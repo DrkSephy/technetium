@@ -1,5 +1,14 @@
-# Django settings for technetium project.
+"""
+Technetium Project Configuration Settings
 
+Requirements:
+1. Install PostgreSQL database
+2. Create postgres user and db called 'technetium'
+"""
+
+###################
+# DJANGO SETTINGS #
+###################
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -9,15 +18,26 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
+######################
+# DATABASES SETTINGS #
+######################
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+    "default": {
+        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        # DB name or path to database file if using sqlite3.
+        "NAME": "technetium",
+        # Ignore below with sqlite3
+        "USER": "technetium",
+        # Not used with sqlite3.
+        "PASSWORD": "ae2cce3603f1913efb36bf39cb20250c",
+        # Set to empty string for localhost.
+        "HOST": "localhost",
+        # Set to empty string for default. Default PostgreSQL port
+        "PORT": "5432",
+        # Prevent Database transaction abort error.
+        'OPTIONS': {'autocommit': True,},
     }
 }
 
@@ -29,7 +49,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
