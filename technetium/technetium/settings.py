@@ -34,7 +34,7 @@ DATABASES = {
 # BITBUCKET KEYS #
 ##################
 
-# Not sure which syntax is valid anymore, conflicting documentation for 
+# Not sure which syntax is valid anymore, conflicting documentation for
 # Python-social-auth. We'll just use both for now.
 
 SOCIAL_AUTH_BITBUCKET_KEY = 'dQMksmtLyJnCkh8JP6'
