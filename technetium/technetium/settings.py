@@ -1,24 +1,12 @@
-"""
-Technetium Project Configuration Settings
-
-Requirements:
-1. Install PostgreSQL database
-2. Create postgres user and db called 'technetium'
-3. Run: `python manage.py synchdb`
-"""
-
-###################
-# DJANGO SETTINGS #
-###################
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
-
 
 ######################
 # DATABASES SETTINGS #
@@ -42,36 +30,6 @@ DATABASES = {
     }
 }
 
-###########################
-# AUTHENTICATION BACKENDS #
-###########################
-
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.bitbucket.BitbucketBackend',
-    'social_auth.backends.bitbucket.BitbucketOAuth',
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.yahoo.YahooBackend',
-    'social_auth.backends.browserid.BrowserIDBackend',
-    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    'social_auth.backends.contrib.disqus.DisqusBackend',
-    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
-    'social_auth.backends.contrib.orkut.OrkutBackend',
-    'social_auth.backends.contrib.foursquare.FoursquareBackend',
-    'social_auth.backends.contrib.github.GithubBackend',
-    'social_auth.backends.contrib.vk.VKOAuth2Backend',
-    'social_auth.backends.contrib.live.LiveBackend',
-    'social_auth.backends.contrib.skyrock.SkyrockBackend',
-    'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
-    'social_auth.backends.contrib.readability.ReadabilityBackend',
-    'social_auth.backends.contrib.fedora.FedoraBackend',
-    'social_auth.backends.OpenIDBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 ##################
 # BITBUCKET KEYS #
 ##################
@@ -84,7 +42,6 @@ SOCIAL_AUTH_BITBUCKET_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
 
 BITBUCKET_CONSUMER_KEY = 'dQMksmtLyJnCkh8JP6'
 BITBUCKET_CONSUMER_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
-
 
 ##################
 # HOSTS SETTINGS #
@@ -132,10 +89,13 @@ CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 # URL prefix for static files.
 STATIC_URL = "/static/"
 
-# Social Auth paths
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/done/'
 URL_PATH = ''
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+
 
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = ''
@@ -192,26 +152,17 @@ ROOT_URLCONF = 'technetium.urls'
 # Python dotted path to the WSGI application
 WSGI_APPLICATION = 'technetium.wsgi.application'
 
-
-#######################
-# DJANGO APPLICATIONS #
-#######################
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_auth',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'social.apps.django_app.default',
+    'technetium',
 )
-
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-
 
 ##########################
 # LOGGING CONFIGURATIONS #
@@ -239,3 +190,81 @@ LOGGING = {
         },
     }
 }
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+)
+
+###########################
+# AUTHENTICATION BACKENDS #
+###########################
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
+    'social.backends.google.GooglePlusAuth',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.yahoo.YahooOpenId',
+    'social.backends.stripe.StripeOAuth2',
+    'social.backends.persona.PersonaAuth',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.facebook.FacebookAppOAuth2',
+    'social.backends.yahoo.YahooOAuth',
+    'social.backends.angel.AngelOAuth2',
+    'social.backends.behance.BehanceOAuth2',
+    'social.backends.bitbucket.BitbucketOAuth',
+    'social.backends.box.BoxOAuth2',
+    'social.backends.linkedin.LinkedinOAuth',
+    'social.backends.linkedin.LinkedinOAuth2',
+    'social.backends.github.GithubOAuth2',
+    'social.backends.foursquare.FoursquareOAuth2',
+    'social.backends.instagram.InstagramOAuth2',
+    'social.backends.live.LiveOAuth2',
+    'social.backends.vk.VKOAuth2',
+    'social.backends.dailymotion.DailymotionOAuth2',
+    'social.backends.disqus.DisqusOAuth2',
+    'social.backends.dropbox.DropboxOAuth',
+    'social.backends.evernote.EvernoteSandboxOAuth',
+    'social.backends.fitbit.FitbitOAuth',
+    'social.backends.flickr.FlickrOAuth',
+    'social.backends.livejournal.LiveJournalOpenId',
+    'social.backends.soundcloud.SoundcloudOAuth2',
+    'social.backends.thisismyjam.ThisIsMyJamOAuth1',
+    'social.backends.stocktwits.StocktwitsOAuth2',
+    'social.backends.tripit.TripItOAuth',
+    'social.backends.twilio.TwilioAuth',
+    'social.backends.xing.XingOAuth',
+    'social.backends.yandex.YandexOAuth2',
+    'social.backends.douban.DoubanOAuth2',
+    'social.backends.mixcloud.MixcloudOAuth2',
+    'social.backends.rdio.RdioOAuth1',
+    'social.backends.rdio.RdioOAuth2',
+    'social.backends.yammer.YammerOAuth2',
+    'social.backends.stackoverflow.StackoverflowOAuth2',
+    'social.backends.readability.ReadabilityOAuth',
+    'social.backends.skyrock.SkyrockOAuth',
+    'social.backends.tumblr.TumblrOAuth',
+    'social.backends.reddit.RedditOAuth2',
+    'social.backends.steam.SteamOpenId',
+    'social.backends.podio.PodioOAuth2',
+    'social.backends.amazon.AmazonOAuth2',
+    'social.backends.email.EmailAuth',
+    'social.backends.username.UsernameAuth',
+    'social.apps.django_app.utils.BackendWrapper',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+try:
+    from technetium.local_settings import *
+except ImportError:
+    pass
