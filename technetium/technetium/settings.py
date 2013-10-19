@@ -89,14 +89,6 @@ CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 # URL prefix for static files.
 STATIC_URL = "/static/"
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/done/'
-URL_PATH = ''
-SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
-SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
-
-
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = ''
 
@@ -153,6 +145,7 @@ ROOT_URLCONF = 'technetium.urls'
 WSGI_APPLICATION = 'technetium.wsgi.application'
 
 INSTALLED_APPS = (
+    # Django Apps
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -160,6 +153,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Project Apps
     'social.apps.django_app.default',
     'technetium',
 )
@@ -202,9 +197,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
 )
 
-###########################
-# AUTHENTICATION BACKENDS #
-###########################
+#############################
+# SOCIAL AUTH CONFIGURATION #
+#############################
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/done/'
+URL_PATH = ''
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
