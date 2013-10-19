@@ -2,36 +2,11 @@
 {% load url from future %}
 
 {% block content %}
-<p>You are logged in as {{ user.username }}!</p>
+<h3>Congratulations social-auth works!</h3>
 
-<p>Associated:</p>
-<ul>
-  {% for assoc in backends.associated %}
-    <li>
-      {{ assoc.provider }} (<a href="{% url 'social:disconnect_individual' assoc.provider assoc.id %}" class="disconnect">Disconnect</a>)
-    </li>
-  {% endfor %}
-</ul>
+<p>
+  You are logged in as {{ user.username }}!
+  <a href="/logout">[Log out]</a>
+</p>
 
-<p>Associate:</p>
-<ul>
-  {% for name in backends.not_associated %}
-    <li>
-      <a href="{% url 'social:begin' name %}">{{ name }}</a>
-    </li>
-  {% endfor %}
-</ul>
-
-{% if plus_id %}
-<div id="signinButton">
-  <span class="g-signin" data-scope="{{ plus_scope }}"
-                         data-clientid="{{ plus_id }}"
-                         data-redirecturi="postmessage"
-                         data-accesstype="offline"
-                         data-cookiepolicy="single_host_origin"
-                         data-callback="signInCallback">
-  </span>
-</div>
-<div id="result"></div>
-{% endif %}
 {% endblock %}
