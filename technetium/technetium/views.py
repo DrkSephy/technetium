@@ -13,3 +13,10 @@ def home(request):
     }, Request.Context(request))
 
 
+@login_required
+def done(request):
+    scope = ' '.join(BitbucketOAuth.DEFAULT_SCOPE)
+    return render_to_response('done.html', {
+      'user': request.user,
+      'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
+    }, RequestContext(request))
