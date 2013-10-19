@@ -42,14 +42,6 @@ DATABASES = {
     }
 }
 
-##################
-# BITBUCKET KEYS #
-##################
-
-SOCIAL_AUTH_BITBUCKET_KEY = 'dQMksmtLyJnCkh8JP6'
-SOCIAL_AUTH_BITBUCKET_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
-
-
 ###########################
 # AUTHENTICATION BACKENDS #
 ###########################
@@ -80,7 +72,18 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+##################
+# BITBUCKET KEYS #
+##################
 
+# Not sure which syntax is valid anymore, conflicting documentation for 
+# Python-social-auth. We'll just use both for now.
+
+SOCIAL_AUTH_BITBUCKET_KEY = 'dQMksmtLyJnCkh8JP6'
+SOCIAL_AUTH_BITBUCKET_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
+
+BITBUCKET_CONSUMER_KEY = 'dQMksmtLyJnCkh8JP6'
+BITBUCKET_CONSUMER_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
 
 
 ##################
@@ -128,6 +131,11 @@ CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
 # URL prefix for static files.
 STATIC_URL = "/static/"
+
+# Social Auth paths
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/done/'
+URL_PATH = ''
 
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = ''
