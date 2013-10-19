@@ -10,7 +10,7 @@ def home(request):
         return redirect('done')
     return render_to_response('home.html', {
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
-    }, Request.Context(request))
+    }, RequestContext(request))
 
 
 @login_required
