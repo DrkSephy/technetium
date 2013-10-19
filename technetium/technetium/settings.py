@@ -220,9 +220,3 @@ AUTHENTICATION_BACKENDS = (
     'social.apps.django_app.utils.BackendWrapper',
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
-try:
-    from technetium.local_settings import *
-except ImportError:
-    pass

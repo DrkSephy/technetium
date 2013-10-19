@@ -20,8 +20,6 @@ def home(request):
 
 @login_required
 def done(request):
-    scope = ' '.join(BitbucketOAuth.DEFAULT_SCOPE)
-
     return render(request, 'done.html', {
       'user': request.user,
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
