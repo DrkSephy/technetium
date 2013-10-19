@@ -42,6 +42,14 @@ DATABASES = {
     }
 }
 
+##################
+# BITBUCKET KEYS #
+##################
+
+SOCIAL_AUTH_BITBUCKET_KEY = '7AeUSjDpnAJG8FN5ee'
+SOCIAL_AUTH_BITBUCKET_SECRET = 'HGN65dt6UPT8BZsArTF8YpmejymQpq6w'
+
+
 ###########################
 # AUTHENTICATION BACKENDS #
 ###########################
