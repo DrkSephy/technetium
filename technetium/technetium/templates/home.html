@@ -3,7 +3,16 @@
 
 {% block content %}
 
-<a href="{% url 'social:begin' "bitbucket" %}">Bitbucket OAuth</a> <br />
+    <div class="container">
+
+    <div class="hero-unit text-center">
+    <h2>Welcome to Technetium</h2>
+    <p>Please sign in to continue</p>
+    <a class="btn btn-primary btn-large" href="{% url 'social:begin' "bitbucket" %}">
+    <i class="icon-user icon-white"></i> Sign in with Bitbucket</a>
+    </div>
+
+    </div>
 
 {% endblock %}
 

@@ -34,14 +34,13 @@ DATABASES = {
 # BITBUCKET KEYS #
 ##################
 
-# Not sure which syntax is valid anymore, conflicting documentation for
-# Python-social-auth. We'll just use both for now.
-
+# Python-social-auth. We'll use both for now.
 SOCIAL_AUTH_BITBUCKET_KEY = 'dQMksmtLyJnCkh8JP6'
 SOCIAL_AUTH_BITBUCKET_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
 
 BITBUCKET_CONSUMER_KEY = 'dQMksmtLyJnCkh8JP6'
 BITBUCKET_CONSUMER_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
+
 
 ##################
 # HOSTS SETTINGS #
