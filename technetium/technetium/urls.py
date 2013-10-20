@@ -9,13 +9,13 @@ from bitbucket import views as views_bitbucket
 
 urlpatterns = patterns('',
 
-    # Technetium: bitbucket app
+    # Technetium: bitbucket app URLs
     url(r'^$', views_bitbucket.home),
     url(r'^login/$', views_bitbucket.home),
     url(r'^done/$', views_bitbucket.done, name='done'),
     url(r'^logout/$', views_bitbucket.logout),
 
-    # Social Auth
+    # Social Auth URLs
     url(r'', include('social.apps.django_app.urls', namespace='social'))
 
     # Admin URL
