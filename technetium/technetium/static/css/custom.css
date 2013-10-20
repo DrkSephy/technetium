@@ -1,6 +1,10 @@
 /* Custom Stylesheet to override bootstrap */
 /* Keep things simple and remember to stay DRY */
 
+body {
+    font-family: 'Karla', sans-serif;
+}
+
 .hero-unit {
     width: 450px;
     margin-left: auto;

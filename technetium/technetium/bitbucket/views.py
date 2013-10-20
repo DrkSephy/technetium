@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from social.backends.bitbucket import BitbucketOAuth
 
+
 # Home page view
 def home(request):
     if request.user.is_authenticated():
