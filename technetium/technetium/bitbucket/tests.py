@@ -18,4 +18,8 @@ class SimpleTest(TestCase):
 
 class BitauthTest(TestCase):
 	pass
-			
+
+
+class BitissuesTest(TestCase):
+	pass
+	
