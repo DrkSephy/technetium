@@ -16,11 +16,34 @@ def add_repository():
 
     Parameters:
     -----------
+    Repo_slug: string
+        - The repository endpoint to add to the list.
 
 
     Returns:
     --------
+    Confirmation: Boolean
+        - Returns true/false based on if operation was successful.
 
     """
+    
+    pass
+
+def remove_repository():
+    """
+    Removes a repository from a list which is being 
+    `followed` by the user.
+
+    Paramters:
+    ---------
+    Repo_slug: string
+        - The repository endpoint to remove from the list.
+
+    Returns:
+    --------
+    Confirmation: Boolean
+        - Returns true/false based on if operation was successful.
+    """
+
     pass
 
