@@ -42,17 +42,25 @@ class BitchangesetsTest(TestCase):
 
 
 class BitmanagerTest(TestCase):
-    def test_add_repository():
+    def test_add_repository(self):
         """
         Tests that a repository is added to the endpoint.
         """
 
         pass
 
-    def test_remove_repository():
+    def test_remove_repository(self):
         """
         Tests that a repository is removed from the endpoint.
         """
 
         pass
+
+    def test_remove_all_repositories(self):
+        """
+        Tests that all repositories are removed from the list.
+        """
+
+        pass
+
 	
