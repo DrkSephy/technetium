@@ -63,4 +63,11 @@ class BitmanagerTest(TestCase):
 
         pass
 
+class BitmethodsTest(TestCase):
+    def test_get_repositories(self):
+        """
+        Tests that we get a list of repositories that a user
+        has access to.
+        """
+
 	
