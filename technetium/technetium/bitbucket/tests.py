@@ -70,4 +70,10 @@ class BitmethodsTest(TestCase):
         has access to.
         """
 
+        pass
+
+class BitdashboardTest(TestCase):
+
+    pass
+
 	

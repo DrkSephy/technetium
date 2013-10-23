@@ -16,6 +16,9 @@ def get_repositories():
 
     Returns:
     --------
+    repos: dictionary
+        - A dictionary containing a list of all 
+          repositories owned by the user.
     """
 
     pass
