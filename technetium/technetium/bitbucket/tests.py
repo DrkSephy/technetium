@@ -29,9 +29,16 @@ class BitchangesetsTest(TestCase):
         Tests that our API call to the `repositories`
         endpoint returns JSON data.
         """
-    pass
+        
+        pass
 
     def test_parse_changesets(self):
+        """
+        Tests that on JSON input, outputs properly
+        stripped/formatted JSON data.
+        """
+
+        pass
 
 
 class BitmanagerTest(TestCase):
