@@ -29,7 +29,7 @@ class BitchangesetsTest(TestCase):
         Tests that our API call to the `repositories`
         endpoint returns JSON data.
         """
-        
+
         pass
 
     def test_parse_changesets(self):
@@ -42,5 +42,17 @@ class BitchangesetsTest(TestCase):
 
 
 class BitmanagerTest(TestCase):
-    pass
+    def test_add_repository():
+        """
+        Tests that a repository is added to the endpoint.
+        """
+
+        pass
+
+    def test_remove_repository():
+        """
+        Tests that a repository is removed from the endpoint.
+        """
+
+        pass
 	

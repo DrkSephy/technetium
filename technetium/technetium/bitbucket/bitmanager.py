@@ -5,6 +5,7 @@ Handles the following:
 
     - Allows method to add repositories.
     - Allows method to remove repositories.
+    - Allows flush method to remove all repositories.
 """
 
 import requests
@@ -26,7 +27,7 @@ def add_repository():
         - Returns true/false based on if operation was successful.
 
     """
-    
+
     pass
 
 def remove_repository():
@@ -43,6 +44,24 @@ def remove_repository():
     --------
     Confirmation: Boolean
         - Returns true/false based on if operation was successful.
+    """
+
+    pass
+
+def remove_all_repositories():
+    """
+    Removes all repositories being `followed`.
+
+    Paramters:
+    ---------
+    Repositories: dictionary
+        - A dictionary containing the list of repositories 
+          to remove. 
+
+    Returns:
+    -------
+    Repository_count: int
+        - Integer number of removed repositories.
     """
 
     pass
