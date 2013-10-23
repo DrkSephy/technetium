@@ -28,4 +28,21 @@ def get_changesets():
     pass
 
 def parse_changesets():
+    """
+    Parses returned JSON data for the API call to the
+    `repositories` endpoint on Bitbucket.
+
+    Parameters:
+    -----------
+    Repositories: dictionary
+        - A dictionary containing repository JSON
+          which needs to be parsed for all useful
+          information.
+
+    Returns:
+    --------
+    changeset_data: dictionary
+        - A JSON formatted dictionary containing 
+          all relevant data.
+    """
     pass
