@@ -22,4 +22,10 @@ class BitauthTest(TestCase):
 
 class BitissuesTest(TestCase):
 	pass
+
+class BitchangesetsTest(TestCase):
+    pass
+
+class BitmanagerTest(TestCase):
+    pass
 	
