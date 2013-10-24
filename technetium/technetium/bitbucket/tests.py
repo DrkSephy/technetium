@@ -21,7 +21,20 @@ class BitauthTest(TestCase):
 
 
 class BitissuesTest(TestCase):
-	pass
+    def test_get_issues():
+        """
+        Tests that our API call to the `repositories`
+        endpoint returns JSON data.
+        """
+        pass
+
+    def test_parse_issues():
+        """
+        Tests that on JSON input, outputs properly
+        stripped/formatted JSON data.
+        """
+        pass
+	
 
 class BitchangesetsTest(TestCase):
     def test_get_changesets(self):
