@@ -89,3 +89,51 @@ class BitdashboardTest(TestCase):
 
     pass
 
+class BitfilterTest(TestCase):
+    def test_filter_issues_by_type(self):
+        """
+        Tests filtering of issues by type.
+        """
+
+        pass
+
+    def test_filter_issues_by_priority(self):
+        """
+        Tests filtering of issues by priority.
+        """
+
+        pass
+
+    def test_filter_issues_by_user(self):
+        """
+        Tests filtering of issues by user.
+        """
+
+        pass
+
+    def test_filter_issues_by_date(self):
+        """
+        Tests filtering of issues by date.
+        """
+
+    def test_filter_issues_by_status(self):
+        """
+        Tests filtering of issues by status.
+        """
+
+        pass
+
+    def test_filter_changesets_by_date(self):
+        """
+        Tests filtering changesets by date.
+        """
+
+        pass
+
+    def test_filter_changesets_by_user(self):
+        """
+        Tests filtering changesets by user.
+        """
+
+        pass
+    
