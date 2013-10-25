@@ -16,16 +16,17 @@ Technetium Modules/Tasks
 ------------------------
 The following is a list of tasks needed to be done:
 
-1. wiki.py (Module for greping all wiki data)
-2. repo.py (Module for greping all repo data)
-3. changesets.py (Module for greping all changesets)
-4. issues.py (Module for greping all changesets)
-   `https://github.com/Sheeprider/BitBucket-api`
-5. OAuth login page for users of Technetium
-   `https://pypi.python.org/pypi/python-social-auth/#auth-providers`
-6. A JSON Parser to present API data to user 
-7. Front-end stuff (AngularJS? BackboneJS?)
-8. 100% code coverage for all modules (PyLint is also recommended) 
+* Bitgraphs.py (Module for greping graphs of all activities in repos)
+* Bitstats.py (Module for greping all code statistics)
+* Bitmanager.py (Module for greping all repo data)
+* Bitchangesets.py (Module for greping all changesets)
+* Bitissues.py (Module for greping all issues)
+		`https://github.com/Sheeprider/BitBucket-api`
+* Bitfilter.py (Module for filtering changesets and issues)
+* Bitdashboard.py (Module for overview page after login)
+* A JSON Parser to present API data to user
+* Admin UI Bootstrap (already decided to match http://startbootstrap.com/templates/sb-admin/) 
+* 100% code coverage for all modules (PyLint is also recommended) 
 
 
 ###Installation and Running Django
