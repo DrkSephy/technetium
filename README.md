@@ -21,11 +21,11 @@ The following is a list of tasks needed to be done:
 * Bitmanager.py (Module for greping all repo data)
 * Bitchangesets.py (Module for greping all changesets)
 * Bitissues.py (Module for greping all issues)
-		`https://github.com/Sheeprider/BitBucket-api`
+	`https://github.com/Sheeprider/BitBucket-api`
 * Bitfilter.py (Module for filtering changesets and issues)
 * Bitdashboard.py (Module for overview page after login)
 * A JSON Parser to present API data to user
-* Admin UI Bootstrap (already decided to match http://startbootstrap.com/templates/sb-admin/) 
+* Admin UI Bootstrap (already decided to match `http://startbootstrap.com/templates/sb-admin/`) 
 * 100% code coverage for all modules (PyLint is also recommended) 
 
 
