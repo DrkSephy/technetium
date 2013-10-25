@@ -26,8 +26,8 @@ The following is a list of planned modules:
 2. Changesets.py: Module for handling all changeset related data. This 
    included (but is not limited to):
 
-   - Handling changesets based on date/time created.
-   - Handling changesets based on user.
+    - Handling changesets based on date/time created.
+    - Handling changesets based on user.
 
 3. Manager.py: Module for handling the repositories that the user is 
    interested in.
