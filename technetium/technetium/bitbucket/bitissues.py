@@ -1,16 +1,40 @@
 """
-Module for Bitbucket issues aggregation
+Module for Bitbucket issues aggregation.
+
+Bitbucket API requests start at the following endpoint:
+
+https://bitbucket.org/api/1.0/repositories/
+and have the following layout:
+
+https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
+
+    - {accountname} : The Bitbucket User name
+    - {repo_slug} : The repository name 
+    - {endpoint} : The resource to request
+
+The calls also take the following extra query parameters:
+
+    - start: The hash value which the query starts from. The 
+             default start point is the most recent entry to
+             the earliest.
+
+    - limit: Integer value which represents the number of changesets
+             to return. 
 """
 
 import requests
 import simplejson as json
-import json
+
 
 def get_issues():
     """
     Obtains a JSON dictionary of issues.
     """
-    pass
+
+    
+    r = requests.get('https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/?limit=2')
+
+    
 
 
 def parse_issues():

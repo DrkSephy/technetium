@@ -28,6 +28,7 @@ The calls also take the following extra query parameters:
 """
 
 import requests
+import simplejson as json
 
 
 def get_changesets():
