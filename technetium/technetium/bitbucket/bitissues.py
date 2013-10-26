@@ -53,7 +53,7 @@ def parse_issues(dictionary):
     
     
     # Convert python object `r` to JSON string
-    json_string = json.loads(dictionary.text)
+    json_string = json.loads(dictionary)
 
     # DAVID'S COMMENTS FOR JORGE:
 

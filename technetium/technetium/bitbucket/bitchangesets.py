@@ -31,16 +31,15 @@ import requests
 import simplejson as json
 
 
-def get_changesets():
+def get_changesets(URL):
     """
     Obtains a JSON dictionary of changesets across
     a repository/repositories.
 
-
-
     Parameters:
-    ----------
-
+    -----------
+    URL: string
+        - The url to GET the resource from bitbucket.
 
     Returns:
     -------
@@ -48,9 +47,18 @@ def get_changesets():
         - A dictionary containing [key][values] representing
           all commits for the requested repositories.
     """
+
+    # Get the changesets.
+    # The URL for changesets is:
+    # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
+    r = requests.get(URL)
+   
+    # Return the JSON
+    return r.text
+
     
 
-def parse_changesets():
+def parse_changesets(dictionary):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -68,4 +76,11 @@ def parse_changesets():
         - A JSON formatted dictionary containing 
           all relevant data.
     """
-    pass
+    json_string = json.loads(dictionary)
+
+    # Keys that we are interested in
+    # Currently does not work for nested key/value pairs.
+    req = ['count', 'changests', 'author', 'date']
+
+    print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
+
