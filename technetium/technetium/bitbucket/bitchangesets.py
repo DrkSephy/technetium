@@ -25,7 +25,7 @@ def get_changesets():
         - A dictionary containing [key][values] representing
           all commits for the requested repositories.
     """
-    pass
+    
 
 def parse_changesets():
     """
