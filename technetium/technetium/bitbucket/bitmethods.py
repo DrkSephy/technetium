@@ -2,8 +2,10 @@
 Module for common methods.
 
 Proposed methods:
+
     - Method for getting a list of all repositories
       belonging to the user.
+    - Parsing could probably be refactored into a common method.
 """
 
 def get_repositories():
