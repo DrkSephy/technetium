@@ -31,32 +31,47 @@ def get_issues():
     Obtains a JSON dictionary of issues.
     """
 
-    
+    # Make the GET request to the issues endpoint.
+    # For testing purposes, we can query the Game Development repository, it is is public.
+    # Here we return only two entries for testing purposes. (limit = 2)
     r = requests.get('https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/?limit=2')
-
+    
+    # Return the JSON
+    return r.text
     
 
 
-def parse_issues():
+def parse_issues(dictionary):
     """
     Parses returned JSON data for the API call to the 
     `repositories` endpoint on Bitbucket.
+
+    Parameters:
+    ----------
+    dictionary: A JSON dictionary to parse
     """
     
-    # Get issue data from Bitbucket
-    # Can set parameters for query, here the returned list 'limit' = 2
-    r = requests.get('https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/?limit=2')
-
+    
     # Convert python object `r` to JSON string
-    d = json.loads(r.text)
+    json_string = json.loads(dictionary.text)
 
-    # Key-value pairs to extract.
-    # Currently not sure how to extract key-values from nested dictionaries.
+    # DAVID'S COMMENTS FOR JORGE:
+
+    # Note: I took a look at the JSON returned from bitbucket. It is valid.
+
+    # Parsing idea: We want to extract only certain key-value pairs.
+    # First, convert the json_string to a python dictionary, then
+    # we can create an array of keys to look for, and extract them
+    # as we iterate through the dictionary.
+
+    # BLOCKER: I'm currently not sure how to extract key/value pairs from
+    # a python dictionary which contains both nested/not-nested dictionaries.
 
     req = ['count','issues']
 
-    # Prints the new dictionary of wanted values
-    print dict([i for i in d.iteritems() if i[0] in d and i[0] in req])
+    # Prints the new dictionary of wanted values. Currently does not
+    # extract values from nested dictionaries.
+    print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
 
 
 
