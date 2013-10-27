@@ -7,10 +7,15 @@ Proposed methods:
       belonging to the user.
     - Parsing could probably be refactored into a common method.
 """
+#######################
+# BITBUCKET CONSTANTS #
+#######################
+API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
+
 
 def get_repositories():
     """
-    Gets all repositories that the user owns/has 
+    Gets all repositories that the user owns/has
     access privledges to.
 
     Parameters:
@@ -19,7 +24,7 @@ def get_repositories():
     Returns:
     --------
     repos: dictionary
-        - A dictionary containing a list of all 
+        - A dictionary containing a list of all
           repositories owned by the user.
     """
 

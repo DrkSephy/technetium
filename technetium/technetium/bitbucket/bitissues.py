@@ -9,49 +9,52 @@ and have the following layout:
 https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
 
     - {accountname} : The Bitbucket User name
-    - {repo_slug} : The repository name 
+    - {repo_slug} : The repository name
     - {endpoint} : The resource to request
 
 The calls also take the following extra query parameters:
 
-    - start: The hash value which the query starts from. The 
+    - start: The hash value which the query starts from. The
              default start point is the most recent entry to
              the earliest.
 
     - limit: Integer value which represents the number of changesets
-             to return. 
+             to return.
 """
-
-import requests
 import simplejson as json
+import requests
+import bitmethods
 
-
-def get_issues():
+def get_issues(username, repository, limit=5):
     """
     Obtains a JSON dictionary of issues.
-    """
 
-    # Make the GET request to the issues endpoint.
-    # For testing purposes, we can query the Game Development repository, it is is public.
-    # Here we return only two entries for testing purposes. (limit = 2)
-    r = requests.get('https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/?limit=2')
-    
+    Parameters:
+    - username: String
+    - repository: String (repository slug)
+    - limit: Integer
+    """
+    req_url = '%s%s/%s/isses?limit=%d' %\
+               (bitmethods.API_BASE_URL, username, repository, limit)
+
+    r = requests.get(req_url)
+
     # Return the JSON
     return r.text
-    
+
 
 
 def parse_issues(dictionary):
     """
-    Parses returned JSON data for the API call to the 
+    Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
 
     Parameters:
     ----------
     dictionary: A JSON dictionary to parse
     """
-    
-    
+
+
     # Convert python object `r` to JSON string
     json_string = json.loads(dictionary)
 
@@ -72,8 +75,6 @@ def parse_issues(dictionary):
     # Prints the new dictionary of wanted values. Currently does not
     # extract values from nested dictionaries.
     print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
-
-
 
 
 
