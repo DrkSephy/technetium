@@ -12,7 +12,7 @@ Proposed methods:
 #######################
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 
-def make_req_url(user, repo, endpoint, limit=5):
+def make_req_url(user, repo, endpoint, limit=None):
     """
     Constructs a URL for bitbucket API request.
 
@@ -26,10 +26,12 @@ def make_req_url(user, repo, endpoint, limit=5):
 
     Example:
     Params: (user='technetiumccny', repo='technetium', endpoint='issues')
-    Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=5'
+    Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
     """
-    return "%s%s/%s/%s?limit=%d" % \
-           (API_BASE_URL, user, repo, endpoint, limit)
+    url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
+    if limit:
+        url += "?limit=%d" % limit
+    return url
 
 
 def get_repositories():

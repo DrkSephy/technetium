@@ -14,7 +14,7 @@ class BitmethodsTests(unittest.TestCase):
         user = 'technetiumccny'
         repo = 'technetium'
         endpt = 'issues'
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=5'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
         self.assertEqual(bitmethods.make_req_url(user, repo, endpt), match)
 
 
