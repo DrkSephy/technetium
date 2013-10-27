@@ -12,6 +12,25 @@ Proposed methods:
 #######################
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 
+def make_req_url(user, repo, endpoint, limit=5):
+    """
+    Constructs a URL for bitbucket API request.
+
+    Parameters:
+    - user: String
+    - repo: String
+    - endpoint: String
+    - limit: Integer
+
+    Returns: String
+
+    Example:
+    Params: (user='technetiumccny', repo='technetium', endpoint='issues')
+    Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=5'
+    """
+    return "%s%s/%s/%s?limit=%d" % \
+           (API_BASE_URL, user, repo, endpoint, limit)
+
 
 def get_repositories():
     """
