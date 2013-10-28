@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from social.backends.bitbucket import BitbucketOAuth
 
+# Project Modules
+import bitauth
 
 # Home page view
 def home(request):
@@ -32,3 +34,4 @@ def done(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
+
