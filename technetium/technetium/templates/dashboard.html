@@ -2,11 +2,20 @@
 {% load url from future %}
 
 {% block content %}
+
 <h3>Congratulations social-auth works!</h3>
 
 <p>
   You are logged in as {{ user.username }}!
   <a href="/logout">[Log out]</a>
 </p>
+<br>
+<h4>Check out what we have from social auth</h4>
+<ul>
+    <li>{{ first_name }}</li>
+    <li>{{ last_name }}</li>
+    <li>{{ email }}</li>
+</ul>
+
 
 {% endblock %}

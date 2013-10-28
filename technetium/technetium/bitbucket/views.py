@@ -24,12 +24,17 @@ def home(request):
 
 @login_required
 def dashboard(request):
-    print bitauth.get_social_auth_data(request)
+    """
+    Render dashboard overview.
+    """
+    social_user = bitauth.get_social_auth_data(request)
 
-    return render(request, 'dashboard.html', {
-      'user': request.user,
-      'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
-    })
+    data = { 'user': request.user }
+    data['first_name'] = social_user['first_name']
+    data['last_name'] = social_user['last_name']
+    data['email'] = social_user['email']
+
+    return render(request, 'dashboard.html', data)
 
 
 @login_required
