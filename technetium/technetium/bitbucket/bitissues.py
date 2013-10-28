@@ -33,12 +33,16 @@ def get_issues(username, repository, limit=5):
     - username: String
     - repository: String (repository slug)
     - limit: Integer
+
+    Returns => List
     """
     req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
-    r = requests.get(req_url)
+    req = requests.get(req_url)
 
-    # Return the JSON
-    return r.text
+    # Success status 200, return JSON
+    if req.status_code == 200:
+        return json.loads(req.content)['issues']
+    return []
 
 
 

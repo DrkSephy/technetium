@@ -54,10 +54,11 @@ def get_repositories():
 
 def unicode_to_str(data):
     """
-    Recursively convert a collection containing unicode  strings to strings.
+    Recursively convert a collection containing unicode strings to strings.
     Call this method on the JSON returned from Bitbucketself.
-    """
     
+    Returns: String
+    """    
     if isinstance(data, str):
         return data
     elif isinstance(data, unicode):
