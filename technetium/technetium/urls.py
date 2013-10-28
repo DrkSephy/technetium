@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # Technetium: bitbucket app URLs
     url(r'^$', views_bitbucket.home),
     url(r'^login/$', views_bitbucket.home),
-    url(r'^done/$', views_bitbucket.done, name='done'),
+    url(r'^dashboard/$', views_bitbucket.dashboard),
     url(r'^logout/$', views_bitbucket.logout),
 
     # Social Auth URLs
