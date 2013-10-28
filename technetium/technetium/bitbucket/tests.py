@@ -77,6 +77,7 @@ class BitmethodsTest(TestCase):
 
 class BitdashboardTest(TestCase):
     pass
+    
 
 class BitfilterTest(TestCase):
     def test_filter_issues_by_type(self):

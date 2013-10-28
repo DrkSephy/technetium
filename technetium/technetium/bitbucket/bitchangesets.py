@@ -58,7 +58,7 @@ def get_changesets(URL):
 
     
 
-def parse_changesets(dictionary):
+def parse_changesets(data):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -80,7 +80,7 @@ def parse_changesets(dictionary):
  
     # r = get_changesets(URL)
     # json.loads(r.text)
-    dictionary = json.loads()
+    dictionary = json.loads(data)
     pprint(unicode_to_str(d))
     # Print issue 1
     # pprint(d.issues[0])
