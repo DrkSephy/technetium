@@ -15,7 +15,7 @@ import bitauth
 # Home page view
 def home(request):
     if request.user.is_authenticated():
-        return redirect('/done')
+        return redirect('/dashboard')
 
     return render(request, 'home.html', {
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
@@ -23,8 +23,10 @@ def home(request):
 
 
 @login_required
-def done(request):
-    return render(request, 'done.html', {
+def dashboard(request):
+    print bitauth.get_social_auth_data(request)
+
+    return render(request, 'dashboard.html', {
       'user': request.user,
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
     })

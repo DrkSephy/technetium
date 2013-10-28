@@ -4,8 +4,16 @@ Module for Bitbucket authentication and authorization.
 from social_auth.models import UserSocialAuth
 
 
-def get_access_secret_tokens(request):
+def get_social_auth_data(request):
     """
-    Gets Access and Secret Tokens out from PSA
+    Gets a dictionary of the following data from social auth:
+    1. 'access_token' : {'oauth_token' : String, 'oauth_token_secret' : String}
+    2. 'email' : String
+    3. 'first_name' : String
+    4. 'last_name' : String
+    5. 'username' : String
+
+    Returns => Dictionary
     """
-    social_user = UserSocialAuth.objects.get(user=request.user)
+    return UserSocialAuth.objects.get(user=request.user).extra_data
+
