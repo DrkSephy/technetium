@@ -76,11 +76,11 @@ def parse_changesets(dictionary):
         - A JSON formatted dictionary containing 
           all relevant data.
     """
-    json_string = json.loads(dictionary)
-
-    # Keys that we are interested in
-    # Currently does not work for nested key/value pairs.
-    req = ['count', 'changests', 'author', 'date']
-
-    print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
-
+    
+ 
+    # r = get_changesets(URL)
+    # json.loads(r.text)
+    dictionary = json.loads()
+    pprint(unicode_to_str(d))
+    # Print issue 1
+    # pprint(d.issues[0])

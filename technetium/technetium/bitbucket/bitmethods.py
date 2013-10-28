@@ -50,3 +50,23 @@ def get_repositories():
     """
 
     pass
+
+def unicode_to_str(data):
+    """
+    Recursively convert a collection containing unicode  strings to strings.
+    """
+    
+    if isinstance(data, str):
+        return data
+    elif isinstance(data, unicode):
+        return str(data)
+    elif isinstance(data, collections.Mapping):
+        return dict([unicode_to_str(i) for i in data.iteritems()])
+    elif isinstance(data, collections.Iterable):
+        return type(data)(unicode_to_str(i) for i in data)
+    else:
+        return data
+
+    
+
+
