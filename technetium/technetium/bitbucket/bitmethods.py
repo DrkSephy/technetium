@@ -7,6 +7,12 @@ Proposed methods:
       belonging to the user.
     - Parsing could probably be refactored into a common method.
 """
+
+import simplejson as json
+import json
+from pprint import pprint
+import random, collections
+
 #######################
 # BITBUCKET CONSTANTS #
 #######################
@@ -67,6 +73,6 @@ def unicode_to_str(data):
     else:
         return data
 
-    
+
 
 
