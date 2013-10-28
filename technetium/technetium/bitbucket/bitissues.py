@@ -37,7 +37,7 @@ def get_issues(username, repository, limit=5):
     Returns => List
     """
     req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
-    req = requests.get(req_url)
+    req = requests.get(bitmethods.make_req_url(username, repository, 'issues', limit))
 
     # Success status 200, return JSON
     if req.status_code == 200:
@@ -46,19 +46,18 @@ def get_issues(username, repository, limit=5):
 
 
 
-def parse_issues(dictionary):
+def parse_issues(issues):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
 
     Parameters:
     ----------
-    dictionary: A JSON dictionary to parse
+    issues: Dictionary of JSON issues
+    
+    Returns: List
     """
-
-
-    # Convert python object `r` to JSON string
-    json_string = json.loads(dictionary)
+    return issues
 
     # DAVID'S COMMENTS FOR JORGE:
 
@@ -72,12 +71,12 @@ def parse_issues(dictionary):
     # BLOCKER: I'm currently not sure how to extract key/value pairs from
     # a python dictionary which contains both nested/not-nested dictionaries.
 
-    req = ['count','issues']
+    # req = ['count','issues']
 
     # Prints the new dictionary of wanted values. Currently does not
     # extract values from nested dictionaries.
-    print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
+    # print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
 
 
 if __name__ == '__main__':
-    print get_issues('DrkSephy', 'smw-koopa-krisis')
+    print parse_issues(get_issues('DrkSephy', 'smw-koopa-krisis'))
