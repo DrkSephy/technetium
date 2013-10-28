@@ -34,9 +34,7 @@ def get_issues(username, repository, limit=5):
     - repository: String (repository slug)
     - limit: Integer
     """
-    req_url = '%s%s/%s/isses?limit=%d' %\
-               (bitmethods.API_BASE_URL, username, repository, limit)
-
+    req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
     r = requests.get(req_url)
 
     # Return the JSON
@@ -77,4 +75,5 @@ def parse_issues(dictionary):
     print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
 
 
-
+if __name__ == '__main__':
+    print get_issues('DrkSephy', 'smw-koopa-krisis')
