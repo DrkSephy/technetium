@@ -8,11 +8,6 @@ Proposed methods:
     - Parsing could probably be refactored into a common method.
 """
 
-import simplejson as json
-import json
-from pprint import pprint
-import random, collections
-
 #######################
 # BITBUCKET CONSTANTS #
 #######################
