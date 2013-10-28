@@ -1,7 +1,7 @@
 """
 Views for bitbucket application
 """
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render, redirect
@@ -40,5 +40,5 @@ def dashboard(request):
 @login_required
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/')
+    return redirect('/')
 
