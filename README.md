@@ -6,11 +6,11 @@ Technetium is a data aggregration tool built using the Bitbucket API.
 Technetium Features
 -------------------
 1. Single-page Admin Application for viewing bitbucket data.
-2. Simple API calls to grab changesets (including wiki, and issues), 
+2. Simple API calls to grab changesets (including wiki, and issues),
    and any relevant data needed by the user.
 3. Visual representations of any and all bitbucket data. Examples include
    line charts which show average commits over a period of time for one
-   or more users in a repository. 
+   or more users in a repository.
 
 Technetium Modules
 ------------------
@@ -23,17 +23,17 @@ The following is a list of planned modules:
     - Handling issues based on creator/resolver.
     - Handling issues based on type (blocker, etc).
 
-2. Changesets.py: Module for handling all changeset related data. This 
+2. Changesets.py: Module for handling all changeset related data. This
    included (but is not limited to):
 
     - Handling changesets based on date/time created.
     - Handling changesets based on user.
 
-3. Manager.py: Module for handling the repositories that the user is 
+3. Manager.py: Module for handling the repositories that the user is
    interested in.
 
 4. Statistics.py: Module for handling visual representations of all
-   aquired data from Bitbucket. 
+   aquired data from Bitbucket.
 
 5. Dashboard.py: Module for handling the dashboard views.
 
@@ -50,18 +50,18 @@ Goals/Tasks [ 10/22/13 ---> 10/29/13 ]
 
 2. Work on Changesets module. [ David ]
 
-    - One of the main modules for Technetium. 
+    - One of the main modules for Technetium.
 
     - STATUS: IN PROGRESS.
 
 3. Set up Admin theme on Technetium. [ Albert? Henry? ]
 
-    - Currently, logging in with Bitbucket returns the user to 
-      the done page. We would like to return the user to a 
+    - Currently, logging in with Bitbucket returns the user to
+      the done page. We would like to return the user to a
       dashboard page. This requires altering the views.py file
       to redirect the user.
 
-    - The admin theme is located here: 
+    - The admin theme is located here:
       http://startbootstrap.com/templates/sb-admin/
 
 
@@ -86,3 +86,8 @@ Handles visual representation of bitbucket data in various forms.
 3. Install python packages: `pip install -r requirements.txt`
 4. Run app server: `python manage.py runserver`
 5. Go to: `http://127.0.0.1:8000`
+
+
+###Unit Testing
+1. Go to the 'technetium/technetium/bitbucket' directory
+2. Run `nosetests`

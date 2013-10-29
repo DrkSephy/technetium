@@ -13,6 +13,7 @@ Proposed methods:
 #######################
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 
+
 def make_req_url(user, repo, endpoint, limit=None):
     """
     Constructs a URL for bitbucket API request.
@@ -49,27 +50,20 @@ def get_repositories():
         - A dictionary containing a list of all
           repositories owned by the user.
     """
-
     pass
+
 
 def unicode_to_str(data):
     """
     Recursively convert a collection containing unicode strings to strings.
     Call this method on the JSON returned from Bitbucketself.
-    
+
     Returns: String
-    """    
+    """
     if isinstance(data, str):
         return data
     elif isinstance(data, unicode):
         return str(data)
-    elif isinstance(data, collections.Mapping):
-        return dict([unicode_to_str(i) for i in data.iteritems()])
-    elif isinstance(data, collections.Iterable):
-        return type(data)(unicode_to_str(i) for i in data)
     else:
         return data
-
-
-
 
