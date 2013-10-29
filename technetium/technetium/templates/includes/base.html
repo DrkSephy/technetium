@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>
+      {% block meta_title %}
+      Technetium | Bitbucket Repository Manager
+      {% endblock %}
+    </title>
+    <meta charset="UTF-8">
+
+    <!-- Stylesheets -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Karla:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+
+    {% block extra_css %}{% endblock %}
+  </head>
+
+  <body>
+    {% block content %}{% endblock %}
+    {% block scripts %}{% endblock %}
+
+<!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js" type="text/javascript"></script>
+ -->
+
+  </body>
+</html>
