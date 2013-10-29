@@ -1,6 +1,5 @@
 """
 Test Technetium Bitbucket: bitmethods
-Running unit tests
 """
 import unittest
 import bitmethods
@@ -18,6 +17,3 @@ class BitmethodsTests(unittest.TestCase):
         self.assertEqual(bitmethods.make_req_url(user, repo, endpt), match)
 
 
-if __name__ == '__main__':
-    # Run unittests
-    unittest.main()

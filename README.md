@@ -90,4 +90,4 @@ Handles visual representation of bitbucket data in various forms.
 
 ###Unit Testing
 1. Go to the 'technetium/technetium/bitbucket' directory
-2. Run `nosetests`
+2. Run `nosetests -v`

@@ -54,7 +54,7 @@ def parse_issues(issues):
     Parameters:
     ----------
     issues: Dictionary of JSON issues
-    
+
     Returns: List
     """
     return issues
