@@ -38,8 +38,27 @@ The following is a list of planned modules:
 5. Dashboard.py: Module for handling the dashboard views.
 
 
-Goals/Tasks [ 10/22/13 ---> 11/1/13 ]
+Goals/Tasks [ 10/30/13 ---> 11/5/13 ]
 -------------------------------------
+
+1. Write tests for subscription methods. [ Albert? Henry?]
+
+2. Create subscription methods. [ Jorge ]
+    
+      - [A] Create database model for Subscriptions.
+      - [B] Write the URL dispatch and the views for repository subscriptions.
+      - [C] Write a method for inserting new subscriptions into database.
+      - [D] Render the template UI for subscription interface. 
+
+3. Create Changesets view. [ David ]
+
+      - [A] Create template for changesets module.
+      - [B] URL dispatch for the view of changesets.
+      - [C] Render the template for viewing changesets.
+
+
+Finished Tasks [10/22/13 --> 10/29/13]
+---------------------------------------
 
 1. Work on Bitauth module. [ Jorge, David ]
 
