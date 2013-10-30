@@ -16,7 +16,7 @@ import requests
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 
 
-def make_req_url(user, repo, endpoint, limit=None):
+def make_req_url(user, repo, endpoint, limit=None, start=None):
     """
     Constructs a URL for bitbucket API request.
 
@@ -25,6 +25,7 @@ def make_req_url(user, repo, endpoint, limit=None):
     - repo: String
     - endpoint: String
     - limit: Integer
+    - start: Integer
 
     Returns: String
 
@@ -33,8 +34,14 @@ def make_req_url(user, repo, endpoint, limit=None):
     Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
     """
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
-    if limit:
+
+    # Handle extra queries
+    if limit and start:
+        url += "?limit=%d&%d" % (limit, start)
+    elif limit:
         url += "?limit=%d" % limit
+    elif start:
+        url += "?start=%d" % start
     return url
 
 
