@@ -11,7 +11,6 @@ from social.backends.bitbucket import BitbucketOAuth
 
 # Project Modules
 import bitauth
-import bitauth
 import bitissues
 
 # Home page view
@@ -29,17 +28,20 @@ def dashboard(request):
     """
     Render dashboard overview.
     """
-    # Example
+    # Example repository
     user = 'technetiumccny'
     repo = 'technetium'
-    endpoint = 'issues'
-
-    # Construct URL to get a limit of 5 issues
-    req_url = bitmethods.make_req_url(user, repo, endpoint, 5)
+    data = {}
 
     # Get OAuth tokens
-    auth_data = bitauth.get_social_auth_data()
+    auth_data = bitauth.get_social_auth_data(request)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
 
+    # We need to parse this before in the future
+    data['first_name'] = auth_data['first_name']
+    data['last_name'] = auth_data['last_name']
+    data['email'] = auth_data['email']
+    data['issues_json'] = bitissues.get_issues(user, repo, auth_tokens, 5)
     return render(request, 'dashboard.html', data)
 
 

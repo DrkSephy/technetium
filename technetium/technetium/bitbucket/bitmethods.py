@@ -7,6 +7,8 @@ Proposed methods:
       belonging to the user.
     - Parsing could probably be refactored into a common method.
 """
+import simplejson as json
+import requests
 
 #######################
 # BITBUCKET CONSTANTS #

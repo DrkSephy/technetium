@@ -22,22 +22,21 @@ import simplejson as json
 import requests
 import bitmethods
 
-def get_issues(request):
+
+def get_issues(user, repo, auth_tokens, limit):
     """
     Obtains a JSON dictionary from issues endpoint.
 
     Parameters:
-    - requests: Request (Django)
+    - user: User (Django)
+    - repo: String
+    - auth_tokens: OAuth1
+    - limit: Integer
 
     Returns => Dictionary
     """
-    req = requests.get(req_url, auth=auth_tokens)
-
-    # Success status 200, return JSON
-    if req.status_code == 200:
-        return json.loads(req.content)
-    return {}
-
+    req_url = bitmethods.make_req_url(user, repo, 'issues', limit)
+    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
 def parse_issues(issues):
