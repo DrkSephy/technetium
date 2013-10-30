@@ -33,7 +33,7 @@ def get_issues(user, repo, auth_tokens, limit):
     - auth_tokens: OAuth1
     - limit: Integer
 
-    Returns => Dictionary
+    Returns: Dictionary
     """
     req_url = bitmethods.make_req_url(user, repo, 'issues', limit)
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
@@ -41,12 +41,11 @@ def get_issues(user, repo, auth_tokens, limit):
 
 def parse_issues(issues):
     """
-    Parses returned JSON data for the API call to the
-    `repositories` endpoint on Bitbucket.
+    Parses returned JSON data from the bitbucket API
+    response for the technetium issues dashboard.
 
     Parameters:
-    ----------
-    issues: Dictionary of JSON issues
+    - issues: Dictionary of JSON issues
 
     Returns: List
     """
