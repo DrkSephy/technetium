@@ -1,10 +1,7 @@
 """
 Module for Bitbucket issues aggregation.
 
-Bitbucket API requests start at the following endpoint:
-
-https://bitbucket.org/api/1.0/repositories/
-and have the following layout:
+Bitbucket API requests start at the following layout:
 
 https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
 
@@ -25,23 +22,24 @@ import simplejson as json
 import requests
 import bitmethods
 
-def get_issues(username, repository, limit=5):
+def get_issues(username, repository, auth_tokens, limit=5):
     """
-    Obtains a JSON dictionary of issues.
+    Obtains a JSON dictionary from issues endpoint.
 
     Parameters:
     - username: String
     - repository: String (repository slug)
+    - auth_tokens: OAuth1 (Object)
     - limit: Integer
 
-    Returns => List
+    Returns => Dictionary
     """
     req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
-    req = requests.get(bitmethods.make_req_url(username, repository, 'issues', limit))
+    req = requests.get(req_url, auth=auth_tokens)
 
     # Success status 200, return JSON
     if req.status_code == 200:
-        return json.loads(req.content)['issues']
+        return json.loads(req.content)
     return []
 
 
