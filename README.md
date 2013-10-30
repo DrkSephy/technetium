@@ -38,7 +38,7 @@ The following is a list of planned modules:
 5. Dashboard.py: Module for handling the dashboard views.
 
 
-Goals/Tasks [ 10/22/13 ---> 10/29/13 ]
+Goals/Tasks [ 10/22/13 ---> 11/1/13 ]
 -------------------------------------
 
 1. Work on Bitauth module. [ Jorge, David ]
@@ -54,7 +54,7 @@ Goals/Tasks [ 10/22/13 ---> 10/29/13 ]
 
     - STATUS: IN PROGRESS.
 
-3. Set up Admin theme on Technetium. [ Albert? Henry? ]
+3. Set up Admin theme on Technetium. [ Albert ]
 
     - Currently, logging in with Bitbucket returns the user to
       the done page. We would like to return the user to a
@@ -73,11 +73,19 @@ of desired repositories to track.
 
 #####Methods module
 A collection of common methods which will be used across other modules.
+
 Proposed methods:
-    - Method for getting all repositories that a user has access to.
+    
+* Method for getting all repositories that a user has access to.
 
 #####Statistics module
 Handles visual representation of bitbucket data in various forms.
+
+#####Filter module
+Handles actions allowing the user to filter issues and changesets.
+
+* Issues can be filtered by user, date, priority, status, and type.
+* Changesets can be filtered by user and date.
 
 
 ###Installation and Running Django
