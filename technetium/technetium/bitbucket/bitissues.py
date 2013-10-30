@@ -20,21 +20,19 @@ The calls also take the following extra query parameters:
 """
 import simplejson as json
 import requests
-import bitmethods
 
-def get_issues(username, repository, auth_tokens, limit=5):
+
+def get_issues(req_url, auth_tokens, limit=5):
     """
     Obtains a JSON dictionary from issues endpoint.
 
     Parameters:
-    - username: String
-    - repository: String (repository slug)
+    - req_url: String (URL)
     - auth_tokens: OAuth1 (Object)
-    - limit: Integer
+    - limit: Integer (50 max)
 
     Returns => Dictionary
     """
-    req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
     req = requests.get(req_url, auth=auth_tokens)
 
     # Success status 200, return JSON
@@ -75,6 +73,3 @@ def parse_issues(issues):
     # extract values from nested dictionaries.
     # print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
 
-
-if __name__ == '__main__':
-    print parse_issues(get_issues('DrkSephy', 'smw-koopa-krisis'))
