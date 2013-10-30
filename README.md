@@ -46,7 +46,7 @@ Goals/Tasks [ 10/22/13 ---> 11/1/13 ]
     - A common method needed for all Bitbucket API calls to be
       successful.
 
-    - STATUS: IN PROGRESS.
+    - STATUS: COMPLETED.
 
 2. Work on Changesets module. [ David ]
 
@@ -75,7 +75,7 @@ of desired repositories to track.
 A collection of common methods which will be used across other modules.
 
 Proposed methods:
-    
+
 * Method for getting all repositories that a user has access to.
 
 #####Statistics module
@@ -92,8 +92,9 @@ Handles actions allowing the user to filter issues and changesets.
 1. Setup and workon your python virtualenv
 2. Clone this repository
 3. Install python packages: `pip install -r requirements.txt`
-4. Run app server: `python manage.py runserver`
-5. Go to: `http://127.0.0.1:8000`
+4. Sync database and add models: `python manage.py syncdb`
+5. Run app server: `python manage.py runserver`
+6. Go to: `http://127.0.0.1:8000`
 
 
 ###Unit Testing
