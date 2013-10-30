@@ -20,16 +20,14 @@ The calls also take the following extra query parameters:
 """
 import simplejson as json
 import requests
+import bitmethods
 
-
-def get_issues(req_url, auth_tokens, limit=5):
+def get_issues(request):
     """
     Obtains a JSON dictionary from issues endpoint.
 
     Parameters:
-    - req_url: String (URL)
-    - auth_tokens: OAuth1 (Object)
-    - limit: Integer (50 max)
+    - requests: Request (Django)
 
     Returns => Dictionary
     """

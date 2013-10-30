@@ -36,6 +36,23 @@ def make_req_url(user, repo, endpoint, limit=None):
     return url
 
 
+def send_bitbucket_request(req_url, auth_tokens):
+    """
+    Obtains a JSON dictionary from bitbucket API endpoint.
+
+    Parameters:
+    - req_url: String (URL)
+    - auth_tokens: OAuth1 (Object)
+
+    Returns => Dictionary
+    """
+    # Success status 200, return JSON
+    req = requests.get(req_url, auth=auth_tokens)
+    if req.status_code == 200:
+        return json.loads(req.content)
+    return {}
+
+
 def get_repositories():
     """
     Gets all repositories that the user owns/has
