@@ -29,9 +29,10 @@ The calls also take the following extra query parameters:
 
 import requests
 import simplejson as json
+import bitmethods
 
 
-def get_changesets(URL):
+def get_changesets(user, repo, auth_tokens, limit):
     """
     Obtains a JSON dictionary of changesets across
     a repository/repositories.
@@ -51,14 +52,14 @@ def get_changesets(URL):
     # Get the changesets.
     # The URL for changesets is:
     # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
-    r = requests.get(URL)
+    req_url = bitmethods.make_req_url(user, repo, 'changesets', limit)
+    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
    
     # Return the JSON
-    return r.text
 
     
 
-def parse_changesets(data):
+def parse_changesets(changesets):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -76,11 +77,4 @@ def parse_changesets(data):
         - A JSON formatted dictionary containing 
           all relevant data.
     """
-    
- 
-    # r = get_changesets(URL)
-    # json.loads(r.text)
-    dictionary = json.loads(data)
-    pprint(unicode_to_str(d))
-    # Print issue 1
-    # pprint(d.issues[0])
+
