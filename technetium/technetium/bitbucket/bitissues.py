@@ -49,44 +49,38 @@ def parse_issues(issues):
 
     Returns: List
     """
+
     x = issues['issues']
-    req = ['status', 'title', 'priority']
-    # list of nested keys
-    vreqs = ['kind', 'component']
-    test = []
+
+    # List of non-nested keys to parse out
+    keys = ['status', 'title', 'priority']
+
+    # list of nested keys to parse out
+    nested_keys = ['kind', 'component']
+
+    # Empty list of new dictionaries
+    issue = []
+
     # x is the array of issues
     # a represents a dictionary inside x, which is an issue
     # there are multiple a's
     for a in x:
         new_list = {}
         for k,v in a.iteritems():
-            if k in req:
+            if k in keys:
+
         # Create a new list of dictionaries for each issue 
         # containing the key,value pairs that we want
                 new_list[k] = v
+            # Iterate through keys which have dictionaries as values
+            # This iteration goes through nested dictionaries and looks
+            # up keys from vreqs
             if isinstance(v, dict):
                 for key, value in v.iteritems():
-                    if key in vreqs:
+                    if key in nested_keys:
                         new_list[key] = value
-        test.append(new_list)
+        issue.append(new_list)
     
-    return test
+    return issue
 
-    # DAVID'S COMMENTS FOR JORGE:
-
-    # Note: I took a look at the JSON returned from bitbucket. It is valid.
-
-    # Parsing idea: We want to extract only certain key-value pairs.
-    # First, convert the json_string to a python dictionary, then
-    # we can create an array of keys to look for, and extract them
-    # as we iterate through the dictionary.
-
-    # BLOCKER: I'm currently not sure how to extract key/value pairs from
-    # a python dictionary which contains both nested/not-nested dictionaries.
-
-    # req = ['count','issues']
-
-    # Prints the new dictionary of wanted values. Currently does not
-    # extract values from nested dictionaries.
-    # print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
-
+    
