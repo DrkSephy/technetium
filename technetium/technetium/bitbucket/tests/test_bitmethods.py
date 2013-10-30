@@ -12,7 +12,7 @@ class BitmethodsTests(unittest.TestCase):
         self.issues_endpt = 'issues'
 
 
-    # Series of tests for make request URL
+    # Series of tests for: make_req_url()
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
