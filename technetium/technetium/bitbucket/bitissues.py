@@ -58,16 +58,16 @@ def parse_issues(issues):
     # a represents a dictionary inside x, which is an issue
     # there are multiple a's
     for a in x:
-        new_list = []
+        new_list = {}
         for k,v in a.iteritems():
             if k in req:
         # Create a new list of dictionaries for each issue 
         # containing the key,value pairs that we want
-                new_list.append({k:v})
+                new_list[k] = v
             if isinstance(v, dict):
                 for key, value in v.iteritems():
                     if key in vreqs:
-                        new_list.append({key:value})
+                        new_list[key] = value
         test.append(new_list)
     
     return test
