@@ -37,7 +37,7 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
 
     # Handle extra queries
     if limit and start:
-        url += "?limit=%d&%d" % (limit, start)
+        url += "?limit=%d&start=%d" % (limit, start)
     elif limit:
         url += "?limit=%d" % limit
     elif start:
