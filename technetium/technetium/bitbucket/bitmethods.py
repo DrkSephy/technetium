@@ -24,7 +24,7 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
     - user: String
     - repo: String
     - endpoint: String
-    - limit: Integer
+    - limit: Integer (Max 50)
     - start: Integer
 
     Returns: String
@@ -34,6 +34,10 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
     Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
     """
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
+
+    # Set limit is given and is above 50, set limit to 50
+    if limit and limit > 50:
+            limit = 50
 
     # Handle extra queries
     if limit and start:
