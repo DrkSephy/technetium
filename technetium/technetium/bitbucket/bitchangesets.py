@@ -78,3 +78,18 @@ def parse_changesets(changesets):
           all relevant data.
     """
 
+    x = changeets['changesets']
+
+    keys = ['author', 'branch', 'utctimestamp', 'message']
+
+    changeset = []
+
+    for a in x:
+        new_list = {}
+        for k,v in a.iteritems():
+            if k in keys:
+                new_list[k] = v
+        changeset.append(new_list)
+
+    return changeset
+
