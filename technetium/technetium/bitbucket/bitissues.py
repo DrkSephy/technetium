@@ -49,7 +49,28 @@ def parse_issues(issues):
 
     Returns: List
     """
-    return issues
+    x = issues['issues']
+    req = ['status', 'title', 'priority']
+    # list of nested keys
+    vreqs = ['kind', 'component']
+    test = []
+    # x is the array of issues
+    # a represents a dictionary inside x, which is an issue
+    # there are multiple a's
+    for a in x:
+        new_list = []
+        for k,v in a.iteritems():
+            if k in req:
+        # Create a new list of dictionaries for each issue 
+        # containing the key,value pairs that we want
+                new_list.append({k:v})
+            if isinstance(v, dict):
+                for key, value in v.iteritems():
+                    if key in vreqs:
+                        new_list.append({key:value})
+        test.append(new_list)
+    
+    return test
 
     # DAVID'S COMMENTS FOR JORGE:
 
