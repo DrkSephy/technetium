@@ -38,7 +38,7 @@ def get_issues(req_url, auth_tokens, limit=5):
     # Success status 200, return JSON
     if req.status_code == 200:
         return json.loads(req.content)
-    return []
+    return {}
 
 
 
