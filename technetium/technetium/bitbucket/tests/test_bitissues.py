@@ -2,7 +2,7 @@
 Test Technetium Bitbucket: bitissues
 """
 import unittest
-import bitissues
+import technetium.bitbucket.bitissues as bitissues
 
 
 class BitissuesTests(unittest.TestCase):

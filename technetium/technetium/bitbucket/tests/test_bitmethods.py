@@ -2,7 +2,7 @@
 Test Technetium Bitbucket: bitmethods
 """
 import unittest
-import bitmethods
+import technetium.bitbucket.bitmethods as bitmethods
 
 class BitmethodsTests(unittest.TestCase):
 
