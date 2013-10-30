@@ -1,10 +1,7 @@
 """
 Module for Bitbucket issues aggregation.
 
-Bitbucket API requests start at the following endpoint:
-
-https://bitbucket.org/api/1.0/repositories/
-and have the following layout:
+Bitbucket API requests start at the following layout:
 
 https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
 
@@ -25,35 +22,30 @@ import simplejson as json
 import requests
 import bitmethods
 
-def get_issues(username, repository, limit=5):
+
+def get_issues(user, repo, auth_tokens, limit):
     """
-    Obtains a JSON dictionary of issues.
+    Obtains a JSON dictionary from issues endpoint.
 
     Parameters:
-    - username: String
-    - repository: String (repository slug)
+    - user: User (Django)
+    - repo: String
+    - auth_tokens: OAuth1
     - limit: Integer
 
-    Returns => List
+    Returns: Dictionary
     """
-    req_url = bitmethods.make_req_url(username, repository, 'issues', limit)
-    req = requests.get(bitmethods.make_req_url(username, repository, 'issues', limit))
-
-    # Success status 200, return JSON
-    if req.status_code == 200:
-        return json.loads(req.content)['issues']
-    return []
-
+    req_url = bitmethods.make_req_url(user, repo, 'issues', limit)
+    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
 def parse_issues(issues):
     """
-    Parses returned JSON data for the API call to the
-    `repositories` endpoint on Bitbucket.
+    Parses returned JSON data from the bitbucket API
+    response for the technetium issues dashboard.
 
     Parameters:
-    ----------
-    issues: Dictionary of JSON issues
+    - issues: Dictionary of JSON issues
 
     Returns: List
     """
@@ -77,6 +69,3 @@ def parse_issues(issues):
     # extract values from nested dictionaries.
     # print dict([i for i in json_string.iteritems() if i[0] in json_string and i[0] in req])
 
-
-if __name__ == '__main__':
-    print parse_issues(get_issues('DrkSephy', 'smw-koopa-krisis'))

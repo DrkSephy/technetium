@@ -7,6 +7,8 @@ Proposed methods:
       belonging to the user.
     - Parsing could probably be refactored into a common method.
 """
+import simplejson as json
+import requests
 
 #######################
 # BITBUCKET CONSTANTS #
@@ -14,7 +16,7 @@ Proposed methods:
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 
 
-def make_req_url(user, repo, endpoint, limit=None):
+def make_req_url(user, repo, endpoint, limit=None, start=None):
     """
     Constructs a URL for bitbucket API request.
 
@@ -22,7 +24,8 @@ def make_req_url(user, repo, endpoint, limit=None):
     - user: String
     - repo: String
     - endpoint: String
-    - limit: Integer
+    - limit: Integer (Max 50)
+    - start: Integer
 
     Returns: String
 
@@ -31,9 +34,36 @@ def make_req_url(user, repo, endpoint, limit=None):
     Output: 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
     """
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
-    if limit:
+
+    # Set limit is given and is above 50, set limit to 50
+    if limit and limit > 50:
+            limit = 50
+
+    # Handle extra queries
+    if limit and start:
+        url += "?limit=%d&start=%d" % (limit, start)
+    elif limit:
         url += "?limit=%d" % limit
+    elif start:
+        url += "?start=%d" % start
     return url
+
+
+def send_bitbucket_request(req_url, auth_tokens):
+    """
+    Obtains a JSON dictionary from bitbucket API endpoint.
+
+    Parameters:
+    - req_url: String (URL)
+    - auth_tokens: OAuth1 (Object)
+
+    Returns => Dictionary
+    """
+    # Success status 200, return JSON
+    req = requests.get(req_url, auth=auth_tokens)
+    if req.status_code == 200:
+        return json.loads(req.content)
+    return {}
 
 
 def get_repositories():

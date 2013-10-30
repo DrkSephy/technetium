@@ -9,13 +9,9 @@
   You are logged in as {{ user.username }}!
   <a href="/logout">[Log out]</a>
 </p>
+<h4>Hi {{ first_name }} {{ last_name }} ({{ email }})</h4>
 <br>
-<h4>Check out what we have from social auth</h4>
-<ul>
-    <li>{{ first_name }}</li>
-    <li>{{ last_name }}</li>
-    <li>{{ email }}</li>
-</ul>
-
+<h4>You are authorized to view this JSON from technetium's private repo</h4>
+{{ issues_json }}
 
 {% endblock %}
