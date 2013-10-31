@@ -32,21 +32,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav">
-            <li class="active"><a href="index.html"><i class="icon-dashboard"></i> Dashboard</a></li>
-            <li><a href="charts.html"><i class="icon-bar-chart"></i> Issues </a></li>
-            <li><a href="tables.html"><i class="icon-table"></i> Changesets </a></li>
-            <li><a href="forms.html"><i class="icon-edit"></i> Manager </a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Dropdown Item</a></li>
-                <li><a href="#">Another Item</a></li>
-                <li><a href="#">Third Item</a></li>
-                <li><a href="#">Last Item</a></li>
-              </ul>
-            </li>
-          </ul>
+
+        {% include "includes/addons/sidebar.html" %}
 
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown messages-dropdown">
@@ -103,11 +90,11 @@
                 <li><a href="#"><i class="icon-envelope"></i> Inbox <span class="badge">7</span></a></li>
                 <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="/logout"><i class="icon-power-off"></i> [Log out]</a></li>
+                <li><a href="/logout"><i class="icon-power-off"></i>Log out</a></li>
               </ul>
             </li>
           </ul>
-        </div><!-- /.navbar-collapse -->
+        </div>
       </nav>
 
 {% endif %}
