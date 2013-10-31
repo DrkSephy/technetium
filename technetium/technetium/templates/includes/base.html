@@ -15,14 +15,14 @@
   </head>
 
   <body>
-    {% include 'includes/addons/navbar.html' %}
-
     <div id='page-wrapper'>
       <div class='row'>
+
+    {% include 'includes/addons/navbar.html' %}
+
     {% block content %}{% endblock %}
     {% block scripts %}{% endblock %}
       </div>
-    </div>
     </div>
 
     <script src="/static/js/jquery.min.js"></script>
