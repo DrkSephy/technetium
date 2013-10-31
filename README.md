@@ -39,6 +39,10 @@ Goals/Tasks [ 10/30/13 ---> 11/5/13 ]
       - [A] Obtain a list of repositories that a User has access to.
       - [B] Add method for adding/removing repositories to follow.
 
+5. Work on Statistics/Graphs module. [ David ]
+
+      - [A] Figure out what input data is needed to use third-party libraries.
+      - [B] Obtain data and render through graphs.
 
 Finished Tasks [10/22/13 --> 10/29/13]
 ---------------------------------------
