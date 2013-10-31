@@ -2,6 +2,7 @@ Technetium Description
 ----------------------
 
 Technetium is a data aggregration tool built using the Bitbucket API.
+
 Technetium is deployed here: http://technetium.herokuapp.com/
 
 Technetium Features
@@ -47,7 +48,7 @@ Goals/Tasks [ 10/30/13 ---> 11/5/13 ]
 Finished Tasks [10/22/13 --> 10/29/13]
 ---------------------------------------
 
-1. Work on Bitauth module. [ Jorge, David ]
+1. Work on Bitauth module. [ Jorge ]
 
     - A common method needed for all Bitbucket API calls to be
       successful.
@@ -74,12 +75,6 @@ Finished Tasks [10/22/13 --> 10/29/13]
 
 
 ###Future Tasks
-
-
-
-
-#####Statistics module
-Handles visual representation of bitbucket data in various forms.
 
 #####Filter module
 Handles actions allowing the user to filter issues and changesets.
