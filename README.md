@@ -3,7 +3,7 @@ Technetium Description
 
 Technetium is a data aggregration tool built using the Bitbucket API.
 
-Technetium is deployed here: http://technetium.herokuapp.com/
+Technetium is deployed here: [Technetium](http://technetium.herokuapp.com/)
 
 Technetium Features
 -------------------
