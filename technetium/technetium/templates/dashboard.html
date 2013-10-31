@@ -7,47 +7,35 @@
 <h4>Hi {{ first_name }} {{ last_name }} ({{ email }})</h4>
 <br>
 
-
 <div class="col-lg-12">
-            <h2>Issues</h2>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped tablesorter">
-                <thead>
-                  <tr>
-                    <th class="header">Status <i class="icon-sort"></i></th>
-                    <th class="header">Title <i class="icon-sort"></i></th>
-                    <th class="header">Priority <i class="icon-sort"></i></th>
-                    <th class="header">Kind <i class="icon-sort"></i></th>
-                    <th class="header">Component<i class="icon-sort"></i></th>
-                  </tr>
-                </thead>
-                <tbody>
+  <h2>Issues</h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <th class="header">Title <i class="icon-sort"></i></th>
+          <th class="header">Assignee <i class="icon-sort"></i></th>
+          <th class="header">Type <i class="icon-sort"></i></th>
+          <th class="header">Priority <i class="icon-sort"></i></th>
+          <th class="header">Created <i class="icon-sort"></i></th>
+          <th class="header">Status <i class="icon-sort"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for issue in issues_json %}
+      <tr>
+        <td>{{ issue.title }}</td>
+        <td>{{ issue.assignee }}</td>
+        <td>{{ issue.type }}</td>
+        <td>{{ issue.priority }}</td>
+        <td>{{ issue.created }}</td>
+        <td>{{ issue.status }}</td>
+      </tr>
+    {% endfor %}
 
-
-{% for issue in issues_json %}
-
-<tr>
-  <td>
-    {{ issue.status }}
-  </td>
-  <td>
-     {{ issue.title }}
-  </td>
-  <td>
-     {{ issue.priority }}
-  </td>
-  <td>
-    {{ issue.kind }}
-  </td>
-  <td>
-     {{ issue.component}}
-  </td>
-</tr>
-{% endfor %}
-
-            </tbody>
-        </table>
-    </div>
+    </tbody>
+  </table>
+  </div>
 </div>
 
 {% endblock %}

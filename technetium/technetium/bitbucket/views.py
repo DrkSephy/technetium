@@ -42,6 +42,7 @@ def dashboard(request):
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
     data['issues_json'] = bitissues.parse_issues(bitissues.get_issues(user, repo, auth_tokens, 5))
+    print data['issues_json']
     return render(request, 'dashboard.html', data)
 
 

@@ -39,19 +39,19 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_issues(raw_issues):
+def parse_issues(raw_json):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
 
     Parameters:
-    - raw_issues: Dictionary of JSON issues
+    - raw_json: Dictionary of JSON issues
 
     Returns: List
     """
     parsed_issues = []
 
-    for issue in raw_issues:
+    for issue in raw_json['issues']:
         data = {}
 
         # Parse general information
@@ -60,6 +60,7 @@ def parse_issues(raw_issues):
         data['type'] = issue['metadata']['kind']
         data['priority'] = issue['priority']
         data['created'] = issue['utc_created_on']
+        data['issues_url'] = bitmethods.transform_url(issue['resource_uri'])
 
         # Parse assignee
         data['assignee'] = ''
@@ -69,5 +70,5 @@ def parse_issues(raw_issues):
             data['assignee_avatar'] = issue['responsible']['avatar']
 
         parsed_issues.append(data)
-    return parse_issues
+    return parsed_issues
 

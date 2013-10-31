@@ -66,6 +66,18 @@ def send_bitbucket_request(req_url, auth_tokens):
     return {}
 
 
+def transform_url(resource_uri):
+    """
+    Strips and transform resource uri from JSON
+    into a link to that bitbucket resource.
+
+    Example:
+    Params: (resource_uri="/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13")
+    Output: 'https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13'
+    """
+    pass
+
+
 def get_repositories():
     """
     Gets all repositories that the user owns/has
