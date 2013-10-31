@@ -39,48 +39,35 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_issues(issues):
+def parse_issues(raw_issues):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
 
     Parameters:
-    - issues: Dictionary of JSON issues
+    - raw_issues: Dictionary of JSON issues
 
     Returns: List
     """
+    parsed_issues = []
 
-    x = issues['issues']
+    for issue in raw_issues:
+        data = {}
 
-    # List of non-nested keys to parse out
-    keys = ['status', 'title', 'priority']
+        # Parse general information
+        data['title'] = issue['title']
+        data['status'] = issue['status']
+        data['type'] = issue['metadata']['kind']
+        data['priority'] = issue['priority']
+        data['created'] = issue['utc_created_on']
 
-    # list of nested keys to parse out
-    nested_keys = ['kind', 'component']
+        # Parse assignee
+        data['assignee'] = ''
+        data['assignee_avatar'] = ''
+        if 'responsible' in issue:
+            data['assignee'] = issue['responsible']['display_name']
+            data['assignee_avatar'] = issue['responsible']['avatar']
 
-    # Empty list of new dictionaries
-    issue = []
+        parsed_issues.append(data)
+    return parse_issues
 
-    # x is the array of issues
-    # a represents a dictionary inside x, which is an issue
-    # there are multiple a's
-    for a in x:
-        new_list = {}
-        for k,v in a.iteritems():
-            if k in keys:
-
-        # Create a new list of dictionaries for each issue 
-        # containing the key,value pairs that we want
-                new_list[k] = v
-            # Iterate through keys which have dictionaries as values
-            # This iteration goes through nested dictionaries and looks
-            # up keys from vreqs
-            if isinstance(v, dict):
-                for key, value in v.iteritems():
-                    if key in nested_keys:
-                        new_list[key] = value
-        issue.append(new_list)
-    
-    return issue
-
-    
