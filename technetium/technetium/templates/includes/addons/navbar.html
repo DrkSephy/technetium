@@ -15,7 +15,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         </div><!-- /.navbar-collapse -->
 
-{% elif user.is_authenticated %}
+{% else %}
 
     <div id='wrapper'>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -106,8 +106,8 @@
                 <li><a href="/logout"><i class="icon-power-off"></i> [Log out]</a></li>
               </ul>
             </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </nav>
+</div>
+</nav>
+</div>
 
 {% endif %}
