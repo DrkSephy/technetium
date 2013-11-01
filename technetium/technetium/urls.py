@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     url(r'^login/$', views_bitbucket.home),
     url(r'^logout/$', views_bitbucket.logout),
     url(r'^dashboard/$', views_bitbucket.dashboard),
+    url(r'^changesets/$', views_bitbucket.dashboard_changesets),
+
 
     # Manage Repository views
     url(r'^manage/$', views_bitbucket.manage_repositories),
