@@ -26,6 +26,14 @@ def home(request):
 
 
 @login_required
+def dashboard(request):
+    """
+    Render dashboard overview
+    """
+
+    pass
+
+@login_required
 def dashboard_issues(request):
     """
     Render dashboard issues overview.
