@@ -26,9 +26,9 @@ def home(request):
 
 
 @login_required
-def dashboard(request):
+def dashboard_issues(request):
     """
-    Render dashboard overview.
+    Render dashboard issues overview.
     """
     # Example repository
     user = 'technetiumccny'
@@ -44,7 +44,7 @@ def dashboard(request):
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
     data['issues_json'] = bitissues.parse_issues(bitissues.get_issues(user, repo, auth_tokens, 13))
-    return render(request, 'dashboard.html', data)
+    return render(request, 'dashboard_issues.html', data)
 
 
 @login_required
