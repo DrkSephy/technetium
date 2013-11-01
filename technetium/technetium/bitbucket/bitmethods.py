@@ -78,23 +78,6 @@ def transform_url(resource_uri):
     pass
 
 
-def get_repositories():
-    """
-    Gets all repositories that the user owns/has
-    access privledges to.
-
-    Parameters:
-    -----------
-
-    Returns:
-    --------
-    repos: dictionary
-        - A dictionary containing a list of all
-          repositories owned by the user.
-    """
-    pass
-
-
 def unicode_to_str(data):
     """
     Recursively convert a collection containing unicode strings to strings.

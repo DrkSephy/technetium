@@ -12,7 +12,7 @@ class BitmethodsTests(unittest.TestCase):
         self.issues_endpt = 'issues'
 
 
-    # Series of tests for: make_req_url()
+    # Tests For: make_req_url()
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
@@ -52,3 +52,4 @@ class BitmethodsTests(unittest.TestCase):
         match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
+

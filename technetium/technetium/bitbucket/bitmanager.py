@@ -7,8 +7,25 @@ Handles the following:
     - Allows method to remove repositories.
     - Allows flush method to remove all repositories.
 """
-
 import requests
+
+
+def get_repositories():
+    """
+    Gets all repositories that the user owns/has
+    access privledges to.
+
+    Parameters:
+    -----------
+
+    Returns:
+    --------
+    repos: dictionary
+        - A dictionary containing a list of all
+          repositories owned by the user.
+    """
+    pass
+
 
 def add_repository():
     """
@@ -32,7 +49,7 @@ def add_repository():
 
 def remove_repository():
     """
-    Removes a repository from a list which is being 
+    Removes a repository from a list which is being
     `followed` by the user.
 
     Paramters:
@@ -55,8 +72,8 @@ def remove_all_repositories():
     Paramters:
     ---------
     Repositories: dictionary
-        - A dictionary containing the list of repositories 
-          to remove. 
+        - A dictionary containing the list of repositories
+          to remove.
 
     Returns:
     -------
