@@ -12,6 +12,7 @@ from social.backends.bitbucket import BitbucketOAuth
 # Project Modules
 import bitauth
 import bitissues
+import bitmanager
 
 # Home page view
 def home(request):
@@ -42,7 +43,6 @@ def dashboard(request):
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
     data['issues_json'] = bitissues.parse_issues(bitissues.get_issues(user, repo, auth_tokens, 13))
-    print data['issues_json']
     return render(request, 'dashboard.html', data)
 
 
@@ -51,6 +51,11 @@ def manage_repositories(request):
     """
     Renders manage repositories page
     """
+    # Get OAuth tokens, starting to seem WET
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    data['all_repos'] = bitmanager.get_list_of_repositories(auth_tokens)
     return HttpResponse("Manage Repos")
 
 

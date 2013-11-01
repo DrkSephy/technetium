@@ -7,24 +7,22 @@ Handles the following:
     - Allows method to remove repositories.
     - Allows flush method to remove all repositories.
 """
+import bitmethods
 import requests
 
 
-def get_repositories():
+def get_list_of_repositories(auth_tokens):
     """
-    Gets all repositories that the user owns/has
-    access privledges to.
+    Returns a list of all repositories that the
+    user has at least read access permissions.
 
     Parameters:
-    -----------
+    - auth_tokens: OAuth1
 
-    Returns:
-    --------
-    repos: dictionary
-        - A dictionary containing a list of all
-          repositories owned by the user.
+    Returns: List
     """
-    pass
+    req_url = "https://bitbucket.org/api/1.0/user/repositories/dashboard/"
+    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
 def add_repository():

@@ -14,6 +14,7 @@ import requests
 # BITBUCKET CONSTANTS #
 #######################
 API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
+BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
 def make_req_url(user, repo, endpoint, limit=None, start=None):
@@ -75,8 +76,8 @@ def transform_url(resource_uri):
     Params: (resource_uri="/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13")
     Output: 'https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13'
     """
-    return resource_uri
-
+    # return resource_uri.replace('/1.0/repositories/', BITBUCKET_BASE_URL)
+    pass
 
 def unicode_to_str(data):
     """
