@@ -47,6 +47,13 @@ def dashboard(request):
 
 
 @login_required
+def dashboard_changesets(request):
+    """
+    Render changesets on dashboard overview
+    """
+
+
+@login_required
 def manage_repositories(request):
     """
     Renders manage repositories page
