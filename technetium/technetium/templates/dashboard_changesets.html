@@ -9,23 +9,17 @@
     <table class="table table-hover table-striped tablesorter">
       <thead>
         <tr>
-          <th class="header">Title <i class="icon-sort"></i></th>
-          <th class="header">Assignee <i class="icon-sort"></i></th>
-          <th class="header">Type <i class="icon-sort"></i></th>
-          <th class="header">Priority <i class="icon-sort"></i></th>
-          <th class="header">Created <i class="icon-sort"></i></th>
-          <th class="header">Status <i class="icon-sort"></i></th>
+          <th class="header">Author <i class="icon-sort"></i></th>
+          <th class="header">Branch <i class="icon-sort"></i></th>
+          <th class="header">Message <i class="icon-sort"></i></th>
         </tr>
       </thead>
       <tbody>
     {% for changeset in changesets_json %}
       <tr>
-        <td>{{ issue.title }}</td>
-        <td>{{ issue.assignee }}</td>
-        <td>{{ issue.type }}</td>
-        <td>{{ issue.priority }}</td>
-        <td>{{ issue.created }}</td>
-        <td>{{ issue.status }}</td>
+        <td>{{ changeset.author }}</td>
+        <td>{{ changeset.branch.assignee }}</td>
+        <td>{{ changeset.message }}</td>
       </tr>
     {% endfor %}
 
