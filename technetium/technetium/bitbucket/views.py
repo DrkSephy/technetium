@@ -51,12 +51,13 @@ def manage_repositories(request):
     """
     Renders manage repositories page
     """
+    data = {}
+
     # Get OAuth tokens, starting to seem WET
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
-
     data['all_repos'] = bitmanager.get_list_of_repositories(auth_tokens)
-    return HttpResponse("Manage Repos")
+    return render(request, 'manage.html', data)
 
 
 @login_required
