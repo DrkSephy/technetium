@@ -78,7 +78,7 @@ def parse_changesets(changesets):
           all relevant data.
     """
 
-    x = changeets['changesets']
+    x = changesets['changesets']
 
     keys = ['author', 'branch', 'utctimestamp', 'message']
 
