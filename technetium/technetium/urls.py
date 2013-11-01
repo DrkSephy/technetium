@@ -12,8 +12,13 @@ urlpatterns = patterns('',
     # Technetium: bitbucket app URLs
     url(r'^$', views_bitbucket.home),
     url(r'^login/$', views_bitbucket.home),
-    url(r'^dashboard/$', views_bitbucket.dashboard),
     url(r'^logout/$', views_bitbucket.logout),
+    url(r'^dashboard/$', views_bitbucket.dashboard),
+
+    # Manage Repository views
+    url(r'^manage/$', views_bitbucket.manage_repositories),
+    url(r'^subscribe/$', views_bitbucket.manage_repositories),
+    url(r'^unsubscribe/$', views_bitbucket.manage_repositories),
 
     # Social Auth URLs
     url(r'', include('social.apps.django_app.urls', namespace='social'))

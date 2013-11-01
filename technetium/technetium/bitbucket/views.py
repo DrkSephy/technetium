@@ -47,6 +47,31 @@ def dashboard(request):
 
 
 @login_required
+def manage_repositories(request):
+    """
+    Renders manage repositories page
+    """
+    return HttpResponse("Manage Repos")
+
+
+@login_required
+def subscribe_repository(request):
+    """
+    Handles request to subscribe to a repository
+    """
+    return HttpResponse("Subscribing to repo")
+
+
+@login_required
+def unsubscribe_repository(request):
+    """
+    Handles request to unsubscribe from a repository
+    """
+    return HttpResponse("Unsubscribe from a repo")
+
+
+
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect('/')
