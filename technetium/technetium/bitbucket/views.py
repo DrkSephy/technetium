@@ -51,6 +51,12 @@ def dashboard_changesets(request):
     """
     Render changesets on dashboard overview
     """
+    user = 'technetiumccny'
+    repo = 'technetium'
+    data = {}
+
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
 
 
 @login_required
