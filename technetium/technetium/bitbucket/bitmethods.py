@@ -75,7 +75,7 @@ def transform_url(resource_uri):
     Params: (resource_uri="/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13")
     Output: 'https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13'
     """
-    pass
+    return resource_uri
 
 
 def unicode_to_str(data):
