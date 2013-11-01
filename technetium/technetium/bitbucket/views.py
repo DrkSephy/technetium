@@ -31,7 +31,18 @@ def dashboard(request):
     Render dashboard overview
     """
 
-    pass
+    # Repository to get information from
+    user = 'technetiumccny'
+    repo = 'technetium'
+
+    # Dictionary to store issues
+    issues = {}
+
+    # Dictionary to store changesets
+    changesets = {}
+
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
 
 @login_required
 def dashboard_issues(request):
