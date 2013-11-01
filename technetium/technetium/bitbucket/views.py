@@ -50,7 +50,7 @@ def dashboard(request):
 
     # Render the last 5 changesets
     changesets['changesets_json'] = bitchangesets.parse_changesets(bitchangesets.get_changesets(user, repo, auth_tokens, 5))
-    return render(request, 'dashboard_issues.html', issues, changesets)
+    return render(request, 'dashboard_issues.html', issues)
 
 
 @login_required
