@@ -41,8 +41,17 @@ def dashboard(request):
     # Dictionary to store changesets
     changesets = {}
 
+    # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    # Render the last 5 issues
+    issues['issues_json'] = bitissues.parse_issues(bitissues.get_issues(user, repo, auth_tokens, 5))
+
+    # Render the last 5 changesets
+    changesets['changesets_json'] = bitchangesets.parse_changesets(bitchangesets.get_changesets(user, repo, auth_tokens, 5))
+    return render(request, 'dashboard_issues.html', issues, changesets)
+
 
 @login_required
 def dashboard_issues(request):
