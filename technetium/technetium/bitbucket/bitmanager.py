@@ -37,9 +37,22 @@ def parse_all_repositories(repositories):
     parsed_repositories = []
 
     for user in repositories:
-        user_repos = []
-        account_info = user[0]
-        repo_list = user[1]
+        # Leave account information as it is
+        data = {'account_info' : user[0]}
+        data['repo_list'] = []
+
+        # Parse and add information to repository list
+        for repo in user[1]:
+            repo_data = {}
+            repo_data['name'] = repo['name']
+            repo_data['url_path'] = repo['absolute_url']
+            repo_data['full_url'] = 'https://bitbucket.org' + repo_data['url_path']
+            repo_data['repo_id'] = repo['_pk']
+            repo_data['owner'] = repo['owner']
+            repo_data['slug'] = repo['slug']
+            data['repo_list'].append(repo_data)
+        parsed_repositories.append(data)
+    return parsed_repositories
 
 
 def add_repository():

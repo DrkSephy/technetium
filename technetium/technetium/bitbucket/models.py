@@ -12,6 +12,7 @@ class Subscription(models.Model):
     slug_url = models.CharField(max_length=120)
     owner = models.CharField(max_length=50)
     repo_id = models.IntegerField(max_length=15)
+    hidden = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('user', 'repository')
