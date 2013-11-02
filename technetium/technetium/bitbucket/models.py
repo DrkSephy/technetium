@@ -10,6 +10,8 @@ class Subscription(models.Model):
     user = models.ForeignKey(User)
     repository = models.CharField(max_length=80)
     slug_url = models.CharField(max_length=120)
+    owner = models.CharField(max_length=50)
+    repo_id = models.IntegerField(max_length=15)
 
     class Meta:
         unique_together = ('user', 'repository')

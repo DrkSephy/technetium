@@ -25,6 +25,23 @@ def get_list_of_repositories(auth_tokens):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
+def parse_all_repositories(repositories):
+    """
+    Parse list of repositories.
+
+    Parameters:
+    - repositories: List
+
+    Returns: List
+    """
+    parsed_repositories = []
+
+    for user in repositories:
+        user_repos = []
+        account_info = user[0]
+        repo_list = user[1]
+
+
 def add_repository():
     """
     Adds a repository to a list which is `followed`
