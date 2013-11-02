@@ -18,7 +18,7 @@
     {% for changeset in changesets_json %}
       <tr>
         <td>{{ changeset.author }}</td>
-        <td>{{ changeset.branch.assignee }}</td>
+        <td>{{ changeset.branch }}</td>
         <td>{{ changeset.message }}</td>
       </tr>
     {% endfor %}
