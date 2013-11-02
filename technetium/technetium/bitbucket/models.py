@@ -5,7 +5,7 @@ from django.db import models
 class Subscription(models.Model):
     """
     Django Model for repository subscriptions.
-    Foreign Key on User.
+    Foreign Key on User. Explanation and examples:
     """
     user = models.ForeignKey(User)
     repository = models.CharField(max_length=80)
