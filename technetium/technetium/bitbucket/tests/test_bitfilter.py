@@ -6,7 +6,7 @@ import technetium.bitbucket.bitfilter as bitfilter
 
 class BitfilterTest(unittest.TestCase):
 
-	def setUp(self):
+    def setUp(self):
         # Public user repository
         self.pub_user = 'DrkSephy'
         self.pub_repo = 'smw-koopa-krisis'
@@ -35,6 +35,6 @@ class BitfilterTest(unittest.TestCase):
 
     def test_get_individual_changeset_not_empty(self):
         """
-        
+        Test to get individual changeset
         """
         pass
