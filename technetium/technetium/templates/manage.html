@@ -12,8 +12,10 @@
 
         <div class="panel-heading">
           <h4 class="panel-title">
+            <img src="{{ repository.account_info.avatar }}">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseUser{{ forloop.counter }}">
-              {{ repository.account_info }}
+              <span class="display-name">{{ repository.account_info.display_name }}</span>
+              <span class="glyphicon glyphicon-star pull-right"></span>
             </a>
           </h4>
         </div>

@@ -8,3 +8,10 @@
     margin-top: 200px;
 }
 
+.panel-title>a {
+    color: #428bca;
+}
+
+.display-name {
+    margin-left: 15px;
+}
