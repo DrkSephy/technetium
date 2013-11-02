@@ -38,7 +38,6 @@ def dashboard(request):
     # Dictionary to store data
     data = {}
 
-
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
@@ -111,7 +110,7 @@ def manage_repositories(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get and Parse list of all repositories
-    data['all_repos'] = bitmanager.parse_all_repositories(
+    data['repositories'] = bitmanager.parse_all_repositories(
         bitmanager.get_list_of_repositories(auth_tokens))
     return render(request, 'manage.html', data)
 
