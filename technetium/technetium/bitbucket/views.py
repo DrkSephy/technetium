@@ -136,7 +136,7 @@ def line_chart(request):
         }
     }
 
-    return render_to_response('linechart.html', data)
+    return render_to_response('line_chart.html', data)
 
 
 @login_required
