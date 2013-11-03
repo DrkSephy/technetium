@@ -43,7 +43,7 @@ def dashboard(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Render the last 5 issues
-    data['issues_json'] = bitissues.parse_issues(
+    data['issues_json'] = bitissues.parse_issues(request,
         bitissues.get_issues(user, repo, auth_tokens, 5))
 
     # Render the last 5 changesets
@@ -63,6 +63,14 @@ def dashboard_issues(request):
     repo = 'technetium'
     data = {}
 
+    limit = 13
+    filterNameValues={}
+    for n, v in request.GET.iteritems():
+        filterNameValues[n] = v
+        limit += 50
+
+    data['filterNameValues'] = filterNameValues
+
     # Get OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
@@ -71,8 +79,9 @@ def dashboard_issues(request):
     data['first_name'] = auth_data['first_name']
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
-    data['issues_json'] = bitissues.parse_issues(
-        bitissues.get_issues(user, repo, auth_tokens, 13))
+    data['issues_json'] = bitissues.parse_issues(request,
+        bitissues.get_issues(user, repo, auth_tokens, limit))
+
     return render(request, 'dashboard_issues.html', data)
 
 
