@@ -58,16 +58,34 @@ class BitmethodsTests(unittest.TestCase):
     # Tests For: send_bitbucket_request()
     def test_send_bitbucket_request_not_200(self):
         """
-        Tests send_bitbucket_request status_code != 200 returns {}
+        Tests send_bitbucket_request status_code not 200 returns empty dict
         """
         req_url = self.url_issues
         bitbucket_req = Mock()
-        auth_tokens = {'oauth_token' : 'abc', "oauth_token_secret" : '123'}
+        auth_tokens = {'oauth_token' : 'Fake', "oauth_token_secret" : 'Invalid'}
+        match = {}
         with patch('technetium.bitbucket.bitmethods.requests') as mock_requests:
             mock_requests.get.return_value = mock_response = Mock()
             mock_response.status_code = 201
             results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
-            self.assertEqual(results, {})
+            self.assertEqual(results, match)
+
+    def test_send_bitbucket_request_200(self):
+        """
+        Tests send_bitbucket_request with status 200 returns dictionary
+        """
+        req_url = self.url_issues
+        bitbucket_req = Mock()
+        auth_tokens = {'oauth_token' : 'Real', "oauth_token_secret" : 'Valid'}
+        match = {"count" : 49, "issues" : [{"status": "new"}]}
+
+        # Mock string json in request.content matches expected match JSON
+        with patch('technetium.bitbucket.bitmethods.requests') as mock_requests:
+            mock_requests.get.return_value = mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = '{"count" : 49, "issues" : [{"status": "new"}]}'
+            results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+            self.assertEqual(results, match)
 
 
     # Tests For: transform_url()
