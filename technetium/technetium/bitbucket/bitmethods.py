@@ -64,19 +64,6 @@ def send_bitbucket_request(req_url, auth_tokens):
     return {}
 
 
-def transform_url(resource_uri):
-    """
-    Strips and transform resource uri from JSON
-    into a link to that bitbucket resource.
-
-    Example:
-    Params: (resource_uri="/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13")
-    Output: 'https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13'
-    """
-    # return resource_uri.replace('/1.0/repositories/', BITBUCKET_BASE_URL)
-    pass
-
-
 def unicode_to_str(data):
     """
     Convert a collection containing unicode strings to strings.

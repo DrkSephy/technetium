@@ -87,18 +87,3 @@ class BitmethodsTests(unittest.TestCase):
             results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
             self.assertEqual(results, match)
 
-
-    # Tests For: transform_url()
-    def test_transform_url_empty(self):
-        """
-        Tests that transform url on empty returns empty string
-        """
-        self.assertEqual(bitmethods.transform_url(''), '')
-
-    def test_transform_url_issues(self):
-        """
-        Tests that transform url returns valid URL for issues resource
-        """
-        resource = "/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13"
-        match = "https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13"
-        self.assertEqual(bitmethods.transform_url(resource), match)
