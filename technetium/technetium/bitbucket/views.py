@@ -115,7 +115,7 @@ def dashboard_changesets(request):
 @login_required
 def line_chart(request):
     """
-    Render line chart on dashboard
+    Render line chart on dashboard/graphs
     """
     start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
     nb_element = 150
@@ -145,6 +145,14 @@ def line_chart(request):
         }
     }
     return render(request,'line_chart.html', data)
+
+@login_required
+def pie_chart(request):
+    """
+    Render pie chart on dashboard/graphs
+    """
+
+    pass
 
 
 @login_required
