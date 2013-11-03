@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th class="header">Title <i class="icon-sort"></i></th>
+          <th class="header">Repository <i class="icon-sort"></i></th>
           <th class="header">Assignee <i class="icon-sort"></i></th>
           <th class="header">Type <i class="icon-sort"></i></th>
           <th class="header">Priority <i class="icon-sort"></i></th>
@@ -20,7 +21,8 @@
       <tbody>
     {% for issue in issues_json %}
       <tr>
-        <td>{{ issue.title }}</td>
+        <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
+        <td>{{ issue.repository }}</td>
         <td>{{ issue.assignee }}</td>
         <td>{{ issue.type }}</td>
         <td>{{ issue.priority }}</td>

@@ -99,3 +99,6 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that valid time stamp is returned in correct format
         """
+        timestamp = '2013-10-29 18:36:11+00:00'
+        match = '10-29-2013'
+        self.assertEqual(bitmethods.format_timestamp(timestamp), match)

@@ -5,6 +5,7 @@ Proposed methods:
     - Parsing could probably be refactored into a common method.
 """
 import simplejson as json
+from datetime import datetime
 import requests
 
 #######################
@@ -68,7 +69,11 @@ def format_timestamp(timestamp):
     """
     Formats string timestamp into readable timestamp.
     """
-    pass
+    try:
+        date = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S+00:00')
+        return datetime.strftime(date, '%m-%d-%Y')
+    except ValueError:
+        return ''
 
 
 def unicode_to_str(data):
