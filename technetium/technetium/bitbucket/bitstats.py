@@ -1,10 +1,15 @@
 """
 Module for calculating statistics for Bitbucket data.
 
-Proposed methods:
+Charting algorithm workflow:
+    1. Write methods for getting the data in the proper form.
+    2. For line charts, the input is a CSL (Comma Seperated List)
+    3. Pass the data into the views and render it through the 
+       templates.
 
-    - Create line/bar/pie charts for issues and changesets data.
-    - Create line/bar/pie charts for lines of code added by user.
+* Might be a good idea to be able to filter the data from a general
+  list, this might limit the requests to the server and client-side
+  computation.
 
 DAVID'S NOTES
 -------------

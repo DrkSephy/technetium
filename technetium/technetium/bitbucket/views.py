@@ -116,7 +116,16 @@ def dashboard_changesets(request):
 def line_chart(request):
     """
     Render line chart on dashboard/graphs
+
+    David's notes
+    -------------
+    I'll need to figure out how to properly get the data from the JSON 
+    returned from Bitbucket, and get it into the proper form. Will 
+    probably need a few methods from bitstats to get the data in the
+    right form and pass it into the charting views. 
     """
+
+    # Get random data 
     start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
     nb_element = 150
     xdata = range(nb_element)
@@ -151,6 +160,9 @@ def pie_chart(request):
     """
     Render pie chart on dashboard/graphs
     """
+
+    # Pie charts take strings on the x-axis,
+    # and the distribution are integers on the y-axis.
     xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
     ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
 
