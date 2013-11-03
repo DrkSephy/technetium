@@ -144,8 +144,7 @@ def line_chart(request):
             'jquery_on_ready': False,
         }
     }
-
-    return render_to_response('line_chart.html', data)
+    return render(request,'line_chart.html', data)
 
 
 @login_required
