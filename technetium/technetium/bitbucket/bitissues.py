@@ -21,6 +21,7 @@ The calls also take the following extra query parameters:
 import simplejson as json
 import requests
 import bitmethods
+import bitfilter
 
 
 def get_issues(user, repo, auth_tokens, limit):
@@ -39,7 +40,7 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_issues(raw_json):
+def parse_issues(request, raw_json):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
@@ -70,5 +71,7 @@ def parse_issues(raw_json):
             data['assignee_avatar'] = issue['responsible']['avatar']
 
         parsed_issues.append(data)
+
+    parsed_issues = bitfilter.filter_issues(request, parsed_issues)
     return parsed_issues
 
