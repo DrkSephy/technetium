@@ -1,6 +1,10 @@
 {% extends "includes/base.html" %}
 {% load url from future %}
 
+{% 
+  type_val = 'bug'
+  selected = 'selected'
+  %}
 
 {% block content %}
 <div class="col-lg-12">
@@ -12,7 +16,31 @@
           <th class="header">Title <i class="icon-sort"></i></th>
           <th class="header">Repository <i class="icon-sort"></i></th>
           <th class="header">Assignee <i class="icon-sort"></i></th>
-          <th class="header">Type <i class="icon-sort"></i></th>
+          <th class="header">Type
+                <select id="Type" onchange="getIssues('Type')">
+                  <option value="">---</option>
+                  <option value="bug" 
+{%  if filterNameValues.Type and filterNameValues.Type == 'bug'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >bug</option>
+                  <option value="enhancement"
+{%  if filterNameValues.Type and filterNameValues.Type == 'enhancement'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >enhancement</option>
+                  <option value="proposal"
+{%  if filterNameValues.Type and filterNameValues.Type == 'proposal'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                     >proposal</option>
+                  <option value="task"
+{%  if filterNameValues.Type and filterNameValues.Type == 'task'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >task</option>
+                </select>  
+            <i class="icon-sort"></i></th>
           <th class="header">Priority <i class="icon-sort"></i></th>
           <th class="header">Created <i class="icon-sort"></i></th>
           <th class="header">Status <i class="icon-sort"></i></th>
