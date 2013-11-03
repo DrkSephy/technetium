@@ -1,8 +1,9 @@
 """
 Test Technetium Bitbucket: bitmethods
 """
-import unittest
+from mock import Mock, patch
 import technetium.bitbucket.bitmethods as bitmethods
+import unittest
 
 class BitmethodsTests(unittest.TestCase):
 
@@ -10,14 +11,14 @@ class BitmethodsTests(unittest.TestCase):
         self.user = 'technetiumccny'
         self.repo = 'technetium'
         self.issues_endpt = 'issues'
-
+        self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
     # Tests For: make_req_url()
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
+        match = self.url_issues
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt), match)
 
@@ -54,17 +55,50 @@ class BitmethodsTests(unittest.TestCase):
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
 
-    # Tests For: transform_url()
-    def test_transform_url_empty(self):
+    # Tests For: send_bitbucket_request()
+    def test_send_bitbucket_request_not_200(self):
         """
-        Tests that transform url on empty returns empty string
+        Tests send_bitbucket_request status_code not 200 returns empty dict
         """
-        self.assertEqual(bitmethods.transform_url(''), '')
+        req_url = self.url_issues
+        bitbucket_req = Mock()
+        auth_tokens = {'oauth_token' : 'Fake', "oauth_token_secret" : 'Invalid'}
+        match = {}
+        with patch('technetium.bitbucket.bitmethods.requests') as mock_requests:
+            mock_requests.get.return_value = mock_response = Mock()
+            mock_response.status_code = 201
+            results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+            self.assertEqual(results, match)
 
-    def test_transform_url_issues(self):
+    def test_send_bitbucket_request_200(self):
         """
-        Tests that transform url returns valid URL for issues resource
+        Tests send_bitbucket_request with status 200 returns dictionary
         """
-        resource = "/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13"
-        match = "https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13"
-        self.assertEqual(bitmethods.transform_url(resource), match)
+        req_url = self.url_issues
+        bitbucket_req = Mock()
+        auth_tokens = {'oauth_token' : 'Real', "oauth_token_secret" : 'Valid'}
+        match = {"count" : 49, "issues" : [{"status": "new"}]}
+
+        # Mock string json in request.content matches expected match JSON
+        with patch('technetium.bitbucket.bitmethods.requests') as mock_requests:
+            mock_requests.get.return_value = mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = '{"count" : 49, "issues" : [{"status": "new"}]}'
+            results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+            self.assertEqual(results, match)
+
+
+    # Tests For: format_timestamp()
+    def test_format_timestamp_empty(self):
+        """
+        Tests that empty timestamp returns empty string
+        """
+        self.assertEqual(bitmethods.format_timestamp(''), '')
+
+    def test_format_timestamp_valid(self):
+        """
+        Tests that valid time stamp is returned in correct format
+        """
+        timestamp = '2013-10-29 18:36:11+00:00'
+        match = '10-29-2013'
+        self.assertEqual(bitmethods.format_timestamp(timestamp), match)

@@ -1,13 +1,11 @@
 """
-Module for common methods.
+Module for common bitbucket methods.
 
 Proposed methods:
-
-    - Method for getting a list of all repositories
-      belonging to the user.
     - Parsing could probably be refactored into a common method.
 """
 import simplejson as json
+from datetime import datetime
 import requests
 
 #######################
@@ -38,7 +36,7 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
 
     # Set limit is given and is above 50, set limit to 50
     if limit and limit > 50:
-            limit = 50
+        limit = 50
 
     # Handle extra queries
     if limit and start:
@@ -67,22 +65,21 @@ def send_bitbucket_request(req_url, auth_tokens):
     return {}
 
 
-def transform_url(resource_uri):
+def format_timestamp(timestamp):
     """
-    Strips and transform resource uri from JSON
-    into a link to that bitbucket resource.
+    Formats string timestamp into readable timestamp.
+    """
+    try:
+        date = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S+00:00')
+        return datetime.strftime(date, '%m-%d-%Y')
+    except ValueError:
+        return ''
 
-    Example:
-    Params: (resource_uri="/1.0/repositories/DrkSephy/smw-koopa-krisis/issues/13")
-    Output: 'https://bitbucket.org/DrkSephy/smw-koopa-krisis/issue/13'
-    """
-    # return resource_uri.replace('/1.0/repositories/', BITBUCKET_BASE_URL)
-    pass
 
 def unicode_to_str(data):
     """
-    Recursively convert a collection containing unicode strings to strings.
-    Call this method on the JSON returned from Bitbucketself.
+    Convert a collection containing unicode strings to strings.
+    Call this method on the JSON returned from Bitbucket.
 
     Returns: String
     """
