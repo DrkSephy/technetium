@@ -1,3 +1,8 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+
 {% load nvd3_tags %}
 <head>
     <script src="/static/js/jquery.min.js"></script>
@@ -7,3 +12,6 @@
 <body>
     {% include_container chartcontainer %}
 </body>
+
+{% endblock %}
+
