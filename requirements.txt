@@ -5,7 +5,7 @@ Werkzeug==0.9.4
 argparse==1.2.1
 astroid==1.0.0
 coverage==3.7
-django-chartit==0.1
+django-nvd3==0.6.0
 django-social-auth==0.7.28
 httplib2==0.8
 logilab-common==0.60.0
@@ -15,6 +15,7 @@ oauth2==1.5.211
 oauthlib==0.6.0
 psycopg2==2.5.1
 pylint==1.0.0
+python-nvd3==0.11.0
 python-openid==2.2.5
 python-social-auth==0.1.14
 requests==2.0.0
