@@ -36,7 +36,7 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
 
     # Set limit is given and is above 50, set limit to 50
     if limit and limit > 50:
-            limit = 50
+        limit = 50
 
     # Handle extra queries
     if limit and start:

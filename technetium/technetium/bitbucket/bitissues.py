@@ -59,7 +59,7 @@ def parse_issues(raw_json):
         data['status'] = issue['status'].capitalize()
         data['type'] = issue['metadata']['kind'].capitalize()
         data['priority'] = issue['priority'].capitalize()
-        data['created'] = issue['utc_created_on']
+        data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
         data['issues_url'] = '#'
 
         # Parse assignee
