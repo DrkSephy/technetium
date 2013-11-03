@@ -11,13 +11,14 @@ class BitmethodsTests(unittest.TestCase):
         self.user = 'technetiumccny'
         self.repo = 'technetium'
         self.issues_endpt = 'issues'
+        self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
     # Tests For: make_req_url()
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
+        match = self.url_issues
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt), match)
 
@@ -55,10 +56,18 @@ class BitmethodsTests(unittest.TestCase):
 
 
     # Tests For: send_bitbucket_request()
-    def test_send_bitbucket_request(self):
+    def test_send_bitbucket_request_not_200(self):
         """
-        Tests that send bitbucket request returns dictionary
+        Tests send_bitbucket_request status_code != 200 returns {}
         """
+        req_url = self.url_issues
+        bitbucket_req = Mock()
+        auth_tokens = {'oauth_token' : 'abc', "oauth_token_secret" : '123'}
+        with patch('technetium.bitbucket.bitmethods.requests') as mock_requests:
+            mock_requests.get.return_value = mock_response = Mock()
+            mock_response.status_code = 201
+            results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+            self.assertEqual(results, {})
 
 
     # Tests For: transform_url()
