@@ -151,8 +151,28 @@ def pie_chart(request):
     """
     Render pie chart on dashboard/graphs
     """
+    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
+    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
 
-    pass
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container' # container name
+
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+    return render(request, 'pie_chart.html', data)
+
+
 
 
 @login_required

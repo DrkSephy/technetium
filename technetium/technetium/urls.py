@@ -16,8 +16,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', views_bitbucket.dashboard),
     url(r'^issues/$', views_bitbucket.dashboard_issues),
     url(r'^changesets/$', views_bitbucket.dashboard_changesets),
-    url(r'^dashboard/linechart/$', views_bitbucket.line_chart),
-    url(r'^dashboard/piechart/$', views_bitbucket.line_chart),
+    url(r'^linechart/$', views_bitbucket.line_chart),
+    url(r'^piechart/$', views_bitbucket.pie_chart),
 
     # Manage Repository views
     url(r'^manage/$', views_bitbucket.manage_repositories),
