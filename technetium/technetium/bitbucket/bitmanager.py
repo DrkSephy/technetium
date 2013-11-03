@@ -3,9 +3,9 @@ Module for managing various Bitbucket endpoints.
 
 Handles the following:
 
-    - Allows method to add repositories.
-    - Allows method to remove repositories.
-    - Allows flush method to remove all repositories.
+    - Allows method to subscribe to repositories.
+    - Allows method to unsubscribe from repositories.
+    - Allows flush method to unsubscribe all repositories.
 """
 import bitmethods
 import requests
@@ -72,8 +72,8 @@ def add_repository():
         - Returns true/false based on if operation was successful.
 
     """
-
     pass
+
 
 def remove_repository():
     """
@@ -90,8 +90,8 @@ def remove_repository():
     Confirmation: Boolean
         - Returns true/false based on if operation was successful.
     """
-
     pass
+
 
 def remove_all_repositories():
     """
@@ -108,6 +108,5 @@ def remove_all_repositories():
     Repository_count: int
         - Integer number of removed repositories.
     """
-
     pass
 
