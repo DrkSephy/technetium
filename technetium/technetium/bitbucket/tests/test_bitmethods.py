@@ -87,3 +87,15 @@ class BitmethodsTests(unittest.TestCase):
             results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
             self.assertEqual(results, match)
 
+
+    # Tests For: format_timestamp()
+    def test_format_timestamp_empty(self):
+        """
+        Tests that empty timestamp returns empty string
+        """
+        self.assertEqual(bitmethods.format_timestamp(''), '')
+
+    def test_format_timestamp_valid(self):
+        """
+        Tests that valid time stamp is returned in correct format
+        """

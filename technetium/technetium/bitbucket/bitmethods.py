@@ -64,6 +64,13 @@ def send_bitbucket_request(req_url, auth_tokens):
     return {}
 
 
+def format_timestamp(timestamp):
+    """
+    Formats string timestamp into readable timestamp.
+    """
+    pass
+
+
 def unicode_to_str(data):
     """
     Convert a collection containing unicode strings to strings.

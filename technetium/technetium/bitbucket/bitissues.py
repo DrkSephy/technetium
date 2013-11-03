@@ -60,7 +60,7 @@ def parse_issues(raw_json):
         data['type'] = issue['metadata']['kind'].capitalize()
         data['priority'] = issue['priority'].capitalize()
         data['created'] = issue['utc_created_on']
-        data['issues_url'] = bitmethods.transform_url(issue['resource_uri'])
+        data['issues_url'] = '#'
 
         # Parse assignee
         data['assignee'] = ''
