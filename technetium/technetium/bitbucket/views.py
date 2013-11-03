@@ -5,9 +5,14 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render, redirect
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from social.backends.bitbucket import BitbucketOAuth
+
+import random
+import datetime
+import time
 
 # Project Modules
 import bitauth
@@ -97,6 +102,41 @@ def dashboard_changesets(request):
 
     # Send request to templates
     return render(request, 'dashboard_changesets.html', data)
+
+@login_required
+def line_chart(request):
+    """
+    Render line chart on dashboard
+    """
+    start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
+    nb_element = 150
+    xdata = range(nb_element)
+    xdata = map(lambda x: start_time + x * 1000000000, xdata)
+    ydata = [i + random.randint(1, 10) for i in range(nb_element)]
+    ydata2 = map(lambda x: x * 2, ydata)
+
+    tooltip_date = "%d %b %Y %H:%M:%S %p"
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"},
+                   "date_format": tooltip_date}
+    chartdata = {'x': xdata,
+                 'name1': 'series 1', 'y1': ydata, 'extra1': extra_serie,
+                 'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
+
+    charttype = "lineChart"
+    chartcontainer = 'linechart_container' # container name
+    data = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': True,
+            'x_axis_format': '%d %b %Y %H',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+
+    return render_to_response('linechart.html', data)
 
 
 @login_required
