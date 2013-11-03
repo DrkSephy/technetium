@@ -2,7 +2,7 @@
 Test Technetium Bitbucket: bitstats
 """
 import unittest
-import technetium.bitbucket.bitstatistics
+import technetium.bitbucket.bitstats
 
 class BitstatsTest(unittest.TestCase):
 
