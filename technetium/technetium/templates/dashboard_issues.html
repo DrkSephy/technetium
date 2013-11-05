@@ -68,7 +68,47 @@
                 </select>  
             <i class="icon-sort"></i></th>
           <th class="header">Created <i class="icon-sort"></i></th>
-          <th class="header">Status <i class="icon-sort"></i></th>
+          <th class="header">Status
+                <select id="Status" onchange="getIssues()">
+                  <option value="">no filter</option>
+                  <option value="new" 
+{%  if filterNameValues.Status and filterNameValues.Status == 'new'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >new</option>
+                  <option value="open" 
+{%  if filterNameValues.Status and filterNameValues.Status == 'open' %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >open</option>
+                  <option value="resolved"
+{%  if filterNameValues.Status and filterNameValues.Status == 'resolved'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >resolved</option>
+                  <option value="duplicate"
+{%  if filterNameValues.Status and filterNameValues.Status == 'duplicate'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                     >duplicate</option>
+                  <option value="on_hold"
+{%  if filterNameValues.Status and filterNameValues.Status == 'on_hold'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >on hold</option>
+                  <option value="invalid"
+{%  if filterNameValues.Status and filterNameValues.Status == 'invalid'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >invalid</option>
+                  <option value="wontfix"
+{%  if filterNameValues.Status and filterNameValues.Status == 'wontfix'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >wontfix</option>
+                </select>  
+
+            <i class="icon-sort"></i></th>
         </tr>
       </thead>
       <tbody>
