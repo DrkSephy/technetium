@@ -16,9 +16,9 @@
           <th class="header">Title <i class="icon-sort"></i></th>
           <th class="header">Repository <i class="icon-sort"></i></th>
           <th class="header">Assignee <i class="icon-sort"></i></th>
-          <th class="header">
-                <select id="Type" onchange="getIssues('Type')">
-                  <option value="">Type</option>
+          <th class="header">Type
+                <select id="Type" onchange="getIssues()">
+                  <option value="">no filter</option>
                   <option value="bug" 
 {%  if filterNameValues.Type and filterNameValues.Type == 'bug'  %}
     {{ 'selected' }}
@@ -41,9 +41,9 @@
                     >task</option>
                 </select>  
             <i class="icon-sort"></i></th>
-          <th class="header">
-                <select id="Priority" onchange="getIssues('Priority')">
-                  <option value="">Priority</option>
+          <th class="header">Priority
+                <select id="Priority" onchange="getIssues()">
+                  <option value="">no filter</option>
                   <option value="major" 
 {%  if filterNameValues.Priority and filterNameValues.Priority == 'major'  %}
     {{ 'selected' }}

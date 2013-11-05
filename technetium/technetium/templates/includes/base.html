@@ -30,13 +30,26 @@
     <script src="/static/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-      function getIssues(header){
+      function getIssues(){
 //        alert("header="+header);
         var url = '/issues';
-        var val = document.getElementById(header).value;
-        if (val != ''){
-          url += '?'+header+'='+val;
+        var type = document.getElementById("Type");
+        var priority = document.getElementById("Priority");
+
+        if (type != null || priority != null){
+          url += '?';
+          if (type != null && type.value.trim() != ""){
+            url += "Type="+type.value.trim();
+          }
+          if (priority != null && priority.value.trim() != ""){
+            if (url.endsWith("?"))
+              url += "Priority="+priority.value.trim();
+            else
+              url += "&Priority="+priority.value.trim();              
+          }
         }
+
+
         top.location = url;
       }
     </script>
