@@ -70,9 +70,12 @@ def dashboard_issues(request):
 
     limit = 13
     filterNameValues={}
+
+    # get filtering name value pairs from request query string
+    i = 0
     for n, v in request.GET.iteritems():
         filterNameValues[n] = v
-        limit += 50
+        i += 1
 
     data['filterNameValues'] = filterNameValues
 
@@ -84,8 +87,14 @@ def dashboard_issues(request):
     data['first_name'] = auth_data['first_name']
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
-    data['issues_json'] = bitissues.parse_issues(request,
-        bitissues.get_issues(user, repo, auth_tokens, limit))
+
+    if i > 0:
+        # retrieve all issues from database, e.g. 1000
+        retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 1000)
+    else:
+        retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
+
+    data['issues_json'] = bitissues.parse_issues(request, retrieved_issues)
 
     return render(request, 'dashboard_issues.html', data)
 
