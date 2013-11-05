@@ -23,6 +23,8 @@ def filter_issues(request, parsed_json):
             filtered_json = filter_issues_by_type(filtered_json, v)
         if n.strip().lower() == 'priority':
             filtered_json = filter_issues_by_priority(filtered_json, v)
+        if n.strip().lower() == 'status':
+            filtered_json = filter_issues_by_status(filtered_json, v)
 
     return filtered_json
 
@@ -68,12 +70,17 @@ def filter_issues_by_date():
 
     pass
 
-def filter_issues_by_status():
+def filter_issues_by_status(parsed_json, filtered_value):
     """
     Filters issues based on status.
     """
 
-    pass
+    filtered_json = []
+    for issue in parsed_json:
+        if issue['status'] is not None and issue['status'].strip().lower() == filtered_value.strip().lower():
+            filtered_json.append(issue)
+
+    return filtered_json
 
 def filter_changesets_by_date():
     """

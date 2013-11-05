@@ -74,11 +74,11 @@ def parse_issues(request, raw_json):
 
     # filter issues based on query parameters
     parsed_issues = bitfilter.filter_issues(request, parsed_issues)
-    # limit 100 issues to be displayed
+    # limit 200 issues to be displayed
     display_parsed_issues = []
     count = 0
     for issue in parsed_issues:
-        if count < 100:
+        if count < 200:
             display_parsed_issues.append(issue)
             count += 1
 
