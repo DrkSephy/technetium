@@ -119,13 +119,13 @@ def line_chart(request):
 
     David's notes
     -------------
-    I'll need to figure out how to properly get the data from the JSON 
-    returned from Bitbucket, and get it into the proper form. Will 
+    I'll need to figure out how to properly get the data from the JSON
+    returned from Bitbucket, and get it into the proper form. Will
     probably need a few methods from bitstats to get the data in the
-    right form and pass it into the charting views. 
+    right form and pass it into the charting views.
     """
 
-    # Get random data 
+    # Get random data
     start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
     nb_element = 150
     xdata = range(nb_element)
@@ -204,10 +204,13 @@ def manage_repositories(request):
 
 
 @login_required
-def subscribe_repository(request):
+def subscribe_repository(request, content):
     """
-    Handles request to subscribe to a repository
+    Handles request to subscribe to a repository with
+    AJAX request. Content should contain a dictionary
+    with the fields for Subcription Model.
     """
+
     return HttpResponse("Subscribing to repo")
 
 

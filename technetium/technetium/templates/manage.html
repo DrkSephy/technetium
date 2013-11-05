@@ -41,7 +41,9 @@
                   <td>{{ repo.owner }}</td>
                   <td>No</td>
                   <td>
-                    <button type="button" class="btn btn-link">Subscribe</button>
+                    <button id="{{ repo.owner }}-{{ repo.slug }}" type="button" class="btn btn-link">
+                      Subscribe
+                    </button>
                   </td>
                 </tr>
               {% endfor %}
