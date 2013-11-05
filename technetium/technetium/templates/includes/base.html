@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>
+      {% block meta_title %}Technetium | Bitbucket Repository Manager{% endblock %}
+    </title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/img/favicon.png" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/admin.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/admin.css">
+    {% block extra_css %}{% endblock %}
+  </head>
+
+  <body>
+    <div id='page-wrapper'>
+      <div class='row'>
+
+    {% include 'includes/addons/navbar.html' %}
+
+    {% block content %}{% endblock %}
+    {% block scripts %}{% endblock %}
+      </div>
+    </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      function getIssues(header){
+//        alert("header="+header);
+        var url = '/issues';
+        var val = document.getElementById(header).value;
+        if (val != ''){
+          url += '?'+header+'='+val;
+        }
+        top.location = url;
+      }
+    </script>
+
+    <!-- Production JavaScript -->
+    <!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    -->
+  </body>
+</html>

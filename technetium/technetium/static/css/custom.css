@@ -1,0 +1,22 @@
+/* Custom Stylesheet to override bootstrap */
+/* Keep things simple and remember to stay DRY */
+
+.hero-unit {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.panel-title>a {
+    color: #428bca;
+}
+
+.display-name {
+    margin-left: 15px;
+}
+
+.thick {
+    font-size: 30px;
+    font-weight: bold;
+}
