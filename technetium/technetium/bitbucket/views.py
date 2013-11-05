@@ -72,7 +72,7 @@ def dashboard_issues(request):
     filterNameValues={}
     for n, v in request.GET.iteritems():
         filterNameValues[n] = v
-        limit += 50
+        limit += 100
 
     data['filterNameValues'] = filterNameValues
 
