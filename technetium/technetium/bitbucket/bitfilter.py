@@ -18,13 +18,13 @@ def filter_issues(request, parsed_json):
     """
 
     filtered_json = parsed_json
-    for n, v in request.GET.iteritems():
-        if n.strip().lower() == 'type':
-            filtered_json = filter_issues_by_type(filtered_json, v)
-        if n.strip().lower() == 'priority':
-            filtered_json = filter_issues_by_priority(filtered_json, v)
-        if n.strip().lower() == 'status':
-            filtered_json = filter_issues_by_status(filtered_json, v)
+    for name, value in request.GET.iteritems():
+        if name.strip().lower() == 'type':
+            filtered_json = filter_issues_by_type(filtered_json, value)
+        if name.strip().lower() == 'priority':
+            filtered_json = filter_issues_by_priority(filtered_json, value)
+        if name.strip().lower() == 'status':
+            filtered_json = filter_issues_by_status(filtered_json, value)
 
     return filtered_json
 
