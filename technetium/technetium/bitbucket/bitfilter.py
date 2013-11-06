@@ -14,7 +14,7 @@ import requests
 
 def filter_issues(request, parsed_json):
     """
-    Main filter dispatcher
+    Main filter dispatcher for issues
     """
 
     filtered_json = parsed_json
