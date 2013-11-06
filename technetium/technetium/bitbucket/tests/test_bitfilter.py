@@ -11,14 +11,15 @@ class BitfilterTest(unittest.TestCase):
         """
         setup to define global variables for testing
         """
+
+        # global variables to filter issues by type
         self.bug_issue = {'type':'bug'}
         self.enhancement_issue = {'type':'enhancement'}
         self.proposal_issue = {'type':'proposal'}
         self.task_issue= {'type':'task'}
-
         self.type_issues = [self.bug_issue, self.enhancement_issue, self.proposal_issue, self.task_issue]
 
-
+        # global variables to filter issues by status
         self.new_issue = {'status':'new'}
         self.open_issue = {'status':'open'}
         self.resolved_issue = {'status':'resolved'}
@@ -26,8 +27,15 @@ class BitfilterTest(unittest.TestCase):
         self.invalid_issue = {'status':'invalid'}
         self.on_hold_issue = {'status':'on hold'}
         self.wontfix_issue = {'status':'wontfix'}
-
         self.status_issues = [self.new_issue, self.open_issue, self.resolved_issue, self.duplicate_issue, self.invalid_issue, self.on_hold_issue, self.wontfix_issue]
+
+        # global variables to filter issues by priority
+        self.major_issue = {'priority':'major'}
+        self.trivial_issue = {'priority':'trivial'}
+        self.minor_issue = {'priority':'minor'}
+        self.critical_issue = {'priority':'critical'}
+        self.blocker_issue = {'priority':'blocker'}
+        self.priority_issues = [self.major_issue, self.trivial_issue, self.minor_issue, self.critical_issue, self.blocker_issue]
 
 
     def test_filter_issues(self):
@@ -113,6 +121,43 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.wontfix_issue]
         self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'wontfix'), expected_result_issue)
 
+    def test_filter_issue_priority_by_major(self):
+        """
+        Test to filter issue priority by major
+        """
+        expected_result_issue = [self.major_issue]
+        self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'major'), expected_result_issue)
+
+    def test_filter_issue_priority_by_trivial(self):
+        """
+        Test to filter issue priority by trivial
+        """
+        expected_result_issue = [self.trivial_issue]
+        self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'trivial'), expected_result_issue)
+
+    def test_filter_issue_priority_by_minor(self):
+        """
+        Test to filter issue priority by minor
+        """
+        expected_result_issue = [self.minor_issue]
+        self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'minor'), expected_result_issue)
+
+    def test_filter_issue_priority_by_critical(self):
+        """
+        Test to filter issue priority by critical
+        """
+        expected_result_issue = [self.critical_issue]
+        self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'critical'), expected_result_issue)
+
+    def test_filter_issue_priority_by_blocker(self):
+        """
+        Test to filter issue priority by blocker
+        """
+        expected_result_issue = [self.blocker_issue]
+        self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'blocker'), expected_result_issue)
+
+
+
     def test_filter_changesets(self):
     	"""
     	Test to filter changesets
@@ -122,6 +167,6 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_changesets_by_user(self):
         """
-        Test to get individual changeset
+        Test to filter changesets by user
         """
         pass
