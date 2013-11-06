@@ -64,6 +64,54 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.task_issue]
         self.assertEqual(bitfilter.filter_issues_by_type(self.type_issues, 'task'), expected_result_issue)
 
+    def test_filter_issue_status_by_new(self):
+        """
+        Test to filter issue status by new
+        """
+        expected_result_issue = [self.new_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'new'), expected_result_issue)
+
+    def test_filter_issue_status_by_open(self):
+        """
+        Test to filter issue status by open
+        """
+        expected_result_issue = [self.open_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'open'), expected_result_issue)
+
+    def test_filter_issue_status_by_resolved(self):
+        """
+        Test to filter issue status by resolved
+        """
+        expected_result_issue = [self.resolved_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'resolved'), expected_result_issue)
+
+    def test_filter_issue_status_by_duplicate(self):
+        """
+        Test to filter issue status by duplicate
+        """
+        expected_result_issue = [self.duplicate_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'duplicate'), expected_result_issue)
+
+    def test_filter_issue_status_by_invalid(self):
+        """
+        Test to filter issue status by invalid
+        """
+        expected_result_issue = [self.invalid_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'invalid'), expected_result_issue)
+
+    def test_filter_issue_status_by_on_hold(self):
+        """
+        Test to filter issue status by on hold
+        """
+        expected_result_issue = [self.on_hold_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'on hold'), expected_result_issue)
+
+    def test_filter_issue_status_by_wontfix(self):
+        """
+        Test to filter issue status by wontfix
+        """
+        expected_result_issue = [self.wontfix_issue]
+        self.assertEqual(bitfilter.filter_issues_by_status(self.status_issues, 'wontfix'), expected_result_issue)
 
     def test_filter_changesets(self):
     	"""
