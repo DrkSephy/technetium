@@ -2,15 +2,15 @@
 Test Technetium Bitbucket: bitfilter
 """
 import unittest
+import requests
 import technetium.bitbucket.bitfilter as bitfilter
  
 
 class BitfilterTest(unittest.TestCase):
 
     def setUp(self):
-        """
-        setup to define global variables for testing
-        """
+        # global variable for filtering
+        self.request = requests.request
 
         # global variables to filter issues by type
         self.bug_issue = {'type':'bug'}
@@ -36,6 +36,7 @@ class BitfilterTest(unittest.TestCase):
         self.critical_issue = {'priority':'critical'}
         self.blocker_issue = {'priority':'blocker'}
         self.priority_issues = [self.major_issue, self.trivial_issue, self.minor_issue, self.critical_issue, self.blocker_issue]
+
 
 
     def test_filter_issues(self):
@@ -156,7 +157,47 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.blocker_issue]
         self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'blocker'), expected_result_issue)
 
+    def test_filter_issue_date_by_today(self):
+        """
+        Test to filter issue date by today
+        """
+        pass
 
+    def test_filter_issue_date_by_this_week(self):
+        """
+        Test to filter issue date by this week
+        """
+        pass
+
+    def test_filter_issue_date_by_last_week(self):
+        """
+        Test to filter issue date by last week
+        """
+        pass
+
+    def test_filter_issue_date_by_this_month(self):
+        """
+        Test to filter issue date by this month
+        """
+        pass
+
+    def test_filter_issue_date_by_last_month(self):
+        """
+        Test to filter issue date by last month
+        """
+        pass
+
+    def test_filter_issue_date_by_this_year(self):
+        """
+        Test to filter issue date by this year
+        """
+        pass
+
+    def test_filter_issue_date_by_last_year(self):
+        """
+        Test to filter issue date by last year
+        """
+        pass
 
     def test_filter_changesets(self):
     	"""

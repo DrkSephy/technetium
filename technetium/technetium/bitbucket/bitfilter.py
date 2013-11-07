@@ -31,12 +31,12 @@ def filter_issues(request, parsed_json):
 
 def filter_issues_by_type(parsed_json, filtered_value):
     """
-    Filters issues by type. (Blocker, Status, etc)
+    Filters issues by type.
     """
 
     filtered_json = []
     for issue in parsed_json:
-        if issue['type'] is not None and issue['type'].strip().lower() == filtered_value.strip().lower():
+        if issue['type'] is not None and issue['type'].strip().lower()==filtered_value.strip().lower():
             filtered_json.append(issue)
 
     return filtered_json
@@ -49,7 +49,7 @@ def filter_issues_by_priority(parsed_json, filtered_value):
 
     filtered_json = []
     for issue in parsed_json:
-        if issue['priority'] is not None and issue['priority'].strip().lower() == filtered_value.strip().lower():
+        if issue['priority'] is not None and issue['priority'].strip().lower()==filtered_value.strip().lower():
             filtered_json.append(issue)
 
     return filtered_json
@@ -77,7 +77,7 @@ def filter_issues_by_status(parsed_json, filtered_value):
 
     filtered_json = []
     for issue in parsed_json:
-        if issue['status'] is not None and issue['status'].strip().lower() == filtered_value.strip().lower():
+        if issue['status'] is not None and issue['status'].strip().lower()==filtered_value.strip().lower():
             filtered_json.append(issue)
 
     return filtered_json

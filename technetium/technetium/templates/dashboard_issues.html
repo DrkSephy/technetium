@@ -67,7 +67,46 @@
                     >blocker</option>
                 </select>  
             <i class="icon-sort"></i></th>
-          <th class="header">Created <i class="icon-sort"></i></th>
+          <th class="header">Created 
+                <select id="Created" onchange="getIssues()">
+                  <option value="">no filter</option>
+                  <option value="today" 
+{%  if filterNameValues.Created and filterNameValues.Created == 'today'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >today</option>
+                  <option value="this_week"
+{%  if filterNameValues.Created and filterNameValues.Created == 'this_week'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >this week</option>
+                  <option value="last_week"
+{%  if filterNameValues.Created and filterNameValues.Created == 'last_week'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                     >last week</option>
+                  <option value="this_month"
+{%  if filterNameValues.Created and filterNameValues.Created == 'this_month'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >this month</option>
+                  <option value="last_month"
+{%  if filterNameValues.Created and filterNameValues.Created == 'last_month'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >last month</option>
+                  <option value="this_year"
+{%  if filterNameValues.Created and filterNameValues.Created == 'this_year'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >this year</option>
+                  <option value="last_year"
+{%  if filterNameValues.Created and filterNameValues.Created == 'last_year'  %}
+    {{ 'selected' }}
+{%  endif  %}
+                    >last year</option>
+                </select>  
+            <i class="icon-sort"></i></th>
           <th class="header">Status
                 <select id="Status" onchange="getIssues()">
                   <option value="">no filter</option>
@@ -107,7 +146,6 @@
 {%  endif  %}
                     >wontfix</option>
                 </select>  
-
             <i class="icon-sort"></i></th>
         </tr>
       </thead>
