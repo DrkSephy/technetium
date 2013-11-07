@@ -20,8 +20,8 @@ The calls also take the following extra query parameters:
 """
 import simplejson as json
 import requests
-import bitmethods
-import bitfilter
+import technetium.bitbucket.bitmethods as bitmethods
+import technetium.bitbucket.bitfilter as bitfilter
 
 
 def get_issues(user, repo, auth_tokens, limit):
