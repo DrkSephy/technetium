@@ -10,12 +10,11 @@
       <thead>
         <tr>
           <th class="header">Title <i class="icon-sort"></i></th>
-          <th class="header">Repository <i class="icon-sort"></i></th>
           <th class="header">Assignee <i class="icon-sort"></i></th>
           <th class="header">Type
                 <select id="Type" onchange="getIssues()">
                   <option value="">no filter</option>
-                  <option value="bug" 
+                  <option value="bug"
 {%  if filterNameValues.Type and filterNameValues.Type == 'bug'  %}
     {{ 'selected' }}
 {%  endif  %}
@@ -35,42 +34,13 @@
     {{ 'selected' }}
 {%  endif  %}
                     >task</option>
-                </select>  
+                </select>
             <i class="icon-sort"></i></th>
-          <th class="header">Priority
-                <select id="Priority" onchange="getIssues()">
-                  <option value="">no filter</option>
-                  <option value="major" 
-{%  if filterNameValues.Priority and filterNameValues.Priority == 'major'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                    >major</option>
-                  <option value="trivial"
-{%  if filterNameValues.Priority and filterNameValues.Priority == 'trivial'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                    >trivial</option>
-                  <option value="minor"
-{%  if filterNameValues.Priority and filterNameValues.Priority == 'minor'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                     >minor</option>
-                  <option value="critical"
-{%  if filterNameValues.Priority and filterNameValues.Priority == 'critical'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                    >critical</option>
-                  <option value="blocker"
-{%  if filterNameValues.Priority and filterNameValues.Priority == 'blocker'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                    >blocker</option>
-                </select>  
-            <i class="icon-sort"></i></th>
-          <th class="header">Created 
+
+          <th class="header">Created
                 <select id="Created" onchange="getIssues()">
                   <option value="">no filter</option>
-                  <option value="today" 
+                  <option value="today"
 {%  if filterNameValues.Created and filterNameValues.Created == 'today'  %}
     {{ 'selected' }}
 {%  endif  %}
@@ -105,17 +75,17 @@
     {{ 'selected' }}
 {%  endif  %}
                     >last year</option>
-                </select>  
+                </select>
             <i class="icon-sort"></i></th>
           <th class="header">Status
                 <select id="Status" onchange="getIssues()">
                   <option value="">no filter</option>
-                  <option value="new" 
+                  <option value="new"
 {%  if filterNameValues.Status and filterNameValues.Status == 'new'  %}
     {{ 'selected' }}
 {%  endif  %}
                     >new</option>
-                  <option value="open" 
+                  <option value="open"
 {%  if filterNameValues.Status and filterNameValues.Status == 'open' %}
     {{ 'selected' }}
 {%  endif  %}
@@ -145,7 +115,7 @@
     {{ 'selected' }}
 {%  endif  %}
                     >wontfix</option>
-                </select>  
+                </select>
             <i class="icon-sort"></i></th>
         </tr>
       </thead>
@@ -153,10 +123,8 @@
     {% for issue in issues_json %}
       <tr>
         <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
-        <td>{{ issue.repository }}</td>
         <td>{{ issue.assignee }}</td>
         <td>{{ issue.type }}</td>
-        <td>{{ issue.priority }}</td>
         <td>{{ issue.created }}</td>
         <td>{{ issue.status }}</td>
       </tr>
