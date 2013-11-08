@@ -8,11 +8,11 @@ class Subscription(models.Model):
     Foreign Key on User. Explanation and examples:
     """
     user = models.ForeignKey(User)
-    repository = models.CharField(max_length=80)
+    repo_id = models.IntegerField(max_length=15)
+    repository = models.CharField(max_length=100)
     slug_url = models.CharField(max_length=120)
     owner = models.CharField(max_length=50)
-    repo_id = models.IntegerField(max_length=15)
-    hidden = models.BooleanField(default=False)
+    subscribed = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('user', 'repository')

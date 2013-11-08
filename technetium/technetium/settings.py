@@ -153,12 +153,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     # Project Apps
     'social.apps.django_app.default',
     # Django charting app
     'django_nvd3',
-    'technetium',
+    'technetium.bitbucket',
 )
 
 ##########################
