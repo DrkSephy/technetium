@@ -10,9 +10,10 @@ $(":button").click(function() {
     var repoOwner = $("#owner-" + buttonId).val();
     var repoSlug  = $("#slug-" + buttonId).val();
 
+    // Send Ajax request to server
     $.ajax({
         type : 'POST',
-        url  : '/subscribe/',
+        url  : '/' + action + '/',
         data : {
             'csrfmiddlewaretoken' : csrftoken,
             'repo-name' : repoName,
@@ -23,9 +24,17 @@ $(":button").click(function() {
 
         // Sucess: change button value to unsubscribe
         success : function () {
-            button.attr('value', 'unsubscribe');
-            button.html('unsubscribe');
-            $('#subscribed-' + buttonId).html('Yes');
+            if (action == 'subscribe') {
+                $('#subscribed-' + buttonId).html('Yes');
+                button.attr('value', 'unsubscribe');
+                button.html('Unsubscribe');
+            }
+
+            else if (action == 'unsubscribe') {
+                $('#subscribed-' + buttonId).html('No');
+                button.attr('value', 'subscribe');
+                button.html('Subscribe');
+            }
         },
 
         // Fail: show alert of failure

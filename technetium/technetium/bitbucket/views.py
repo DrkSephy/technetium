@@ -212,7 +212,7 @@ def subscribe_repository(request):
     AJAX request. Content should contain a dictionary
     with the fields for Subcription Model.
     """
-    print request.POST
+    print "Subscribing"
     return HttpResponse("Subscribing to repo")
 
 
@@ -221,6 +221,7 @@ def unsubscribe_repository(request):
     """
     Handles request to unsubscribe from a repository
     """
+    print "Unsubscribing"
     return HttpResponse("Unsubscribe from a repo")
 
 
