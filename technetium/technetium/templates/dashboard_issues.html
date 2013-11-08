@@ -1,0 +1,43 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+<div class="col-lg-12">
+  <h2>Issue Tracker</h2>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <th class="header">Title <i class="icon-sort"></i></th>
+          <th class="header">Assignee <i class="icon-sort"></i></th>
+          <th class="header">Type
+            {% include "includes/filters/filter-type.html" %}
+          </th>
+
+          <th class="header">Created
+            {% include "includes/filters/filter-created.html" %}
+          </th>
+
+          <th class="header">Status
+            {% include "includes/filters/filter-status.html" %}
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+    {% for issue in issues_json %}
+      <tr>
+        <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
+        <td>{{ issue.assignee }}</td>
+        <td>{{ issue.type }}</td>
+        <td>{{ issue.created }}</td>
+        <td>{{ issue.status }}</td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% endblock %}
