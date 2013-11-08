@@ -206,12 +206,13 @@ def manage_repositories(request):
 
 
 @login_required
-def subscribe_repository(request, content):
+def subscribe_repository(request):
     """
     Handles request to subscribe to a repository with
     AJAX request. Content should contain a dictionary
     with the fields for Subcription Model.
     """
+    print request.POST
     return HttpResponse("Subscribing to repo")
 
 
