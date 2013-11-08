@@ -3,8 +3,25 @@
 // AJAX Request to subscribe to repository
 $(":button").click(function() {
     var buttonId  = this.id;
+    var action    = this.value;
     var repoName  = $("#name-" + buttonId).val();
     var repoOwner = $("#owner-" + buttonId).val();
     var repoSlug  = $("#slug-" + buttonId).val();
-    alert("Subscribing to " + repoName);
-})
+
+    $.ajax({
+        type : 'POST',
+        url  : 'http://127.0.0.1:8008/subscribe/',
+        data : {
+            'repo-name' : repoName,
+            'repo-owner' : repoOwner,
+            'repo-slug' : repoSlug,
+            'action' : action
+        },
+        success : function () {
+            alert("Subscribed to " + this.repoName); },
+        error : function () {
+            alert("Can't subscribed to " + this.repoName); },
+
+    });
+
+});
