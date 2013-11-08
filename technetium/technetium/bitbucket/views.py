@@ -188,7 +188,6 @@ def pie_chart(request):
 
 
 
-
 @login_required
 def manage_repositories(request):
     """
@@ -212,8 +211,9 @@ def subscribe_repository(request):
     AJAX request. Content should contain a dictionary
     with the fields for Subcription Model.
     """
-    print "Subscribing"
-    return HttpResponse("Subscribing to repo")
+    print "Subscribing to %s: %s" % \
+        (request.POST['repo-id'], request.POST['repo-name'])
+    return HttpResponse("{'status' : 'sucess'}")
 
 
 @login_required
@@ -221,9 +221,9 @@ def unsubscribe_repository(request):
     """
     Handles request to unsubscribe from a repository
     """
-    print "Unsubscribing"
-    return HttpResponse("Unsubscribe from a repo")
-
+    print "Unsubscribing from %s: %s" % \
+        (request.POST['repo-id'], request.POST['repo-name'])
+    return HttpResponse("{'status' : 'sucess'}")
 
 
 @login_required

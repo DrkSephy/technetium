@@ -9,6 +9,7 @@ $(":button").click(function() {
     var repoName  = $("#name-" + buttonId).val();
     var repoOwner = $("#owner-" + buttonId).val();
     var repoSlug  = $("#slug-" + buttonId).val();
+    var repoId  = $("#id-" + buttonId).val();
 
     // Send Ajax request to server
     $.ajax({
@@ -19,6 +20,7 @@ $(":button").click(function() {
             'repo-name' : repoName,
             'repo-owner' : repoOwner,
             'repo-slug' : repoSlug,
+            'repo-id' : repoId,
             'action' : action
         },
 
