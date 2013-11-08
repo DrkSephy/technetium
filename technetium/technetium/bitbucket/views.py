@@ -3,13 +3,10 @@ Views for bitbucket application
 """
 from django.http import HttpResponse
 from django.conf import settings
-from django.template import RequestContext
 from django.shortcuts import render, redirect
-from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from social.backends.bitbucket import BitbucketOAuth
-
 import random
 import datetime
 import time
@@ -34,9 +31,12 @@ def home(request):
 @login_required
 def dashboard(request):
     """
-    Render dashboard overview
+    Render dashboard overview. It will contain the following:
+    1. Issue Tracker reports
+    2. Changeset reports
+    3. Progress reports
+    4. Charts and graphs
     """
-
     # Repository to get information from
     user = 'technetiumccny'
     repo = 'technetium'

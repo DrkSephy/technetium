@@ -41,6 +41,9 @@
                   <td>{{ repo.owner }}</td>
                   <td>No</td>
                   <td>
+                    <input type="hidden" id="{{ repo.owner }}">
+                    <input type="hidden" id="{{ repo.slug }}">
+                    <input type="hidden" id="name-{{ repo.slug }}" value="{{ repo.name }}">
                     <button id="{{ repo.owner }}-{{ repo.slug }}" type="button" class="btn btn-link">
                       Subscribe
                     </button>
