@@ -20,13 +20,16 @@ Goals/Tasks [ 11/5/13 ---> 11/14/13 ]
   
       STATUS: In progress.
 
+
 2. Add AJAX to all requests. [ Jorge ]
 
       STATUS: In progress.
 
+
 3. Write tests. [ Albert ]
 
       STATUS: In progress.
+      
 
 4. Write methods for statistics/reports. [ David ]
 
