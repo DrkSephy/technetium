@@ -1,0 +1,15 @@
+              {% for repo in repository.repo_list %}
+                <tr>
+                  <td><a href="{{ repo.full_url }}" target="_bank">{{ repo.name }}</a></td>
+                  <td>{{ repo.owner }}</td>
+                  <td id="{{ repo.owner }}-{{ repo.slug }}-subscribed">No</td>
+                  <td>
+                    <input type="hidden" id="repo-owner{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.owner }}">
+                    <input type="hidden" id="repo-slug{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.slug }}">
+                    <input type="hidden" id="repo-name{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.name }}">
+                    <button id="{{ repo.owner }}-{{ repo.slug }}" type="button" class="btn btn-link">
+                      Subscribe
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}

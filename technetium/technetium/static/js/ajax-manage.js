@@ -3,5 +3,7 @@
 // AJAX Request to subscribe to repository
 $(":button").click(function() {
     var button_id = this.id;
-    alert("Subscribing to " + button_id);
+    var fields = $("#"+button_id+":input")
+    alert(fields)
+    // alert("Subscribing to " + button_id);
 })
