@@ -7,8 +7,9 @@ function getIssues() {
   var priority = document.getElementById("Priority");
   var status = document.getElementById("Status");
   var created = document.getElementById("Created");
+  var assignee = document.getElementById("Assignee");
 
-  if (type != null || priority != null || status != null || created != null){
+  if (type != null || priority != null || status != null || created != null || assignee != null){
     url += '?';
     if (type != null && type.value.trim() != ""){
       url += "Type="+type.value.trim();
@@ -25,11 +26,17 @@ function getIssues() {
       else
         url += "&Status="+status.value.trim();
     }
-     if (created != null && created.value.trim() != ""){
+    if (created != null && created.value.trim() != ""){
       if (url.endsWith("?"))
         url += "Created="+created.value.trim();
       else
         url += "&Created="+created.value.trim();
+    }
+    if (assignee != null && assignee.value.trim() != ""){
+      if (url.endsWith("?"))
+        url += "Assignee="+assignee.value.trim();
+      else
+        url += "&Assignee="+assignee.value.trim();              
     }
 }
 

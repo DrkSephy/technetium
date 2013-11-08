@@ -19,7 +19,6 @@ The calls also take the following extra query parameters:
              to return.
 """
 import simplejson as json
-import requests
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
 
@@ -40,7 +39,7 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_issues(request, raw_json):
+def parse_issues(name_val_dict, raw_json):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
@@ -51,6 +50,7 @@ def parse_issues(request, raw_json):
     Returns: List
     """
     parsed_issues = []
+    assignee_list = []
 
     for issue in raw_json['issues']:
         data = {}
@@ -71,16 +71,19 @@ def parse_issues(request, raw_json):
             data['assignee_avatar'] = issue['responsible']['avatar']
 
         parsed_issues.append(data)
+        if data['assignee'] != '':
+            if data['assignee'].strip() not in assignee_list:
+                assignee_list.append(data['assignee'].strip())
 
     # filter issues based on query parameters
-    parsed_issues = bitfilter.filter_issues(request, parsed_issues)
-    # limit 200 issues to be displayed
+    parsed_issues = bitfilter.filter_issues(name_val_dict, parsed_issues)
+    # limit 50 issues to be displayed
     display_parsed_issues = []
     count = 0
     for issue in parsed_issues:
-        if count < 200:
+        if count < 50:
             display_parsed_issues.append(issue)
             count += 1
 
-    return display_parsed_issues
+    return display_parsed_issues, assignee_list
 
