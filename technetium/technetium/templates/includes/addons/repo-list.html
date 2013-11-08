@@ -2,7 +2,7 @@
   <tr>
     <td><a href="{{ repo.full_url }}" target="_bank">{{ repo.name }}</a></td>
     <td>{{ repo.owner }}</td>
-    <td id="{{ repo.owner }}-{{ repo.slug }}-subscribed">No</td>
+    <td id="subscribed-{{ repo.owner }}-{{ repo.slug }}">No</td>
     <td>
       <input type="hidden" id="owner-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.owner }}">
       <input type="hidden" id="slug-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.slug }}">

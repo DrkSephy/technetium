@@ -2,6 +2,7 @@
 
 // AJAX Request to subscribe to repository
 $(":button").click(function() {
+    var button    = $(this);
     var buttonId  = this.id;
     var action    = this.value;
     var csrftoken = $.cookie('csrftoken');
@@ -19,10 +20,18 @@ $(":button").click(function() {
             'repo-slug' : repoSlug,
             'action' : action
         },
+
+        // Sucess: change button value to unsubscribe
         success : function () {
-            alert("Subscribed to " + repoName); },
+            button.attr('value', 'unsubscribe');
+            button.html('unsubscribe');
+            $('#subscribed-' + buttonId).html('Yes');
+        },
+
+        // Fail: show alert of failure
         error : function () {
-            alert("Can't subscribed to " + repoName); },
+            alert("Can't subscribed to " + repoName);
+        },
 
     });
 
