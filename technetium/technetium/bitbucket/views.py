@@ -17,6 +17,7 @@ import time
 # Project Modules
 import bitauth
 import bitissues
+import bitfilter
 import bitmanager
 import bitchangesets
 
@@ -63,37 +64,28 @@ def dashboard_issues(request):
     """
     Render dashboard issues overview.
     """
+    # Get OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
     # Example repository
     user = 'technetiumccny'
     repo = 'technetium'
     data = {}
 
-    limit = 13
-    filterNameValues={}
-
     # get filtering name value pairs from request query string
-    i = 0
+    filterNameValues={}
     for n, v in request.GET.iteritems():
         filterNameValues[n] = v
-        i += 1
-
-    data['filterNameValues'] = filterNameValues
-
-    # Get OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # We need to parse this before in the future
+    data['filterNameValues'] = filterNameValues
     data['first_name'] = auth_data['first_name']
     data['last_name'] = auth_data['last_name']
     data['email'] = auth_data['email']
 
-    if i > 0:
-        # retrieve all issues from database, e.g. 1000
-        retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 1000)
-    else:
-        retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
-
+    # Get retrieved issues
+    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 13)
     data['issues_json'] = bitissues.parse_issues(request, retrieved_issues)
 
     return render(request, 'dashboard_issues.html', data)
@@ -120,6 +112,7 @@ def dashboard_changesets(request):
 
     # Send request to templates
     return render(request, 'dashboard_changesets.html', data)
+
 
 @login_required
 def line_chart(request):
