@@ -1,0 +1,27 @@
+            <select id="Type" onchange="getIssues()">
+              <option value="">no filter</option>
+              <option value="bug"
+
+{%  if filterNameValues.Type == 'bug'  %}
+    {{ 'selected' }}
+{%  endif  %}> bug</option>
+
+              <option value="enhancement"
+
+{%  if filterNameValues.Type == 'enhancement'  %}
+    {{ 'selected' }}
+{%  endif  %}> enhancement</option>
+
+              <option value="proposal"
+
+{%  if filterNameValues.Type == 'proposal'  %}
+    {{ 'selected' }}
+{%  endif  %}>proposal</option>
+
+              <option value="task"
+
+{%  if filterNameValues.Type == 'task'  %}
+    {{ 'selected' }}
+{%  endif  %}> task</option>
+                </select>
+            <i class="icon-sort"></i>
