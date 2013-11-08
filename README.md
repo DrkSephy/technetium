@@ -18,25 +18,27 @@ Goals/Tasks [ 11/5/13 ---> 11/14/13 ]
 -------------------------------------
 1. Finish subscription functionality. [ Jorge ]
   
-   STATUS: In progress.
+      STATUS: In progress.
 
 2. Add AJAX to all requests. [ Jorge ]
 
-   STATUS: In progress.
+      STATUS: In progress.
 
 3. Write tests. [ Albert ]
 
-   STATUS: In progress.
+      STATUS: In progress.
 
 4. Write methods for statistics/reports. [ David ]
-    -[A] Method for getting all changeset tallies for a repository.
-    -[B] Method for getting all pull request tallies for a repository.
-    -[C] Method for getting all closed issues from a repository.
+
+      - [A] Method for getting all changeset tallies for a repository.
+      - [B] Method for getting all pull request tallies for a repository.
+      - [C] Method for getting all closed issues from a repository.
   
-   STATUS: In progress.
+      STATUS: In progress.
 
 5. Continue to work on getting proper data for D3 graphs. [ David ]
-   -[A] Display all commits for all users in a repository.
+
+      - [A] Display all commits for all users in a repository.
 
 Goals/Tasks [ 10/30/13 ---> 11/5/13 ]
 -------------------------------------
