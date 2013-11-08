@@ -21,8 +21,8 @@ urlpatterns = patterns('',
 
     # Manage Repository views
     url(r'^manage/$', views_bitbucket.manage_repositories),
-    url(r'^subscribe/$', views_bitbucket.manage_repositories),
-    url(r'^unsubscribe/$', views_bitbucket.manage_repositories),
+    url(r'^subscribe/$', views_bitbucket.subscribe_repositories),
+    url(r'^unsubscribe/$', views_bitbucket.unsubscribe_repositories),
 
     # Social Auth URLs
     url(r'', include('social.apps.django_app.urls', namespace='social'))

@@ -212,7 +212,6 @@ def subscribe_repository(request, content):
     AJAX request. Content should contain a dictionary
     with the fields for Subcription Model.
     """
-
     return HttpResponse("Subscribing to repo")
 
 

@@ -1,5 +1,7 @@
 // Put AJAX Requests for Manage in this File
 
+BASEURL = 'http://127.0.0.1:8008'
+
 // AJAX Request to subscribe to repository
 $(":button").click(function() {
     var buttonId  = this.id;
@@ -10,7 +12,7 @@ $(":button").click(function() {
 
     $.ajax({
         type : 'POST',
-        url  : 'http://127.0.0.1:8008/subscribe/',
+        url  : BASEURL + '/subscribe/',
         data : {
             'repo-name' : repoName,
             'repo-owner' : repoOwner,
