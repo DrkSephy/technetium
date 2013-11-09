@@ -55,13 +55,13 @@ def get_repo_id_from_subscriptions(subscriptions):
     return repo_ids
 
 
-def parse_repositories(repositories, subscriptions):
+def parse_repositories(repositories, repo_ids):
     """
     Parse list of repositories.
 
     Parameters:
     - repositories: List
-    - subscriptions: List (of Repo IDs)
+    - repo_ids: List (repo ids that uer is subscribed to)
 
     Returns: List
     """
@@ -80,6 +80,14 @@ def parse_repositories(repositories, subscriptions):
             repo_data['repo_id'] = repo['_pk']
             repo_data['owner'] = repo['owner']
             repo_data['slug'] = repo['slug']
+
+            # Change in ajax-manage.js if you change strings
+            repo_data['subscribed'] = 'No'
+            repo_data['action'] = 'subscribe'
+            if repo_data['repo_id'] in repo_ids:
+                repo_data['subscribed'] = 'Yes'
+                repo_data['action'] = 'unsubscribe'
+
             data['repo_list'].append(repo_data)
         parsed_repositories.append(data)
     return parsed_repositories
