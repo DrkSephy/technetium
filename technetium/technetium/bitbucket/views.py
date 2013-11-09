@@ -88,11 +88,9 @@ def dashboard_issues(request):
     data['email'] = auth_data['email']
 
     # Get retrieved issues
-    limit = 1000
-    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
+    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 50)
     issues_json, assignee_list = bitissues.parse_issues(name_val_dict, retrieved_issues)
     data['issues_json'] = issues_json
-
     data['all_assignees'] = assignee_list
 
     return render(request, 'dashboard_issues.html', data)
@@ -164,6 +162,8 @@ def line_chart(request):
     }
     return render(request,'line_chart.html', data)
 
+
+
 @login_required
 def pie_chart(request):
     """
@@ -194,7 +194,9 @@ def pie_chart(request):
     return render(request, 'pie_chart.html', data)
 
 
-
+#######################
+# MANAGE REPOSITORIES #
+#######################
 @login_required
 def manage_repositories(request):
     """
@@ -220,7 +222,13 @@ def subscribe_repository(request):
     """
     print "Subscribing to %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
-    return HttpResponse("{'status' : 'sucess'}")
+
+    # Pass in user information and POST data to bitmanager
+    status = bitmanager.add_repository(request.user, request.POST)
+
+    if status:
+        return HttpResponse("{'status' : 'sucess'}")
+    return HttpResponse("{'status' : 'fail'}")
 
 
 @login_required
@@ -233,6 +241,9 @@ def unsubscribe_repository(request):
     return HttpResponse("{'status' : 'sucess'}")
 
 
+##################
+# AUTHENTICATION #
+##################
 @login_required
 def logout(request):
     auth.logout(request)
