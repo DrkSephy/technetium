@@ -207,7 +207,8 @@ def manage_repositories(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    # Get and Parse list of all repositories
+    # Get subscriptions and Parse list of all repositories
+    subscriptions = bitmanager.get_all_subscriptions(request.user)
     data['repositories'] = bitmanager.parse_all_repositories(
         bitmanager.get_list_of_repositories(auth_tokens))
     return render(request, 'manage.html', data)

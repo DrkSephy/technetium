@@ -2,15 +2,13 @@
   <tr>
     <td><a href="{{ repo.full_url }}" target="_bank">{{ repo.name }}</a></td>
     <td>{{ repo.owner }}</td>
-    <td id="subscribed-{{ repo.owner }}-{{ repo.slug }}">No</td>
+    <td id="subscribed-{{ repo.owner }}-{{ repo.slug }}">{{ repo.subscribed }}</td>
     <td>
       <input type="hidden" id="owner-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.owner }}">
       <input type="hidden" id="slug-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.slug }}">
       <input type="hidden" id="name-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.name }}">
       <input type="hidden" id="id-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.repo_id }}">
-      <button type="button" id="{{ repo.owner }}-{{ repo.slug }}" class="btn btn-link" value="subscribe">
-        Subscribe
-      </button>
+      <button type="button" id="{{ repo.owner }}-{{ repo.slug }}" class="btn btn-link" value="{{ repo.action }}">{{ repo.action }}</button>
     </td>
   </tr>
 {% endfor %}

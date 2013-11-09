@@ -26,17 +26,17 @@ def get_list_of_repositories(auth_tokens):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_all_repositories(repositories):
+def parse_all_repositories(repositories, subscriptions):
     """
     Parse list of repositories.
 
     Parameters:
     - repositories: List
+    - subscriptions: List (of Subscription Objects)
 
     Returns: List
     """
     parsed_repositories = []
-
     for user in repositories:
         # Leave account information as it is
         data = {'account_info' : user[0]}
