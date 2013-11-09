@@ -9,7 +9,9 @@
       <thead>
         <tr>
           <th class="header">Title <i class="icon-sort"></i></th>
-          <th class="header">Assignee <i class="icon-sort"></i></th>
+          <th class="header">Assignee 
+            {% include "includes/filters/filter-issue-assignee.html" %}
+          </th>
           <th class="header">Type
             {% include "includes/filters/filter-type.html" %}
           </th>

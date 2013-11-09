@@ -49,7 +49,8 @@ def dashboard(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Render the last 5 issues
-    data['issues_json'] = bitissues.parse_issues(request,
+    name_val_dict = {}
+    data['issues_json'], assignee_list = bitissues.parse_issues(name_val_dict,
         bitissues.get_issues(user, repo, auth_tokens, 5))
 
     # Render the last 5 changesets
@@ -74,8 +75,10 @@ def dashboard_issues(request):
     data = {}
 
     # get filtering name value pairs from request query string
-    filterNameValues={}
+    name_val_dict = {}
+    filterNameValues = {}
     for n, v in request.GET.iteritems():
+        name_val_dict[n] = v
         filterNameValues[n] = v
 
     # We need to parse this before in the future
@@ -85,8 +88,12 @@ def dashboard_issues(request):
     data['email'] = auth_data['email']
 
     # Get retrieved issues
-    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 13)
-    data['issues_json'] = bitissues.parse_issues(request, retrieved_issues)
+    limit = 1000
+    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
+    issues_json, assignee_list = bitissues.parse_issues(name_val_dict, retrieved_issues)
+    data['issues_json'] = issues_json
+
+    data['all_assignees'] = assignee_list
 
     return render(request, 'dashboard_issues.html', data)
 
