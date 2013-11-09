@@ -15,7 +15,7 @@ class Subscription(models.Model):
     subscribed = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ('user', 'repository')
+        unique_together = ('user', 'repo_id')
         verbose_name = "Repository Subscription"
 
     def __unicode__(self):

@@ -70,8 +70,8 @@ def add_repository(user, data):
     # If subscription exists, update subscribed to True
     subscription = Subscription.objects.filter(user=user).filter(repo_id=data['repo-id'])
     if subscription:
-        subscription.subscribed = True
-        subscription.save()
+        subscription[0].subscribed = True
+        subscription[0].save()
 
     # Subscription doesn't exist, insert new subscription
     else:
@@ -90,20 +90,17 @@ def add_repository(user, data):
     return False
 
 
-def remove_repository():
+def remove_repository(user, data):
     """
-    Removes a repository from a list which is being
-    `followed` by the user.
+    Updates a user's Subscription in database and set
+    subscribed to False.
 
-    Paramters:
-    ---------
-    Repo_slug: string
-        - The repository endpoint to remove from the list.
+    Parameters:
+    - user: User (Django Model)
+    - data: request.POST (Django Query dict)
 
-    Returns:
-    --------
-    Confirmation: Boolean
-        - Returns true/false based on if operation was successful.
+    Returns: Boolean
+    - True/False based on if operation was successful.
     """
     pass
 
