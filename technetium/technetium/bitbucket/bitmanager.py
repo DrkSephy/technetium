@@ -26,7 +26,20 @@ def get_list_of_repositories(auth_tokens):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def parse_all_repositories(repositories, subscriptions):
+def get_all_subscriptions(user):
+    """
+    Returns a list of all Subscription objects that
+    a user is currently subscribed to.
+
+    Parameters:
+    - user: User (Django Request)
+
+    Returns: List
+    """
+    return Subscription.objects.filter(user=user).filter(subscribed=True)
+
+
+def parse_repositories(repositories, subscriptions):
     """
     Parse list of repositories.
 
@@ -56,9 +69,9 @@ def parse_all_repositories(repositories, subscriptions):
     return parsed_repositories
 
 
-def add_repository(user, data):
+def subscribe_repository(user, data):
     """
-    Adds a repository to a user's Subscription in database.
+    Inserts new repository to a user's Subscription in database.
 
     Parameters:
     - user: User (Django Model)

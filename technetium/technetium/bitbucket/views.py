@@ -204,13 +204,13 @@ def manage_repositories(request):
     """
     data = {}
     # Get OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_data   = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get subscriptions and Parse list of all repositories
     subscriptions = bitmanager.get_all_subscriptions(request.user)
-    data['repositories'] = bitmanager.parse_all_repositories(
-        bitmanager.get_list_of_repositories(auth_tokens))
+    repositories  = bitmanager.get_list_of_repositories(auth_tokens)
+    data['repositories'] = bitmanager.parse_repositories(repositories, subscriptions)
     return render(request, 'manage.html', data)
 
 
@@ -225,7 +225,7 @@ def subscribe_repository(request):
         (request.POST['repo-id'], request.POST['repo-name'])
 
     # Success: subscribe to repository
-    if bitmanager.add_repository(request.user, request.POST):
+    if bitmanager.subscribe_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")
     return HttpResponse("{'status' : 'fail'}")
 
