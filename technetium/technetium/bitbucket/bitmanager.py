@@ -90,7 +90,7 @@ def add_repository(user, data):
     return False
 
 
-def remove_repository(user, data):
+def unsubscribe_repository(user, data):
     """
     Updates a user's Subscription in database and set
     subscribed to False.
@@ -102,10 +102,17 @@ def remove_repository(user, data):
     Returns: Boolean
     - True/False based on if operation was successful.
     """
-    pass
+    # If subscription exists, update subscribed to False
+    subscription = Subscription.objects.filter(user=user).filter(repo_id=data['repo-id'])
+    if subscription:
+        subscription[0].subscribed = False
+        subscription[0].save()
+        return True
+    else:
+        return False
 
 
-def remove_all_repositories():
+def unsubscribe_all_repositories():
     """
     Removes all repositories being `followed`.
 

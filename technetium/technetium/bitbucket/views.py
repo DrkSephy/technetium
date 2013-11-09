@@ -236,7 +236,12 @@ def unsubscribe_repository(request):
     """
     print "Unsubscribing from %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
-    return HttpResponse("{'status' : 'sucess'}")
+
+    # Success: unsubscribe from repository
+    if bitmanager.unsubscribe_repository(request.user, request.POST):
+        return HttpResponse("{'status' : 'sucess'}")
+    return HttpResponse("{'status' : 'fail'}")
+
 
 
 ##################
