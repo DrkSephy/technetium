@@ -39,13 +39,29 @@ def get_all_subscriptions(user):
     return Subscription.objects.filter(user=user).filter(subscribed=True)
 
 
+def get_repo_id_from_subscriptions(subscriptions):
+    """
+    Returns a list of repo_ids of repositories that
+    a user is subscribed to.
+
+    Parameters:
+    - subscriptions: Subscription (Object)
+
+    Returns: List (of Integers)
+    """
+    repo_ids = []
+    for repo in subscriptions:
+        repo_ids.append(repo.repo_id)
+    return repo_ids
+
+
 def parse_repositories(repositories, subscriptions):
     """
     Parse list of repositories.
 
     Parameters:
     - repositories: List
-    - subscriptions: List (of Subscription Objects)
+    - subscriptions: List (of Repo IDs)
 
     Returns: List
     """

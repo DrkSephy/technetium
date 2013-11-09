@@ -209,8 +209,9 @@ def manage_repositories(request):
 
     # Get subscriptions and Parse list of all repositories
     subscriptions = bitmanager.get_all_subscriptions(request.user)
+    repo_ids = bitmanager.get_repo_id_from_subscriptions(subscriptions)
     repositories  = bitmanager.get_list_of_repositories(auth_tokens)
-    data['repositories'] = bitmanager.parse_repositories(repositories, subscriptions)
+    data['repositories'] = bitmanager.parse_repositories(repositories, repo_ids)
     return render(request, 'manage.html', data)
 
 
