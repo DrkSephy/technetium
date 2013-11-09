@@ -223,10 +223,8 @@ def subscribe_repository(request):
     print "Subscribing to %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
 
-    # Pass in user information and POST data to bitmanager
-    status = bitmanager.add_repository(request.user, request.POST)
-
-    if status:
+    # Success: subscribe to repository
+    if bitmanager.add_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")
     return HttpResponse("{'status' : 'fail'}")
 

@@ -7,6 +7,7 @@ Handles the following:
     - Allows method to unsubscribe from repositories.
     - Allows flush method to unsubscribe all repositories.
 """
+from models import Subscription
 import bitmethods
 import requests
 
@@ -55,24 +56,38 @@ def parse_all_repositories(repositories):
     return parsed_repositories
 
 
-def add_repository():
+def add_repository(user, data):
     """
-    Adds a repository to a list which is `followed`
-    by the user.
+    Adds a repository to a user's Subscription in database.
 
     Parameters:
-    -----------
-    Repo_slug: string
-        - The repository endpoint to add to the list.
+    - user: User (Django Model)
+    - data: request.POST (Django Query dict)
 
-
-    Returns:
-    --------
-    Confirmation: Boolean
-        - Returns true/false based on if operation was successful.
-
+    Returns: Boolean
+    - True/False based on if operation was successful.
     """
-    pass
+    # If subscription exists, update subscribed to True
+    subscription = Subscription.objects.filter(user=user).filter(repo_id=data['repo-id'])
+    if subscription:
+        subscription.subscribed = True
+        subscription.save()
+
+    # Subscription doesn't exist, insert new subscription
+    else:
+        subscription = Subscription(
+            user=user,
+            repo_id = data['repo-id'],
+            repository = data['repo-name'],
+            slug_url = data['repo-slug'],
+            owner = data['repo-owner'],
+            subscribed = True )
+        subscription.save()
+
+    # Return status of subscription
+    if subscription:
+        return True
+    return False
 
 
 def remove_repository():
