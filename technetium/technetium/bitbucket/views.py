@@ -70,13 +70,10 @@ def dashboard_issues(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get all subscribed repositories
+    limit = 10
     subscribed = bitmanager.get_all_subscriptions(request.user)
-    repo_urls  = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', 20)
-    print repo_urls
-
-    # Example repository
-    user = 'technetiumccny'
-    repo = 'technetium'
+    repo_urls  = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
+    repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
     data = {}
 
     # get filtering name value pairs from request query string
@@ -88,12 +85,9 @@ def dashboard_issues(request):
 
     # We need to parse this before in the future
     data['filterNameValues'] = filterNameValues
-    data['first_name'] = auth_data['first_name']
-    data['last_name'] = auth_data['last_name']
-    data['email'] = auth_data['email']
 
-    # Get retrieved issues
-    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, 50)
+    # Get retrieved issues from subscribed repositories
+    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
     issues_json, assignee_list = bitissues.parse_issues(name_val_dict, retrieved_issues)
     data['issues_json'] = issues_json
     data['all_assignees'] = assignee_list

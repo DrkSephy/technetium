@@ -39,6 +39,23 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
+def get_issues_from_subscribed(req_urls, auth_tokens):
+    """
+    Gets a list back from sending multiple requests to
+    get issues from all subscribed repositories.
+
+    Parameters:
+    - req_urls: List (String: URLs)
+    - auth_tokens: OAuth1
+
+    Returns: List (of Dictionaries)
+    """
+    repo_issues = []
+    for url in req_urls:
+        repo_issues.append(bitmethods.send_bitbucket_request(url, auth_tokens))
+    return repo_issues
+
+
 def parse_issues(name_val_dict, raw_json):
     """
     Parses returned JSON data from the bitbucket API
