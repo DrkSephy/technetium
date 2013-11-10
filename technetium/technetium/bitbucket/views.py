@@ -69,6 +69,11 @@ def dashboard_issues(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
+    # Get all subscribed repositories
+    subscribed = bitmanager.get_all_subscriptions(request.user)
+    repo_urls  = bitissues.get_subscribed_repo_urls(subscribed)
+    print repo_urls
+
     # Example repository
     user = 'technetiumccny'
     repo = 'technetium'
