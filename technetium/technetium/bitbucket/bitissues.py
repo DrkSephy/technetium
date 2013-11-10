@@ -39,54 +39,56 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def get_issues_from_subscribed(req_urls, auth_tokens):
+def get_issues_from_subscribed(req_data, auth_tokens):
     """
     Gets a list back from sending multiple requests to
     get issues from all subscribed repositories.
 
     Parameters:
-    - req_urls: List (String: URLs)
+    - req_data: List (Dictionary)
     - auth_tokens: OAuth1
 
-    Returns: Dictionary
+    Returns: List
     """
-    repo_issues = {}
-    for url in req_urls:
-        repo_issues.append(bitmethods.send_bitbucket_request(url, auth_tokens))
+    repo_issues = []
+    for repo in req_data:
+        data = {}
+        data['meta_data']  = repo
+        # Get list of issues, None if no issues
+        data['raw_issues'] = repo_issues.append(
+            bitmethods.send_bitbucket_request(repo['req_url'], auth_tokens))
+        repo_issues.append(data)
     return repo_issues
 
 
-def parse_issues(repo_json):
+def parse_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
 
     Parameters:
-    - repo_json: List of dictionaries of JSON issues
+    - repo_issues: List of dictionaries of JSON issues
 
     Returns: List
     """
     # List of repositories, which contains list of parsed issues
-    parsed_repository_issues = []
+    repository_issues = []
 
-    for repo in repo_json:
-        # Skip if empty dictionary returned
-        if not repo:
-            continue
-
+    for repo in repo_issues:
         parsed_data = {}
         parsed_data['issues'] = []
+        print repo
+        print
+        # Parse general information
+        if repo['raw_issues']:
+            for issue in repo['raw_issues']:
+                data = {}
+                data['title'] = issue['title'].capitalize()
+                data['status'] = issue['status'].capitalize()
+                data['type'] = issue['metadata']['kind'].capitalize()
+                data['priority'] = issue['priority'].capitalize()
+                data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
+                parsed_data['issues'].append(data)
 
-        for issue in repo['issues']:
-            data = {}
-
-            # Parse general information
-            data['title'] = issue['title'].capitalize()
-            data['status'] = issue['status'].capitalize()
-            data['type'] = issue['metadata']['kind'].capitalize()
-            data['priority'] = issue['priority'].capitalize()
-            data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
-            parsed_data['issues'].append(data)
-        parsed_repository_issues.append(parsed_data)
-
-    return parsed_repository_issues
+        repository_issues.append(parsed_data)
+    return repository_issues
