@@ -195,6 +195,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
 
     # Python Social Auth
     'social.apps.django_app.context_processors.backends',
@@ -212,9 +213,6 @@ SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOAuth',
     'social.backends.bitbucket.BitbucketOAuth',
     'social.backends.email.EmailAuth',
     'social.backends.username.UsernameAuth',
