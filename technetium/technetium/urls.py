@@ -11,16 +11,16 @@ urlpatterns = patterns('',
 
     # Technetium: bitbucket app URLs
     url(r'^$', views_bitbucket.home),
-    url(r'^login/$', views_bitbucket.home),
-    url(r'^logout/$', views_bitbucket.logout),
-    url(r'^dashboard/$', views_bitbucket.dashboard),
-    url(r'^issues/$', views_bitbucket.dashboard_issues),
-    url(r'^changesets/$', views_bitbucket.dashboard_changesets),
+    url(r'^login/$', views_bitbucket.home, name='login'),
+    url(r'^logout/$', views_bitbucket.logout, name='logout'),
+    url(r'^dashboard/$', views_bitbucket.dashboard, name='dashboard'),
+    url(r'^issues/$', views_bitbucket.dashboard_issues, name='issues'),
+    url(r'^changesets/$', views_bitbucket.dashboard_changesets, name='changesets'),
     url(r'^linechart/$', views_bitbucket.line_chart),
     url(r'^piechart/$', views_bitbucket.pie_chart),
+    url(r'^manage/$', views_bitbucket.manage_repositories, name='manage'),
 
-    # Manage Repository views
-    url(r'^manage/$', views_bitbucket.manage_repositories),
+    # Ajax Request URLs
     url(r'^subscribe/$', views_bitbucket.subscribe_repository),
     url(r'^unsubscribe/$', views_bitbucket.unsubscribe_repository),
 
