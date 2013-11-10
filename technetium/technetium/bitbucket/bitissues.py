@@ -81,11 +81,22 @@ def parse_issues(repo_issues):
         if repo['raw_issues']:
             for issue in repo['raw_issues']['issues']:
                 data = {}
+
+                # Parse issue information
                 data['title'] = issue['title'].capitalize()
                 data['status'] = issue['status'].capitalize()
                 data['type'] = issue['metadata']['kind'].capitalize()
                 data['priority'] = issue['priority'].capitalize()
                 data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
+                data['issues_url'] = "#"
+
+                # Parse assignee
+                data['assignee'] = ''
+                data['assignee_avatar'] = ''
+                if 'responsible' in issue:
+                    data['assignee'] = issue['responsible']['display_name']
+                    data['assignee_avatar'] = issue['responsible']['avatar']
+
                 parsed_data['issues'].append(data)
         repository_issues.append(parsed_data)
     return repository_issues
