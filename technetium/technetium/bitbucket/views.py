@@ -71,10 +71,10 @@ def dashboard_issues(request):
 
     # Get all subscribed repositories
     limit = 10
-    subscribed = bitmanager.get_all_subscriptions(request.user)
-    repo_urls  = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
+    subscribed  = bitmanager.get_all_subscriptions(request.user)
+    repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
-    data = {}
+    data = {'repo_issues' : []}
 
     # get filtering name value pairs from request query string
     name_val_dict = {}
@@ -83,13 +83,9 @@ def dashboard_issues(request):
         name_val_dict[n] = v
         filterNameValues[n] = v
 
-    # We need to parse this before in the future
-    data['filterNameValues'] = filterNameValues
-
     # Get retrieved issues from subscribed repositories
-    retrieved_issues = bitissues.get_issues(user, repo, auth_tokens, limit)
-    issues_json, assignee_list = bitissues.parse_issues(name_val_dict, retrieved_issues)
-    data['issues_json'] = issues_json
+    issues_list, assignee_list = bitissues.parse_issues(name_val_dict, repo_issues)
+    data['issues_list'] = issues_list
     data['all_assignees'] = assignee_list
 
     return render(request, 'dashboard_issues.html', data)

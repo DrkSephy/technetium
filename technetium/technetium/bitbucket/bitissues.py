@@ -56,51 +56,45 @@ def get_issues_from_subscribed(req_urls, auth_tokens):
     return repo_issues
 
 
-def parse_issues(name_val_dict, raw_json):
+def parse_issues(name_val_dict, repo_json):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
 
     Parameters:
-    - raw_json: Dictionary of JSON issues
+    - repo_json: List of dictionaries of JSON issues
 
     Returns: List
     """
     parsed_issues = []
     assignee_list = []
 
-    for issue in raw_json['issues']:
-        data = {}
+    for repo in repo_json:
+        for issue in repo['issues']:
+            data = {}
 
-        # Parse general information
-        data['title'] = issue['title'].capitalize()
-        data['status'] = issue['status'].capitalize()
-        data['type'] = issue['metadata']['kind'].capitalize()
-        data['priority'] = issue['priority'].capitalize()
-        data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
-        data['issues_url'] = '#'
+            # Parse general information
+            data['title'] = issue['title'].capitalize()
+            data['status'] = issue['status'].capitalize()
+            data['type'] = issue['metadata']['kind'].capitalize()
+            data['priority'] = issue['priority'].capitalize()
+            data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
+            data['issues_url'] = '#'
 
-        # Parse assignee
-        data['assignee'] = ''
-        data['assignee_avatar'] = ''
-        if 'responsible' in issue:
-            data['assignee'] = issue['responsible']['display_name']
-            data['assignee_avatar'] = issue['responsible']['avatar']
+            # Parse assignee
+            data['assignee'] = ''
+            data['assignee_avatar'] = ''
+            if 'responsible' in issue:
+                data['assignee'] = issue['responsible']['display_name']
+                data['assignee_avatar'] = issue['responsible']['avatar']
 
-        parsed_issues.append(data)
-        if data['assignee'] != '':
-            if data['assignee'].strip() not in assignee_list:
-                assignee_list.append(data['assignee'].strip())
+            parsed_issues.append(data)
+            if not data['assignee']:
+                if data['assignee'].strip() not in assignee_list:
+                    assignee_list.append(data['assignee'].strip())
 
-    # filter issues based on query parameters
-    parsed_issues = bitfilter.filter_issues(name_val_dict, parsed_issues)
-    # limit 50 issues to be displayed
-    display_parsed_issues = []
-    count = 0
-    for issue in parsed_issues:
-        if count < 50:
-            display_parsed_issues.append(issue)
-            count += 1
+        # Filter issues based on query parameters
+        parsed_issues = bitfilter.filter_issues(name_val_dict, parsed_issues)
 
-    return display_parsed_issues, assignee_list
+    return parsed_issues, assignee_list
 

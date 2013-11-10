@@ -8,6 +8,18 @@ Handles:
     - Filtering issues by user.
     - Filtering issues by date.
     - Filtering issues by status.
+
+Place holder code for views:
+    # get filtering name value pairs from request query string
+    name_val_dict = {}
+    filterNameValues = {}
+    for n, v in request.GET.iteritems():
+        name_val_dict[n] = v
+        filterNameValues[n] = v
+
+    # We need to parse this before in the future
+    data['filterNameValues'] = filterNameValues
+
 """
 import simplejson as json
 import datetime
