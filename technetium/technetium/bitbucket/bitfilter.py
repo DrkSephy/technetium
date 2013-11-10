@@ -20,6 +20,14 @@ Place holder code for views:
     # We need to parse this before in the future
     data['filterNameValues'] = filterNameValues
 
+In bitissues:
+    # Parse assignee
+    data['assignee'] = ''
+    data['assignee_avatar'] = ''
+    if 'responsible' in issue:
+        data['assignee'] = issue['responsible']['display_name']
+        data['assignee_avatar'] = issue['responsible']['avatar']
+
 """
 import simplejson as json
 import datetime

@@ -56,7 +56,7 @@ def get_issues_from_subscribed(req_urls, auth_tokens):
     return repo_issues
 
 
-def parse_issues(name_val_dict, repo_json):
+def parse_issues(repo_json):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
@@ -66,10 +66,18 @@ def parse_issues(name_val_dict, repo_json):
 
     Returns: List
     """
-    parsed_issues = []
-    assignee_list = []
+    # List of repositories, which contains list of parsed issues
+    parsed_repository_issues = []
 
     for repo in repo_json:
+        # Skip if empty dictionary returned
+        if not repo:
+            continue
+
+        parsed_data = {}
+        parsed_data['repo_name'] = repo
+        parsed_data['issues'] = []
+
         for issue in repo['issues']:
             data = {}
 
@@ -79,22 +87,6 @@ def parse_issues(name_val_dict, repo_json):
             data['type'] = issue['metadata']['kind'].capitalize()
             data['priority'] = issue['priority'].capitalize()
             data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
-            data['issues_url'] = '#'
+            parsed_data['issues'].append(data)
 
-            # Parse assignee
-            data['assignee'] = ''
-            data['assignee_avatar'] = ''
-            if 'responsible' in issue:
-                data['assignee'] = issue['responsible']['display_name']
-                data['assignee_avatar'] = issue['responsible']['avatar']
-
-            parsed_issues.append(data)
-            if not data['assignee']:
-                if data['assignee'].strip() not in assignee_list:
-                    assignee_list.append(data['assignee'].strip())
-
-        # Filter issues based on query parameters
-        parsed_issues = bitfilter.filter_issues(name_val_dict, parsed_issues)
-
-    return parsed_issues, assignee_list
-
+    return parsed_repository_issues

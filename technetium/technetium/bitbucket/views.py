@@ -76,17 +76,8 @@ def dashboard_issues(request):
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
     data = {'repo_issues' : []}
 
-    # get filtering name value pairs from request query string
-    name_val_dict = {}
-    filterNameValues = {}
-    for n, v in request.GET.iteritems():
-        name_val_dict[n] = v
-        filterNameValues[n] = v
-
     # Get retrieved issues from subscribed repositories
-    issues_list, assignee_list = bitissues.parse_issues(name_val_dict, repo_issues)
-    data['issues_list'] = issues_list
-    data['all_assignees'] = assignee_list
+    data['issues_list'] = bitissues.parse_issues(repo_issues)
 
     return render(request, 'dashboard_issues.html', data)
 
