@@ -1,19 +1,22 @@
 
 <ul class="nav navbar-nav side-nav">
-
-  <li class="active"><a href="/dashboard">
+  <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+    <a href="{% url 'dashboard' %}">
     <span class="glyphicon glyphicon-list-alt space-right"></span> Dashboard </a>
   </li>
 
-  <li><a href="/manage">
+  <li class="{% if request.path == '/manage/' %}active{% endif %}">
+    <a href="{% url 'manage' %}">
     <span class="glyphicon glyphicon-briefcase space-right"></span> Manage Repositories</a>
   </li>
 
-  <li><a href="/issues">
+  <li class="{% if request.path == '/issues/' %}active{% endif %}">
+    <a href="{% url 'issues' %}">
     <span class="glyphicon glyphicon-saved space-right"></span> Issue Tracker </a>
   </li>
 
-  <li><a href="/changesets">
+  <li class="{% if request.path == '/changesets/' %}active{% endif %}">
+    <a href="{% url 'changesets' %}">
     <span class="glyphicon glyphicon-transfer space-right"></span> Changesets </a>
   </li>
 
