@@ -71,16 +71,8 @@
 
             {% include 'includes/addons/navbar-subscriptions.html' %}
 
-            <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>  {{ user.username }} <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#"><i class="icon-user"></i> Profile</a></li>
-                <li><a href="#"><i class="icon-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                <li><a href="#"><i class="icon-gear"></i> Settings</a></li>
-                <li class="divider"></li>
-                <li><a href="/logout"><i class="icon-power-off"></i>Log out</a></li>
-              </ul>
-            </li>
+            {% include 'includes/addons/navbar-account.html' %}
+
           </ul>
         </div>
       </nav>
