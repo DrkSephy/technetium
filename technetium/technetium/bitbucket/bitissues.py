@@ -87,18 +87,3 @@ def parse_issues(name_val_dict, raw_json):
 
     return display_parsed_issues, assignee_list
 
-
-def get_subscribed_repo_urls(subs):
-    """
-    Creates a list of all subscribed repo API request URLs
-
-    Parameters:
-    - subs: List (Subscription Objects)
-
-    Returns: List (String URLs)
-    """
-    repo_urls = []
-    for repo in subs:
-        url = bitmethods.make_req_url(repo.owner, repo.slug_url, 'issues', 20)
-        repo_urls.append(url)
-    return repo_urls

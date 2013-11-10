@@ -55,6 +55,25 @@ def get_repo_id_from_subscriptions(subscriptions):
     return repo_ids
 
 
+def get_subscribed_repo_urls(subs, endpoint, limit):
+    """
+    Creates a list of all subscribed repo API request URLs
+    for issues endpoint.
+
+    Parameters:
+    - subs: List (Subscription Objects)
+    - endpoint: String (API request endpoint: 'issues')
+    - limit: Integer (20)
+
+    Returns: List (String URLs)
+    """
+    repo_urls = []
+    for repo in subs:
+        url = bitmethods.make_req_url(repo.owner, repo.slug_url, endpoint, limit)
+        repo_urls.append(url)
+    return repo_urls
+
+
 def parse_repositories(repositories, repo_ids):
     """
     Parse list of repositories.

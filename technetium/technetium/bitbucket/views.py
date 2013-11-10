@@ -71,7 +71,7 @@ def dashboard_issues(request):
 
     # Get all subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
-    repo_urls  = bitissues.get_subscribed_repo_urls(subscribed)
+    repo_urls  = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', 20)
     print repo_urls
 
     # Example repository
