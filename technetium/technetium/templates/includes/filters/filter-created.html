@@ -1,48 +1,19 @@
-              <select id="Created" onchange="getIssues()">
+<!-- Issue Tracker: Filter Date -->
+<div class="btn-group">
 
-              <option value="">no filter</option>
+  <button type="button" class="btn btn-default btn-xs">Filter Date</button>
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
 
-              <option value="today"
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Today</a></li>
+    <li><a href="#">This Week</a></li>
+    <li><a href="#">This Month</a></li>
+    <li><a href="#">This Year</a></li>
+    <li class="divider"></li>
+    <li><a href="#">All Dates</a></li>
+  </ul>
 
-{%  if filterNameValues.Created == 'today'  %}
-    {{ 'selected' }}
-{%  endif  %}> today</option>
-
-              <option value="this_week"
-
-{%  if filterNameValues.Created == 'this_week'  %}
-    {{ 'selected' }}
-{%  endif  %}> this week</option>
-
-              <option value="last_week"
-
-{%  if filterNameValues.Created == 'last_week'  %}
-    {{ 'selected' }}
-{%  endif  %}
-                     >last week</option>
-
-              <option value="this_month"
-
-{%  if filterNameValues.Created == 'this_month'  %}
-    {{ 'selected' }}
-{%  endif  %}> this month</option>
-
-              <option value="last_month"
-
-{%  if filterNameValues.Created == 'last_month'  %}
-    {{ 'selected' }}
-{%  endif  %}> last month</option>
-
-              <option value="this_year"
-
-{%  if filterNameValues.Created == 'this_year'  %}
-    {{ 'selected' }}
-{%  endif  %}> this year</option>
-
-              <option value="last_year"
-
-{%  if filterNameValues.Created == 'last_year'  %}
-    {{ 'selected' }}
-{%  endif  %}> last year</option>
-                </select>
-            <i class="icon-sort"></i>
+</div>
