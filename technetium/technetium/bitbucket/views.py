@@ -48,11 +48,6 @@ def dashboard(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    # Render the last 5 issues
-    name_val_dict = {}
-    data['issues_json'], assignee_list = bitissues.parse_issues(name_val_dict,
-        bitissues.get_issues(user, repo, auth_tokens, 5))
-
     # Render the last 5 changesets
     data['changesets_json'] = bitchangesets.parse_changesets(
         bitchangesets.get_changesets(user, repo, auth_tokens, 5))
