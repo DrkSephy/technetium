@@ -3,7 +3,11 @@
 
 {% block content %}
 <div class="col-lg-12">
-  <h2>Manage Repository Subscriptions</h2>
+  <h2>
+  <span class="glyphicon glyphicon-briefcase space-right"></span>
+  Manage Repository Subscriptions
+  </h2>
+
     <div class="panel-group" id="accordion">
     {% for repository in repositories %}
       <hr>
@@ -15,7 +19,7 @@
             <img src="{{ repository.account_info.avatar }}">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseUser{{ forloop.counter }}">
               <span class="display-name">{{ repository.account_info.display_name }}</span>
-              <span class="pull-right thick">&rarr;</span>
+              <span class="glyphicon glyphicon-list expand pull-right"></span>
             </a>
           </h4>
         </div>
