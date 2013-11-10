@@ -18,10 +18,8 @@
     <table class="table table-hover table-striped tablesorter">
       <thead>
         <tr>
+          <th class="header">Assignee</th>
           <th class="header">Issue Title <i class="icon-sort"></i></th>
-          <th class="header">Assignee
-            {% include "includes/filters/filter-issue-assignee.html" %}
-          </th>
           <th class="header">Type
             {% include "includes/filters/filter-type.html" %}
           </th>
@@ -39,8 +37,16 @@
       <tbody>
       {% for issue in repo.issues %}
         <tr>
+
+          {% if issue.assignee %}
+            <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
+              {{ issue.assignee }}
+            </td>
+          {% else %}
+            <td>None</td>
+          {% endif %}
+
           <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
-          <td>{{ issue.assignee }}</td>
           <td>{{ issue.type }}</td>
           <td>{{ issue.created }}</td>
           <td>{{ issue.status }}</td>

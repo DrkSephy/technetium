@@ -38,3 +38,9 @@ h2 { font-size: 25px; }
 .space-right {
     margin-right: 5px;
 }
+
+.assignee-avatar {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
