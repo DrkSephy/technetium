@@ -77,7 +77,7 @@ def dashboard_issues(request):
 
     # Get retrieved issues from subscribed repositories
     data = {'issues_list' : bitissues.parse_issues(repo_issues)}
-
+    print data
     return render(request, 'dashboard_issues.html', data)
 
 

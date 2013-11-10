@@ -39,24 +39,23 @@ def get_issues(user, repo, auth_tokens, limit):
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
 
 
-def get_issues_from_subscribed(req_data, auth_tokens):
+def get_issues_from_subscribed(repo_data, auth_tokens):
     """
     Gets a list back from sending multiple requests to
     get issues from all subscribed repositories.
 
     Parameters:
-    - req_data: List (Dictionary)
+    - repo_data: List (Dictionary)
     - auth_tokens: OAuth1
 
     Returns: List
     """
     repo_issues = []
-    for repo in req_data:
+    for repo in repo_data:
         data = {}
-        data['meta_data']  = repo
-        # Get list of issues, None if no issues
-        data['raw_issues'] = repo_issues.append(
-            bitmethods.send_bitbucket_request(repo['req_url'], auth_tokens))
+        data['repo_meta']  = repo
+        data['raw_issues'] = bitmethods.send_bitbucket_request(
+            repo['req_url'], auth_tokens)
         repo_issues.append(data)
     return repo_issues
 
@@ -76,12 +75,11 @@ def parse_issues(repo_issues):
 
     for repo in repo_issues:
         parsed_data = {}
+        parsed_data['repo_meta'] = repo['repo_meta']
         parsed_data['issues'] = []
-        print repo
-        print
         # Parse general information
         if repo['raw_issues']:
-            for issue in repo['raw_issues']:
+            for issue in repo['raw_issues']['issues']:
                 data = {}
                 data['title'] = issue['title'].capitalize()
                 data['status'] = issue['status'].capitalize()
@@ -89,6 +87,5 @@ def parse_issues(repo_issues):
                 data['priority'] = issue['priority'].capitalize()
                 data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
                 parsed_data['issues'].append(data)
-
         repository_issues.append(parsed_data)
     return repository_issues
