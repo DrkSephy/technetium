@@ -11,7 +11,13 @@
   {% else %}
   {% for repo in issues_list %}
   <hr>
-  <h3>{{ repo.repo_meta.repo_name }}</h3>
+  <h3>{{ repo.repo_meta.repo_name }}
+    <span class="pull-right">
+      <button class="btn btn-default btn-sm">Post New Issue</button>
+        <span class="space-right"></span>
+      <button class="btn btn-default btn-sm">Show More</button>
+    </span>
+  </h3>
 
     {% if repo.issues %}
     <div class="table-responsive">
