@@ -63,7 +63,7 @@ def dashboard(request):
 @login_required
 def dashboard_issues(request):
     """
-    Render dashboard issues overview.
+    Render dashboard issue tracker overview.
     """
     # Get OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
