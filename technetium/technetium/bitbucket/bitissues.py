@@ -48,9 +48,9 @@ def get_issues_from_subscribed(req_urls, auth_tokens):
     - req_urls: List (String: URLs)
     - auth_tokens: OAuth1
 
-    Returns: List (of Dictionaries)
+    Returns: Dictionary
     """
-    repo_issues = []
+    repo_issues = {}
     for url in req_urls:
         repo_issues.append(bitmethods.send_bitbucket_request(url, auth_tokens))
     return repo_issues
@@ -75,7 +75,6 @@ def parse_issues(repo_json):
             continue
 
         parsed_data = {}
-        parsed_data['repo_name'] = repo
         parsed_data['issues'] = []
 
         for issue in repo['issues']:
@@ -88,5 +87,6 @@ def parse_issues(repo_json):
             data['priority'] = issue['priority'].capitalize()
             data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
             parsed_data['issues'].append(data)
+        parsed_repository_issues.append(parsed_data)
 
     return parsed_repository_issues

@@ -67,11 +67,16 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
 
     Returns: List (String URLs)
     """
-    repo_urls = []
+    repo_list = []
     for repo in subs:
-        url = bitmethods.make_req_url(repo.owner, repo.slug_url, endpoint, limit)
-        repo_urls.append(url)
-    return repo_urls
+        repo_data = {}
+        repo_data['repo_name'] = repo.repository
+        repo_data['repo_owner'] = repo.owner
+        repo_data['endpoint_url'] = bitmethods.make_req_url(
+            repo.owner, repo.slug_url, endpoint, limit)
+        repo_urls.append(repo_data)
+    print repo_list
+    return repo_list
 
 
 def parse_repositories(repositories, repo_ids):
