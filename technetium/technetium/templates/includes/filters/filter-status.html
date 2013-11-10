@@ -1,47 +1,22 @@
-<select id="Status" onchange="getIssues()">
+<!-- Issue Tracker: Filter Status -->
+<div class="btn-group">
 
-<option value="">no filter</option>
+  <button type="button" class="btn btn-default btn-xs">Filter Status</button>
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
 
-<option value="new"
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">New</a></li>
+    <li><a href="#">Open</a></li>
+    <li><a href="#">Resolved</a></li>
+    <li><a href="#">Duplicate</a></li>
+    <li><a href="#">On Hold</a></li>
+    <li><a href="#">Invalid</a></li>
+    <li><a href="#">Won't Fix</a></li>
+    <li class="divider"></li>
+    <li><a href="#">All Issues</a></li>
+  </ul>
 
-{%  if filterNameValues.Status == 'new'  %}
-    {{ 'selected' }}
-{%  endif  %}> new</option>
-
-              <option value="open"
-
-{%  if filterNameValues.Status == 'open' %}
-    {{ 'selected' }}
-{%  endif  %}> open</option>
-
-              <option value="resolved"
-
-{%  if filterNameValues.Status == 'resolved'  %}
-    {{ 'selected' }}
-{%  endif  %}> resolved</option>
-
-              <option value="duplicate"
-
-{%  if filterNameValues.Status == 'duplicate'  %}
-    {{ 'selected' }}
-{%  endif  %}> duplicate</option>
-
-              <option value="on_hold"
-
-{%  if filterNameValues.Status == 'on_hold'  %}
-    {{ 'selected' }}
-{%  endif  %}> on hold</option>
-
-              <option value="invalid"
-
-{%  if filterNameValues.Status == 'invalid'  %}
-    {{ 'selected' }}
-{%  endif  %}> invalid</option>
-
-              <option value="wontfix"
-
-{%  if filterNameValues.Status == 'wontfix'  %}
-    {{ 'selected' }}
-{%  endif  %}> wontfix</option>
-                </select>
-            <i class="icon-sort"></i>
+</div>

@@ -10,16 +10,20 @@
 
   {% else %}
   {% for repo in issues_list %}
+
   <hr>
   <h3>{{ repo.repo_meta.repo_name }}
     <span class="pull-right">
-      <button class="btn btn-default btn-sm">Post New Issue</button>
-        <span class="space-right"></span>
-      <button class="btn btn-default btn-sm">Show More</button>
+      <button class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-check space-right"></span>Post New Issue</button>
+      <span class="space-right"></span>
+      <button class="btn btn-default btn-sm">
+       <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
     </span>
   </h3>
 
     {% if repo.issues %}
+    <hr>
     <div class="table-responsive">
     <table class="table table-hover table-striped tablesorter">
       <thead>
@@ -34,7 +38,7 @@
             {% include "includes/filters/filter-created.html" %}
           </th>
 
-          <th class="header">Status
+          <th class="header">
             {% include "includes/filters/filter-status.html" %}
           </th>
 
