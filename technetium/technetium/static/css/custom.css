@@ -32,7 +32,11 @@ h2 { font-size: 25px; }
 }
 
 .dropdown-menu {
-    min-width: 182px;
+    min-width: 120px;
+}
+
+.space-left {
+    margin-left: 25px;
 }
 
 .space-right {
