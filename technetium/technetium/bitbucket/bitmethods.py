@@ -74,19 +74,3 @@ def format_timestamp(timestamp):
         return datetime.strftime(date, '%m-%d-%Y')
     except ValueError:
         return ''
-
-
-def unicode_to_str(data):
-    """
-    Convert a collection containing unicode strings to strings.
-    Call this method on the JSON returned from Bitbucket.
-
-    Returns: String
-    """
-    if isinstance(data, str):
-        return data
-    elif isinstance(data, unicode):
-        return str(data)
-    else:
-        return data
-

@@ -23,22 +23,6 @@ import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
 
 
-def get_issues(user, repo, auth_tokens, limit):
-    """
-    Obtains a JSON dictionary from issues endpoint.
-
-    Parameters:
-    - user: User (Django)
-    - repo: String
-    - auth_tokens: OAuth1
-    - limit: Integer
-
-    Returns: Dictionary
-    """
-    req_url = bitmethods.make_req_url(user, repo, 'issues', limit)
-    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
-
-
 def get_issues_from_subscribed(repo_data, auth_tokens):
     """
     Gets a list back from sending multiple requests to
