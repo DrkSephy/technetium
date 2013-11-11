@@ -71,6 +71,7 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
     for repo in subs:
         repo_data = {}
         repo_data['repo_name'] = repo.repository
+        repo_data['repo_slug'] = repo.slug_url
         repo_data['repo_owner'] = repo.owner
         repo_data['req_url'] = bitmethods.make_req_url(
             repo.owner, repo.slug_url, endpoint, limit)
