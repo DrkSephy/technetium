@@ -95,6 +95,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         self.assertEqual(bitmethods.format_timestamp(''), '')
 
+
     def test_format_timestamp_valid(self):
         """
         Tests that valid time stamp is returned in correct format
