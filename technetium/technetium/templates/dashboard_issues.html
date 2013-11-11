@@ -13,16 +13,15 @@
 
   <hr>
   <h3>{{ repo.repo_meta.repo_name }}
+
     <span class="pull-right">
 
-      <button class="btn btn-default btn-sm"
-      id="new-issue-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+      <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-new-issue">
       <span class="glyphicon glyphicon-check space-right"></span>Post New Issue</button>
 
       <span class="space-right"></span>
 
-      <button class="btn btn-default btn-sm"
-      id="show-more-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+      <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-show-more">
       <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
 
     </span>
@@ -93,4 +92,8 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/issue-tracker.js"></script>
 {% endblock %}
