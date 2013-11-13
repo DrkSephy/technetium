@@ -13,6 +13,7 @@ class BitstatsTests(unittest.TestCase):
         self.pub_repo = 'smw-koopa-krisis'
         self.data = [{'author': 'Kevin Chan'}, {'author': 'Kevin Chan'}]
         self.data2 = [{'author': 'Kevin Chan'}, {'author': 'DrkSephy'}]
+        self.data3 = {'DrkSephy': 29, 'Kevin Chan': 11}
     
 
     def test_commit_counter(self):
@@ -37,15 +38,15 @@ class BitstatsTests(unittest.TestCase):
         """
         Tests that a non-empty dictionary returns a list of users.
         """
-
-        pass
+        self.assertEqual(bitstats.list_users(self.data3), ['DrkSephy', 'Kevin Chan'])
+        
 
     def test_list_empty_users(self):
         """
         Tests that an empty dictionary returns an empty list of users.
         """
 
-        pass
+        self.assertEqual(bitstats.list_users({}), [])
 
     def test_list_non_empty_commits(self):
         """
