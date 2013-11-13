@@ -38,7 +38,7 @@ def dashboard(request):
     4. Charts and graphs
     """
  
-    return render(request, 'dashboard.html', data)
+    return render(request, 'dashboard.html')
 
 
 @login_required
