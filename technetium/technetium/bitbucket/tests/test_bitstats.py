@@ -12,5 +12,8 @@ class BitstatsTests(unittest.TestCase):
         self.pub_user = 'DrkSephy'
         self.pub_repo = 'smw-koopa-krisis'
         self.json = """
-        [{'author': 'Kevin Chan'}, {'author': 'DrkSephy'}]
+        [{'author': 'Kevin Chan'}]
         """
+
+    def test_commit_counter(self):
+        self.assertEqual(bitstats.tally_changesets(self.json), {'Kevin Chan': 1})
