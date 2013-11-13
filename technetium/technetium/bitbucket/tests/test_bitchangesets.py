@@ -23,3 +23,9 @@ class BitchangesetsTests(unittest.TestCase):
         Tests that get changesets return a non-empty list.
         """
         pass
+
+    def test_parse_changesets_empty(self):
+        """
+        Tests that parsing an empty changeset list returns empty list
+        """
+        self.assertEqual(bitchangesets.parse_changesets([]), [])
