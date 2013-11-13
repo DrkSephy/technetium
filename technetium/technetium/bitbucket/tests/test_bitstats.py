@@ -16,4 +16,4 @@ class BitstatsTests(unittest.TestCase):
         """
 
     def test_commit_counter(self):
-        self.assertEqual(bitstats.tally_changesets(self.json), {'Kevin Chan': 1})
+        self.assertEqual(bitstats.tally_changesets([]), {})
