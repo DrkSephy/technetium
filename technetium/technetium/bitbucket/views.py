@@ -37,21 +37,7 @@ def dashboard(request):
     3. Progress reports
     4. Charts and graphs
     """
-    # Repository to get information from
-    user = 'technetiumccny'
-    repo = 'technetium'
-
-    # Dictionary to store data
-    data = {}
-
-    # OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
-
-    # Render the last 5 changesets
-    data['changesets_json'] = bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 5))
-
+ 
     return render(request, 'dashboard.html', data)
 
 
