@@ -32,3 +32,31 @@ class BitstatsTests(unittest.TestCase):
         Tests that an empty list returns an empty dictionary
         """
         self.assertEqual(bitstats.tally_changesets([]), {})
+
+    def test_list_non_empty_users(self):
+        """
+        Tests that a non-empty dictionary returns a list of users.
+        """
+
+        pass
+
+    def test_list_empty_users(self):
+        """
+        Tests that an empty dictionary returns an empty list of users.
+        """
+
+        pass
+
+    def test_list_non_empty_commits(self):
+        """
+        Tests that a non-empty dictionary returns a list of commits.
+        """
+
+        pass
+
+    def test_list_empty_commits(self):
+        """
+        Tests that an empty dictionary returns an empty list of commits.
+        """
+
+        pass
