@@ -47,4 +47,13 @@ def list_users(data):
         devs.append(k)
     return devs
 
+def list_commits(data):
+    """
+    Returns a list of commits in order of developers.
+    Useful for graphs.
+    """
 
+    commits = []
+    for k,v in data.iteritems():
+        commits.append(v)
+    return commits
