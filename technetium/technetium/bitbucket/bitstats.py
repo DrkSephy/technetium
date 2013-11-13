@@ -17,7 +17,7 @@ def tally_changesets(data):
     --------
     tally: dictionary
     """
-
+    #data = [{'author': 'Kevin Chan'}, {'author': 'Kevin Chan'}]
     # Dictionary to store commit counts
     tally = {}
     # Iterate over all dictionaries in our list
