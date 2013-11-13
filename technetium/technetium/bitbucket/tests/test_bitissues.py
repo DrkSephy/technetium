@@ -66,7 +66,7 @@ class BitissuesTests(unittest.TestCase):
             mock_req.get.return_value = []
             self.assertEqual(bitissues.get_issues_from_subscribed([],None), [])
 
-    def test_parse_issues_empty():
+    def test_parse_issues_empty(self):
         """
         Tests that empty parse issue returns list of empty issues
         """
