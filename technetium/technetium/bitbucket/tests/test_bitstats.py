@@ -53,11 +53,14 @@ class BitstatsTests(unittest.TestCase):
         Tests that a non-empty dictionary returns a list of commits.
         """
 
-        pass
+        self.assertEqual(bitstats.list_commits(self.data3), [29, 11])
+        
 
     def test_list_empty_commits(self):
         """
         Tests that an empty dictionary returns an empty list of commits.
         """
+
+        self.assertEqual(bitstats.list_commits({}), [])
 
         pass
