@@ -18,4 +18,8 @@ def tally_changesets(data):
     tally: dictionary
     """
 
-    pass
+    tally = {}
+    for i in data:
+        for k,v in i.iteritems():
+            if v in tally:
+                
