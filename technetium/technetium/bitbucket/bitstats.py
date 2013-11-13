@@ -21,6 +21,7 @@ def tally_changesets(data):
     # Dictionary to store commit counts
     tally = {}
     # Iterate over all dictionaries in our list
+    
     for i in data:
         for k,v in i.iteritems():
             # If author is in dictionary, +=1.
