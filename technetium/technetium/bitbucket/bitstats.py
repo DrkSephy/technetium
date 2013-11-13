@@ -35,3 +35,16 @@ def tally_changesets(data):
         # Return a dictionary of the tally.
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
+
+def list_users(data):
+    """
+    Returns a list of all developers in a repository.
+    Useful for plugging directly into the Pie Chart.
+    """
+
+    devs = []
+    for k,v in data.iteritems():
+        devs.append(k)
+    return devs
+
+
