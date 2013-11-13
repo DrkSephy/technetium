@@ -26,3 +26,9 @@ class BitstatsTests(unittest.TestCase):
         Tests that commit counter returns valid data for multiple users
         """
         self.assertEqual(bitstats.tally_changesets(self.data2), {'Kevin Chan': 1, 'DrkSephy': 1})
+
+    def test_commit_counter_empty(self):
+        """
+        Tests that an empty list returns an empty dictionary
+        """
+        self.assertEqual(bitstats.tally_changesets([]), {})
