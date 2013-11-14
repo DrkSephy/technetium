@@ -214,7 +214,7 @@ def filter_changesets_by_date(parsed_json, filtered_value):
     # TODO when date format is defined in parse changeset method
     filtered_json = parsed_json
 
-    return filtered_json    
+    return filtered_json
 
 def filter_changesets_by_user(parsed_json, filtered_value):
     """
