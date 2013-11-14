@@ -72,6 +72,11 @@ class BitfilterTest(unittest.TestCase):
         self.unassigned_issue = {'assignee':''}
         self.assignee_issues = [self.albert_issue, self.jorge_issue, self.david_issue, self.unassigned_issue]
 
+        # global variables to filter changesets by user
+        self.albert_changeset = {'author':'Albert Chieu'}
+        self.jorge_changeset = {'author':'Jorge Yau'}
+        self.david_changeset = {'author':'David Leonard'}
+        self.author_changesets = [self.albert_changeset, self.jorge_changeset, self.david_changeset]
 
     def test_filter_issue_type_by_bug(self):
         """
@@ -185,51 +190,51 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.blocker_issue]
         self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'blocker'), expected_result_issue)
 
-    def test_filter_issue_date_by_today(self):
+    def test_filter_issue_by_today(self):
         """
-        Test to filter issue date by today
+        Test to filter issue by today
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'today'), expected_result_issue)        
 
-    def test_filter_issue_date_by_this_week(self):
+    def test_filter_issue_by_this_week(self):
         """
-        Test to filter issue date by this week
+        Test to filter issue by this week
         """
         expected_result_issue = [self.today_issue, self.current_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'this_week'), expected_result_issue)        
 
-    def test_filter_issue_date_by_last_week(self):
+    def test_filter_issue_by_last_week(self):
         """
-        Test to filter issue date by last week
+        Test to filter issue by last week
         """
         expected_result_issue = [self.last_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'last_week'), expected_result_issue)        
 
-    def test_filter_issue_date_by_this_month(self):
+    def test_filter_issue_by_this_month(self):
         """
-        Test to filter issue date by this month
+        Test to filter issue by this month
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'this_month'), expected_result_issue)        
 
-    def test_filter_issue_date_by_last_month(self):
+    def test_filter_issue_by_last_month(self):
         """
-        Test to filter issue date by last month
+        Test to filter issue by last month
         """
         expected_result_issue = [self.last_day_prev_month_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'last_month'), expected_result_issue)        
 
-    def test_filter_issue_date_by_this_year(self):
+    def test_filter_issue_by_this_year(self):
         """
-        Test to filter issue date by this year
+        Test to filter issue by this year
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'this_year'), expected_result_issue)        
 
-    def test_filter_issue_date_by_last_year(self):
+    def test_filter_issue_by_last_year(self):
         """
-        Test to filter issue date by last year
+        Test to filter issue by last year
         """
         expected_result_issue = [self.last_year_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'last_year'), expected_result_issue)        
@@ -262,14 +267,65 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.unassigned_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'unassigned'), expected_result_issue)        
 
-    def test_filter_changesets_by_user(self):
+    def test_filter_changesets_by_user_albert(self):
         """
-        Test to filter changesets by user
+        Test to filter changesets by user 'Albert Chieu'
+        """
+        expected_result_changeset = [self.albert_changeset]
+        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'Albert Chieu'), expected_result_changeset)                
+
+    def test_filter_changesets_by_user_jorge(self):
+        """
+        Test to filter changesets by user 'Jorge Yau'
+        """
+        expected_result_changeset = [self.jorge_changeset]
+        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'Jorge Yau'), expected_result_changeset)                
+
+    def test_filter_changesets_by_user_david(self):
+        """
+        Test to filter changesets by user 'David Leonard'
+        """
+        expected_result_changeset = [self.david_changeset]
+        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'David Leonard'), expected_result_changeset)                
+
+    def test_filter_changesets_by_today(self):
+        """
+        Test to filter changesets by today
         """
         pass
 
-    def test_filter_changesets_by_date(self):
+    def test_filter_changesets_by_this_week(self):
         """
-        Test to filter changesets by date
+        Test to filter changesets by this week
+        """
+        pass
+
+    def test_filter_changesets_by_last_week(self):
+        """
+        Test to filter changesets by last week
+        """
+        pass
+
+    def test_filter_changesets_by_this_month(self):
+        """
+        Test to filter changesets by this month
+        """
+        pass
+
+    def test_filter_changesets_by_last_month(self):
+        """
+        Test to filter changesets by last month
+        """
+        pass
+
+    def test_filter_changesets_by_this_year(self):
+        """
+        Test to filter changesets by this year
+        """
+        pass
+
+    def test_filter_changesets_by_last_year(self):
+        """
+        Test to filter changesets by last year
         """
         pass

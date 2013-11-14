@@ -204,17 +204,30 @@ def filter_issues_by_status(parsed_json, filtered_value):
 
     return filtered_json
 
-def filter_changesets_by_date():
+def filter_changesets_by_date(parsed_json, filtered_value):
     """
     Filters issues based on date/time.
     """
 
-    pass
+    filtered_value = filtered_value.lower()
+    filtered_json = []
+    # TODO when date format is defined in parse changeset method
+    filtered_json = parsed_json
 
-def filter_changesets_by_user():
+    return filtered_json    
+
+def filter_changesets_by_user(parsed_json, filtered_value):
     """
     Filters issues based on user.
     """
 
-    pass
+    filtered_value = filtered_value.lower()
+    filtered_json = []
+    for changeset in parsed_json:
+        if 'author' in changeset:
+            j_author = changeset['author']
+            if j_author.strip().lower()==filtered_value:
+                filtered_json.append(changeset)
+
+    return filtered_json
 
