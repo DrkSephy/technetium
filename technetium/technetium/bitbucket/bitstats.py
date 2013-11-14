@@ -62,9 +62,24 @@ def tally_issue_comments(data):
     of all comments made. 
 
     Returns:
-    -------
+    --------
     issue_comments: dictionary containing number of comments for 
                     each user.
+    """
+
+    pass
+
+def tally_opened_issues(data):
+    """
+    Gets the number of issues each user has opened.
+
+    Notes: Even though issues are usually opened by the scrum master,
+    we still need this to grade them.
+
+    Returns:
+    --------
+    opened_issues: dictionary containing number of issues that each 
+                   user has opened.
     """
 
     pass
