@@ -35,7 +35,7 @@ def get_changesets(user, repo, auth_tokens, limit):
 
     
 
-def parse_changesets(changesets):
+def parse_changesets(data):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -54,13 +54,11 @@ def parse_changesets(changesets):
           all relevant data.
     """
 
-    x = changesets['changesets']
-
-    keys = ['author', 'branch', 'utctimestamp', 'message']
+    keys = ['author', 'utctimestamp']
 
     changeset = []
 
-    for a in x:
+    for a in data:
         new_list = {}
         for k,v in a.iteritems():
             if k in keys:
