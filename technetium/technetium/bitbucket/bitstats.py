@@ -36,6 +36,26 @@ def tally_changesets(data):
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
 
+def tally_assigned_issues(data):
+    """
+    Gets the number of issues that a user has completed.
+
+    Parameters:
+    -----------
+    data: JSON dictionary
+
+    Returns:
+    -------
+    assigned_issues: dictionary
+
+    Example: Returns {accountname: 8, DrkSephy: 5}, which is a
+    dictionary of the number of issues the above user resolved.
+    """
+
+    pass
+
+
+
 def list_users(data):
     """
     Returns a list of all developers in a repository.
