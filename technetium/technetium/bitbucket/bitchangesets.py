@@ -54,7 +54,7 @@ def parse_changesets(data):
           all relevant data.
     """
 
-    keys = ['author', 'utctimestamp']
+    keys = ['author']
 
     changeset = []
 
