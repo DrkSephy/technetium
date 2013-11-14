@@ -28,7 +28,8 @@ def get_changesets(user, repo, auth_tokens, limit):
     # The URL for changesets is:
     # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
     req_url = bitmethods.make_req_url(user, repo, 'changesets', limit)
-    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    changesets = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    return changesets['changesets']
    
     # Return the JSON
 
