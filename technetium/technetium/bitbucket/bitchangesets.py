@@ -1,30 +1,5 @@
 """
 Module for Bitbucket changesets aggregation.
-
-Proposed methods:
-    - GETs changesets for a given repository
-    - GETs changesets for multiple repositories.
-    - Parses returned JSON.
-
-Bitbucket API requests start at the following endpoint:
-
-https://bitbucket.org/api/1.0/repositories/
-and have the following layout:
-
-https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
-
-    - {accountname} : The Bitbucket User name
-    - {repo_slug} : The repository name 
-    - {endpoint} : The resource to request
-
-The calls also take the following extra query parameters:
-
-    - start: The hash value which the query starts from. The 
-             default start point is the most recent entry to
-             the earliest.
-
-    - limit: Integer value which represents the number of changesets
-             to return. 
 """
 
 import requests
@@ -53,13 +28,14 @@ def get_changesets(user, repo, auth_tokens, limit):
     # The URL for changesets is:
     # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
     req_url = bitmethods.make_req_url(user, repo, 'changesets', limit)
-    return bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    changesets = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    return changesets['changesets']
    
     # Return the JSON
 
     
 
-def parse_changesets(changesets):
+def parse_changesets(data):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -78,13 +54,11 @@ def parse_changesets(changesets):
           all relevant data.
     """
 
-    x = changesets['changesets']
-
-    keys = ['author', 'branch', 'utctimestamp', 'message']
+    keys = ['author']
 
     changeset = []
 
-    for a in x:
+    for a in data:
         new_list = {}
         for k,v in a.iteritems():
             if k in keys:

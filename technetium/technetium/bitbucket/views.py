@@ -37,22 +37,8 @@ def dashboard(request):
     3. Progress reports
     4. Charts and graphs
     """
-    # Repository to get information from
-    user = 'technetiumccny'
-    repo = 'technetium'
-
-    # Dictionary to store data
-    data = {}
-
-    # OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
-
-    # Render the last 5 changesets
-    data['changesets_json'] = bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 5))
-
-    return render(request, 'dashboard.html', data)
+ 
+    return render(request, 'dashboard.html')
 
 
 @login_required
@@ -73,30 +59,7 @@ def dashboard_issues(request):
     # Get retrieved issues from subscribed repositories
     data = {'issues_list' : bitissues.parse_issues(repo_issues)}
     return render(request, 'dashboard_issues.html', data)
-
-
-@login_required
-def dashboard_changesets(request):
-    """
-    Render changesets on dashboard overview
-    """
-
-    # Repository to get changesets from
-    user = 'technetiumccny'
-    repo = 'technetium'
-    data = {}
-
-    # Get the OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
-
-    # Data to render
-    data['changesets_json'] = bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 13))
-
-    # Send request to templates
-    return render(request, 'dashboard_changesets.html', data)
-
+    
 
 @login_required
 def line_chart(request):
