@@ -192,70 +192,70 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issue_by_today(self):
         """
-        Test to filter issue by today
+        Test to filter issues by today
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'today'), expected_result_issue)        
 
     def test_filter_issue_by_this_week(self):
         """
-        Test to filter issue by this week
+        Test to filter issues by this week
         """
         expected_result_issue = [self.today_issue, self.current_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'this_week'), expected_result_issue)        
 
     def test_filter_issue_by_last_week(self):
         """
-        Test to filter issue by last week
+        Test to filter issues by last week
         """
         expected_result_issue = [self.last_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'last_week'), expected_result_issue)        
 
     def test_filter_issue_by_this_month(self):
         """
-        Test to filter issue by this month
+        Test to filter issues by this month
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'this_month'), expected_result_issue)        
 
     def test_filter_issue_by_last_month(self):
         """
-        Test to filter issue by last month
+        Test to filter issues by last month
         """
         expected_result_issue = [self.last_day_prev_month_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'last_month'), expected_result_issue)        
 
     def test_filter_issue_by_this_year(self):
         """
-        Test to filter issue by this year
+        Test to filter issues by this year
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'this_year'), expected_result_issue)        
 
     def test_filter_issue_by_last_year(self):
         """
-        Test to filter issue by last year
+        Test to filter issues by last year
         """
         expected_result_issue = [self.last_year_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'last_year'), expected_result_issue)        
 
     def test_filter_issues_by_user_albert(self):
         """
-        Test to filter issues by username 'Albert Chieu'
+        Test to filter issues by user 'Albert Chieu'
         """
         expected_result_issue = [self.albert_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues,'Albert Chieu'), expected_result_issue)
         
     def test_filter_issues_by_user_jorge(self):
         """
-        Test to filter issues by username 'Jorge Yau'
+        Test to filter issues by user 'Jorge Yau'
         """
         expected_result_issue = [self.jorge_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'Jorge Yau'), expected_result_issue)        
 
     def test_filter_issues_by_user_david(self):
         """
-        Test to filter issues by username 'David Leonard'
+        Test to filter issues by user 'David Leonard'
         """
         expected_result_issue = [self.david_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'David Leonard'), expected_result_issue)        
