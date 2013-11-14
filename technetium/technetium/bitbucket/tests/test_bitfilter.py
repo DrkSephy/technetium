@@ -238,19 +238,22 @@ class BitfilterTest(unittest.TestCase):
         """
         Test to filter issues by username 'Albert Chieu'
         """
-        pass
+        expected_result_issue = [self.albert_issue]
+        self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues,'Albert Chieu'), expected_result_issue)
         
     def test_filter_issues_by_user_jorge(self):
         """
         Test to filter issues by username 'Jorge Yau'
         """
-        pass
+        expected_result_issue = [self.jorge_issue]
+        self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'Jorge Yau'), expected_result_issue)        
 
     def test_filter_issues_by_user_david(self):
         """
         Test to filter issues by username 'David Leonard'
         """
-        pass 
+        expected_result_issue = [self.david_issue]
+        self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'David Leonard'), expected_result_issue)        
 
     def test_filter_issues_by_user_unassigned(self):
         """

@@ -60,6 +60,7 @@ def filter_issues_by_type(parsed_json, filtered_value):
     Filters issues by type.
     """
 
+    filtered_value = filtered_value.lower()
     filtered_json = []
     for issue in parsed_json:
         if 'type' in issue:
@@ -74,6 +75,7 @@ def filter_issues_by_priority(parsed_json, filtered_value):
     Filters issues based on priority.
     """
 
+    filtered_value = filtered_value.lower()
     filtered_json = []
     for issue in parsed_json:
         if 'priority' in issue:
@@ -88,6 +90,7 @@ def filter_issues_by_user(parsed_json, filtered_value):
     Filters issues based on users.
     """
 
+    filtered_value = filtered_value.lower()
     filtered_json = []
     for issue in parsed_json:
         if 'assignee' in issue:
@@ -105,6 +108,7 @@ def filter_issues_by_date(parsed_json, filtered_value):
     Filters issues based on date.
     """
 
+    filtered_value = filtered_value.lower()
     value = []
     case_num = 0
     today = datetime.date.today()
@@ -191,6 +195,7 @@ def filter_issues_by_status(parsed_json, filtered_value):
     Filters issues based on status.
     """
 
+    filtered_value = filtered_value.lower()
     filtered_json = []
     for issue in parsed_json:
         if 'status' in issue:
