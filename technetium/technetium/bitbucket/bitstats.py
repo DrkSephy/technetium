@@ -38,7 +38,7 @@ def tally_changesets(data):
 
 def tally_assigned_issues(data):
     """
-    Gets the number of issues that a user has completed.
+    Gets the number of issues that each user has completed.
 
     Parameters:
     -----------
@@ -54,6 +54,20 @@ def tally_assigned_issues(data):
 
     pass
 
+def tally_issue_comments(data):
+    """
+    Gets the number of comments that each user has made.
+
+    Notes: Needs to check each issue endpoint and get a tally 
+    of all comments made. 
+
+    Returns:
+    -------
+    issue_comments: dictionary containing number of comments for 
+                    each user.
+    """
+
+    pass
 
 
 def list_users(data):
