@@ -1,6 +1,8 @@
 """
 Test Technetium Bitbucket: bitchangesets
 """
+
+from mock import Mock, patch
 import unittest
 import technetium.bitbucket.bitchangesets as bitchangesets
 
@@ -19,7 +21,6 @@ class BitchangesetsTests(unittest.TestCase):
                     'timestamp': '2013-11-11 04:14:50', 'raw_author': 'David Leonard <sephirothcloud1025@yahoo.com>'}]
 
 
-    # These tests might need to be mocked
     def test_get_changesets_not_empty(self):
         """
         Tests that get changesets return a non-empty list.
