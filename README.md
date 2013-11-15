@@ -1,120 +1,59 @@
-Technetium Description
-----------------------
+Technetium
+----------
 
-Technetium is a data aggregration tool built using the Bitbucket API.
+## What is Technetium?
 
-Technetium is deployed here: [Technetium](http://technetium.herokuapp.com/)
 
-Technetium Features
--------------------
-1. Single-page Admin Application for viewing bitbucket data.
-2. Simple API calls to grab changesets (including wiki, and issues),
-   and any relevant data needed by the user.
-3. Visual representations of any and all bitbucket data. Examples include
-   line charts which show average commits over a period of time for one
-   or more users in a repository.
+See: [Technetium](http://technetium.herokuapp.com/)
 
-Goals/Tasks [ 11/5/13 ---> 11/14/13 ]
+> Technetium is a data aggregation web application built using the Bitbucket API.
+It features an all-in-one issue tracker across multiple repositories, along with
+both visualization and statistical reports of data pertaining to a repository.
+
+Goals/Tasks [ 11/14/13 --> 11/21/13 ]
 -------------------------------------
-1. Finish subscription functionality. [ Jorge ]
-
-  
-      STATUS: In progress.
-
-2. Add AJAX to all requests. [ Jorge ]
-
-      STATUS: In progress.
-
-3. Write tests. [ Albert ]
-
-      STATUS: In progress.
-
-4. Write methods for statistics/reports. [ David ]
-
-      - [A] Method for getting all changeset tallies for a repository.
-      - [B] Method for getting all pull request tallies for a repository.
-      - [C] Method for getting all closed issues from a repository.
-  
-      STATUS: In progress.
-
-5. Continue to work on getting proper data for D3 graphs. [ David ]
-
-      - [A] Display all commits for all users in a repository.
-
-Goals/Tasks [ 10/30/13 ---> 11/5/13 ]
--------------------------------------
-
-1. Write tests for subscription methods. [ Albert? Henry?]
-
-
-2. Create subscription methods. [ Jorge ]
+1. Finish Issue Tracker functionality. [ Jorge ]
     
-      - [A] Create database model for Subscriptions.
-      - [B] Write the URL dispatch and the views for repository subscriptions.
-      - [C] Write a method for inserting new subscriptions into database.
-      - [D] Render the template UI for subscription interface. 
+      - [A] Add functionality to get all issues in all repositories.
+      - [B] Finish AJAX calls for the "Show more" option.
+          - Ideally, we might want to show 10-20 more issues at a time.
+
+2. Continue working on Reports module (changesets). [ David ]
+
+      - [A] Complete methods for getting commit data.
+      - [B] Add functionality to get all changesets in a repository.
+      - [C] Write the view, template and URL dispatch for Reports.
+
+3. Work on Reports module (issues). [ Jorge ]
+
+      - [A] Use a method described in TASK [1][A] to get all issues.
+            From these issues, extract the number of comments for 
+            each user.
+      - [B] From the data above, use it to create a tally of all comments.
+      - [C] Add functionality to also create a tally of all issues that
+            were completed by its assignee.
+      - [D] Add functionality to get number of issues opened by each user.
+            (Even though the Scrum master is the one who should open 
+            issues, this feature is useful in general for other users).
+
+4. Write unit tests. [ Albert ]
+
+      - [A] Continue to write unit tests for anything that isn't 100% 
+            covered yet. Start with the filter first.
+      - [B] Take a look at application testing using Selenium. Try and see
+            if you can write a system test.
+
+5. Using data in TASK [2], display real graphs. [ David ]
       
-      STATUS: COMPLETED.
-
-3. Create Changesets view. [ David ]
-
-      - [A] Create template for changesets module.
-      - [B] URL dispatch for the view of changesets.
-      - [C] Render the template for viewing changesets.
-
-      STATUS: COMPLETED.
-
-4. Work on Manager module. [ Jorge ]
-
-      - [A] Obtain a list of repositories that a User has access to.
-      - [B] Add method for adding/removing repositories to follow.
-
-      STATUS: COMPLETED.
-
-5. Work on Statistics/Graphs module. [ David ]
-
-      - [A] Figure out what input data is needed to use third-party libraries.
-      - [B] Obtain data and render through graphs.
-
-      STATUS: In progress.
-
-Finished Tasks [10/22/13 --> 10/29/13]
----------------------------------------
-
-1. Work on Bitauth module. [ Jorge ]
-
-    - A common method needed for all Bitbucket API calls to be
-      successful.
-
-    - STATUS: COMPLETED.
-
-2. Work on Changesets module. [ David ]
-
-    - One of the main modules for Technetium.
-
-    - STATUS: COMPLETED.
-
-3. Set up Admin theme on Technetium. [ David ]
-
-    - Currently, logging in with Bitbucket returns the user to
-      the done page. We would like to return the user to a
-      dashboard page. This requires altering the views.py file
-      to redirect the user.
-
-    - The admin theme is located here:
-      http://startbootstrap.com/templates/sb-admin/
-
-    - STATUS: COMPLETED.
-
-
-###Future Tasks
-
-#####Filter module
-Handles actions allowing the user to filter issues and changesets.
-
-* Issues can be filtered by user, date, priority, status, and type.
-* Changesets can be filtered by user and date.
-
+      - [A] Using methods in TASK[2][B], display a graph using this returned
+            data. 
+      - [B] Create a Pie Graph with actual data. Requires the following:
+          - A Python list of all of the users in the repository.
+          - A Python list of all the commits in the repository.
+      - [C] Create a line graph with actual data. Requires the following:
+          - A Python list of all of the users in the repository.
+          - A Python list of all the commits in the repository. 
+          - A Python list of all the dates for commits.
 
 ###Installation and Running Django
 1. Setup and workon your python virtualenv
