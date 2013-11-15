@@ -1,0 +1,102 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+<div class="col-lg-12">
+  <h2><span class="glyphicon glyphicon-saved space-right"></span>Issue Tracker</h2>
+
+  {% if not issues_list %}
+    {% include 'includes/tutorials/issues-tutorial.html' %}
+
+  {% else %}
+  {% for repo in issues_list %}
+
+  <hr>
+  <h3>{{ repo.repo_meta.repo_name }}
+
+    <span class="pull-right">
+
+      <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-new-issue">
+      <span class="glyphicon glyphicon-check space-right"></span>Post New Issue</button>
+
+      <span class="space-right"></span>
+
+      <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-show-more">
+      <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
+
+    </span>
+  </h3>
+
+    {% if repo.issues %}
+    <hr>
+    <div class="table-responsive">
+    <table class="table table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <th class="header">Assignee</th>
+          <th class="header">Issue Title <i class="icon-sort"></i></th>
+          <th class="header">
+            {% include "includes/filters/filter-type.html" %}
+          </th>
+
+          <th class="header">
+            {% include "includes/filters/filter-created.html" %}
+          </th>
+
+          <th class="header">
+            {% include "includes/filters/filter-status.html" %}
+          </th>
+
+        </tr>
+      </thead>
+      <tbody id="issues-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+      {% for issue in repo.issues %}
+        <tr>
+
+          {% if issue.assignee %}
+            <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
+              {{ issue.assignee }}
+            </td>
+          {% else %}
+            <td><span class="text-muted space-left">Unassigned</span></td>
+          {% endif %}
+
+          <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
+          <td>{{ issue.type }}</td>
+          <td>{{ issue.created }}</td>
+          <td>
+            {% if issue.status == "Resolved" %}
+              <span class="text-success">{{ issue.status }}</span>
+            {% else %}
+
+              {% if issue.status == "Bug" %}
+              <span class="text-danger">{{ issue.status }}</span>
+              {% else %}
+              <span>{{ issue.status }}</span>
+
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+
+    {% else %}
+      <hr>
+      <h4>No issues reported yet.</h4>
+    {% endif %}
+    </tbody>
+  </table>
+  {% endfor %}
+
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/issue-tracker.js"></script>
+    <script src="/static/js/issue-filter-type.js"></script>
+    <script src="/static/js/issue-filter-date.js"></script>
+    <script src="/static/js/issue-filter-status.js"></script>
+{% endblock %}

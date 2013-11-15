@@ -1,0 +1,50 @@
+{% if not user.is_authenticated %}
+    <div id='wrapper'>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+          <span class="glyphicon glyphicon-hdd space-right"></span>Technetium</a>
+        </div>
+    </nav>
+    </div>
+
+{% else %}
+    <div id='wrapper'>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+          Technetium</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+        {% include "includes/addons/sidebar.html" %}
+
+          <ul class="nav navbar-nav navbar-right navbar-user">
+
+            {% include 'includes/addons/navbar-messages.html' %}
+
+            {% include 'includes/addons/navbar-subscriptions.html' %}
+
+            {% include 'includes/addons/navbar-account.html' %}
+
+          </ul>
+        </div>
+      </nav>
+
+{% endif %}
