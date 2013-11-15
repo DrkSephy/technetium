@@ -12,14 +12,14 @@ class BitauthTest(TestCase):
 
 
 class BitissuesTest(TestCase):
-    def test_get_issues():
+    def test_get_issues(self):
         """
         Tests that our API call to the `repositories`
         endpoint returns JSON data.
         """
         pass
 
-    def test_parse_issues():
+    def test_parse_issues(self):
         """
         Tests that on JSON input, outputs properly
         stripped/formatted JSON data.
