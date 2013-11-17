@@ -37,7 +37,7 @@ def dashboard(request):
     3. Progress reports
     4. Charts and graphs
     """
- 
+
     return render(request, 'dashboard.html')
 
 
@@ -59,7 +59,7 @@ def dashboard_issues(request):
     # Get retrieved issues from subscribed repositories
     data = {'issues_list' : bitissues.parse_issues(repo_issues)}
     return render(request, 'dashboard_issues.html', data)
-    
+
 
 @login_required
 def line_chart(request):
@@ -186,6 +186,17 @@ def unsubscribe_repository(request):
         return HttpResponse("{'status' : 'sucess'}")
     return HttpResponse("{'status' : 'fail'}")
 
+
+@login_required
+def unsubscribe_all_repository(request):
+    """
+    Handles request to unsubscribe from a repository
+    """
+    print "Unsubscribing from %s: %s" % \
+        (request.POST['repo-id'], request.POST['repo-name'])
+
+    bitmanager.unsubscribe_all_repository(request.user)
+    return redirect('/manage')
 
 
 ##################
