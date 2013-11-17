@@ -7,8 +7,11 @@
   <span class="glyphicon glyphicon-briefcase space-right"></span>
   Manage Repository Subscriptions
 
+  <form action="/unsubscribe-all" method="POST" class="pull-right inline">
+  {% csrf_token %}
   <button id="unsubscribe-all" class="btn btn-default btn-sm btn-new-issue pull-right">
   <span class="glyphicon glyphicon-edit space-right"></span>Unsubscribe From All</button>
+  </form>
 
   </h2>
 

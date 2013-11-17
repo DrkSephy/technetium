@@ -48,3 +48,7 @@ h2 { font-size: 25px; }
     width: 16px;
     margin-right: 5px;
 }
+
+.inline {
+    display: inline-block;
+}
