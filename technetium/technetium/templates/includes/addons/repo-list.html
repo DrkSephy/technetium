@@ -8,7 +8,7 @@
       <input type="hidden" id="slug-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.slug }}">
       <input type="hidden" id="name-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.name }}">
       <input type="hidden" id="id-{{ repo.owner }}-{{ repo.slug }}" value="{{ repo.repo_id }}">
-      <button type="button" id="{{ repo.owner }}-{{ repo.slug }}" class="btn btn-link" value="{{ repo.action }}">{{ repo.action|capfirst }}</button>
+      <button name="subscribe" type="button" id="{{ repo.owner }}-{{ repo.slug }}" class="btn btn-link" value="{{ repo.action }}">{{ repo.action|capfirst }}</button>
     </td>
   </tr>
 {% endfor %}
