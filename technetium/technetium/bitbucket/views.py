@@ -188,14 +188,11 @@ def unsubscribe_repository(request):
 
 
 @login_required
-def unsubscribe_all_repository(request):
+def unsubscribe_all(request):
     """
     Handles request to unsubscribe from a repository
     """
-    print "Unsubscribing from %s: %s" % \
-        (request.POST['repo-id'], request.POST['repo-name'])
-
-    bitmanager.unsubscribe_all_repository(request.user)
+    bitmanager.unsubscribe_all_repositories(request.user)
     return redirect('/manage')
 
 
