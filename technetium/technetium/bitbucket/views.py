@@ -203,6 +203,14 @@ def unsubscribe_all(request):
     return redirect('/manage')
 
 
+@login_required
+def fetch_more_issues(request):
+    """
+    Handles request to unsubscribe from a repository
+    """
+    return HttpResponse('')
+
+
 ##################
 # AUTHENTICATION #
 ##################

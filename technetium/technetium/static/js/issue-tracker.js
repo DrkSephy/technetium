@@ -9,6 +9,8 @@ $(".btn-show-more").click(function() {
     var repoCount = button.attr("data-count");
     var tableBody = $('#issues-' + repoOwner + '-' + repoSlug);
 
+    alert(repoCount);
+
     // Ajax request to get next set of issues
     $.ajax({
         type : 'GET',
@@ -20,6 +22,7 @@ $(".btn-show-more").click(function() {
         },
 
         success : function(data) {
+            // Increment repo count
             alert(data);
         },
 
