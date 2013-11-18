@@ -40,6 +40,14 @@ def dashboard(request):
 
     return render(request, 'dashboard.html')
 
+@login_required
+def statistics(request):
+    """
+    Render the reports.
+    """
+
+    return render(request, 'statistics.html')
+
 
 @login_required
 def dashboard_issues(request):
