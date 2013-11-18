@@ -40,6 +40,7 @@ def dashboard(request):
     4. Charts and graphs
     """
     # Get retrieved issues from subscribed repositories
+    subscribed  = bitmanager.get_all_subscriptions(request.user)
     data = bitmethods.package_context(subscribed)
     return render(request, 'dashboard.html', data)
 
