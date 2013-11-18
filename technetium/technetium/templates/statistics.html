@@ -20,6 +20,15 @@
 
             </tr>
         </thead>
+        <tbody>
+        {% for changeset in changesets_json %}
+        <tr>
+            <td>{{ changeset.author }}</td>
+            <td>{{ changeset.branch }}</td>
+            <td>{{ changeset.message }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
         </table>
     </div>
 </div>

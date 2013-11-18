@@ -17,6 +17,7 @@ import bitissues
 import bitfilter
 import bitmanager
 import bitchangesets
+import bitstats
 
 # Home page view
 def home(request):
@@ -46,7 +47,21 @@ def statistics(request):
     Render the reports.
     """
 
-    return render(request, 'statistics.html')
+    # Using smw-koopa-krisis as a test repository
+    user = 'DrkSephy'
+    repo = 'smw-koopa-krisis'
+
+    # Store the data
+    data = {}
+
+    # OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    data['changesets_json'] = bitchangesets.parse_changesets(
+        bitchangesets.get_changesets(user, repo, auth_tokens, 5))
+
+    return render(request, 'statistics.html', data)
 
 
 @login_required
