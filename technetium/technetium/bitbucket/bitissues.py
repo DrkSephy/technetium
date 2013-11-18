@@ -60,7 +60,9 @@ def parse_all_issues(repo_issues):
     for repo in repo_issues:
         parsed_data = {}
         parsed_data['repo_meta'] = repo['repo_meta']
-        parsed_data['issues'] = parse_issues(repo['raw_issues']['issues'])
+        parsed_data['issues'] = []
+        if repo['raw_issues']:
+            parsed_data['issues'] = parse_issues(repo['raw_issues']['issues'])
         repository_issues.append(parsed_data)
     return repository_issues
 
