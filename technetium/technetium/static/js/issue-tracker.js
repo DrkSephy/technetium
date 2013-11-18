@@ -8,6 +8,7 @@ $(".btn-show-more").click(function() {
     var repoSlug  = button.attr("data-slug");
     var repoCount = button.attr("data-count");
     var tableBody = $('#issues-' + repoOwner + '-' + repoSlug);
+    button.attr("disabled", "disabled");
 
     // Ajax request to get next set of issues
     $.ajax({
@@ -24,11 +25,13 @@ $(".btn-show-more").click(function() {
             tableBody.append(data);
 
             // Increment repo count
+            var newCount = parseInt(repoCount) + 10;
+            $(this).attr('data-count', toString(newCount));
+            button.removeAttr('disabled');
         },
 
         error : function() {
             alert('Error trying to fetch more issues');
         }
     });
-    tableBody.append("<tr><td></td></tr>");
 });
