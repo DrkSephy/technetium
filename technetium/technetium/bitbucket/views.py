@@ -43,7 +43,6 @@ def dashboard(request):
 
 
 @login_required
-@load_subscriptions
 def dashboard_issues(request):
     """
     Render dashboard issue tracker overview.
@@ -51,7 +50,7 @@ def dashboard_issues(request):
     # Get OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
-    print request.session['subscriptions']
+
     # Get all subscribed repositories
     limit = 10
     subscribed  = bitmanager.get_all_subscriptions(request.user)
@@ -59,7 +58,9 @@ def dashboard_issues(request):
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
 
     # Get retrieved issues from subscribed repositories
-    data = {'issues_list' : bitissues.parse_issues(repo_issues)}
+    data = {'subscriptions' : subscribed}
+    data['repo_count'] = len(subscribed)
+    data['issues_list'] = bitissues.parse_issues(repo_issues)
     return render(request, 'dashboard_issues.html', data)
 
 
