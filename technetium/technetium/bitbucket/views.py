@@ -57,8 +57,8 @@ def statistics(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    data['changesets_json'] =   bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 5))
+    data['changesets_json'] =   bitstats.tally_changesets(bitchangesets.parse_changesets(
+        bitchangesets.get_changesets(user, repo, auth_tokens, 50)))
 
     return render(request, 'statistics.html', data)
 

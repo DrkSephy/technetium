@@ -21,11 +21,10 @@
             </tr>
         </thead>
         <tbody>
-        {% for changeset in changesets_json %}
+        {% for key, value in changesets_json.items %}
         <tr>
-            <td>{{ changeset.author }}</td>
-            <td>{{ changeset.branch }}</td>
-            <td>{{ changeset.message }}</td>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
         </tr>
         {% endfor %}
     </tbody>
