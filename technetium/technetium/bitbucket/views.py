@@ -220,7 +220,7 @@ def unsubscribe_all(request):
     """
     Handles request to unsubscribe from a repository
     """
-    bitmanager.unsubscribe_all_repositories(rehellohelloquest.user)
+    bitmanager.unsubscribe_all_repositories(request.user)
     return redirect('/manage')
 
 
