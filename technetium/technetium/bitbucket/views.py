@@ -53,12 +53,11 @@ def statistics(request):
 
     # Store the data
     data = {}
-
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    data['changesets_json'] = bitchangesets.parse_changesets(
+    data['changesets_json'] =   bitchangesets.parse_changesets(
         bitchangesets.get_changesets(user, repo, auth_tokens, 5))
 
     return render(request, 'statistics.html', data)
