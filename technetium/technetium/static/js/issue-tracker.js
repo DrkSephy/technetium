@@ -3,10 +3,29 @@
 // Show more issues
 $(".btn-show-more").click(function() {
     // Get button name and table body to add issues
-    var button     = $(this);
-    var buttonName = this.name;
-    var tableBody  = 'issues-' + buttonName;
+    var button    = $(this);
+    var repoOwner = button.attr("data-owner");
+    var repoSlug  = button.attr("data-slug");
+    var repoCount = button.attr("data-count");
+    var tableBody = $('#issues-' + repoOwner + '-' + repoSlug);
 
     // Ajax request to get next set of issues
-    alert(tableBody);
+    $.ajax({
+        type : 'GET',
+        url  : '/fetch-more-issues',
+        data : {
+            'repo-owner' : repoOwner,
+            'repo-slug'  : repoSlug,
+            'starting'   : repoCount
+        },
+
+        success : function(data) {
+            alert(data);
+        },
+
+        error : function() {
+            alert('Error trying to fetch more issues');
+        },
+    });
+    tableBody.append("<tr><td></td></tr>");
 });
