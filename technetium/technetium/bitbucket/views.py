@@ -12,7 +12,6 @@ import datetime
 import time
 
 # Project Modules
-from technetium.bitbucket.decorators import *
 import bitauth
 import bitissues
 import bitfilter
@@ -189,9 +188,9 @@ def manage_repositories(request):
 @login_required
 def subscribe_repository(request):
     """
-    Handles request to subscribe to a repository with
-    AJAX request. Content should contain a dictionary
-    with the fields for Subcription Model.
+    [AJAX] Handles request to subscribe to a repository.
+    Content should contain a dictionary with the
+    fields for Subcription Model.
     """
     print "Subscribing to %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
@@ -205,7 +204,7 @@ def subscribe_repository(request):
 @login_required
 def unsubscribe_repository(request):
     """
-    Handles request to unsubscribe from a repository
+    [AJAX] Handles request to unsubscribe from a repository
     """
     print "Unsubscribing from %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
@@ -221,16 +220,28 @@ def unsubscribe_all(request):
     """
     Handles request to unsubscribe from a repository
     """
-    bitmanager.unsubscribe_all_repositories(request.user)
+    bitmanager.unsubscribe_all_repositories(rehellohelloquest.user)
     return redirect('/manage')
 
 
 @login_required
 def fetch_more_issues(request):
     """
-    Handles request to unsubscribe from a repository
+    [AJAX] Handles request to  from a repository
     """
-    return HttpResponse('')
+    # Get OAuth tokens
+    auth_data   = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+    repo_owner = request.GET['repo-owner']
+    repo_slug  = request.GET['repo-slug']
+    repo_count = int(request.GET['count'])
+
+    # Filter out just one repo slug
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
+    print req_url
+    data = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    print data
+    return HttpResponse('hello')
 
 
 ##################

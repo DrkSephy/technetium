@@ -18,7 +18,7 @@ $(".btn-show-more").click(function() {
         data : {
             'repo-owner' : repoOwner,
             'repo-slug'  : repoSlug,
-            'starting'   : repoCount
+            'count' : repoCount
         },
 
         success : function(data) {
