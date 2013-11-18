@@ -74,3 +74,14 @@ def format_timestamp(timestamp):
         return datetime.strftime(date, '%m-%d-%Y')
     except ValueError:
         return ''
+
+
+def package_context(subscriptions):
+    """
+    Packages common data for request context
+
+    Returns: Dictionary
+    """
+    data = {'subscriptions' : subscriptions}
+    data['subscription_count'] = len(subscriptions)
+    return data

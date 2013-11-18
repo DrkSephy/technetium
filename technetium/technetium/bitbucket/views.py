@@ -18,6 +18,7 @@ import bitissues
 import bitfilter
 import bitmanager
 import bitchangesets
+import bitmethods
 
 # Home page view
 def home(request):
@@ -38,8 +39,9 @@ def dashboard(request):
     3. Progress reports
     4. Charts and graphs
     """
-
-    return render(request, 'dashboard.html')
+    # Get retrieved issues from subscribed repositories
+    data = bitmethods.package_context(subscribed)
+    return render(request, 'dashboard.html', data)
 
 
 @login_required
@@ -58,8 +60,7 @@ def dashboard_issues(request):
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
 
     # Get retrieved issues from subscribed repositories
-    data = {'subscriptions' : subscribed}
-    data['repo_count'] = len(subscribed)
+    data = bitmethods.package_context(subscribed)
     data['issues_list'] = bitissues.parse_issues(repo_issues)
     return render(request, 'dashboard_issues.html', data)
 
@@ -147,15 +148,17 @@ def manage_repositories(request):
     """
     Renders manage repositories page
     """
-    data = {}
     # Get OAuth tokens
     auth_data   = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get subscriptions and Parse list of all repositories
-    subscriptions = bitmanager.get_all_subscriptions(request.user)
-    repo_ids = bitmanager.get_repo_id_from_subscriptions(subscriptions)
+    subscribed = bitmanager.get_all_subscriptions(request.user)
+    repo_ids = bitmanager.get_repo_id_from_subscriptions(subscribed)
     repositories  = bitmanager.get_list_of_repositories(auth_tokens)
+
+    # Package subscribed
+    data = bitmethods.package_context(subscribed)
     data['repositories'] = bitmanager.parse_repositories(repositories, repo_ids)
     return render(request, 'manage.html', data)
 
