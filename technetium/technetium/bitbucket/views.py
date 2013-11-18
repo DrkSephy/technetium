@@ -83,7 +83,7 @@ def dashboard_issues(request):
 
     # Get retrieved issues from subscribed repositories
     data = bitmethods.package_context(subscribed)
-    data['issues_list'] = bitissues.parse_issues(repo_issues)
+    data['issues_list'] = bitissues.parse_all_issues(repo_issues)
     return render(request, 'dashboard_issues.html', data)
 
 
@@ -238,10 +238,9 @@ def fetch_more_issues(request):
 
     # Filter out just one repo slug
     req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
-    print req_url
-    data = bitmethods.send_bitbucket_request(req_url, auth_tokens)
-    print data
-    return HttpResponse('hello')
+    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
+    parsed_data = bitissues.parse_issues
+    return HttpResponse(data)
 
 
 ##################
