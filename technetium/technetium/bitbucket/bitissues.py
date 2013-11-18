@@ -18,7 +18,8 @@ The calls also take the following extra query parameters:
     - limit: Integer value which represents the number of changesets
              to return.
 """
-from django.template import Context, Template
+from django.template.loader import get_template
+from django.template import Context
 import simplejson as json
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
@@ -105,36 +106,6 @@ def add_html_issue_rows(parsed_data):
 
     Returns: String
     """
-    html = Template("""
-        {% for issue in issues %}
-        <tr>
-
-          {% if issue.assignee %}
-            <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
-              {{ issue.assignee }}
-            </td>
-          {% else %}
-            <td><span class="text-muted space-left">Unassigned</span></td>
-          {% endif %}
-
-          <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
-          <td>{{ issue.type }}</td>
-          <td>{{ issue.created }}</td>
-          <td>
-            {% if issue.status == "Resolved" %}
-              <span class="text-success">{{ issue.status }}</span>
-            {% else %}
-
-              {% if issue.status == "Bug" %}
-              <span class="text-danger">{{ issue.status }}</span>
-              {% else %}
-              <span>{{ issue.status }}</span>
-
-              {% endif %}
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-        """)
+    html = get_template('includes/issues/issues-list.html')
     context = Context(parsed_data)
     return html.render(context)
