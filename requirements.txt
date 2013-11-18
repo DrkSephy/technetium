@@ -5,6 +5,8 @@ Werkzeug==0.9.4
 argparse==1.2.1
 astroid==1.0.0
 coverage==3.7
+django-bower==4.8
+django-chartit==0.1
 django-nvd3==0.6.0
 django-social-auth==0.7.28
 httplib2==0.8
