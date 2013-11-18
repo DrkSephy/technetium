@@ -240,7 +240,7 @@ def fetch_more_issues(request):
     req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 15, repo_count)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
-    html_data = bitissues.add_html_issue_rows({'issues' : parsed_data})
+    html_data = bitissues.add_html_issue_rows(parsed_data)
     return HttpResponse(html_data)
 
 

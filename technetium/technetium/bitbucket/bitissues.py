@@ -18,8 +18,9 @@ The calls also take the following extra query parameters:
     - limit: Integer value which represents the number of changesets
              to return.
 """
-from django.template.loader import get_template
-from django.template import Context
+from django.shortcuts import render
+from django.template.loader import get_template, render_to_string
+from django.template import Context, Template
 import simplejson as json
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
@@ -106,6 +107,5 @@ def add_html_issue_rows(parsed_data):
 
     Returns: String
     """
-    html = get_template('includes/issues/issues-list.html')
-    context = Context(parsed_data)
-    return html.render(context)
+    html = 'includes/issues/issues-list.html'
+    return render_to_string(html, {'repo' : {'issues' : parsed_data}})
