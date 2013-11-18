@@ -19,6 +19,7 @@ import bitfilter
 import bitmanager
 import bitchangesets
 import bitmethods
+import bitstats
 
 # Home page view
 def home(request):
@@ -28,6 +29,27 @@ def home(request):
     return render(request, 'home.html', {
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
     })
+
+
+@login_required
+def statistics(request):
+    """
+    Render the reports.
+    """
+    # Using smw-koopa-krisis as a test repository
+    user = 'DrkSephy'
+    repo = 'smw-koopa-krisis'
+
+    # Store the data
+    data = {}
+    # OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    data['changesets_json'] =   bitstats.tally_changesets(bitchangesets.parse_changesets(
+        bitchangesets.get_changesets(user, repo, auth_tokens, 50)))
+
+    return render(request, 'statistics.html', data)
 
 
 @login_required
