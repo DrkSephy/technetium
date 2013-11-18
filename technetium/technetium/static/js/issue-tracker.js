@@ -25,13 +25,13 @@ $(".btn-show-more").click(function() {
             tableBody.append(data);
 
             // Increment repo count
-            var newCount = parseInt(repoCount) + 10;
-            $(this).attr('data-count', toString(newCount));
+            var newCount = parseInt(repoCount) + 15;
+            button.attr('data-count', newCount);
             button.removeAttr('disabled');
         },
 
         error : function() {
-            alert('Error trying to fetch more issues');
+            alert('Cannot fetch any more issues');
         }
     });
 });

@@ -98,6 +98,9 @@ def add_html_issue_rows(parsed_data):
     Takes parsed issues and returns HTML to attach to rows.
     There has to be a better way of doing this.
 
+    Parameters:
+    - parsed_data: Dictionary
+
     Returns: String
     """
     html = Template("""
