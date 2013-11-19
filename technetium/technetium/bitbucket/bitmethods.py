@@ -7,6 +7,8 @@ Proposed methods:
 import simplejson as json
 from datetime import datetime
 import requests
+import grequests
+
 
 #######################
 # BITBUCKET CONSTANTS #
@@ -63,6 +65,22 @@ def send_bitbucket_request(req_url, auth_tokens):
     if req.status_code == 200:
         return json.loads(req.content)
     return {}
+
+
+def send_async_bitbucket_requests(req_urls, auth_tokens):
+    """
+    Use this method to send asynchronous requests for bitbucket
+    API when generating reports.
+
+    Parameters:
+    - req_urls: List (of URLS)
+    - auth_tokens: OAuth1
+
+    Returns => List (JSON Dictionaries)
+    """
+    urls = (grequests.get(url, auth=auth_tokens) for url in req_urls)
+    return [json.loads(res.content) for res in grequests.map(urls))
+
 
 
 def format_timestamp(timestamp):
