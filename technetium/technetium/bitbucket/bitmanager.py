@@ -7,6 +7,7 @@ Handles the following:
     - Allows method to unsubscribe from repositories.
     - Allows flush method to unsubscribe all repositories.
 """
+from django.db import IntegrityError, DatabaseError
 from models import Subscription
 import bitmethods
 import requests
@@ -74,7 +75,7 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
         repo_data['repo_slug'] = repo.slug_url
         repo_data['repo_owner'] = repo.owner
         repo_data['req_url'] = bitmethods.make_req_url(
-            repo.owner, repo.slug_url, endpoint, limit)
+            repo.owner, repo.slug_url, 'issues', limit)
         repo_list.append(repo_data)
     return repo_list
 
@@ -173,20 +174,17 @@ def unsubscribe_repository(user, data):
         return False
 
 
-def unsubscribe_all_repositories():
+def unsubscribe_all_repositories(user):
     """
-    Removes all repositories being `followed`.
+    Unsubscribe from all user's repositories
 
     Paramters:
-    ---------
-    Repositories: dictionary
-        - A dictionary containing the list of repositories
-          to remove.
+    - user: User (Django Request)
 
-    Returns:
-    -------
-    Repository_count: int
-        - Integer number of removed repositories.
+    Returns: Boolean
     """
-    pass
-
+    try:
+        subscriptions = Subscription.objects.filter(user=user).update(subscribed=False)
+        return True
+    except (DatabaseError, IntegrityError):
+        return False

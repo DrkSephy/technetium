@@ -1,7 +1,7 @@
 // Put AJAX Requests for Manage in this File
 
 // AJAX Request to subscribe to repository
-$(":button").click(function() {
+$("button[name='subscribe']").click(function() {
     var button    = $(this);
     var buttonId  = this.id;
     var action    = this.value;

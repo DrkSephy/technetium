@@ -17,6 +17,8 @@ import bitissues
 import bitfilter
 import bitmanager
 import bitchangesets
+import bitmethods
+import bitstats
 
 # Home page view
 def home(request):
@@ -29,6 +31,27 @@ def home(request):
 
 
 @login_required
+def statistics(request):
+    """
+    Render the reports.
+    """
+    # Using smw-koopa-krisis as a test repository
+    user = 'DrkSephy'
+    repo = 'smw-koopa-krisis'
+
+    # Store the data
+    data = {}
+    # OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    data['changesets_json'] =   bitstats.tally_changesets(bitchangesets.parse_changesets(
+        bitchangesets.get_changesets(user, repo, auth_tokens, 50)))
+
+    return render(request, 'statistics.html', data)
+
+
+@login_required
 def dashboard(request):
     """
     Render dashboard overview. It will contain the following:
@@ -37,8 +60,10 @@ def dashboard(request):
     3. Progress reports
     4. Charts and graphs
     """
- 
-    return render(request, 'dashboard.html')
+    # Get retrieved issues from subscribed repositories
+    subscribed  = bitmanager.get_all_subscriptions(request.user)
+    data = bitmethods.package_context(subscribed)
+    return render(request, 'dashboard.html', data)
 
 
 @login_required
@@ -57,9 +82,10 @@ def dashboard_issues(request):
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
 
     # Get retrieved issues from subscribed repositories
-    data = {'issues_list' : bitissues.parse_issues(repo_issues)}
+    data = bitmethods.package_context(subscribed)
+    data['issues_list'] = bitissues.parse_all_issues(repo_issues)
     return render(request, 'dashboard_issues.html', data)
-    
+
 
 @login_required
 def line_chart(request):
@@ -144,15 +170,17 @@ def manage_repositories(request):
     """
     Renders manage repositories page
     """
-    data = {}
     # Get OAuth tokens
     auth_data   = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get subscriptions and Parse list of all repositories
-    subscriptions = bitmanager.get_all_subscriptions(request.user)
-    repo_ids = bitmanager.get_repo_id_from_subscriptions(subscriptions)
+    subscribed = bitmanager.get_all_subscriptions(request.user)
+    repo_ids = bitmanager.get_repo_id_from_subscriptions(subscribed)
     repositories  = bitmanager.get_list_of_repositories(auth_tokens)
+
+    # Package subscribed
+    data = bitmethods.package_context(subscribed)
     data['repositories'] = bitmanager.parse_repositories(repositories, repo_ids)
     return render(request, 'manage.html', data)
 
@@ -160,9 +188,9 @@ def manage_repositories(request):
 @login_required
 def subscribe_repository(request):
     """
-    Handles request to subscribe to a repository with
-    AJAX request. Content should contain a dictionary
-    with the fields for Subcription Model.
+    [AJAX] Handles request to subscribe to a repository.
+    Content should contain a dictionary with the
+    fields for Subcription Model.
     """
     print "Subscribing to %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
@@ -176,7 +204,7 @@ def subscribe_repository(request):
 @login_required
 def unsubscribe_repository(request):
     """
-    Handles request to unsubscribe from a repository
+    [AJAX] Handles request to unsubscribe from a repository
     """
     print "Unsubscribing from %s: %s" % \
         (request.POST['repo-id'], request.POST['repo-name'])
@@ -186,6 +214,34 @@ def unsubscribe_repository(request):
         return HttpResponse("{'status' : 'sucess'}")
     return HttpResponse("{'status' : 'fail'}")
 
+
+@login_required
+def unsubscribe_all(request):
+    """
+    Handles request to unsubscribe from a repository
+    """
+    bitmanager.unsubscribe_all_repositories(request.user)
+    return redirect('/manage')
+
+
+@login_required
+def fetch_more_issues(request):
+    """
+    [AJAX] Handles request to  from a repository
+    """
+    # Get OAuth tokens
+    auth_data   = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+    repo_owner = request.GET['repo-owner']
+    repo_slug  = request.GET['repo-slug']
+    repo_count = int(request.GET['count'])
+
+    # Filter out just one repo slug
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 15, repo_count)
+    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
+    parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
+    html_data = bitissues.add_html_issue_rows(parsed_data)
+    return HttpResponse(html_data)
 
 
 ##################

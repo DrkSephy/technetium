@@ -1,18 +1,24 @@
 <li class="dropdown alerts-dropdown">
 
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  <span class="glyphicon glyphicon-time space-right"></span>
-    Filter Repositories <span class="badge">3</span>
-
+  <span class="glyphicon glyphicon-eye-open space-right"></span>
+    Subscribed Repositories
+  <span class="badge">
+    {% if subscription_count %}
+      {{ subscription_count }}
+    {% else %}0
+    {% endif %}
+  </span>
+  <!-- We might need a decorator for views -->
+  <!-- Pass the subscribed repo information into request object -->
   <b class="caret"></b></a>
   <ul class="dropdown-menu">
-    <li><a href="#">Default <span class="label label-default">Default</span></a></li>
-    <li><a href="#">Primary <span class="label label-primary">Primary</span></a></li>
-    <li><a href="#">Success <span class="label label-success">Success</span></a></li>
-    <li><a href="#">Info <span class="label label-info">Info</span></a></li>
-    <li><a href="#">Warning <span class="label label-warning">Warning</span></a></li>
-    <li><a href="#">Danger <span class="label label-danger">Danger</span></a></li>
-    <li class="divider"></li>
-    <li><a href="#">View All</a></li>
+    {% if subscriptions %}
+      {% for repo in subscriptions %}
+        <li><a href="#">{{ repo.owner }} / {{ repo.repository }}</a></li>
+      {% endfor %}
+      <li class="divider"></li>
+    {% endif %}
+    <li><a href="{% url 'manage' %}">Manage Subscriptions</a></li>
   </ul>
 </li>
