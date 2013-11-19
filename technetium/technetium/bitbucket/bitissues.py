@@ -86,6 +86,26 @@ def parse_issues(issues):
     return parsed_issues
 
 
+def attach_meta(subscription, repo_issues):
+    """
+    Creates a list of Dictionaries that attaches meta
+    infomation to each list of issues.
+
+    Returns: List
+    """
+    repo_list = []
+    # Add meta data for each repo issues
+    for i in xrange(len(subscription)):
+        data = {'issues' : repo_issues[i]}
+        repo = subscription[i]
+        meta = {}
+        meta['repo_owner'] = repo.owner
+        meta['repo_slug']  = repo.slug_url
+        data['repo_meta']  = meta
+        repo_list.append(data)
+    return repo_list
+
+
 def add_html_issue_rows(parsed_data):
     """
     Takes parsed issues and returns HTML to attach to rows.

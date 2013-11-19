@@ -79,7 +79,13 @@ def send_async_bitbucket_requests(req_urls, auth_tokens):
     Returns => List (JSON Dictionaries)
     """
     urls = (grequests.get(url, auth=auth_tokens) for url in req_urls)
-    return [json.loads(res.content) for res in grequests.map(urls)]
+    issues_list = []
+    for response in grequests.map(urls):
+        try:
+            issues_list.append(json.loads(response.content))
+        except Exception:
+            issues_list.append({'issues' : {}})
+    return issues_list
 
 
 def format_timestamp(timestamp):
