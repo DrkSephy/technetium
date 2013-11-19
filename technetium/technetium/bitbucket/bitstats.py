@@ -11,7 +11,7 @@ def tally_changesets(data):
 
     Parameters:
     -----------
-    data: dictionary 
+    data: dictionary
 
     Returns:
     --------
@@ -25,45 +25,44 @@ def tally_changesets(data):
         for i in data:
             for k,v in i.iteritems():
                 # If author is in dictionary, +=1.
-                # Otherwise, add the author to the dictionary 
+                # Otherwise, add the author to the dictionary
                 # and start his counter to be 1.
                 if v in tally:
                     tally[v] += 1
-                else: 
+                else:
                     tally[v] = 1
 
         # Return a dictionary of the tally.
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
 
+
 def tally_assigned_issues(data):
     """
-    Gets the number of issues that each user has completed.
+    Gets the number of issues that each user has been assigned.
 
     Parameters:
-    -----------
-    data: JSON dictionary
+    - data: dictionary
 
-    Returns:
-    -------
-    assigned_issues: dictionary
+    Returns: Dictionary
 
     Example: Returns {accountname: 8, DrkSephy: 5}, which is a
     dictionary of the number of issues the above user resolved.
     """
-
     pass
+
+
 
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
 
-    Notes: Needs to check each issue endpoint and get a tally 
-    of all comments made. 
+    Notes: Needs to check each issue endpoint and get a tally
+    of all comments made.
 
     Returns:
     --------
-    issue_comments: dictionary containing number of comments for 
+    issue_comments: dictionary containing number of comments for
                     each user.
     """
 
@@ -78,7 +77,7 @@ def tally_opened_issues(data):
 
     Returns:
     --------
-    opened_issues: dictionary containing number of issues that each 
+    opened_issues: dictionary containing number of issues that each
                    user has opened.
     """
 
