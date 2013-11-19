@@ -24,7 +24,7 @@ from django.template import Context, Template
 import simplejson as json
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
-
+import grequests
 
 def get_issues_from_subscribed(repo_data, auth_tokens):
     """
@@ -37,6 +37,20 @@ def get_issues_from_subscribed(repo_data, auth_tokens):
 
     Returns: List
     """
+    urls = [
+        'http://www.google.com',
+        'http://wikipedia.org',
+        'http://youtube.com',
+        'http://www.heroku.com',
+    ]
+
+    # Optional auth
+    auth=('username', 'password')
+
+    rs = (grequests.get(url, auth=auth) for url in urls)
+    res = grequests.map(rs)
+    print res
+
     repo_issues = []
     for repo in repo_data:
         data = {}

@@ -79,8 +79,7 @@ def send_async_bitbucket_requests(req_urls, auth_tokens):
     Returns => List (JSON Dictionaries)
     """
     urls = (grequests.get(url, auth=auth_tokens) for url in req_urls)
-    return [json.loads(res.content) for res in grequests.map(urls))
-
+    return [json.loads(res.content) for res in grequests.map(urls)]
 
 
 def format_timestamp(timestamp):
