@@ -79,14 +79,12 @@ def dashboard_issues(request):
     limit = 10
     subscribed  = bitmanager.get_all_subscriptions(request.user)
     repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
-    print repo_urls
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
-    print
-    print repo_issues
+    repo_issues = bitissues.parse_all_issues(repo_issues)
 
     # Get retrieved issues from subscribed repositories
     data = bitmethods.package_context(subscribed)
-    data['issues_list'] = bitissues.parse_all_issues(repo_issues)
+    data['issues_list'] = repo_issues
     return render(request, 'dashboard_issues.html', data)
 
 

@@ -46,20 +46,16 @@ def parse_all_issues(repo_issues):
     response for the technetium issues dashboard.
 
     Parameters:
-    - repo_issues: List of dictionaries of JSON issues
+    - repo_issues: List (Dictionaries of JSON issues)
 
     Returns: List
     """
     # List of repositories, which contains list of parsed issues
-    repository_issues = []
+    issues_list = []
     for repo in repo_issues:
-        parsed_data = {}
-        parsed_data['repo_meta'] = repo['repo_meta']
-        parsed_data['issues'] = []
-        if repo['raw_issues']:
-            parsed_data['issues'] = parse_issues(repo['raw_issues']['issues'])
-        repository_issues.append(parsed_data)
-    return repository_issues
+        issues = repo['issues']
+        issues_list.append(parse_issues(repo['issues']))
+    return issues_list
 
 
 def parse_issues(issues):
