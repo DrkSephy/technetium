@@ -24,41 +24,20 @@ from django.template import Context, Template
 import simplejson as json
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
-import grequests
 
-def get_issues_from_subscribed(repo_data, auth_tokens):
+
+def get_issues_from_subscribed(repo_urls, auth_tokens):
     """
     Gets a list back from sending multiple requests to
     get issues from all subscribed repositories.
 
     Parameters:
-    - repo_data: List (Dictionary)
+    - repo_urls: List
     - auth_tokens: OAuth1
 
     Returns: List
     """
-    urls = [
-        'http://www.google.com',
-        'http://wikipedia.org',
-        'http://youtube.com',
-        'http://www.heroku.com',
-    ]
-
-    # Optional auth
-    auth=('username', 'password')
-
-    rs = (grequests.get(url, auth=auth) for url in urls)
-    res = grequests.map(rs)
-    print res
-
-    repo_issues = []
-    for repo in repo_data:
-        data = {}
-        data['repo_meta']  = repo
-        data['raw_issues'] = bitmethods.send_bitbucket_request(
-            repo['req_url'], auth_tokens)
-        repo_issues.append(data)
-    return repo_issues
+    return bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens)
 
 
 def parse_all_issues(repo_issues):

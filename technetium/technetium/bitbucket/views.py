@@ -81,6 +81,8 @@ def dashboard_issues(request):
     repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
     print repo_urls
     repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
+    print
+    print repo_issues
 
     # Get retrieved issues from subscribed repositories
     data = bitmethods.package_context(subscribed)
