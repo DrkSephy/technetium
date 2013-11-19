@@ -106,6 +106,8 @@ class BitfilterTest(TestCase):
         Tests filtering of issues by date.
         """
 
+        pass
+
     def test_filter_issues_by_status(self):
         """
         Tests filtering of issues by status.
