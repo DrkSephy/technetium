@@ -6,8 +6,7 @@ import requests
 import simplejson as json
 import bitmethods
 
-
-def get_changesets(user, repo, auth_tokens, limit):
+def get_changesets(user, repo, auth_tokens, limit, start):
     """
     Obtains a JSON dictionary of changesets across
     a repository/repositories.
@@ -27,7 +26,7 @@ def get_changesets(user, repo, auth_tokens, limit):
     # Get the changesets.
     # The URL for changesets is:
     # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
-    req_url = bitmethods.make_req_url(user, repo, 'changesets', limit)
+    req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
     changesets = bitmethods.send_bitbucket_request(req_url, auth_tokens)
     return changesets['changesets']
    
