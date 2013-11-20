@@ -82,7 +82,7 @@ def dashboard_issues(request):
     repo_issues = bitissues.parse_all_issues(
                   bitissues.get_issues_from_subscribed(repo_urls, auth_tokens))
     issues_list = bitissues.attach_meta(subscribed, repo_issues)
-    print issues_list
+
     # Get retrieved issues from subscribed repositories
     data = bitmethods.package_context(subscribed)
     data['issues_list'] = issues_list
@@ -194,9 +194,6 @@ def subscribe_repository(request):
     Content should contain a dictionary with the
     fields for Subcription Model.
     """
-    print "Subscribing to %s: %s" % \
-        (request.POST['repo-id'], request.POST['repo-name'])
-
     # Success: subscribe to repository
     if bitmanager.subscribe_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")
@@ -208,9 +205,6 @@ def unsubscribe_repository(request):
     """
     [AJAX] Handles request to unsubscribe from a repository
     """
-    print "Unsubscribing from %s: %s" % \
-        (request.POST['repo-id'], request.POST['repo-name'])
-
     # Success: unsubscribe from repository
     if bitmanager.unsubscribe_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")
