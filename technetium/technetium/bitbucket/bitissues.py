@@ -94,13 +94,15 @@ def attach_meta(subscription, repo_issues):
     Returns: List
     """
     repo_list = []
-    # Add meta data for each repo issues
+    # Attach meta data for each repo's issues
     for i in xrange(len(subscription)):
         data = {'issues' : repo_issues[i]}
         repo = subscription[i]
-        meta = {}
-        meta['repo_owner'] = repo.owner
-        meta['repo_slug']  = repo.slug_url
+        meta = {
+                'repo_name' : repo.repository,
+                'repo_owner' : repo.owner,
+                'repo_slug' : repo.slug_url,
+                }
         data['repo_meta']  = meta
         repo_list.append(data)
     return repo_list
