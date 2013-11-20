@@ -114,6 +114,13 @@ def dictionary_sum(DictA,DictB):
     Sums the values of two dictionaries based on corresponding keys. 
     """
 
-    pass
+    # New dictionary to store merged dict
+    d = defaultdict(int, DictA)
+    # For all key-value pairs in dict B, sum up values
+    # In the new dictionary.
+    for k,v in DictB.items():
+        # Sum values corresponding to keys
+        d[k] += v
+    return dict(d)
 
 
