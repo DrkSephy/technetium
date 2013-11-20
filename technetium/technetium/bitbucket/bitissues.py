@@ -39,8 +39,10 @@ def parse_all_issues(repo_issues):
     # List of repositories, which contains list of parsed issues
     issues_list = []
     for repo in repo_issues:
-        issues = repo['issues']
-        issues_list.append(parse_issues(repo['issues']))
+        if 'issues' in repo:
+            issues_list.append(parse_issues(repo['issues']))
+        else:
+            issues_list.append([])
     return issues_list
 
 
@@ -51,10 +53,13 @@ def parse_issues(issues):
     Returns: List
     """
     parsed_issues = []
+    # No issues in repository
+    if not issues:
+        return parsed_issues
+
+    # Parse issue information
     for issue in issues:
         data = {}
-
-        # Parse issue information
         data['title'] = issue['title'].capitalize()
         data['status'] = issue['status'].capitalize()
         data['type'] = issue['metadata']['kind'].capitalize()
