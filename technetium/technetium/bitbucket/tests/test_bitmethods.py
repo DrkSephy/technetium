@@ -13,6 +13,12 @@ class BitmethodsTests(unittest.TestCase):
         self.issues_endpt = 'issues'
         self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
+         # Set up for dictionary_sum()
+        self.data = {}
+        self.data2 = {}
+        self.data3 = {'a':1, 'b':2}
+        self.data4 = {'c':2, 'b':3}
+
     # Tests For: make_req_url()
     def test_make_req_url(self):
         """
