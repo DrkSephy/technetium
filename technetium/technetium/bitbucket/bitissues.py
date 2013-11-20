@@ -26,20 +26,6 @@ import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
 
 
-def get_issues_from_subscribed(repo_urls, auth_tokens):
-    """
-    Gets a list back from sending multiple requests to
-    get issues from all subscribed repositories.
-
-    Parameters:
-    - repo_urls: List
-    - auth_tokens: OAuth1
-
-    Returns: List
-    """
-    return bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens)
-
-
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API

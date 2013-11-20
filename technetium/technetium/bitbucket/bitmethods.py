@@ -84,7 +84,7 @@ def send_async_bitbucket_requests(req_urls, auth_tokens):
         try:
             json_list.append(json.loads(response.content))
         except Exception:
-            json_list.append({'issues' : {}})
+            json_list.append({})
     return json_list
 
 

@@ -80,7 +80,7 @@ def dashboard_issues(request):
     subscribed  = bitmanager.get_all_subscriptions(request.user)
     repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
     repo_issues = bitissues.parse_all_issues(
-                  bitissues.get_issues_from_subscribed(repo_urls, auth_tokens))
+                  bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens))
     issues_list = bitissues.attach_meta(subscribed, repo_issues)
 
     # Get retrieved issues from subscribed repositories
