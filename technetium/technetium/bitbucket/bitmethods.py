@@ -108,3 +108,12 @@ def package_context(subscriptions):
     data = {'subscriptions' : subscriptions}
     data['subscription_count'] = len(subscriptions)
     return data
+
+def dictionary_sum(DictA,DictB):
+    """
+    Sums the values of two dictionaries based on corresponding keys. 
+    """
+
+    pass
+
+
