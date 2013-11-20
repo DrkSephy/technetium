@@ -5,6 +5,7 @@ Module for Bitbucket changesets aggregation.
 import requests
 import simplejson as json
 import bitmethods
+import re
 
 def get_changesets(user, repo, auth_tokens, limit, start):
     """
@@ -53,7 +54,7 @@ def parse_changesets(data):
           all relevant data.
     """
 
-    keys = ['author']
+    keys = ['raw_author']
 
     changeset = []
 
@@ -61,7 +62,11 @@ def parse_changesets(data):
         new_list = {}
         for k,v in a.iteritems():
             if k in keys:
-                new_list[k] = v
+                if re.match('(.*?)(?=\s<)', v) == None:
+                    new_list[k] = v
+                else:
+                    v2 = re.match('(.*?)(?=\s<)', v)
+                    new_list[k] = v2.group()
         changeset.append(new_list)
 
     return changeset
