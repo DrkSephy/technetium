@@ -47,11 +47,12 @@ def statistics(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
     limit = 50
     start = 523
+    last_request = start % limit
     i = 0
     while i < 11:
         if start < 50:
-            start = 23
-            limit = 23
+            start = last_request
+            limit = last_request
 
         x = bitstats.tally_changesets(bitchangesets.parse_changesets(
             bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
