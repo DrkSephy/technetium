@@ -109,3 +109,12 @@ class BitmethodsTests(unittest.TestCase):
         timestamp = '2013-10-29 18:36:11+00:00'
         match = '10-29-2013'
         self.assertEqual(bitmethods.format_timestamp(timestamp), match)
+
+    # Tests for: dictionary_sum()
+    def test_dictionary_sum_empty(self):
+        """
+        Tests that summing two empty dictionaries returns an empty dictionary.
+        """
+
+        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2), {})
+
