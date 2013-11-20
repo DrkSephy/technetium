@@ -41,15 +41,28 @@ def statistics(request):
 
     # Store the data
     data = {}
+    data['changesets_json'] = {}
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
+    limit = 50
+    start = 523
+    i = 0
+    while i < 11:
+        if start < 50:
+            start = 23
+            limit = 23
 
-    data['changesets_json'] =   bitstats.tally_changesets(bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 50)))
+        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
+            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
+        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
+        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
+
+        start -= 50
+        i += 1
+
 
     return render(request, 'statistics.html', data)
-
 
 @login_required
 def dashboard(request):
