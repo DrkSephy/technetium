@@ -41,15 +41,28 @@ def statistics(request):
 
     # Store the data
     data = {}
+    data['changesets_json'] = {}
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
+    limit = 50
+    start = 523
+    i = 0
+    while i < 11:
+        if start < 50:
+            start = 23
+            limit = 23
 
-    data['changesets_json'] =   bitstats.tally_changesets(bitchangesets.parse_changesets(
-        bitchangesets.get_changesets(user, repo, auth_tokens, 50)))
+        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
+            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
+        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
+        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
+
+        start -= 50
+        i += 1
+
 
     return render(request, 'statistics.html', data)
-
 
 @login_required
 def dashboard(request):
@@ -79,11 +92,13 @@ def dashboard_issues(request):
     limit = 10
     subscribed  = bitmanager.get_all_subscriptions(request.user)
     repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
-    repo_issues = bitissues.get_issues_from_subscribed(repo_urls, auth_tokens)
+    repo_issues = bitissues.parse_all_issues(
+                  bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens))
+    issues_list = bitissues.attach_meta(subscribed, repo_issues)
 
     # Get retrieved issues from subscribed repositories
     data = bitmethods.package_context(subscribed)
-    data['issues_list'] = bitissues.parse_all_issues(repo_issues)
+    data['issues_list'] = issues_list
     return render(request, 'dashboard_issues.html', data)
 
 
@@ -192,9 +207,6 @@ def subscribe_repository(request):
     Content should contain a dictionary with the
     fields for Subcription Model.
     """
-    print "Subscribing to %s: %s" % \
-        (request.POST['repo-id'], request.POST['repo-name'])
-
     # Success: subscribe to repository
     if bitmanager.subscribe_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")
@@ -206,9 +218,6 @@ def unsubscribe_repository(request):
     """
     [AJAX] Handles request to unsubscribe from a repository
     """
-    print "Unsubscribing from %s: %s" % \
-        (request.POST['repo-id'], request.POST['repo-name'])
-
     # Success: unsubscribe from repository
     if bitmanager.unsubscribe_repository(request.user, request.POST):
         return HttpResponse("{'status' : 'sucess'}")

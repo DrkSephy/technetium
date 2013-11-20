@@ -7,6 +7,8 @@ Proposed methods:
 import simplejson as json
 from datetime import datetime
 import requests
+import grequests
+
 
 #######################
 # BITBUCKET CONSTANTS #
@@ -65,6 +67,27 @@ def send_bitbucket_request(req_url, auth_tokens):
     return {}
 
 
+def send_async_bitbucket_requests(req_urls, auth_tokens):
+    """
+    Use this method to send asynchronous requests for bitbucket
+    API when generating reports.
+
+    Parameters:
+    - req_urls: List (of URLS)
+    - auth_tokens: OAuth1
+
+    Returns => List (JSON Dictionaries)
+    """
+    urls = (grequests.get(url, auth=auth_tokens) for url in req_urls)
+    json_list = []
+    for response in grequests.map(urls):
+        try:
+            json_list.append(json.loads(response.content))
+        except Exception:
+            json_list.append({})
+    return json_list
+
+
 def format_timestamp(timestamp):
     """
     Formats string timestamp into readable timestamp.
@@ -85,3 +108,19 @@ def package_context(subscriptions):
     data = {'subscriptions' : subscriptions}
     data['subscription_count'] = len(subscriptions)
     return data
+
+def dictionary_sum(DictA,DictB):
+    """
+    Sums the values of two dictionaries based on corresponding keys. 
+    """
+
+    # New dictionary to store merged dict
+    d = defaultdict(int, DictA)
+    # For all key-value pairs in dict B, sum up values
+    # In the new dictionary.
+    for k,v in DictB.items():
+        # Sum values corresponding to keys
+        d[k] += v
+    return dict(d)
+
+

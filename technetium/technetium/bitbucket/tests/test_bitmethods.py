@@ -13,6 +13,12 @@ class BitmethodsTests(unittest.TestCase):
         self.issues_endpt = 'issues'
         self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
+         # Set up for dictionary_sum()
+        self.data = {}
+        self.data2 = {}
+        self.data3 = {'a':1, 'b':2}
+        self.data4 = {'c':2, 'b':3}
+
     # Tests For: make_req_url()
     def test_make_req_url(self):
         """
@@ -103,3 +109,19 @@ class BitmethodsTests(unittest.TestCase):
         timestamp = '2013-10-29 18:36:11+00:00'
         match = '10-29-2013'
         self.assertEqual(bitmethods.format_timestamp(timestamp), match)
+
+    # Tests for: dictionary_sum()
+    def test_dictionary_sum_empty(self):
+        """
+        Tests that summing two empty dictionaries returns an empty dictionary.
+        """
+
+        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2), {})
+
+    def test_dictionary_sum(self):
+        """
+        Tests that summing two non-empty dictionaries returns the proper result.
+        """
+
+        self.assertEqual(bitmethods.dictionary_sum(self.data3, self.data4), {'a': 1, 'c': 2, 'b': 5})
+

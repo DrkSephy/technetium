@@ -26,47 +26,24 @@ import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
 
 
-def get_issues_from_subscribed(repo_data, auth_tokens):
-    """
-    Gets a list back from sending multiple requests to
-    get issues from all subscribed repositories.
-
-    Parameters:
-    - repo_data: List (Dictionary)
-    - auth_tokens: OAuth1
-
-    Returns: List
-    """
-    repo_issues = []
-    for repo in repo_data:
-        data = {}
-        data['repo_meta']  = repo
-        data['raw_issues'] = bitmethods.send_bitbucket_request(
-            repo['req_url'], auth_tokens)
-        repo_issues.append(data)
-    return repo_issues
-
-
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API
     response for the technetium issues dashboard.
 
     Parameters:
-    - repo_issues: List of dictionaries of JSON issues
+    - repo_issues: List (Dictionaries of JSON issues)
 
     Returns: List
     """
     # List of repositories, which contains list of parsed issues
-    repository_issues = []
+    issues_list = []
     for repo in repo_issues:
-        parsed_data = {}
-        parsed_data['repo_meta'] = repo['repo_meta']
-        parsed_data['issues'] = []
-        if repo['raw_issues']:
-            parsed_data['issues'] = parse_issues(repo['raw_issues']['issues'])
-        repository_issues.append(parsed_data)
-    return repository_issues
+        if 'issues' in repo:
+            issues_list.append(parse_issues(repo['issues']))
+        else:
+            issues_list.append([])
+    return issues_list
 
 
 def parse_issues(issues):
@@ -76,10 +53,13 @@ def parse_issues(issues):
     Returns: List
     """
     parsed_issues = []
+    # No issues in repository
+    if not issues:
+        return parsed_issues
+
+    # Parse issue information
     for issue in issues:
         data = {}
-
-        # Parse issue information
         data['title'] = issue['title'].capitalize()
         data['status'] = issue['status'].capitalize()
         data['type'] = issue['metadata']['kind'].capitalize()
@@ -95,6 +75,28 @@ def parse_issues(issues):
             data['assignee_avatar'] = issue['responsible']['avatar']
         parsed_issues.append(data)
     return parsed_issues
+
+
+def attach_meta(subscription, repo_issues):
+    """
+    Creates a list of Dictionaries that attaches meta
+    infomation to each list of issues.
+
+    Returns: List
+    """
+    repo_list = []
+    # Attach meta data for each repo's issues
+    for i in xrange(len(subscription)):
+        data = {'issues' : repo_issues[i]}
+        repo = subscription[i]
+        meta = {
+                'repo_name' : repo.repository,
+                'repo_owner' : repo.owner,
+                'repo_slug' : repo.slug_url,
+                }
+        data['repo_meta']  = meta
+        repo_list.append(data)
+    return repo_list
 
 
 def add_html_issue_rows(parsed_data):
