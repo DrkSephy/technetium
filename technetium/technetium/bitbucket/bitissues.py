@@ -18,9 +18,7 @@ The calls also take the following extra query parameters:
     - limit: Integer value which represents the number of changesets
              to return.
 """
-from django.shortcuts import render
-from django.template.loader import get_template, render_to_string
-from django.template import Context, Template
+from django.template.loader import render_to_string
 import simplejson as json
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitfilter as bitfilter
