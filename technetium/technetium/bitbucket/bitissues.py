@@ -46,6 +46,9 @@ def parse_issues(issues):
     """
     Parse issues from Dictionary
 
+    Parameters:
+    - issues: List
+
     Returns: List
     """
     parsed_issues = []
