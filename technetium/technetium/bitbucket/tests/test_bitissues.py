@@ -12,6 +12,7 @@ class BitissuesTests(unittest.TestCase):
         """
         Setup example JSON data returned from bitbucket  
         """
+
         # JSON returned from bitbucket with no assignee
         self.dummy_issues = {
             'title' : 'issue title',
@@ -21,8 +22,26 @@ class BitissuesTests(unittest.TestCase):
 
             'metadata' : {
                 'kind' : 'task',
+            }}     
+
+
+        # JSON returned from bitbucket with responsible
+        self.dummy_issues_assignee = {
+            
+            'title' : 'issue title',
+            'status' : 'new',
+            'priority' : 'major',
+            'utc_created_on' : '2013-11-17 10:00:01-0400',
+
+            'metadata' : {
+                'kind' : 'task',
             },
-        }     
+
+            'responsible' : {
+                'display_name' : 'accountname',
+                'avatar' : 'http://mygravatar.com',
+            }}
+
 
     def test_parse_issues_empty(self):
         """
