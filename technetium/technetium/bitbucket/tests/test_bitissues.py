@@ -14,7 +14,7 @@ class BitissuesTests(unittest.TestCase):
         """
 
         # JSON returned from bitbucket with no assignee
-        self.dummy_issues = {
+        self.dummy_issues = [{
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
@@ -22,12 +22,11 @@ class BitissuesTests(unittest.TestCase):
 
             'metadata' : {
                 'kind' : 'task',
-            }}     
+            }}]
 
 
         # JSON returned from bitbucket with responsible
-        self.dummy_issues_assignee = {
-            
+        self.dummy_issues_assignee = [{
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
@@ -40,7 +39,7 @@ class BitissuesTests(unittest.TestCase):
             'responsible' : {
                 'display_name' : 'accountname',
                 'avatar' : 'http://mygravatar.com',
-            }}
+            }}]
 
 
     def test_parse_issues_empty(self):
@@ -49,17 +48,29 @@ class BitissuesTests(unittest.TestCase):
         """
         self.assertEqual(bitissues.parse_issues({}), [])
 
+
     def test_parse_issues_no_assignee(self):
         """
-        Tests that parses issues with no assignee
+        Tests that parses issues with no assignee returns blank
         """
-        pass
+        self.assertEqual(bitissues.parse_issues(
+            self.dummy_issues)[0]['assignee'], '')
+
+
+    def test_parse_issues_with_assignee(self):
+        """
+        Tests that parses issues with assignee returns correctly
+        """
+        self.assertEqual(bitissues.parse_issues(
+            self.dummy_issues_assignee)[0]['assignee'], 'accountname')
+
 
     def test_parse_all_issues_empty(self):
         """
         Tests that parse all issues returns blank properly
         """
         self.assertEqual(bitissues.parse_all_issues([]), [])
+
 
     def test_attach_meta_empty(self):
         """
