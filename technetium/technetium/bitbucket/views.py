@@ -39,6 +39,7 @@ def statistics(request):
     user = 'DrkSephy'
     repo = 'smw-koopa-krisis'
 
+
     # Store the data
     data = {}
     data['changesets_json'] = {}
@@ -46,7 +47,7 @@ def statistics(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
     limit = 50
-    start = 524
+    start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
     last_request = start % limit
     i = 0
     while i < 11:

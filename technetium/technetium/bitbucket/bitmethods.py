@@ -50,15 +50,20 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         url += "?start=%d" % start
     return url
 
-def count(start=None, limit=None):
+def count(user, repo, endpoint, start=None, limit=None):
     """
     Returns the count of the repository.
     """
     
-    url = API_BASE_URL
+    url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
 
-    if start and limit:
-        url += "?start=%d&limit=%d" % (start, limit)
+    # Set limit is given and is above 50, set limit to 50
+    if limit and limit > 50:
+        limit = 50
+
+    # Handle extra queries
+    if limit and start:
+        url += "?limit=%d&start=%d" % (limit, start)
     elif limit:
         url += "?limit=%d" % limit
     elif start:
