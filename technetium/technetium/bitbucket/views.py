@@ -46,7 +46,7 @@ def statistics(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
     limit = 50
-    start = 523
+    start = 524
     last_request = start % limit
     i = 0
     while i < 11:

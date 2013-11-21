@@ -50,6 +50,24 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         url += "?start=%d" % start
     return url
 
+def count(start=None, limit=None):
+    """
+    Returns the count of the repository.
+    """
+    
+    url = API_BASE_URL
+
+    if start and limit:
+        url += "?start=%d&limit=%d" % (start, limit)
+    elif limit:
+        url += "?limit=%d" % limit
+    elif start:
+        url += "?start=%d" % start
+
+    req = requests.get(url)
+    changesets = json.loads(req.content)
+    return changesets['count']
+
 
 def send_bitbucket_request(req_url, auth_tokens):
     """
