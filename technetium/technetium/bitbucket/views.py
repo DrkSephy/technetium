@@ -6,7 +6,6 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from social.backends.bitbucket import BitbucketOAuth
 import random
 import datetime
 import time
@@ -14,7 +13,6 @@ import time
 # Project Modules
 import bitauth
 import bitissues
-import bitfilter
 import bitmanager
 import bitchangesets
 import bitmethods
@@ -22,6 +20,9 @@ import bitstats
 
 # Home page view
 def home(request):
+    """
+    Renders the home login page for technetium
+    """
     if request.user.is_authenticated():
         return redirect('/dashboard')
 
@@ -49,7 +50,7 @@ def statistics(request):
     limit = 50
 
     # Get the count of the commits in the repository
-    # The count is not zero based, have to subtract 1 or else 
+    # The count is not zero based, have to subtract 1 or else
     # a JSON decode error is thrown.
     start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
 
@@ -153,7 +154,7 @@ def line_chart(request):
             'jquery_on_ready': False,
         }
     }
-    return render(request,'line_chart.html', data)
+    return render(request, 'line_chart.html', data)
 
 
 
@@ -268,6 +269,9 @@ def fetch_more_issues(request):
 ##################
 @login_required
 def logout(request):
+    """
+    Sends a request to log out user
+    """
     auth.logout(request)
     return redirect('/')
 
