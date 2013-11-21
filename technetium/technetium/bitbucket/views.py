@@ -47,10 +47,18 @@ def statistics(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
     limit = 50
+
+    # Get the count of the commits in the repository
+    # The count is not zero based, have to subtract 1 or else 
+    # a JSON decode error is thrown.
     start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
+
+    # Number of iterations needed to get all of the data
+    iterations = start / 50
+
     last_request = start % limit
     i = 0
-    while i < 11:
+    while i <= iterations:
         if start < 50:
             start = last_request
             limit = last_request
