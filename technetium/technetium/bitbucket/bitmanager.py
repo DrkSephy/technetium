@@ -8,9 +8,8 @@ Handles the following:
     - Allows flush method to unsubscribe all repositories.
 """
 from django.db import IntegrityError, DatabaseError
-from models import Subscription
-import bitmethods
-import requests
+from technetium.bitbucket.models import Subscription
+import technetium.bitbucket.bitmethods as bitmethods
 
 
 def get_list_of_repositories(auth_tokens):
@@ -71,7 +70,7 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
     repo_urls = []
     for repo in subs:
         repo_urls.append(bitmethods.make_req_url(
-            repo.owner, repo.slug_url, 'issues', limit))
+            repo.owner, repo.slug_url, endpoint, limit))
     return repo_urls
 
 
@@ -179,7 +178,7 @@ def unsubscribe_all_repositories(user):
     Returns: Boolean
     """
     try:
-        subscriptions = Subscription.objects.filter(user=user).update(subscribed=False)
+        Subscription.objects.filter(user=user).update(subscribed=False)
         return True
     except (DatabaseError, IntegrityError):
         return False

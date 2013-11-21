@@ -19,9 +19,7 @@ The calls also take the following extra query parameters:
              to return.
 """
 from django.template.loader import render_to_string
-import simplejson as json
-import technetium.bitbucket.bitmethods as bitmethods
-import technetium.bitbucket.bitfilter as bitfilter
+import bitmethods
 
 
 def parse_all_issues(repo_issues):

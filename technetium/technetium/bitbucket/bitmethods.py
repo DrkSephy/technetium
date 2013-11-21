@@ -54,7 +54,7 @@ def count(user, repo, endpoint, start=None, limit=None):
     """
     Returns the count of the repository.
     """
-    
+
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
 
     # Set limit is given and is above 50, set limit to 50
@@ -133,18 +133,18 @@ def package_context(subscriptions):
     data['subscription_count'] = len(subscriptions)
     return data
 
-def dictionary_sum(DictA,DictB):
-    """
-    Sums the values of two dictionaries based on corresponding keys. 
-    """
 
+def dictionary_sum(dict_a, dict_b):
+    """
+    Sums the values of two dictionaries based on corresponding keys.
+    """
     # New dictionary to store merged dict
-    d = defaultdict(int, DictA)
+    dicts = defaultdict(int, dict_a)
     # For all key-value pairs in dict B, sum up values
     # In the new dictionary.
-    for k,v in DictB.items():
+    for key, value in dict_b.items():
         # Sum values corresponding to keys
-        d[k] += v
-    return dict(d)
+        dicts[key] += value
+    return dict(dicts)
 
 
