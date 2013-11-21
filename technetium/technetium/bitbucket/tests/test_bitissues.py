@@ -9,19 +9,32 @@ import unittest
 class BitissuesTests(unittest.TestCase):
 
     def setUp(self):
-        # Public user repository
-        self.pub_user = 'DrkSephy'
-        self.pub_repo = 'smw-koopa-krisis'
+        """
+        Setup example JSON data returned from bitbucket  
+        """
+        # JSON returned from bitbucket with no assignee
+        self.dummy_issues = {
+            'title' : 'issue title',
+            'status' : 'new',
+            'priority' : 'major',
+            'utc_created_on' : '2013-11-17 10:00:01-0400',
 
-        # Private user repository
-        self.priv_user = 'technetiumccny'
-        self.priv_repo = 'technetium'
+            'metadata' : {
+                'kind' : 'task',
+            },
+        }     
 
     def test_parse_issues_empty(self):
         """
         Tests that parse issues on empty dict returns empty list
         """
         self.assertEqual(bitissues.parse_issues({}), [])
+
+    def test_parse_issues_no_assignee(self):
+        """
+        Tests that parses issues with no assignee
+        """
+        pass
 
     def test_parse_all_issues_empty(self):
         """
