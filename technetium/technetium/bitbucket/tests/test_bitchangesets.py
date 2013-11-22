@@ -25,7 +25,7 @@ class BitchangesetsTests(unittest.TestCase):
         """
         Tests that get changesets return a non-empty list.
         """
-        self.assertEqual(bitchangesets.parse_changesets(self.data), [{'author': 'DrkSephy'}])
+        self.assertEqual(bitchangesets.parse_changesets(self.data), [{'raw_author': 'David Leonard'}])
         pass
 
     def test_parse_changesets_empty(self):
