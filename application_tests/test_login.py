@@ -8,7 +8,6 @@ class LoginTest(unittest.TestCase):
 	def setUp(self):
 		self.driver = webdriver.Firefox()
 		self.driver.implicitly_wait(3)
-		#self.base_url = "http://locahost:8000"
 		self.base_url = "http://technetium.herokuapp.com"
 
 	def test_login(self):
@@ -23,7 +22,7 @@ class LoginTest(unittest.TestCase):
 		if link_element is not None:
 			link_element.click()
 		
-			title = ''
+			title = ""
 			try:
 				# wait for the page to refresh
 				WebDriverWait(driver, 10).until(lambda driver : driver.find_element_by_name("submit"))
@@ -32,7 +31,7 @@ class LoginTest(unittest.TestCase):
 				username_element = driver.find_element_by_name("username")
 				password_element = driver.find_element_by_name("password")
 
-				username = ""
+				username = "technetiumccny"
 				password = ""
 				username_element.send_keys(username)
 				password_element.send_keys(password)
