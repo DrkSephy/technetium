@@ -10,50 +10,24 @@ See: [Technetium](http://technetium.herokuapp.com/)
 It features an all-in-one issue tracker across multiple repositories, along with
 both visualization and statistical reports of data pertaining to a repository.
 
-Goals/Tasks [ 11/14/13 --> 11/21/13 ]
+Goals/Tasks [ 11/21/13 --> 11/14/13 ]
 -------------------------------------
-1. Finish Issue Tracker functionality. [ Jorge ]
-    
-      - [A] Add functionality to get all issues in all repositories.
-      - [B] Finish AJAX calls for the "Show more" option.
-          - Ideally, we might want to show 10-20 more issues at a time.
+1. Continue working on Reports module. [ Jorge ]
+    - [A] Write methods for handling all issues. With these issues, we need to:
+        - Get all the issues that were opened by a user.
+        - Get all the issues that were completed by a user.
+        - Get the number of comments that users have made in a repository.
 
-2. Continue working on Reports module (changesets). [ David ]
+2. Finish the graphs for Technetium. [ David ]
+    - [A] Write the last methods for getting more data for graphs.
+    - [B] Update existing graphs with real data using existing methods.
 
-      - [A] Complete methods for getting commit data.
-      - [B] Add functionality to get all changesets in a repository.
-      - [C] Write the view, template and URL dispatch for Reports.
+3. Start the Sphinx Documentation. [ David ]
 
-3. Work on Reports module (issues). [ Jorge ]
+4. Write Application Tests. [ Albert ]
 
-      - [A] Use a method described in TASK [1][A] to get all issues.
-            From these issues, extract the number of comments for 
-            each user.
-      - [B] From the data above, use it to create a tally of all comments.
-      - [C] Add functionality to also create a tally of all issues that
-            were completed by its assignee.
-      - [D] Add functionality to get number of issues opened by each user.
-            (Even though the Scrum master is the one who should open 
-            issues, this feature is useful in general for other users).
-
-4. Write unit tests. [ Albert ]
-
-      - [A] Continue to write unit tests for anything that isn't 100% 
-            covered yet. Start with the filter first.
-      - [B] Take a look at application testing using Selenium. Try and see
-            if you can write a system test.
-
-5. Using data in TASK [2], display real graphs. [ David ]
-      
-      - [A] Using methods in TASK[2][B], display a graph using this returned
-            data. 
-      - [B] Create a Pie Graph with actual data. Requires the following:
-          - A Python list of all of the users in the repository.
-          - A Python list of all the commits in the repository.
-      - [C] Create a line graph with actual data. Requires the following:
-          - A Python list of all of the users in the repository.
-          - A Python list of all the commits in the repository. 
-          - A Python list of all the dates for commits.
+5. Write unit test code. [ Albert, David, Jorge ]
+    - [A] Everyone can pitch in and contribute to test code.
 
 ###Installation and Running Django
 1. Setup and workon your python virtualenv
