@@ -301,6 +301,71 @@ data[&#8216;assignee_avatar&#8217;] = issue[&#8216;responsible&#8217;][&#8216;av
 <dd><p>Filters issues based on users.</p>
 </dd></dl>
 
+<span class="target" id="module-bitissues"></span><p>Module for Bitbucket issues aggregation.</p>
+<p>Bitbucket API requests start at the following layout:</p>
+<p><a class="reference external" href="https://bitbucket.org/api/1.0/repositories">https://bitbucket.org/api/1.0/repositories</a>/{accountname}/{repo_slug}/{endpoint}</p>
+<blockquote>
+<div><ul class="simple">
+<li>{accountname} : The Bitbucket User name</li>
+<li>{repo_slug} : The repository name</li>
+<li>{endpoint} : The resource to request</li>
+</ul>
+</div></blockquote>
+<p>The calls also take the following extra query parameters:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>start: The hash value which the query starts from. The</dt>
+<dd><p class="first last">default start point is the most recent entry to
+the earliest.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>limit: Integer value which represents the number of changesets</dt>
+<dd><p class="first last">to return.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="function">
+<dt id="bitissues.add_html_issue_rows">
+<tt class="descclassname">bitissues.</tt><tt class="descname">add_html_issue_rows</tt><big>(</big><em>parsed_data</em><big>)</big><a class="headerlink" href="#bitissues.add_html_issue_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes parsed issues and returns HTML to attach to rows.
+There has to be a better way of doing this.</p>
+<p>Parameters:
+- parsed_data: Dictionary</p>
+<p>Returns: String</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.attach_meta">
+<tt class="descclassname">bitissues.</tt><tt class="descname">attach_meta</tt><big>(</big><em>subscription</em>, <em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.attach_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list of Dictionaries that attaches meta
+infomation to each list of issues.</p>
+<p>Returns: List</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.parse_all_issues">
+<tt class="descclassname">bitissues.</tt><tt class="descname">parse_all_issues</tt><big>(</big><em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_all_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses returned JSON data from the bitbucket API
+response for the technetium issues dashboard.</p>
+<p>Parameters:
+- repo_issues: List (Dictionaries of JSON issues)</p>
+<p>Returns: List</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.parse_issues">
+<tt class="descclassname">bitissues.</tt><tt class="descname">parse_issues</tt><big>(</big><em>issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse issues from Dictionary</p>
+<p>Parameters:
+- issues: List</p>
+<p>Returns: List</p>
+</dd></dl>
+
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>

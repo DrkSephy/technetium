@@ -19,7 +19,11 @@ Contents:
     :members:
 .. automodule:: bitfilter
     :members:
-.. automodule:: bitauth
+.. automodule:: bitissues
+    :members:
+.. automodule:: bitmanager
+    :members:
+.. automodule:: decorators
     :members:
 
 
