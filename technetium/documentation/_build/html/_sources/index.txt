@@ -21,6 +21,8 @@ Contents:
     :members:
 .. automodule:: bitissues
     :members:
+.. automodule:: bitauth
+    :members:
     
 
 

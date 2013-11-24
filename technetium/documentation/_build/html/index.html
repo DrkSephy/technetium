@@ -366,6 +366,40 @@ response for the technetium issues dashboard.</p>
 <p>Returns: List</p>
 </dd></dl>
 
+<span class="target" id="module-bitauth"></span><p>Module for Bitbucket authentication and authorization.</p>
+<p>Read up on OAuth1 Workflow:
+<a class="reference external" href="http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html">http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html</a></p>
+<dl class="function">
+<dt id="bitauth.get_auth_tokens">
+<tt class="descclassname">bitauth.</tt><tt class="descname">get_auth_tokens</tt><big>(</big><em>extra_data</em><big>)</big><a class="headerlink" href="#bitauth.get_auth_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the authorization tokens required to access
+protected resources from Bitbucket&#8217;s API. Use this
+function as the &#8216;auth&#8217; parameter for requests.</p>
+<p>Note: The client and client_secret come from the settings.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>extra_data: Dictionary (from get_social_auth_data())</li>
+</ul>
+</dd>
+</dl>
+<p>Returns: OAuth1 (object)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitauth.get_social_auth_data">
+<tt class="descclassname">bitauth.</tt><tt class="descname">get_social_auth_data</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#bitauth.get_social_auth_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a dictionary of the following data from social auth:
+1. &#8216;access_token&#8217; : {&#8216;oauth_token&#8217; : String, &#8216;oauth_token_secret&#8217; : String}
+2. &#8216;email&#8217; : String
+3. &#8216;first_name&#8217; : String
+4. &#8216;last_name&#8217; : String
+5. &#8216;username&#8217; : String</p>
+<p>Parameters:
+- user_id: User (Django object)</p>
+<p>Returns =&gt; Dictionary</p>
+</dd></dl>
+
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>

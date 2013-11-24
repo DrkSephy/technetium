@@ -36,7 +36,7 @@ import datetime
 # with this function is 95% as of now
 def filter_issues(name_val_dict, parsed_json):
     """
-    Main filter dispatcher for issues
+    Main filter dispatcher for issues.
     """
 
     filtered_json = parsed_json

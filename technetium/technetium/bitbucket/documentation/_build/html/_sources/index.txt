@@ -21,9 +21,7 @@ Contents:
     :members:
 .. automodule:: bitissues
     :members:
-.. automodule:: bitmanager
-    :members:
-
+    
 
 
 
