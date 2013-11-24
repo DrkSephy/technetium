@@ -400,6 +400,100 @@ function as the &#8216;auth&#8217; parameter for requests.</p>
 <p>Returns =&gt; Dictionary</p>
 </dd></dl>
 
+<span class="target" id="module-decorators"></span><p>Decorators for bitbucket views</p>
+<span class="target" id="module-bitmanager"></span><p>Module for managing various Bitbucket endpoints.</p>
+<p>Handles the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Allows method to subscribe to repositories.</li>
+<li>Allows method to unsubscribe from repositories.</li>
+<li>Allows flush method to unsubscribe all repositories.</li>
+</ul>
+</div></blockquote>
+<dl class="function">
+<dt id="bitmanager.get_all_subscriptions">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_all_subscriptions</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.get_all_subscriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all Subscription objects that
+a user is currently subscribed to.</p>
+<p>Parameters:
+- user: User (Django Request)</p>
+<p>Returns: List</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_list_of_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_list_of_repositories</tt><big>(</big><em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmanager.get_list_of_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all repositories that the
+user has at least read access permissions.</p>
+<p>Parameters:
+- auth_tokens: OAuth1</p>
+<p>Returns: List</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_repo_id_from_subscriptions">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_repo_id_from_subscriptions</tt><big>(</big><em>subscriptions</em><big>)</big><a class="headerlink" href="#bitmanager.get_repo_id_from_subscriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of repo_ids of repositories that
+a user is subscribed to.</p>
+<p>Parameters:
+- subscriptions: Subscription (Object)</p>
+<p>Returns: List (of Integers)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_subscribed_repo_urls">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_subscribed_repo_urls</tt><big>(</big><em>subs</em>, <em>endpoint</em>, <em>limit</em><big>)</big><a class="headerlink" href="#bitmanager.get_subscribed_repo_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list of all subscribed repo API request URLs
+for issues endpoint.</p>
+<p>Parameters:
+- subs: List (Subscription Objects)
+- endpoint: String (API request endpoint: &#8216;issues&#8217;)
+- limit: Integer (20)</p>
+<p>Returns: List (String URLs)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.parse_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">parse_repositories</tt><big>(</big><em>repositories</em>, <em>repo_ids</em><big>)</big><a class="headerlink" href="#bitmanager.parse_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse list of repositories.</p>
+<p>Parameters:
+- repositories: List
+- repo_ids: List (repo ids that uer is subscribed to)</p>
+<p>Returns: List</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.subscribe_repository">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">subscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.subscribe_repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts new repository to a user&#8217;s Subscription in database.</p>
+<p>Parameters:
+- user: User (Django Model)
+- data: request.POST (Django Query dict)</p>
+<p>Returns: Boolean
+- True/False based on if operation was successful.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.unsubscribe_all_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_all_repositories</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_all_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsubscribe from all user&#8217;s repositories</p>
+<p>Paramters:
+- user: User (Django Request)</p>
+<p>Returns: Boolean</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.unsubscribe_repository">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a user&#8217;s Subscription in database and set
+subscribed to False.</p>
+<p>Parameters:
+- user: User (Django Model)
+- data: request.POST (Django Query dict)</p>
+<p>Returns: Boolean
+- True/False based on if operation was successful.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>

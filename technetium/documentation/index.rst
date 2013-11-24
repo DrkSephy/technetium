@@ -23,6 +23,11 @@ Contents:
     :members:
 .. automodule:: bitauth
     :members:
+.. automodule:: decorators
+    :members:
+.. automodule:: bitmanager
+    :members:
+
     
 
 
