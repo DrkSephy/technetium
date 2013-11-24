@@ -109,9 +109,9 @@ information.</li>
 <dt id="bitmethods.count">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">count</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>start=None</em>, <em>limit=None</em><big>)</big><a class="headerlink" href="#bitmethods.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the count of the repository.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>user: String</dt>
 <dd><ul class="first last simple">
 <li>The Bitbucket username.</li>
@@ -138,8 +138,7 @@ information.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<dl class="docutils">
+</dd>
 <dt>Returns:   </dt>
 <dd><dl class="first last docutils">
 <dt>count: Integer</dt>
@@ -156,9 +155,9 @@ information.</li>
 <dt id="bitmethods.dictionary_sum">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">dictionary_sum</tt><big>(</big><em>dict_a</em>, <em>dict_b</em><big>)</big><a class="headerlink" href="#bitmethods.dictionary_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sums the values of two dictionaries based on corresponding keys.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>dict_a: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>The dictionary to add values to.</li>
@@ -171,52 +170,52 @@ added with the first dictionary.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>dictionary: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>The new dictionary containing the sum of its inputs.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmethods.format_timestamp">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">format_timestamp</tt><big>(</big><em>timestamp</em><big>)</big><a class="headerlink" href="#bitmethods.format_timestamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formats string timestamp into readable timestamp.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>timestamp: String</dt>
 <dd><ul class="first last simple">
 <li>The timestamp to format.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>timestamp: String</dt>
 <dd><ul class="first last simple">
 <li>The formatted timestamp.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmethods.make_req_url">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">make_req_url</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>limit=None</em>, <em>start=None</em><big>)</big><a class="headerlink" href="#bitmethods.make_req_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a URL for bitbucket API request.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>user: String</dt>
 <dd><ul class="first last simple">
 <li>The Bitbucket username.</li>
@@ -243,8 +242,7 @@ added with the first dictionary.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<dl class="docutils">
+</dd>
 <dt>Returns:   </dt>
 <dd><dl class="first last docutils">
 <dt>url: String</dt>
@@ -279,9 +277,9 @@ added with the first dictionary.</li>
 <tt class="descclassname">bitmethods.</tt><tt class="descname">send_async_bitbucket_requests</tt><big>(</big><em>req_urls</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmethods.send_async_bitbucket_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this method to send asynchronous requests for bitbucket
 API when generating reports.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>req_urls: List (of URLS)</dt>
 <dd><ul class="first last simple">
 <li>The list of URLs to send requests to.</li>
@@ -293,26 +291,26 @@ API when generating reports.</p>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>content: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A list of JSON dictionaries from the requested URLs.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmethods.send_bitbucket_request">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">send_bitbucket_request</tt><big>(</big><em>req_url</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmethods.send_bitbucket_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtains a JSON dictionary from bitbucket API endpoint.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>req_url: String (URL)</dt>
 <dd><ul class="first last simple">
 <li>The URL to send the request to.</li>
@@ -324,17 +322,17 @@ API when generating reports.</p>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>content: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A JSON dictionary from the requested URL.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <span class="target" id="module-bitstats"></span><dl class="function">
@@ -342,19 +340,18 @@ API when generating reports.</p>
 <tt class="descclassname">bitstats.</tt><tt class="descname">list_commits</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_commits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of commits in order of developers.
 Useful for D3 graphs.</p>
-<p>Paramters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Paramters:</dt>
+<dd><dl class="first last docutils">
 <dt>data: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing commits [keys] to be turned into a list.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>commits: List</dt>
 <dd><ul class="first last simple">
 <li>A list containing the number of commits for each user  
@@ -362,7 +359,8 @@ of a given repository.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -370,43 +368,42 @@ of a given repository.</li>
 <tt class="descclassname">bitstats.</tt><tt class="descname">list_users</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all developers in a repository. 
 Useful for generating D3 graphs.</p>
-<p>Paramters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Paramters:</dt>
+<dd><dl class="first last docutils">
 <dt>data: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing users [keys] to be turned into a list.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>devs: List</dt>
 <dd><ul class="first last simple">
 <li>A list containing the developers of a given repository.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitstats.tally_assigned_issues">
 <tt class="descclassname">bitstats.</tt><tt class="descname">tally_assigned_issues</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_assigned_issues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the number of issues that each user has been assigned.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>data: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing all assigned issues to be tallied.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<dl class="docutils">
+</dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
 <dt>tally: Dictionary</dt>
@@ -426,19 +423,18 @@ dictionary of the number of issues the above user resolved.</p>
 <dt id="bitstats.tally_changesets">
 <tt class="descclassname">bitstats.</tt><tt class="descname">tally_changesets</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_changesets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Counts the number of commits for each developer in a repository.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
 <dt>data: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing the commits to be tallied.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>tally: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing the sums of all commits in the 
@@ -446,7 +442,8 @@ repository.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -461,9 +458,9 @@ repository.</li>
 <dd><p>Gets the number of issues each user has opened.</p>
 <p>Notes: Even though issues are usually opened by the scrum master,
 we still need this to grade them.</p>
-<p>Returns:</p>
-<blockquote>
-<div><dl class="docutils">
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
 <dt>opened_issues: Dictionary</dt>
 <dd><ul class="first last simple">
 <li>A dictionary containing number of issues that each
@@ -471,7 +468,8 @@ user in a given repository has opened.</li>
 </ul>
 </dd>
 </dl>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <span class="target" id="module-bitfilter"></span><dl class="function">

@@ -6,12 +6,10 @@ def tally_changesets(data):
     Counts the number of commits for each developer in a repository.
 
     Parameters:
-
         data: Dictionary
             - A dictionary containing the commits to be tallied.
 
     Returns:
-    
         tally: Dictionary
             - A dictionary containing the sums of all commits in the 
               repository.
@@ -42,7 +40,6 @@ def tally_assigned_issues(data):
     Gets the number of issues that each user has been assigned.
 
     Parameters:
-    
         data: Dictionary
             - A dictionary containing all assigned issues to be tallied. 
 
@@ -73,7 +70,6 @@ def tally_opened_issues(data):
     we still need this to grade them.
 
     Returns:
-    
         opened_issues: Dictionary
             - A dictionary containing number of issues that each
               user in a given repository has opened.
@@ -88,12 +84,10 @@ def list_users(data):
     Useful for generating D3 graphs.
 
     Paramters:
-
         data: Dictionary
             - A dictionary containing users [keys] to be turned into a list.
 
     Returns:
-
         devs: List
             - A list containing the developers of a given repository.
     """
@@ -109,12 +103,10 @@ def list_commits(data):
     Useful for D3 graphs.
 
     Paramters:
-
         data: Dictionary
             - A dictionary containing commits [keys] to be turned into a list.
 
     Returns:
-
         commits: List
             - A list containing the number of commits for each user  
               of a given repository.

@@ -17,19 +17,14 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
     Constructs a URL for bitbucket API request.
 
     Parameters:
-    
         user: String
             - The Bitbucket username.
-        
         repo: String
             - The Bitbucket repository name.
-
         endpoint: String
             - The Bitbucket API endpoint.
-
         limit: Integer (Max 50)
             - The number of data entries to return.
-
         start: Integer
             - The starting node number for the resource.
 
@@ -58,19 +53,14 @@ def count(user, repo, endpoint, start=None, limit=None):
     Returns the count of the repository.
 
     Parameters:
-    
         user: String
             - The Bitbucket username.
-        
         repo: String
             - The Bitbucket repository name.
-
         endpoint: String
             - The Bitbucket API endpoint.
-
         limit: Integer (Max 50)
             - The number of data entries to return.
-
         start: Integer
             - The starting node number for the resource.
 
@@ -103,15 +93,12 @@ def send_bitbucket_request(req_url, auth_tokens):
     Obtains a JSON dictionary from bitbucket API endpoint.
 
     Parameters:
-
         req_url: String (URL)
             - The URL to send the request to.
-
         auth_tokens: OAuth1 (Object)
             - The authentication tokens required for the OAuth1 Protocol.
 
     Returns:
-
         content: Dictionary
             - A JSON dictionary from the requested URL.
     """
@@ -128,15 +115,12 @@ def send_async_bitbucket_requests(req_urls, auth_tokens):
     API when generating reports.
 
     Parameters:
-
         req_urls: List (of URLS)
             - The list of URLs to send requests to.
-
         auth_tokens: OAuth1
             - The authentication tokens required for the OAuth1 protocol.
 
     Returns:
-
         content: Dictionary
             - A list of JSON dictionaries from the requested URLs.
     """
@@ -155,12 +139,10 @@ def format_timestamp(timestamp):
     Formats string timestamp into readable timestamp.
 
     Parameters:
-
         timestamp: String
             - The timestamp to format.
 
     Returns:
-
         timestamp: String
             - The formatted timestamp.
     """
@@ -189,7 +171,6 @@ def dictionary_sum(dict_a, dict_b):
     Sums the values of two dictionaries based on corresponding keys.
 
     Parameters:
-
         dict_a: Dictionary
             - The dictionary to add values to.
 
@@ -198,7 +179,6 @@ def dictionary_sum(dict_a, dict_b):
               added with the first dictionary.
 
     Returns:
-
         dictionary: Dictionary
             - The new dictionary containing the sum of its inputs.
     """
