@@ -163,11 +163,46 @@ def pie_chart(request):
     """
     Render pie chart on dashboard/graphs
     """
+    """
+    user = 'DrkSephy'
+    repo = 'smw-koopa-krisis'
+
+    data = {}
+    data['changesets_json'] = {}
+
+       # OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+    limit = 50
+
+    # Get the count of the commits in the repository
+    # The count is not zero based, have to subtract 1 or else
+    # a JSON decode error is thrown.
+    start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
+
+    # Number of iterations needed to get all of the data
+    iterations = start / 50
+
+    last_request = start % limit
+    i = 0
+    while i <= iterations:
+        if start < 50:
+            start = last_request
+            limit = last_request
+
+        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
+            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
+        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
+        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
+
+        start -= 50
+        i += 1
+    """
 
     # Pie charts take strings on the x-axis,
     # and the distribution are integers on the y-axis.
-    xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
-    ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+    xdata = ["Apple", "Mango"]
+    ydata = [10, 20]
 
     extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
