@@ -1,0 +1,21 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="hero-unit text-center">
+    <h2>Welcome to Technetium</h2>
+    <p>Please sign in to continue</p>
+    <a class="btn btn-primary btn-large" href="{% url 'social:begin' "bitbucket" %}">
+    <span class="glyphicon glyphicon-user"></span> Sign in with Bitbucket</a>
+    </div>
+
+    </div>
+
+{% endblock %}
+
+{% block head_scripts %}
+
+{% endblock %}
