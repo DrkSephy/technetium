@@ -42,6 +42,26 @@ class BitissuesTests(unittest.TestCase):
             }}]
 
 
+    #################################
+    # parse_all_issues(repo_issues) #
+    #################################
+    def test_parse_all_issues_empty(self):
+        """
+        Tests that parse all issues returns blank properly
+        """
+        self.assertEqual(bitissues.parse_all_issues([]), [])
+
+    def test_parse_all_issues(self):
+        """
+        Tests that parse all issues returns len of correct size
+        """
+        self.assertEqual(len(bitissues.parse_all_issues(
+            self.dummy_issues)), 1)
+
+
+    ########################
+    # parse_issues(issues) #
+    ########################
     def test_parse_issues_empty(self):
         """
         Tests that parse issues on empty dict returns empty list
@@ -63,13 +83,6 @@ class BitissuesTests(unittest.TestCase):
         """
         self.assertEqual(bitissues.parse_issues(
             self.dummy_issues_assignee)[0]['assignee'], 'accountname')
-
-
-    def test_parse_all_issues_empty(self):
-        """
-        Tests that parse all issues returns blank properly
-        """
-        self.assertEqual(bitissues.parse_all_issues([]), [])
 
 
     ##########################################
