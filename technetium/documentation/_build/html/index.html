@@ -516,42 +516,17 @@ user in a given repository has opened.</li>
 <dd><p>Filters issues based on users.</p>
 </dd></dl>
 
-<span class="target" id="module-bitissues"></span><p>Module for Bitbucket issues aggregation.</p>
-<p>Bitbucket API requests start at the following layout:</p>
-<p><a class="reference external" href="https://bitbucket.org/api/1.0/repositories">https://bitbucket.org/api/1.0/repositories</a>/{accountname}/{repo_slug}/{endpoint}</p>
-<blockquote>
-<div><ul class="simple">
-<li>{accountname} : The Bitbucket User name</li>
-<li>{repo_slug} : The repository name</li>
-<li>{endpoint} : The resource to request</li>
-</ul>
-</div></blockquote>
-<p>The calls also take the following extra query parameters:</p>
-<blockquote>
-<div><ul>
-<li><dl class="first docutils">
-<dt>start: The hash value which the query starts from. The</dt>
-<dd><p class="first last">default start point is the most recent entry to
-the earliest.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>limit: Integer value which represents the number of changesets</dt>
-<dd><p class="first last">to return.</p>
-</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
-<dl class="function">
+<span class="target" id="module-bitissues"></span><dl class="function">
 <dt id="bitissues.add_html_issue_rows">
 <tt class="descclassname">bitissues.</tt><tt class="descname">add_html_issue_rows</tt><big>(</big><em>parsed_data</em><big>)</big><a class="headerlink" href="#bitissues.add_html_issue_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes parsed issues and returns HTML to attach to rows.
 There has to be a better way of doing this.</p>
-<p>Parameters:
-- parsed_data: Dictionary</p>
-<p>Returns: String</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>parsed_data: Dictionary</dd>
+<dt>Returns: </dt>
+<dd>String</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -559,7 +534,10 @@ There has to be a better way of doing this.</p>
 <tt class="descclassname">bitissues.</tt><tt class="descname">attach_meta</tt><big>(</big><em>subscription</em>, <em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.attach_meta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a list of Dictionaries that attaches meta
 infomation to each list of issues.</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -567,24 +545,27 @@ infomation to each list of issues.</p>
 <tt class="descclassname">bitissues.</tt><tt class="descname">parse_all_issues</tt><big>(</big><em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_all_issues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses returned JSON data from the bitbucket API
 response for the technetium issues dashboard.</p>
-<p>Parameters:
-- repo_issues: List (Dictionaries of JSON issues)</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>repo_issues: List (Dictionaries of JSON issues)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitissues.parse_issues">
 <tt class="descclassname">bitissues.</tt><tt class="descname">parse_issues</tt><big>(</big><em>issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_issues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse issues from Dictionary</p>
-<p>Parameters:
-- issues: List</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>issues: List</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
-<span class="target" id="module-bitauth"></span><p>Module for Bitbucket authentication and authorization.</p>
-<p>Read up on OAuth1 Workflow:
-<a class="reference external" href="http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html">http://requests-oauthlib.readthedocs.org/en/latest/oauth1_workflow.html</a></p>
-<dl class="function">
+<span class="target" id="module-bitauth"></span><dl class="function">
 <dt id="bitauth.get_auth_tokens">
 <tt class="descclassname">bitauth.</tt><tt class="descname">get_auth_tokens</tt><big>(</big><em>extra_data</em><big>)</big><a class="headerlink" href="#bitauth.get_auth_tokens" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the authorization tokens required to access
@@ -593,46 +574,43 @@ function as the &#8216;auth&#8217; parameter for requests.</p>
 <p>Note: The client and client_secret come from the settings.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
-<dd><ul class="first last simple">
-<li>extra_data: Dictionary (from get_social_auth_data())</li>
-</ul>
-</dd>
+<dd>extra_data: Dictionary (from get_social_auth_data())</dd>
+<dt>Returns: </dt>
+<dd>OAuth1 (object)</dd>
 </dl>
-<p>Returns: OAuth1 (object)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitauth.get_social_auth_data">
 <tt class="descclassname">bitauth.</tt><tt class="descname">get_social_auth_data</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#bitauth.get_social_auth_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a dictionary of the following data from social auth:
-1. &#8216;access_token&#8217; : {&#8216;oauth_token&#8217; : String, &#8216;oauth_token_secret&#8217; : String}
-2. &#8216;email&#8217; : String
-3. &#8216;first_name&#8217; : String
-4. &#8216;last_name&#8217; : String
-5. &#8216;username&#8217; : String</p>
-<p>Parameters:
-- user_id: User (Django object)</p>
-<p>Returns =&gt; Dictionary</p>
+<dd><dl class="docutils">
+<dt>Gets a dictionary of the following data from social auth:</dt>
+<dd><ol class="first last arabic simple">
+<li>&#8216;access_token&#8217; : {&#8216;oauth_token&#8217; : String, &#8216;oauth_token_secret&#8217; : String}</li>
+<li>&#8216;email&#8217; : String</li>
+<li>&#8216;first_name&#8217; : String</li>
+<li>&#8216;last_name&#8217; : String</li>
+<li>&#8216;username&#8217; : String</li>
+</ol>
+</dd>
+<dt>Parameters:</dt>
+<dd>user_id: User (Django object)</dd>
+<dt>Returns: </dt>
+<dd>dictionary: Dictionary</dd>
+</dl>
 </dd></dl>
 
-<span class="target" id="module-decorators"></span><p>Decorators for bitbucket views</p>
-<span class="target" id="module-bitmanager"></span><p>Module for managing various Bitbucket endpoints.</p>
-<p>Handles the following:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Allows method to subscribe to repositories.</li>
-<li>Allows method to unsubscribe from repositories.</li>
-<li>Allows flush method to unsubscribe all repositories.</li>
-</ul>
-</div></blockquote>
-<dl class="function">
+<span class="target" id="module-decorators"></span><span class="target" id="module-bitmanager"></span><dl class="function">
 <dt id="bitmanager.get_all_subscriptions">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_all_subscriptions</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.get_all_subscriptions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all Subscription objects that
 a user is currently subscribed to.</p>
-<p>Parameters:
-- user: User (Django Request)</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Request)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -640,9 +618,12 @@ a user is currently subscribed to.</p>
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_list_of_repositories</tt><big>(</big><em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmanager.get_list_of_repositories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all repositories that the
 user has at least read access permissions.</p>
-<p>Parameters:
-- auth_tokens: OAuth1</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>auth_tokens: OAuth1</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -650,9 +631,12 @@ user has at least read access permissions.</p>
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_repo_id_from_subscriptions</tt><big>(</big><em>subscriptions</em><big>)</big><a class="headerlink" href="#bitmanager.get_repo_id_from_subscriptions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of repo_ids of repositories that
 a user is subscribed to.</p>
-<p>Parameters:
-- subscriptions: Subscription (Object)</p>
-<p>Returns: List (of Integers)</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>subscriptions: Subscription (Object)</dd>
+<dt>Returns: </dt>
+<dd>List (of Integers)</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -660,41 +644,66 @@ a user is subscribed to.</p>
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_subscribed_repo_urls</tt><big>(</big><em>subs</em>, <em>endpoint</em>, <em>limit</em><big>)</big><a class="headerlink" href="#bitmanager.get_subscribed_repo_urls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a list of all subscribed repo API request URLs
 for issues endpoint.</p>
-<p>Parameters:
-- subs: List (Subscription Objects)
-- endpoint: String (API request endpoint: &#8216;issues&#8217;)
-- limit: Integer (20)</p>
-<p>Returns: List (String URLs)</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>subs: List (Subscription Objects)
+endpoint: String (API request endpoint: &#8216;issues&#8217;)
+limit: Integer (20)</dd>
+<dt>Returns: </dt>
+<dd>List (String URLs)</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmanager.parse_repositories">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">parse_repositories</tt><big>(</big><em>repositories</em>, <em>repo_ids</em><big>)</big><a class="headerlink" href="#bitmanager.parse_repositories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse list of repositories.</p>
-<p>Parameters:
-- repositories: List
-- repo_ids: List (repo ids that uer is subscribed to)</p>
-<p>Returns: List</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>repositories: List
+repo_ids: List (repo ids that uer is subscribed to)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmanager.subscribe_repository">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">subscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.subscribe_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inserts new repository to a user&#8217;s Subscription in database.</p>
-<p>Parameters:
-- user: User (Django Model)
-- data: request.POST (Django Query dict)</p>
-<p>Returns: Boolean
-- True/False based on if operation was successful.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Model)
+data: request.POST (Django Query dict)</dd>
+<dt>Returns: </dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="bitmanager.unsubscribe_all_repositories">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_all_repositories</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_all_repositories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unsubscribe from all user&#8217;s repositories</p>
-<p>Paramters:
-- user: User (Django Request)</p>
-<p>Returns: Boolean</p>
+<dl class="docutils">
+<dt>Paramters:</dt>
+<dd>user: User (Django Request)</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if the operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -702,11 +711,20 @@ for issues endpoint.</p>
 <tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates a user&#8217;s Subscription in database and set
 subscribed to False.</p>
-<p>Parameters:
-- user: User (Django Model)
-- data: request.POST (Django Query dict)</p>
-<p>Returns: Boolean
-- True/False based on if operation was successful.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Model)
+data: request.POST (Django Query dict)</dd>
+<dt>Returns: </dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

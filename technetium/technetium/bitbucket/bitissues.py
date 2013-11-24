@@ -1,23 +1,3 @@
-"""
-Module for Bitbucket issues aggregation.
-
-Bitbucket API requests start at the following layout:
-
-https://bitbucket.org/api/1.0/repositories/{accountname}/{repo_slug}/{endpoint}
-
-    - {accountname} : The Bitbucket User name
-    - {repo_slug} : The repository name
-    - {endpoint} : The resource to request
-
-The calls also take the following extra query parameters:
-
-    - start: The hash value which the query starts from. The
-             default start point is the most recent entry to
-             the earliest.
-
-    - limit: Integer value which represents the number of changesets
-             to return.
-"""
 from django.template.loader import render_to_string
 import bitmethods
 
@@ -28,9 +8,10 @@ def parse_all_issues(repo_issues):
     response for the technetium issues dashboard.
 
     Parameters:
-    - repo_issues: List (Dictionaries of JSON issues)
+        repo_issues: List (Dictionaries of JSON issues)
 
-    Returns: List
+    Returns: 
+        List
     """
     # List of repositories, which contains list of parsed issues
     issues_list = []
@@ -47,9 +28,10 @@ def parse_issues(issues):
     Parse issues from Dictionary
 
     Parameters:
-    - issues: List
+        issues: List
 
-    Returns: List
+    Returns: 
+        List
     """
     parsed_issues = []
     # No issues in repository
@@ -81,7 +63,8 @@ def attach_meta(subscription, repo_issues):
     Creates a list of Dictionaries that attaches meta
     infomation to each list of issues.
 
-    Returns: List
+    Returns:
+        List
     """
     repo_list = []
     # Attach meta data for each repo's issues
@@ -104,9 +87,10 @@ def add_html_issue_rows(parsed_data):
     There has to be a better way of doing this.
 
     Parameters:
-    - parsed_data: Dictionary
+        parsed_data: Dictionary
 
-    Returns: String
+    Returns: 
+        String
     """
     html = 'includes/issues/issues-list.html'
     return render_to_string(html, {'repo' : {'issues' : parsed_data}})

@@ -1,12 +1,3 @@
-"""
-Module for managing various Bitbucket endpoints.
-
-Handles the following:
-
-    - Allows method to subscribe to repositories.
-    - Allows method to unsubscribe from repositories.
-    - Allows flush method to unsubscribe all repositories.
-"""
 from django.db import IntegrityError, DatabaseError
 from technetium.bitbucket.models import Subscription
 import technetium.bitbucket.bitmethods as bitmethods
@@ -18,9 +9,10 @@ def get_list_of_repositories(auth_tokens):
     user has at least read access permissions.
 
     Parameters:
-    - auth_tokens: OAuth1
+        auth_tokens: OAuth1
 
-    Returns: List
+    Returns: 
+        List
     """
     req_url = "https://bitbucket.org/api/1.0/user/repositories/dashboard/"
     return bitmethods.send_bitbucket_request(req_url, auth_tokens)
@@ -32,9 +24,10 @@ def get_all_subscriptions(user):
     a user is currently subscribed to.
 
     Parameters:
-    - user: User (Django Request)
+        user: User (Django Request)
 
-    Returns: List
+    Returns: 
+        List
     """
     return Subscription.objects.filter(user=user).filter(subscribed=True)
 
@@ -45,9 +38,10 @@ def get_repo_id_from_subscriptions(subscriptions):
     a user is subscribed to.
 
     Parameters:
-    - subscriptions: Subscription (Object)
+        subscriptions: Subscription (Object)
 
-    Returns: List (of Integers)
+    Returns: 
+        List (of Integers)
     """
     repo_ids = []
     for repo in subscriptions:
@@ -61,11 +55,12 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
     for issues endpoint.
 
     Parameters:
-    - subs: List (Subscription Objects)
-    - endpoint: String (API request endpoint: 'issues')
-    - limit: Integer (20)
+        subs: List (Subscription Objects)
+        endpoint: String (API request endpoint: 'issues')
+        limit: Integer (20)
 
-    Returns: List (String URLs)
+    Returns: 
+        List (String URLs)
     """
     repo_urls = []
     for repo in subs:
@@ -79,10 +74,11 @@ def parse_repositories(repositories, repo_ids):
     Parse list of repositories.
 
     Parameters:
-    - repositories: List
-    - repo_ids: List (repo ids that uer is subscribed to)
+        repositories: List
+        repo_ids: List (repo ids that uer is subscribed to)
 
-    Returns: List
+    Returns: 
+        List
     """
     parsed_repositories = []
     for user in repositories:
@@ -117,11 +113,12 @@ def subscribe_repository(user, data):
     Inserts new repository to a user's Subscription in database.
 
     Parameters:
-    - user: User (Django Model)
-    - data: request.POST (Django Query dict)
+        user: User (Django Model)
+        data: request.POST (Django Query dict)
 
-    Returns: Boolean
-    - True/False based on if operation was successful.
+    Returns: 
+        Boolean
+            - True/False based on if operation was successful.
     """
     # If subscription exists, update subscribed to True
     subscription = Subscription.objects.filter(user=user).filter(repo_id=data['repo-id'])
@@ -152,11 +149,12 @@ def unsubscribe_repository(user, data):
     subscribed to False.
 
     Parameters:
-    - user: User (Django Model)
-    - data: request.POST (Django Query dict)
+        user: User (Django Model)
+        data: request.POST (Django Query dict)
 
-    Returns: Boolean
-    - True/False based on if operation was successful.
+    Returns: 
+        Boolean
+            - True/False based on if operation was successful.
     """
     # If subscription exists, update subscribed to False
     subscription = Subscription.objects.filter(user=user).filter(repo_id=data['repo-id'])
@@ -173,9 +171,11 @@ def unsubscribe_all_repositories(user):
     Unsubscribe from all user's repositories
 
     Paramters:
-    - user: User (Django Request)
+        user: User (Django Request)
 
-    Returns: Boolean
+    Returns:
+        Boolean
+            - True/False based on if the operation was successful.
     """
     try:
         Subscription.objects.filter(user=user).update(subscribed=False)
