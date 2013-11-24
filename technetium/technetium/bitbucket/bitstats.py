@@ -100,7 +100,7 @@ def list_users(data):
 
     devs = []
     for k,v in data.iteritems():
-        devs.append(k)
+        devs.append(str(k))
     return devs
 
 def list_commits(data):
