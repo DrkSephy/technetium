@@ -30,6 +30,12 @@ class BitchangesetsTests(unittest.TestCase):
 
     def test_parse_changesets_empty(self):
         """
-        Tests that parsing an empty changeset list returns empty list
+        Tests that parsing an empty changeset list returns empty list.
         """
         self.assertEqual(bitchangesets.parse_changesets([]), [])
+
+    def test_parse_changesets_empty(self):
+        """
+        Tests that parsing a changeset list returns a properly parsed list.
+        """
+        self.assertEqual(bitchangesets.parse_changesets(self.data), [{'raw_author': 'David Leonard'}])
