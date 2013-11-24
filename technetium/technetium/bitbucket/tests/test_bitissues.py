@@ -106,3 +106,13 @@ class BitissuesTests(unittest.TestCase):
         self.assertEqual(
             len(bitissues.attach_meta(
                 list_subscriptions, self.dummy_issues)), 1)
+
+
+    ####################################
+    # add_html_issue_rows(parsed_data) #
+    ####################################
+    def test_add_html_issue_rows(self):
+        """
+        Tests that bitissues add html returns proper html
+        """
+        pass
