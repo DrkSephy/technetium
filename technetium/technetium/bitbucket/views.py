@@ -161,7 +161,9 @@ def line_chart(request):
 @login_required
 def pie_chart(request):
     """
-    Render pie chart on dashboard/graphs
+    Render pie chart on dashboard/graphs.
+    The code below is simply used to determine whether our data can be 
+    used directly inside of our graphs.
     """
     
     user = 'DrkSephy'
@@ -174,6 +176,10 @@ def pie_chart(request):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
     limit = 50
+
+    ############
+    # GET DATA #
+    ############
 
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
@@ -199,13 +205,23 @@ def pie_chart(request):
         i += 1
     
 
+    ##################
+    # GET GRAPH DATA #
+    ##################
 
     # Pie charts take strings on the x-axis,
     # and the distribution are integers on the y-axis.
+    # The two functions below return the following
+    # bitstats.list_users returns ["David Leonard", "Jorge Yau", ...]
+    # bitstats.list_commits returns [291, 24, ....]
     xdata =  bitstats.list_users(data['changesets_json'])
     ydata =  bitstats.list_commits(data['changesets_json'])
 
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    ##########################
+    # Setup Graph Parameters #
+    ##########################
+    
+    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
     charttype = "pieChart"
     chartcontainer = 'piechart_container' # container name
