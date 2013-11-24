@@ -1,0 +1,788 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Technetium’s documentation! &mdash; Technetium 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Technetium 1.0 documentation" href="#" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">Technetium 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-technetium-s-documentation">
+<h1>Welcome to Technetium&#8217;s documentation!<a class="headerlink" href="#welcome-to-technetium-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-bitchangesets"></span><dl class="function">
+<dt id="bitchangesets.get_changesets">
+<tt class="descclassname">bitchangesets.</tt><tt class="descname">get_changesets</tt><big>(</big><em>user</em>, <em>repo</em>, <em>auth_tokens</em>, <em>limit</em>, <em>start</em><big>)</big><a class="headerlink" href="#bitchangesets.get_changesets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains a JSON dictionary of changesets across
+a repository/repositories.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>URL: string</dt>
+<dd><ul class="first last simple">
+<li>The url to GET the resource from bitbucket.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>changesets: dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing [key][values] representing 
+all commits for the requested repositories.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitchangesets.parse_changesets">
+<tt class="descclassname">bitchangesets.</tt><tt class="descname">parse_changesets</tt><big>(</big><em>repository</em><big>)</big><a class="headerlink" href="#bitchangesets.parse_changesets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses returned JSON data for the API call to the
+<cite>repositories</cite> endpoint on Bitbucket.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>repositories: dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing JSON from a repository
+which needs to be parsed for all useful
+information.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-bitmethods"></span><dl class="function">
+<dt id="bitmethods.count">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">count</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>start=None</em>, <em>limit=None</em><big>)</big><a class="headerlink" href="#bitmethods.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the count of the repository.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>user: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket username.</li>
+</ul>
+</dd>
+<dt>repo: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket repository name.</li>
+</ul>
+</dd>
+<dt>endpoint: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket API endpoint.</li>
+</ul>
+</dd>
+<dt>limit: Integer (Max 50)</dt>
+<dd><ul class="first last simple">
+<li>The number of data entries to return.</li>
+</ul>
+</dd>
+<dt>start: Integer</dt>
+<dd><ul class="first last simple">
+<li>The starting node number for the resource.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:   </dt>
+<dd><dl class="first last docutils">
+<dt>count: Integer</dt>
+<dd><ul class="first last simple">
+<li>The number of commits inside the repository.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.dictionary_sum">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">dictionary_sum</tt><big>(</big><em>dict_a</em>, <em>dict_b</em><big>)</big><a class="headerlink" href="#bitmethods.dictionary_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sums the values of two dictionaries based on corresponding keys.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>dict_a: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>The dictionary to add values to.</li>
+</ul>
+</dd>
+<dt>dict_b: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>The second dictionary whose values are iterated through and
+added with the first dictionary.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>dictionary: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>The new dictionary containing the sum of its inputs.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.format_timestamp">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">format_timestamp</tt><big>(</big><em>timestamp</em><big>)</big><a class="headerlink" href="#bitmethods.format_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats string timestamp into readable timestamp.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>timestamp: String</dt>
+<dd><ul class="first last simple">
+<li>The timestamp to format.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>timestamp: String</dt>
+<dd><ul class="first last simple">
+<li>The formatted timestamp.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.make_req_url">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">make_req_url</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>limit=None</em>, <em>start=None</em><big>)</big><a class="headerlink" href="#bitmethods.make_req_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a URL for bitbucket API request.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>user: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket username.</li>
+</ul>
+</dd>
+<dt>repo: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket repository name.</li>
+</ul>
+</dd>
+<dt>endpoint: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket API endpoint.</li>
+</ul>
+</dd>
+<dt>limit: Integer (Max 50)</dt>
+<dd><ul class="first last simple">
+<li>The number of data entries to return.</li>
+</ul>
+</dd>
+<dt>start: Integer</dt>
+<dd><ul class="first last simple">
+<li>The starting node number for the resource.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:   </dt>
+<dd><dl class="first last docutils">
+<dt>url: String</dt>
+<dd><ul class="first last simple">
+<li>The URL to send the request to.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.package_context">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">package_context</tt><big>(</big><em>subscriptions</em><big>)</big><a class="headerlink" href="#bitmethods.package_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Packages common data for request context</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>data: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary of repositories the user is subscribed to.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.send_async_bitbucket_requests">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">send_async_bitbucket_requests</tt><big>(</big><em>req_urls</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmethods.send_async_bitbucket_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to send asynchronous requests for bitbucket
+API when generating reports.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>req_urls: List (of URLS)</dt>
+<dd><ul class="first last simple">
+<li>The list of URLs to send requests to.</li>
+</ul>
+</dd>
+<dt>auth_tokens: OAuth1</dt>
+<dd><ul class="first last simple">
+<li>The authentication tokens required for the OAuth1 protocol.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>content: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A list of JSON dictionaries from the requested URLs.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.send_bitbucket_request">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">send_bitbucket_request</tt><big>(</big><em>req_url</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmethods.send_bitbucket_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtains a JSON dictionary from bitbucket API endpoint.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>req_url: String (URL)</dt>
+<dd><ul class="first last simple">
+<li>The URL to send the request to.</li>
+</ul>
+</dd>
+<dt>auth_tokens: OAuth1 (Object)</dt>
+<dd><ul class="first last simple">
+<li>The authentication tokens required for the OAuth1 Protocol.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>content: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A JSON dictionary from the requested URL.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-bitstats"></span><dl class="function">
+<dt id="bitstats.list_commits">
+<tt class="descclassname">bitstats.</tt><tt class="descname">list_commits</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_commits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of commits in order of developers.
+Useful for D3 graphs.</p>
+<p>Paramters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing commits [keys] to be turned into a list.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>commits: List</dt>
+<dd><ul class="first last simple">
+<li>A list containing the number of commits for each user  
+of a given repository.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.list_users">
+<tt class="descclassname">bitstats.</tt><tt class="descname">list_users</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all developers in a repository. 
+Useful for generating D3 graphs.</p>
+<p>Paramters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing users [keys] to be turned into a list.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>devs: List</dt>
+<dd><ul class="first last simple">
+<li>A list containing the developers of a given repository.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.tally_assigned_issues">
+<tt class="descclassname">bitstats.</tt><tt class="descname">tally_assigned_issues</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_assigned_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the number of issues that each user has been assigned.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing all assigned issues to be tallied.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>tally: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing the tally of all assigned issues for 
+all users in a repository.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example: Returns {accountname: 8, DrkSephy: 5}, which is a
+dictionary of the number of issues the above user resolved.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.tally_changesets">
+<tt class="descclassname">bitstats.</tt><tt class="descname">tally_changesets</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_changesets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of commits for each developer in a repository.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing the commits to be tallied.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>tally: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing the sums of all commits in the 
+repository.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.tally_issue_comments">
+<tt class="descclassname">bitstats.</tt><tt class="descname">tally_issue_comments</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_issue_comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the number of comments that each user has made.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.tally_opened_issues">
+<tt class="descclassname">bitstats.</tt><tt class="descname">tally_opened_issues</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_opened_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the number of issues each user has opened.</p>
+<p>Notes: Even though issues are usually opened by the scrum master,
+we still need this to grade them.</p>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>opened_issues: Dictionary</dt>
+<dd><ul class="first last simple">
+<li>A dictionary containing number of issues that each
+user in a given repository has opened.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-bitfilter"></span><dl class="function">
+<dt id="bitfilter.filter_changesets_by_user">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_changesets_by_user</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_changesets_by_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters changesets based on user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues</tt><big>(</big><em>name_val_dict</em>, <em>parsed_json</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main filter dispatcher for issues.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues_by_date">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues_by_date</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues_by_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters issues based on date.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues_by_priority">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues_by_priority</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues_by_priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters issues based on priority.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues_by_status">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues_by_status</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues_by_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters issues based on status.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues_by_type">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues_by_type</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues_by_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters issues by type.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitfilter.filter_issues_by_user">
+<tt class="descclassname">bitfilter.</tt><tt class="descname">filter_issues_by_user</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_issues_by_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters issues based on users.</p>
+</dd></dl>
+
+<span class="target" id="module-bitissues"></span><dl class="function">
+<dt id="bitissues.add_html_issue_rows">
+<tt class="descclassname">bitissues.</tt><tt class="descname">add_html_issue_rows</tt><big>(</big><em>parsed_data</em><big>)</big><a class="headerlink" href="#bitissues.add_html_issue_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes parsed issues and returns HTML to attach to rows.
+There has to be a better way of doing this.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>parsed_data: Dictionary</dd>
+<dt>Returns: </dt>
+<dd>String</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.attach_meta">
+<tt class="descclassname">bitissues.</tt><tt class="descname">attach_meta</tt><big>(</big><em>subscription</em>, <em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.attach_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list of Dictionaries that attaches meta
+infomation to each list of issues.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.parse_all_issues">
+<tt class="descclassname">bitissues.</tt><tt class="descname">parse_all_issues</tt><big>(</big><em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_all_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses returned JSON data from the bitbucket API
+response for the technetium issues dashboard.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>repo_issues: List (Dictionaries of JSON issues)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitissues.parse_issues">
+<tt class="descclassname">bitissues.</tt><tt class="descname">parse_issues</tt><big>(</big><em>issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse issues from Dictionary</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>issues: List</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-bitauth"></span><dl class="function">
+<dt id="bitauth.get_auth_tokens">
+<tt class="descclassname">bitauth.</tt><tt class="descname">get_auth_tokens</tt><big>(</big><em>extra_data</em><big>)</big><a class="headerlink" href="#bitauth.get_auth_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the authorization tokens required to access
+protected resources from Bitbucket&#8217;s API. Use this
+function as the &#8216;auth&#8217; parameter for requests.</p>
+<p>Note: The client and client_secret come from the settings.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>extra_data: Dictionary (from get_social_auth_data())</dd>
+<dt>Returns: </dt>
+<dd>OAuth1 (object)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitauth.get_social_auth_data">
+<tt class="descclassname">bitauth.</tt><tt class="descname">get_social_auth_data</tt><big>(</big><em>user_id</em><big>)</big><a class="headerlink" href="#bitauth.get_social_auth_data" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Gets a dictionary of the following data from social auth:</dt>
+<dd><ol class="first last arabic simple">
+<li>&#8216;access_token&#8217; : {&#8216;oauth_token&#8217; : String, &#8216;oauth_token_secret&#8217; : String}</li>
+<li>&#8216;email&#8217; : String</li>
+<li>&#8216;first_name&#8217; : String</li>
+<li>&#8216;last_name&#8217; : String</li>
+<li>&#8216;username&#8217; : String</li>
+</ol>
+</dd>
+<dt>Parameters:</dt>
+<dd>user_id: User (Django object)</dd>
+<dt>Returns: </dt>
+<dd>dictionary: Dictionary</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-decorators"></span><span class="target" id="module-bitmanager"></span><dl class="function">
+<dt id="bitmanager.get_all_subscriptions">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_all_subscriptions</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.get_all_subscriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all Subscription objects that
+a user is currently subscribed to.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Request)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_list_of_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_list_of_repositories</tt><big>(</big><em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitmanager.get_list_of_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all repositories that the
+user has at least read access permissions.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>auth_tokens: OAuth1</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_repo_id_from_subscriptions">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_repo_id_from_subscriptions</tt><big>(</big><em>subscriptions</em><big>)</big><a class="headerlink" href="#bitmanager.get_repo_id_from_subscriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of repo_ids of repositories that
+a user is subscribed to.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>subscriptions: Subscription (Object)</dd>
+<dt>Returns: </dt>
+<dd>List (of Integers)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.get_subscribed_repo_urls">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">get_subscribed_repo_urls</tt><big>(</big><em>subs</em>, <em>endpoint</em>, <em>limit</em><big>)</big><a class="headerlink" href="#bitmanager.get_subscribed_repo_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a list of all subscribed repo API request URLs
+for issues endpoint.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>subs: List (Subscription Objects)
+endpoint: String (API request endpoint: &#8216;issues&#8217;)
+limit: Integer (20)</dd>
+<dt>Returns: </dt>
+<dd>List (String URLs)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.parse_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">parse_repositories</tt><big>(</big><em>repositories</em>, <em>repo_ids</em><big>)</big><a class="headerlink" href="#bitmanager.parse_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse list of repositories.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>repositories: List
+repo_ids: List (repo ids that uer is subscribed to)</dd>
+<dt>Returns: </dt>
+<dd>List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.subscribe_repository">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">subscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.subscribe_repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts new repository to a user&#8217;s Subscription in database.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Model)
+data: request.POST (Django Query dict)</dd>
+<dt>Returns: </dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.unsubscribe_all_repositories">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_all_repositories</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_all_repositories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unsubscribe from all user&#8217;s repositories</p>
+<dl class="docutils">
+<dt>Paramters:</dt>
+<dd>user: User (Django Request)</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if the operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmanager.unsubscribe_repository">
+<tt class="descclassname">bitmanager.</tt><tt class="descname">unsubscribe_repository</tt><big>(</big><em>user</em>, <em>data</em><big>)</big><a class="headerlink" href="#bitmanager.unsubscribe_repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a user&#8217;s Subscription in database and set
+subscribed to False.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>user: User (Django Model)
+data: request.POST (Django Query dict)</dd>
+<dt>Returns: </dt>
+<dd><dl class="first last docutils">
+<dt>Boolean</dt>
+<dd><ul class="first last simple">
+<li>True/False based on if operation was successful.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Technetium&#8217;s documentation!</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">Technetium 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Albert Chieu, David Leonard, Jorge Yau.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+  </body>
+</html>

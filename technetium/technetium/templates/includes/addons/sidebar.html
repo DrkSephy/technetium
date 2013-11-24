@@ -1,0 +1,37 @@
+
+<ul class="nav navbar-nav side-nav">
+  <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+    <a href="{% url 'dashboard' %}">
+    <span class="glyphicon glyphicon-list-alt space-right"></span> Dashboard </a>
+  </li>
+
+  <li class="{% if request.path == '/manage/' %}active{% endif %}">
+    <a href="{% url 'manage' %}">
+    <span class="glyphicon glyphicon-briefcase space-right"></span> Manage Repositories</a>
+  </li>
+
+  <li class="{% if request.path == '/issues/' %}active{% endif %}">
+    <a href="{% url 'issues' %}">
+    <span class="glyphicon glyphicon-saved space-right"></span> Issue Tracker </a>
+  </li>
+
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-tasks space-right"></span> Reports<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="/statistics">Statistics</a></li>
+    </ul>
+  </li>
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-stats space-right"></span> Graphs <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="/linechart">Line Charts</a></li>
+      <li><a href="/piechart">Pie Charts</a></li>
+    </ul>
+  </li>
+
+
+</ul>
