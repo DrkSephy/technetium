@@ -163,7 +163,7 @@ def pie_chart(request):
     """
     Render pie chart on dashboard/graphs
     """
-    """
+    
     user = 'DrkSephy'
     repo = 'smw-koopa-krisis'
 
@@ -197,12 +197,13 @@ def pie_chart(request):
 
         start -= 50
         i += 1
-    """
+    
+
 
     # Pie charts take strings on the x-axis,
     # and the distribution are integers on the y-axis.
-    xdata = ["Apple", "Mango"]
-    ydata = [10, 20]
+    xdata =  bitstats.list_users(data['changesets_json'])
+    ydata =  bitstats.list_commits(data['changesets_json'])
 
     extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
