@@ -81,7 +81,7 @@ all commits for the requested repositories.</li>
 
 <dl class="function">
 <dt id="bitchangesets.parse_changesets">
-<tt class="descclassname">bitchangesets.</tt><tt class="descname">parse_changesets</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitchangesets.parse_changesets" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">bitchangesets.</tt><tt class="descname">parse_changesets</tt><big>(</big><em>repository</em><big>)</big><a class="headerlink" href="#bitchangesets.parse_changesets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses returned JSON data for the API call to the
 <cite>repositories</cite> endpoint on Bitbucket.</p>
 <dl class="docutils">
@@ -90,14 +90,6 @@ all commits for the requested repositories.</li>
 <li>A dictionary containing JSON from a repository
 which needs to be parsed for all useful
 information.</li>
-</ul>
-</dd>
-</dl>
-<dl class="docutils">
-<dt>changeset_data: dictionary</dt>
-<dd><ul class="first last simple">
-<li>A JSON formatted dictionary containing 
-all relevant data.</li>
 </ul>
 </dd>
 </dl>
@@ -125,16 +117,46 @@ all relevant data.</li>
 <dt id="bitmethods.make_req_url">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">make_req_url</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>limit=None</em>, <em>start=None</em><big>)</big><a class="headerlink" href="#bitmethods.make_req_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a URL for bitbucket API request.</p>
-<p>Parameters:
-- user: String
-- repo: String
-- endpoint: String
-- limit: Integer (Max 50)
-- start: Integer</p>
-<p>Returns: String</p>
-<p>Example:
-Params: (user=&#8217;technetiumccny&#8217;, repo=&#8217;technetium&#8217;, endpoint=&#8217;issues&#8217;)
-Output: &#8216;<a class="reference external" href="https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues">https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues</a>&#8216;</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>user: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket username.</li>
+</ul>
+</dd>
+<dt>repo: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket repository name.</li>
+</ul>
+</dd>
+<dt>endpoint: String</dt>
+<dd><ul class="first last simple">
+<li>The Bitbucket API endpoint.</li>
+</ul>
+</dd>
+<dt>limit: Integer (Max 50)</dt>
+<dd><ul class="first last simple">
+<li>The number of data entries to return.</li>
+</ul>
+</dd>
+<dt>start: Integer</dt>
+<dd><ul class="first last simple">
+<li>The starting node number for the resource.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>url: String</dt>
+<dd><ul class="first last simple">
+<li>The URL to send the request to.</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="function">

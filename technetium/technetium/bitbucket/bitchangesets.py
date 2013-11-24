@@ -31,7 +31,7 @@ def get_changesets(user, repo, auth_tokens, limit, start):
 
     
 
-def parse_changesets(data):
+def parse_changesets(repository):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -42,12 +42,6 @@ def parse_changesets(data):
         - A dictionary containing JSON from a repository
           which needs to be parsed for all useful
           information.
-
-    Returns:
-    --------
-    changeset_data: dictionary
-        - A JSON formatted dictionary containing 
-          all relevant data.
     """
 
     keys = ['raw_author']
