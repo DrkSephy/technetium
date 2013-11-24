@@ -51,8 +51,7 @@
 <ul class="simple">
 </ul>
 </div>
-<span class="target" id="module-bitchangesets"></span><p>Module for Bitbucket changesets aggregation.</p>
-<dl class="function">
+<span class="target" id="module-bitchangesets"></span><dl class="function">
 <dt id="bitchangesets.get_changesets">
 <tt class="descclassname">bitchangesets.</tt><tt class="descname">get_changesets</tt><big>(</big><em>user</em>, <em>repo</em>, <em>auth_tokens</em>, <em>limit</em>, <em>start</em><big>)</big><a class="headerlink" href="#bitchangesets.get_changesets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtains a JSON dictionary of changesets across
@@ -80,9 +79,9 @@ all commits for the requested repositories.</li>
 <dd><p>Parses returned JSON data for the API call to the
 <cite>repositories</cite> endpoint on Bitbucket.</p>
 <dl class="docutils">
-<dt>Repositories: dictionary</dt>
+<dt>repositories: dictionary</dt>
 <dd><ul class="first last simple">
-<li>A dictionary containing repository JSON
+<li>A dictionary containing JSON from a repository
 which needs to be parsed for all useful
 information.</li>
 </ul>
@@ -226,40 +225,7 @@ we still need this to grade them.</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-bitfilter"></span><p>Module for filtering various Bitbucket data.</p>
-<dl class="docutils">
-<dt>Handles:</dt>
-<dd><ul class="first last simple">
-<li>Filtering changesets by time/user/date.</li>
-<li>Filtering issues by type.</li>
-<li>Filtering issues by priority.</li>
-<li>Filtering issues by user.</li>
-<li>Filtering issues by date.</li>
-<li>Filtering issues by status.</li>
-</ul>
-</dd>
-<dt>Place holder code for views:</dt>
-<dd><p class="first"># get filtering name value pairs from request query string
-name_val_dict = {}
-filterNameValues = {}
-for n, v in request.GET.iteritems():</p>
-<blockquote>
-<div>name_val_dict[n] = v
-filterNameValues[n] = v</div></blockquote>
-<p class="last"># We need to parse this before in the future
-data[&#8216;filterNameValues&#8217;] = filterNameValues</p>
-</dd>
-<dt>In bitissues:</dt>
-<dd><p class="first"># Parse assignee
-data[&#8216;assignee&#8217;] = &#8216;&#8217;
-data[&#8216;assignee_avatar&#8217;] = &#8216;&#8217;
-if &#8216;responsible&#8217; in issue:</p>
-<blockquote class="last">
-<div>data[&#8216;assignee&#8217;] = issue[&#8216;responsible&#8217;][&#8216;display_name&#8217;]
-data[&#8216;assignee_avatar&#8217;] = issue[&#8216;responsible&#8217;][&#8216;avatar&#8217;]</div></blockquote>
-</dd>
-</dl>
-<dl class="function">
+<span class="target" id="module-bitfilter"></span><dl class="function">
 <dt id="bitfilter.filter_changesets_by_user">
 <tt class="descclassname">bitfilter.</tt><tt class="descname">filter_changesets_by_user</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_changesets_by_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filters changesets based on user.</p>

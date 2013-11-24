@@ -1,7 +1,3 @@
-"""
-Module for Bitbucket changesets aggregation.
-"""
-
 import requests
 import simplejson as json
 import bitmethods
@@ -42,8 +38,8 @@ def parse_changesets(data):
 
     Parameters:
     -----------
-    Repositories: dictionary
-        - A dictionary containing repository JSON
+    repositories: dictionary
+        - A dictionary containing JSON from a repository
           which needs to be parsed for all useful
           information.
 
