@@ -1,9 +1,3 @@
-"""
-Module for common bitbucket methods.
-
-Proposed methods:
-    - Parsing could probably be refactored into a common method.
-"""
 import simplejson as json
 from datetime import datetime
 from collections import defaultdict

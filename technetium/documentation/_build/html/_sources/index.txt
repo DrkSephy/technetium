@@ -6,10 +6,11 @@
 Welcome to Technetium's documentation!
 ======================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
+
+
+
 
 .. automodule:: bitchangesets
     :members:
