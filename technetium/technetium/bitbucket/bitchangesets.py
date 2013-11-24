@@ -9,15 +9,13 @@ def get_changesets(user, repo, auth_tokens, limit, start):
     a repository/repositories.
 
     Parameters:
-    -----------
-    URL: string
-        - The url to GET the resource from bitbucket.
+        URL: string
+            - The url to GET the resource from bitbucket.
 
     Returns:
-    -------
-    changesets: dictionary
-        - A dictionary containing [key][values] representing
-          all commits for the requested repositories.
+        changesets: dictionary
+            - A dictionary containing [key][values] representing 
+              all commits for the requested repositories.
     """
 
     # Get the changesets.
@@ -37,11 +35,10 @@ def parse_changesets(repository):
     `repositories` endpoint on Bitbucket.
 
     Parameters:
-    -----------
-    repositories: dictionary
-        - A dictionary containing JSON from a repository
-          which needs to be parsed for all useful
-          information.
+        repositories: dictionary
+            - A dictionary containing JSON from a repository
+              which needs to be parsed for all useful
+              information.
     """
 
     keys = ['raw_author']

@@ -1,6 +1,3 @@
-"""
-Module for computing statistics for Bitbucket.
-"""
 import requests
 import simplejson as json
 
@@ -9,13 +6,17 @@ def tally_changesets(data):
     Counts the number of commits for each developer in a repository.
 
     Parameters:
-    -----------
-    data: dictionary
+
+        data: Dictionary
+            - A dictionary containing the commits to be tallied.
 
     Returns:
-    --------
-    tally: dictionary
+    
+        tally: Dictionary
+            - A dictionary containing the sums of all commits in the 
+              repository.
     """
+
     #data = [{'author': 'Kevin Chan'}, {'author': 'Kevin Chan'}]
     # Dictionary to store commit counts
     tally = {}
@@ -41,9 +42,14 @@ def tally_assigned_issues(data):
     Gets the number of issues that each user has been assigned.
 
     Parameters:
-    - data: dictionary
+    
+        data: Dictionary
+            - A dictionary containing all assigned issues to be tallied. 
 
-    Returns: Dictionary
+    Returns:
+        tally: Dictionary
+            - A dictionary containing the tally of all assigned issues for 
+              all users in a repository.
 
     Example: Returns {accountname: 8, DrkSephy: 5}, which is a
     dictionary of the number of issues the above user resolved.
@@ -55,14 +61,6 @@ def tally_assigned_issues(data):
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
-
-    Notes: Needs to check each issue endpoint and get a tally
-    of all comments made.
-
-    Returns:
-    --------
-    issue_comments: dictionary containing number of comments for
-                    each user.
     """
 
     pass
@@ -75,9 +73,10 @@ def tally_opened_issues(data):
     we still need this to grade them.
 
     Returns:
-    --------
-    opened_issues: dictionary containing number of issues that each
-                   user has opened.
+    
+        opened_issues: Dictionary
+            - A dictionary containing number of issues that each
+              user in a given repository has opened.
     """
 
     pass
@@ -85,8 +84,18 @@ def tally_opened_issues(data):
 
 def list_users(data):
     """
-    Returns a list of all developers in a repository.
-    Useful for plugging directly into the Pie Chart.
+    Returns a list of all developers in a repository. 
+    Useful for generating D3 graphs.
+
+    Paramters:
+
+        data: Dictionary
+            - A dictionary containing users [keys] to be turned into a list.
+
+    Returns:
+
+        devs: List
+            - A list containing the developers of a given repository.
     """
 
     devs = []
@@ -97,7 +106,18 @@ def list_users(data):
 def list_commits(data):
     """
     Returns a list of commits in order of developers.
-    Useful for graphs.
+    Useful for D3 graphs.
+
+    Paramters:
+
+        data: Dictionary
+            - A dictionary containing commits [keys] to be turned into a list.
+
+    Returns:
+
+        commits: List
+            - A list containing the number of commits for each user  
+              of a given repository.
     """
 
     commits = []

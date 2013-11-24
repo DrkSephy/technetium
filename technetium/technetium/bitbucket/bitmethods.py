@@ -188,14 +188,14 @@ def dictionary_sum(dict_a, dict_b):
     """
     Sums the values of two dictionaries based on corresponding keys.
 
-    Paramters:
+    Parameters:
 
         dict_a: Dictionary
             - The dictionary to add values to.
 
         dict_b: Dictionary
             - The second dictionary whose values are iterated through and
-            added with the first dictionary.
+              added with the first dictionary.
 
     Returns:
 
