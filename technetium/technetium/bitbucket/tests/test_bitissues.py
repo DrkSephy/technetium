@@ -10,7 +10,7 @@ class BitissuesTests(unittest.TestCase):
 
     def setUp(self):
         """
-        Setup example JSON data returned from bitbucket  
+        Setup example JSON data returned from bitbucket
         """
 
         # JSON returned from bitbucket with no assignee
@@ -72,8 +72,24 @@ class BitissuesTests(unittest.TestCase):
         self.assertEqual(bitissues.parse_all_issues([]), [])
 
 
+    ##########################################
+    # attach_meta(subscription, repo_issues) #
+    ##########################################
     def test_attach_meta_empty(self):
         """
-        Tests that bitissues attach meta returns blank list
+        Tests that bitissues attach_meta returns blank list
         """
         self.assertEqual(bitissues.attach_meta([], []), [])
+
+    def test_attach_meta_subscription(self):
+        """
+        Tests bitissues attach_meta with subscription
+        """
+        mock_subscription = Mock()
+        mock_subscription.repository = 'Technetium'
+        mock_subscription.owner = 'technetiumccny'
+        mock_subscription.slug_url = 'http://somebitbucketlink.com'
+        list_subscriptions = [mock_subscription]
+        self.assertEqual(
+            len(bitissues.attach_meta(
+                list_subscriptions, self.dummy_issues)), 1)
