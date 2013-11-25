@@ -52,7 +52,7 @@ def statistics(request):
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
     # a JSON decode error is thrown.
-    start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
+    start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
 
     # Number of iterations needed to get all of the data
     iterations = start / 50
@@ -184,7 +184,7 @@ def pie_chart(request):
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
     # a JSON decode error is thrown.
-    start = (bitmethods.count(user, repo, 'changesets', 0, 0)) - 1
+    start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
 
     # Number of iterations needed to get all of the data
     iterations = start / 50

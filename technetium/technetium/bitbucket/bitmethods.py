@@ -48,40 +48,17 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         url += "?start=%d" % start
     return url
 
-def count(user, repo, endpoint, start=None, limit=None):
+def count(url):
     """
     Returns the count of the repository.
 
     Parameters:
-        user: String
-            - The Bitbucket username.
-        repo: String
-            - The Bitbucket repository name.
-        endpoint: String
-            - The Bitbucket API endpoint.
-        limit: Integer (Max 50)
-            - The number of data entries to return.
-        start: Integer
-            - The starting node number for the resource.
-
+        url: String
+            - The URL to send the request to.
     Returns:   
         count: Integer
             - The number of commits inside the repository.
     """
-
-    url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
-
-    # Set limit is given and is above 50, set limit to 50
-    if limit and limit > 50:
-        limit = 50
-
-    # Handle extra queries
-    if limit and start:
-        url += "?limit=%d&start=%d" % (limit, start)
-    elif limit:
-        url += "?limit=%d" % limit
-    elif start:
-        url += "?start=%d" % start
 
     req = requests.get(url)
     changesets = json.loads(req.content)
