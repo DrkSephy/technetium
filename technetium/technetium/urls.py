@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', views_bitbucket.dashboard, name='dashboard'),
     url(r'^issues/$', views_bitbucket.dashboard_issues, name='issues'),
     url(r'^linechart/$', views_bitbucket.line_chart),
-    url(r'^piechart/$', views_bitbucket.pie_chart),
     url(r'^statistics/$', views_bitbucket.statistics),
     url(r'^manage/$', views_bitbucket.manage_repositories, name='manage'),
 
