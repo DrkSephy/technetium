@@ -77,6 +77,7 @@ def statistics(request):
         }
     }
 
+    # Pass in multiple objects to be rendered through the template.
     return render(request, 'statistics.html', {'graph': graph, 'changesets_json': data['changesets_json']})
 
 @login_required
