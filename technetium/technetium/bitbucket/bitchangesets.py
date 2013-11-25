@@ -45,7 +45,7 @@ def parse_changesets(repository):
 
     changeset = []
 
-    for a in data:
+    for a in repository:
         new_list = {}
         for k,v in a.iteritems():
             if k in keys:
