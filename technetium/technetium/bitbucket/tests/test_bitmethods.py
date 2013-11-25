@@ -61,6 +61,7 @@ class BitmethodsTests(unittest.TestCase):
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
 
+    #
     # Tests For: send_bitbucket_request()
     def test_send_bitbucket_request_not_200(self):
         """

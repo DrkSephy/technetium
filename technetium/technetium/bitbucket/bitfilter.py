@@ -1,34 +1,3 @@
-"""
-Module for filtering various Bitbucket data.
-
-Handles:
-    - Filtering changesets by time/user/date.
-    - Filtering issues by type.
-    - Filtering issues by priority.
-    - Filtering issues by user.
-    - Filtering issues by date.
-    - Filtering issues by status.
-
-Place holder code for views:
-    # get filtering name value pairs from request query string
-    name_val_dict = {}
-    filterNameValues = {}
-    for n, v in request.GET.iteritems():
-        name_val_dict[n] = v
-        filterNameValues[n] = v
-
-    # We need to parse this before in the future
-    data['filterNameValues'] = filterNameValues
-
-In bitissues:
-    # Parse assignee
-    data['assignee'] = ''
-    data['assignee_avatar'] = ''
-    if 'responsible' in issue:
-        data['assignee'] = issue['responsible']['display_name']
-        data['assignee_avatar'] = issue['responsible']['avatar']
-
-"""
 import simplejson as json
 import datetime
 
@@ -36,7 +5,7 @@ import datetime
 # with this function is 95% as of now
 def filter_issues(name_val_dict, parsed_json):
     """
-    Main filter dispatcher for issues
+    Main filter dispatcher for issues.
     """
 
     filtered_json = parsed_json

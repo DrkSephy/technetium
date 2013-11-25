@@ -1,7 +1,3 @@
-"""
-Module for Bitbucket changesets aggregation.
-"""
-
 import requests
 import simplejson as json
 import bitmethods
@@ -13,15 +9,13 @@ def get_changesets(user, repo, auth_tokens, limit, start):
     a repository/repositories.
 
     Parameters:
-    -----------
-    URL: string
-        - The url to GET the resource from bitbucket.
+        URL: string
+            - The url to GET the resource from bitbucket.
 
     Returns:
-    -------
-    changesets: dictionary
-        - A dictionary containing [key][values] representing
-          all commits for the requested repositories.
+        changesets: dictionary
+            - A dictionary containing [key][values] representing 
+              all commits for the requested repositories.
     """
 
     # Get the changesets.
@@ -35,30 +29,23 @@ def get_changesets(user, repo, auth_tokens, limit, start):
 
     
 
-def parse_changesets(data):
+def parse_changesets(repository):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
 
     Parameters:
-    -----------
-    Repositories: dictionary
-        - A dictionary containing repository JSON
-          which needs to be parsed for all useful
-          information.
-
-    Returns:
-    --------
-    changeset_data: dictionary
-        - A JSON formatted dictionary containing 
-          all relevant data.
+        repositories: dictionary
+            - A dictionary containing JSON from a repository
+              which needs to be parsed for all useful
+              information.
     """
 
     keys = ['raw_author']
 
     changeset = []
 
-    for a in data:
+    for a in repository:
         new_list = {}
         for k,v in a.iteritems():
             if k in keys:
