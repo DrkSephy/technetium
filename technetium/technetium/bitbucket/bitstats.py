@@ -1,4 +1,7 @@
 import requests
+import bitmethods
+import bitchangesets
+import bitstats
 import simplejson as json
 
 def tally_changesets(data):
@@ -33,6 +36,30 @@ def tally_changesets(data):
         # Return a dictionary of the tally.
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
+
+def iterate_data(user, repo, auth_tokens, start, limit):
+    """
+    Gets all of the commit JSON from a repository, bundles it and tallies.
+    """
+    data = {}
+    data['changesets_json'] = {}
+    num_requests = 0
+    iterations = start / limit
+    last_request = start % limit
+
+    while num_requests <= iterations:
+        if start < 50:
+            start = last_request
+            limit = last_request
+        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
+            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
+        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
+        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
+
+        start -= 50
+        num_requests += 1
+
+    return data
 
 
 def tally_assigned_issues(data):

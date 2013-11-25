@@ -40,14 +40,10 @@ def statistics(request):
     user = 'DrkSephy'
     repo = 'smw-koopa-krisis'
 
-
     # Store the data
-    data = {}
-    data['changesets_json'] = {}
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
-    limit = 50
 
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
@@ -55,23 +51,7 @@ def statistics(request):
     start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
 
     # Number of iterations needed to get all of the data
-    iterations = start / 50
-
-    last_request = start % limit
-    i = 0
-    while i <= iterations:
-        if start < 50:
-            start = last_request
-            limit = last_request
-
-        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
-            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
-        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
-
-        start -= 50
-        i += 1
-
+    data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
 
     return render(request, 'statistics.html', data)
 
@@ -169,17 +149,10 @@ def pie_chart(request):
     user = 'DrkSephy'
     repo = 'smw-koopa-krisis'
 
-    data = {}
-    data['changesets_json'] = {}
-
-       # OAuth tokens
+    # Store the data
+    # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
-    limit = 50
-
-    ############
-    # GET DATA #
-    ############
 
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
@@ -187,23 +160,7 @@ def pie_chart(request):
     start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
 
     # Number of iterations needed to get all of the data
-    iterations = start / 50
-
-    last_request = start % limit
-    i = 0
-    while i <= iterations:
-        if start < 50:
-            start = last_request
-            limit = last_request
-
-        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
-            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
-        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
-
-        start -= 50
-        i += 1
-    
+    data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
 
     ##################
     # GET GRAPH DATA #

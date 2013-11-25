@@ -5,6 +5,7 @@ Test Technetium Bitbucket: bitchangesets
 from mock import Mock, patch
 import unittest
 import technetium.bitbucket.bitchangesets as bitchangesets
+import technetium.bitbucket.bitchangesets as bitmethods
 
 
 class BitchangesetsTests(unittest.TestCase):
@@ -28,21 +29,6 @@ class BitchangesetsTests(unittest.TestCase):
                     'timestamp': '2013-11-11 04:14:50', 'raw_author': 'David Leonard <sephirothcloud1025@yahoo.com>'}]
         self.data2 = [{'utctimestamp': '2013-11-11 03:14:50+00:00', 'author': 'DrkSephy', 
                     'timestamp': '2013-11-11 04:14:50', 'raw_author': 'David Leonard'}]
-
-    
-    def test_get_changesets(self):
-        """
-        Tests that we can get changesets.
-        """
-        req_url = self.url
-        bitbucket_req = Mock()
-        auth_tokens = {'oauth_token' : 'Fake', "oauth_token_secret" : 'Invalid'}
-        changesets = []
-        with patch('technetium.bitbucket.bitchangesets.requests') as mock_requests:
-            mock_requests.get.return_value = mock_response = Mock()
-            mock_response.status_code = 201
-            results = []
-            self.assertEqual(results, changesets)
 
 
     def test_get_parse_not_empty(self):
