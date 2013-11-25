@@ -53,7 +53,31 @@ def statistics(request):
     # Number of iterations needed to get all of the data
     data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
 
-    return render(request, 'statistics.html', data)
+    xdata =  bitstats.list_users(data['changesets_json'])
+    ydata =  bitstats.list_commits(data['changesets_json'])
+
+    ##########################
+    # Setup Graph Parameters #
+    ##########################
+    
+    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
+    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container' # container name
+
+    graph = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+
+    return render(request, 'statistics.html', {'graph': graph, 'changesets_json': data['changesets_json']})
 
 @login_required
 def dashboard(request):
@@ -183,7 +207,7 @@ def pie_chart(request):
     charttype = "pieChart"
     chartcontainer = 'piechart_container' # container name
 
-    data = {
+    graph = {
         'charttype': charttype,
         'chartdata': chartdata,
         'chartcontainer': chartcontainer,
@@ -194,7 +218,7 @@ def pie_chart(request):
             'jquery_on_ready': False,
         }
     }
-    return render(request, 'pie_chart.html', data)
+    return render(request, 'pie_chart.html', {'graph': graph})
 
 
 #######################

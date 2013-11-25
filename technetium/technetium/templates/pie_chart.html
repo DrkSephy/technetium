@@ -7,11 +7,11 @@
 {% load nvd3_tags %}
 <head>
     {% include_chart_jscss %}
-    {% load_chart charttype chartdata chartcontainer extra %}
+    {% load_chart graph.charttype graph.chartdata graph.chartcontainer graph.extra %}
 </head>
 <body>
     <h1>Developer Commits</h1>
-    {% include_container chartcontainer %}
+    {% include_container graph.chartcontainer %}
 </body>
 
 {% endblock %}
