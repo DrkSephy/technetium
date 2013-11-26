@@ -29,6 +29,7 @@ python-openid==2.2.5
 python-social-auth==0.1.14
 requests==2.0.0
 requests-oauthlib==0.4.0
+selenium==2.37.2
 sh==1.09
 simplejson==3.3.1
 six==1.4.1
