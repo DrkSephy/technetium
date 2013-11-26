@@ -38,7 +38,7 @@ def statistics(request):
     """
     # Using smw-koopa-krisis as a test repository
     user = 'DrkSephy'
-    repo = 'smw-koopa-krisis'
+    repo = 'technetium-teamdev-david'
 
     # Store the data
     # OAuth tokens
@@ -48,12 +48,38 @@ def statistics(request):
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
     # a JSON decode error is thrown.
-    start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
+    url = bitmethods.make_req_url(user, repo, 'changesets', 0, 0)
+    start = bitmethods.count(url, auth_tokens) - 1
 
     # Number of iterations needed to get all of the data
     data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
 
-    return render(request, 'statistics.html', data)
+    xdata =  bitstats.list_users(data['changesets_json'])
+    ydata =  bitstats.list_commits(data['changesets_json'])
+
+    ##########################
+    # Setup Graph Parameters #
+    ##########################
+    
+    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
+    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+    charttype = "pieChart"
+    chartcontainer = 'piechart_container' # container name
+
+    graph = {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }
+    }
+
+    # Pass in multiple objects to be rendered through the template.
+    return render(request, 'statistics.html', {'graph': graph, 'changesets_json': data['changesets_json']})
 
 @login_required
 def dashboard(request):
@@ -135,66 +161,6 @@ def line_chart(request):
         }
     }
     return render(request, 'line_chart.html', data)
-
-
-
-@login_required
-def pie_chart(request):
-    """
-    Render pie chart on dashboard/graphs.
-    The code below is simply used to determine whether our data can be 
-    used directly inside of our graphs.
-    """
-    
-    user = 'DrkSephy'
-    repo = 'smw-koopa-krisis'
-
-    # Store the data
-    # OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
-
-    # Get the count of the commits in the repository
-    # The count is not zero based, have to subtract 1 or else
-    # a JSON decode error is thrown.
-    start = (bitmethods.count(bitmethods.make_req_url(user, repo, 'changesets', 0, 0))) - 1
-
-    # Number of iterations needed to get all of the data
-    data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
-
-    ##################
-    # GET GRAPH DATA #
-    ##################
-
-    # Pie charts take strings on the x-axis,
-    # and the distribution are integers on the y-axis.
-    # The two functions below return the following
-    # bitstats.list_users returns ["David Leonard", "Jorge Yau", ...]
-    # bitstats.list_commits returns [291, 24, ....]
-    xdata =  bitstats.list_users(data['changesets_json'])
-    ydata =  bitstats.list_commits(data['changesets_json'])
-
-    ##########################
-    # Setup Graph Parameters #
-    ##########################
-    
-    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-    chartcontainer = 'piechart_container' # container name
-
-    data = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': False,
-            'x_axis_format': '',
-            'tag_script_js': True,
-            'jquery_on_ready': False,
-        }
-    }
-    return render(request, 'pie_chart.html', data)
 
 
 #######################

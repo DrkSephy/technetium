@@ -48,7 +48,7 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         url += "?start=%d" % start
     return url
 
-def count(url):
+def count(url, auth_tokens):
     """
     Returns the count of the repository.
 
@@ -59,8 +59,7 @@ def count(url):
         count: Integer
             - The number of commits inside the repository.
     """
-
-    req = requests.get(url)
+    req = requests.get(url, auth=auth_tokens)
     changesets = json.loads(req.content)
     return changesets['count']
 
