@@ -161,6 +161,7 @@ def filter_issues_by_date(parsed_json, filtered_value):
 
     return filtered_json
 
+
 def filter_issues_by_status(parsed_json, filtered_value):
     """
     Filters issues based on status.
@@ -174,6 +175,7 @@ def filter_issues_by_status(parsed_json, filtered_value):
                 filtered_json.append(issue)
 
     return filtered_json
+
 
 def filter_changesets_by_user(parsed_json, filtered_value):
     """

@@ -56,6 +56,9 @@ class BitfilterTest(unittest.TestCase):
         j_last_year = datetime.datetime.strftime(last_year,'%m-%d-%Y')
         self.last_year_issue = {'created':j_last_year}
 
+        # test input for today
+        self.date_created_issues_0 = [self.today_issue, self.last_monday_issue]
+
         # test input for today, this week, last week
         self.date_created_issues_1 = [self.today_issue, self.current_monday_issue, self.last_monday_issue]
 
@@ -195,7 +198,7 @@ class BitfilterTest(unittest.TestCase):
         Test to filter issues by today
         """
         expected_result_issue = [self.today_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'today'), expected_result_issue)        
+        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_0, 'today'), expected_result_issue)        
 
     def test_filter_issue_by_this_week(self):
         """
