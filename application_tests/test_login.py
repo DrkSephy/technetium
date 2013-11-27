@@ -31,8 +31,8 @@ class LoginTest(unittest.TestCase):
 				username_element = driver.find_element_by_name("username")
 				password_element = driver.find_element_by_name("password")
 
-				username = "technetiumccny"
-				password = ""
+				username = "technetiumtest"
+				password = "zaq1xsw2"
 				username_element.send_keys(username)
 				password_element.send_keys(password)
 
