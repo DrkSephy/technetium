@@ -32,14 +32,25 @@ def home(request):
 
 
 @login_required
-def statistics(request):
+def dashboard(request):
     """
-    Render the reports.
+    Render dashboard overview. It will contain the following:
+    1. Issue Tracker reports
+    2. Changeset reports
+    3. Progress reports
+    4. Charts and graphs
     """
-    # Using smw-koopa-krisis as a test repository
-    user = 'DrkSephy'
-    repo = 'technetium-teamdev-david'
+    # Get retrieved issues from subscribed repositories
+    subscribed  = bitmanager.get_all_subscriptions(request.user)
+    data = bitmethods.package_context(subscribed)
+    return render(request, 'dashboard.html', data)
 
+
+@login_required
+def reports(request, owner, repo_slug):
+    """
+    Render the webpage to show reports and graphs
+    """
     # Store the data
     # OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
@@ -48,11 +59,11 @@ def statistics(request):
     # Get the count of the commits in the repository
     # The count is not zero based, have to subtract 1 or else
     # a JSON decode error is thrown.
-    url = bitmethods.make_req_url(user, repo, 'changesets', 0, 0)
+    url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0, 0)
     start = bitmethods.count(url, auth_tokens) - 1
 
     # Number of iterations needed to get all of the data
-    data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
+    data = bitstats.iterate_data(owner, repo_slug, auth_tokens, start, 50)
 
     xdata =  bitstats.list_users(data['changesets_json'])
     ydata =  bitstats.list_commits(data['changesets_json'])
@@ -60,7 +71,6 @@ def statistics(request):
     ##########################
     # Setup Graph Parameters #
     ##########################
-
     extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
     charttype = "pieChart"
@@ -78,22 +88,13 @@ def statistics(request):
         }
     }
 
-    # Pass in multiple objects to be rendered through the template.
-    return render(request, 'statistics.html', {'graph': graph, 'changesets_json': data['changesets_json']})
-
-@login_required
-def dashboard(request):
-    """
-    Render dashboard overview. It will contain the following:
-    1. Issue Tracker reports
-    2. Changeset reports
-    3. Progress reports
-    4. Charts and graphs
-    """
     # Get retrieved issues from subscribed repositories
     subscribed  = bitmanager.get_all_subscriptions(request.user)
-    data = bitmethods.package_context(subscribed)
-    return render(request, 'dashboard.html', data)
+    context = bitmethods.package_context(subscribed)
+    context['graph'] = {'graph': graph, 'changesets_json': data['changesets_json']}
+
+    # Pass in multiple objects to be rendered through the template.
+    return render(request, 'statistics.html', context)
 
 
 @login_required

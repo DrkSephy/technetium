@@ -18,9 +18,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', views_bitbucket.dashboard, name='dashboard'),
     url(r'^issues/$', views_bitbucket.dashboard_issues, name='issues'),
     url(r'^manage/$', views_bitbucket.manage_repositories, name='manage'),
-    url(r'^reports/(.+)/(.+)$', views_bitbucket.manage_repositories, name='manage'),
+    url(r'^reports/(.+)/(.+)$', views_bitbucket.reports, name='manage'),
     # url(r'^linechart/$', views_bitbucket.line_chart),
-    # url(r'^statistics/$', views_bitbucket.statistics),
 
     # Ajax Request URLs
     url(r'^subscribe/$', views_bitbucket.subscribe_repository),
