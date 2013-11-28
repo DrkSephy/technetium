@@ -55,6 +55,8 @@
       {% endif %}
       </tbody>
   </table>
+
+  {% if repo.issues %}
   <div>
   <span class="pull-right">
       <button class="btn btn-default btn-sm btn-show-more" data-owner="{{ repo.repo_meta.repo_owner }}" data-slug="{{ repo.repo_meta.repo_slug }}" data-count="10">
@@ -62,6 +64,8 @@
   </span>
   </div>
   <br>
+  {% endif %}
+
   <hr>
   {% endfor %}
 
