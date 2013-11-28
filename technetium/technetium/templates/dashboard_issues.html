@@ -17,12 +17,7 @@
     <span class="pull-right">
 
       <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-new-issue">
-      <span class="glyphicon glyphicon-check space-right"></span>Post New Issue</button>
-
-      <span class="space-right"></span>
-
-      <button class="btn btn-default btn-sm btn-show-more" data-owner="{{ repo.repo_meta.repo_owner }}" data-slug="{{ repo.repo_meta.repo_slug }}" data-count="10">
-      <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
+      <span class="glyphicon glyphicon-check space-right"></span>New Issue</button>
 
     </span>
   </h3>
@@ -60,6 +55,14 @@
       {% endif %}
       </tbody>
   </table>
+  <div>
+  <span class="pull-right">
+      <button class="btn btn-default btn-sm btn-show-more" data-owner="{{ repo.repo_meta.repo_owner }}" data-slug="{{ repo.repo_meta.repo_slug }}" data-count="10">
+      <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
+  </span>
+  </div>
+  <br>
+  <hr>
   {% endfor %}
 
   {% endif %}

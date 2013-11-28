@@ -60,7 +60,7 @@ def statistics(request):
     ##########################
     # Setup Graph Parameters #
     ##########################
-    
+
     extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
     charttype = "pieChart"
@@ -232,7 +232,7 @@ def fetch_more_issues(request):
     repo_count = int(request.GET['count'])
 
     # Filter out just one repo slug
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 15, repo_count)
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
     html_data = bitissues.add_html_issue_rows(parsed_data)
