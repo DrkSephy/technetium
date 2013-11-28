@@ -12,7 +12,7 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, limit=None, start=None):
+def make_req_url(user, repo, endpoint, limit=50, start=0):
     """
     Constructs a URL for bitbucket API request.
 
@@ -28,11 +28,10 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         start: Integer
             - The starting node number for the resource.
 
-    Returns:   
+    Returns:
         url: String
             - The URL to send the request to.
     """
-
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
 
     # Set limit is given and is above 50, set limit to 50
@@ -40,13 +39,9 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         limit = 50
 
     # Handle extra queries
-    if limit and start:
-        url += "?limit=%d&start=%d" % (limit, start)
-    elif limit:
-        url += "?limit=%d" % limit
-    elif start:
-        url += "?start=%d" % start
+    url += "?limit=%d&start=%d" % (limit, start)
     return url
+
 
 def count(url, auth_tokens):
     """
@@ -55,7 +50,7 @@ def count(url, auth_tokens):
     Parameters:
         url: String
             - The URL to send the request to.
-    Returns:   
+    Returns:
         count: Integer
             - The number of commits inside the repository.
     """

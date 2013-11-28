@@ -1,5 +1,5 @@
 """
-Views for bitbucket application
+Views for bitbucket web application
 """
 from django.http import HttpResponse
 from django.conf import settings
@@ -51,15 +51,12 @@ def reports(request, owner, repo_slug):
     """
     Render the webpage to show reports and graphs
     """
-    # Store the data
-    # OAuth tokens
+    # Get OAuth tokens
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get the count of the commits in the repository
-    # The count is not zero based, have to subtract 1 or else
-    # a JSON decode error is thrown.
-    url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0, 0)
+    url = bitmethods.make_req_url(owner, repo_slug, 'changesets')
     start = bitmethods.count(url, auth_tokens) - 1
 
     # Number of iterations needed to get all of the data
@@ -126,7 +123,7 @@ def dashboard_issues(request):
 @login_required
 def line_chart(request):
     """
-    Render line chart on dashboard/graphs
+    This view is a placeholder for line graph code.
 
     David's notes
     -------------
@@ -135,7 +132,6 @@ def line_chart(request):
     probably need a few methods from bitstats to get the data in the
     right form and pass it into the charting views.
     """
-
     # Get random data
     start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
     nb_element = 150
