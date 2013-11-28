@@ -14,7 +14,7 @@ def tally_changesets(data):
 
     Returns:
         tally: Dictionary
-            - A dictionary containing the sums of all commits in the 
+            - A dictionary containing the sums of all commits in the
               repository.
     """
 
@@ -68,11 +68,11 @@ def tally_assigned_issues(data):
 
     Parameters:
         data: Dictionary
-            - A dictionary containing all assigned issues to be tallied. 
+            - A dictionary containing all assigned issues to be tallied.
 
     Returns:
         tally: Dictionary
-            - A dictionary containing the tally of all assigned issues for 
+            - A dictionary containing the tally of all assigned issues for
               all users in a repository.
 
     Example: Returns {accountname: 8, DrkSephy: 5}, which is a
@@ -107,7 +107,7 @@ def tally_opened_issues(data):
 
 def list_users(data):
     """
-    Returns a list of all developers in a repository. 
+    Returns a list of all developers in a repository.
     Useful for generating D3 graphs.
 
     Paramters:
@@ -135,7 +135,7 @@ def list_commits(data):
 
     Returns:
         commits: List
-            - A list containing the number of commits for each user  
+            - A list containing the number of commits for each user
               of a given repository.
     """
 

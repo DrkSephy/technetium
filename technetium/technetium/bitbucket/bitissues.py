@@ -10,7 +10,7 @@ def parse_all_issues(repo_issues):
     Parameters:
         repo_issues: List (Dictionaries of JSON issues)
 
-    Returns: 
+    Returns:
         List
     """
     # List of repositories, which contains list of parsed issues
@@ -30,7 +30,7 @@ def parse_issues(issues):
     Parameters:
         issues: List
 
-    Returns: 
+    Returns:
         List
     """
     parsed_issues = []
@@ -45,7 +45,7 @@ def parse_issues(issues):
         data['status'] = issue['status'].capitalize()
         data['type'] = issue['metadata']['kind'].capitalize()
         data['priority'] = issue['priority'].capitalize()
-        data['created'] = bitmethods.format_timestamp(issue['utc_created_on'])
+        data['date'] = bitmethods.format_timestamp(issue['utc_last_updated'])
         data['issues_url'] = "#"
 
         # Parse assignee
@@ -89,7 +89,7 @@ def add_html_issue_rows(parsed_data):
     Parameters:
         parsed_data: Dictionary
 
-    Returns: 
+    Returns:
         String
     """
     html = 'includes/issues/issues-list.html'
