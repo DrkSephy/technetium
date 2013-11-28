@@ -89,9 +89,12 @@ def reports(request, owner, repo_slug):
     }
 
     # Get retrieved issues from subscribed repositories
-    subscribed  = bitmanager.get_all_subscriptions(request.user)
+    subscribed = bitmanager.get_all_subscriptions(request.user)
     context = bitmethods.package_context(subscribed)
-    context['graph'] = {'graph': graph, 'changesets_json': data['changesets_json']}
+    context['owner'] = owner
+    context['repo_slug'] = repo_slug
+    context['graph'] = graph
+    context['changesets_json'] = data['changesets_json']
 
     # Pass in multiple objects to be rendered through the template.
     return render(request, 'statistics.html', context)
