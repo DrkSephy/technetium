@@ -53,12 +53,12 @@ def reports(request, owner, repo_slug):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    start_issues = bitissues.get_issues_count(owner, repo_slug)
-    print start_issues
-    issues_urls = bitmethods.get_api_urls(owner, repo_slug, 'issues', start_issues)
+    # Issues start at count 0
+    end_issues = bitissues.get_issues_count(owner, repo_slug, auth_tokens)
+    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', end_issues)
     print issues_urls
-    # bitissues.iterate_all_issues
     return
+    bitissues.iterate_all_issues(issues_urls, auth_tokens)
 
     # Get the count of the commits in the repository
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
