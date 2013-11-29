@@ -38,14 +38,20 @@
 <br>
 <hr>
 
-{% load nvd3_tags %}
-<head>
+
+<div class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Changeset commits by each user</h3>
+  </div>
+  <div class="panel-body">
+
+    {% load nvd3_tags %}
     {% include_chart_jscss %}
     {% load_chart graph.charttype graph.chartdata graph.chartcontainer graph.extra %}
-</head>
-<body>
     {% include_container graph.chartcontainer 400 500 %}
-</body>
+
+  </div>
+</div>
 
 
 
