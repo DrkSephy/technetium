@@ -36,15 +36,19 @@ def parse_issues_for_tallying(req_urls, auth_tokens):
     Grabs all issues in a repository with async requests.
     Purpose is to parse issues open, assigned, and resolved.
     """
-    parsed_issues
+    parsed_issues = []
     if req_urls:
         raw_issues = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
         for issues_list in raw_issues:
-            for issues in issues_list['issues']:
-                if
-                print issues
-                print
-
+            for issue in issues_list['issues']:
+                data = {}
+                data['issue_id']  = issue['local_id']
+                data['opened_by'] = issue['reported_by']['display_name']
+                data['timestamp'] = issue['utc_last_updated']
+                data['assigned']  = None
+                if 'responsible' in issue:
+                    data['assigned'] = issue['responsible']['display_name']
+                parsed_issues.append(data)
     return parsed_issues
 
 
