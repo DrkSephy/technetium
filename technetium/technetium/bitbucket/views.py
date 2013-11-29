@@ -61,15 +61,13 @@ def reports(request, owner, repo_slug):
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
     changesets_users = bitstats.iterate_changesets(changeset_urls, auth_tokens)
 
-    # Get retrieved issues from subscribed repositories
+    # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
     context = bitmethods.package_context(subscribed)
     context['owner'] = owner
     context['repo_slug'] = repo_slug
+    context['changesets_users'] = changesets_users
     context['graph'] = bitgraphs.commits_pie_graph(changesets_users)
-    context['changesets_json'] = changesets_users
-
-    # Pass in multiple objects to be rendered through the template.
     return render(request, 'statistics.html', context)
 
 
@@ -83,9 +81,8 @@ def dashboard_issues(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get all subscribed repositories
-    limit = 10
     subscribed  = bitmanager.get_all_subscriptions(request.user)
-    repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
+    repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', 10)
     repo_issues = bitissues.parse_all_issues(
                   bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens))
     issues_list = bitissues.attach_meta(subscribed, repo_issues)
@@ -94,7 +91,6 @@ def dashboard_issues(request):
     data = bitmethods.package_context(subscribed)
     data['issues_list'] = issues_list
     return render(request, 'dashboard_issues.html', data)
-
 
 
 #######################
@@ -183,4 +179,3 @@ def logout(request):
     """
     auth.logout(request)
     return redirect('/')
-
