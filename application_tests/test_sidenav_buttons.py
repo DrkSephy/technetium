@@ -15,7 +15,7 @@ class ButtonsTest(unittest.TestCase):
 		password = "zaq1xsw2"
 
 		# set b_local true to test locally
-		b_local = False
+		b_local = True
 		if b_local:
 			base_url = "http://localhost:8000"
 		else:
@@ -53,7 +53,7 @@ class ButtonsTest(unittest.TestCase):
 
 	def test_dashboard_button(self):
 		"""
-		tests dashboard button after login
+		tests Dashboard button after login
 		"""
 
 		b = False
@@ -77,7 +77,7 @@ class ButtonsTest(unittest.TestCase):
 
 	def test_issue_tracker_button(self):
 		"""
-		tests issue tracker button after login
+		tests Issue Tracker button after login
 		"""
 
 		b = False
@@ -101,9 +101,26 @@ class ButtonsTest(unittest.TestCase):
 
 	def test_subscriptions_button(self):
 		"""
-		tests subscriptions button after login
+		tests Subscriptions button after login
 		"""
-		pass
+
+		b = False
+		driver = self.driver
+
+		link_element = driver.find_element_by_partial_link_text("Subscriptions")
+		if link_element is not None:
+			link_element.click()
+			WebDriverWait(driver, 10).until(EC.title_contains("Technetium"))			
+			h2_elements = driver.find_elements_by_tag_name("h2")
+			for element in h2_elements:
+				if "Manage Repository Subscriptions" in element.text:
+					b = True
+					break
+
+		# wait 3 seconds to show the correct page being loaded
+		time.sleep(3)
+
+		self.assertTrue(b)
 
 
 	def tearDown(self):
