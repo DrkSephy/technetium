@@ -109,8 +109,8 @@ def list_users(data):
             - A list containing the developers of a given repository.
     """
     devs = []
-    for k, v in data.iteritems():
-        devs.append(str(k))
+    for key, value in data.iteritems():
+        devs.append(key)
     return devs
 
 
@@ -129,7 +129,7 @@ def list_commits(data):
               of a given repository.
     """
     commits = []
-    for k, v in data.iteritems():
-        commits.append(v)
+    for key, value in data.iteritems():
+        commits.append(value['changesets'])
     return commits
 

@@ -67,7 +67,6 @@ def reports(request, owner, repo_slug):
     context['owner'] = owner
     context['repo_slug'] = repo_slug
     context['tallies'] = tallies
-    print tallies
     context['graph'] = bitgraphs.commits_pie_graph(tallies)
     return render(request, 'statistics.html', context)
 

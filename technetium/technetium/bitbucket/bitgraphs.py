@@ -7,19 +7,19 @@ import datetime
 import time
 
 
-def commits_pie_graph(chart_data):
+def commits_pie_graph(tallies):
     """
     Sets up pie chart from given chart data
 
     Parameters:
-        chart_data: Dictionary
+        tallies: Dictionary
 
     Returns:
         content: Dictionary
     """
     # Get x and y list data
-    xdata = bitstats.list_users(chart_data)
-    ydata = bitstats.list_commits(chart_data)
+    xdata = bitstats.list_users(tallies)
+    ydata = bitstats.list_commits(tallies)
 
     # Setup Graph Parameters
     extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
