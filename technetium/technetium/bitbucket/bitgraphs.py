@@ -39,7 +39,7 @@ def commits_pie_graph(tallies):
         }}
 
 
-def line_chart():
+def commits_linegraph(changesets=None):
     """
     Temporary placeholder for line graph code.
 
