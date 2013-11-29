@@ -94,8 +94,15 @@ def combine_tallies(issues_tallied, changesets_tallied):
     Returns:
         Dictionary
     """
+    for user in changesets_tallied:
+        # User has made an issue
+        if user in issues_tallied:
+            for key in issues_tallied:
+                changesets_tallied[user][key] = issues_tallied[user][key]
+        else:
+            changesets_tallied[user]['issues_opened'] = 0
+            changesets_tallied[user]['issues_assigned'] = 0
     return changesets_tallied
-    pass
 
 
 def tally_issue_comments(data):

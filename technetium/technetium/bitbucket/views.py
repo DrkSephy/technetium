@@ -68,6 +68,7 @@ def reports(request, owner, repo_slug):
 
     # Combine tallies for issues and changesets for each user
     tallies = bitstats.combine_tallies(issues_tallied, changesets_tallied)
+    print tallies
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
@@ -144,7 +145,7 @@ def unsubscribe_repository(request):
     """
     # Success: unsubscribe from repository
     if bitmanager.unsubscribe_repository(request.user, request.POST):
-        return HttpResponse(status=201)
+        return HttpResponse(status=200)
     return HttpResponse(status=500)
 
 
