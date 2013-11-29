@@ -59,7 +59,7 @@ def get_api_urls(user, repo, endpoint, start, limit=50):
         req_urls.append(new_url)
         start -= limit
         count += 1
-    print req_urls
+    return req_urls
 
 
 def send_bitbucket_request(req_url, auth_tokens):

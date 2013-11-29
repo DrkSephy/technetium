@@ -47,13 +47,11 @@ def iterate_changesets(req_urls, auth_tokens):
         Dictionary
     """
     tally = {'changesets_json' : {}}
+    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
 
-        if start < limit:
-            start = last_request
-            limit = last_request
-        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
-            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        tally['changesets_json'] = bitmethods.dictionary_sum(tally['changesets_json'], x)
+    # x = bitstats.tally_changesets(bitchangesets.parse_changesets(
+    #     bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
+    # tally['changesets_json'] = bitmethods.dictionary_sum(tally['changesets_json'], x)
 
     return tally
 
@@ -114,11 +112,11 @@ def list_users(data):
         devs: List
             - A list containing the developers of a given repository.
     """
-
     devs = []
-    for k,v in data.iteritems():
+    for k, v in data.iteritems():
         devs.append(str(k))
     return devs
+
 
 def list_commits(data):
     """
@@ -134,8 +132,7 @@ def list_commits(data):
             - A list containing the number of commits for each user
               of a given repository.
     """
-
     commits = []
-    for k,v in data.iteritems():
+    for k, v in data.iteritems():
         commits.append(v)
     return commits

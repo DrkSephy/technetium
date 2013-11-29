@@ -36,9 +36,7 @@ def parse_changesets(repository):
               which needs to be parsed for all useful
               information.
     """
-
     keys = ['raw_author']
-
     changeset = []
 
     for a in repository:

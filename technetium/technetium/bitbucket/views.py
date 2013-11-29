@@ -61,8 +61,8 @@ def reports(request, owner, repo_slug):
 
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
+    changesets = bitstats.iterate_changesets(changeset_urls, auth_tokens)
     return
-    changesets = bitstats.iterate_changesets(owner, repo_slug, auth_tokens, start)
     xdata = bitstats.list_users(changesets['changesets_json'])
     ydata = bitstats.list_commits(changesets['changesets_json'])
 
