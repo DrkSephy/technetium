@@ -140,7 +140,7 @@ def package_context(subscriptions):
     return data
 
 
-def dictionary_sum(dict_a, dict_b):
+def dictionary_sum(dict_a, dict_b, sum_key):
     """
     Sums the values of two dictionaries based on corresponding keys.
 
@@ -156,13 +156,9 @@ def dictionary_sum(dict_a, dict_b):
         dictionary: Dictionary
             - The new dictionary containing the sum of its inputs.
     """
-    # New dictionary to store merged dict
-    dicts = defaultdict(int, dict_a)
-    # For all key-value pairs in dict B, sum up values
-    # In the new dictionary.
     for key, value in dict_b.items():
-        # Sum values corresponding to keys
-        dicts[key] += value
-    return dict(dicts)
-
-
+        if key not in dict_a:
+            dict_a[key] = value
+        else:
+            dict_a[key][sum_key] += value[sum_key]
+    return dict_a

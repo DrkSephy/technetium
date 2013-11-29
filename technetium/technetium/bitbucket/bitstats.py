@@ -28,8 +28,6 @@ def tally_changesets(data):
             tally[author] = {'changesets' : 1}
         else:
             tally[author]['changesets'] += 1
-    print tally
-    print
     return tally
 
 
@@ -45,12 +43,14 @@ def iterate_changesets(req_urls, auth_tokens):
     Returns:
         Dictionary
     """
-    tally = {}
+    # Send async requests to get raw changesets
     raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+
     # Tally up changesets from responses
+    tally = {}
     for changesets in raw_changesets:
         tallies = tally_changesets(bitchangesets.parse_changesets(changesets['changesets']))
-        tally = bitmethods.dictionary_sum(tally, tallies)
+        tally = bitmethods.dictionary_sum(tally, tallies, 'changesets')
     return tally
 
 
