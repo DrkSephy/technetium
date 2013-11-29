@@ -54,13 +54,13 @@ def reports(request, owner, repo_slug):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Tally all of the changesets for each user
-    changesets_count = bitchangesets.get_changesets_count(owner, repo_slug, auth_tokens)
+    changesets_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'changesets')
     changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', changesets_count)
     changesets_parsed = bitchangesets.iterate_all_changesets(changesets_urls, auth_tokens)
     changesets_tallied = bitstats.tally_changesets(changesets_parsed)
 
     # Tally the number of issues opened, assigned
-    issues_count = bitissues.get_issues_count(owner, repo_slug, auth_tokens)
+    issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
     issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
     issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
     issues_tallied = bitstats.tally_issues(issues_parsed)

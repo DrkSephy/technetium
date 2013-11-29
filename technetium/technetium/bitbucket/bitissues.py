@@ -114,14 +114,3 @@ def add_html_issue_rows(parsed_data):
     """
     html = 'includes/issues/issues-list.html'
     return render_to_string(html, {'repo' : {'issues' : parsed_data}})
-
-
-def get_issues_count(owner, repo_slug, auth_tokens):
-    """
-    Gets and returns issues count of repo
-    """
-    issue_url = bitmethods.make_req_url(owner, repo_slug, 'issues', 0)
-    response = bitmethods.send_bitbucket_request(issue_url, auth_tokens)
-    if response and 'count' in response:
-        return response['count'] - 1
-    return 0

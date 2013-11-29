@@ -47,3 +47,4 @@ def parse_changeset(changeset):
     data['author'] = changeset['author']
     data['timestamp'] = changeset['utctimestamp']
     return data
+
