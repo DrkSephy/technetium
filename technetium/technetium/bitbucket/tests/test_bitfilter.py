@@ -85,38 +85,40 @@ class BitfilterTest(unittest.TestCase):
         self.author_changesets = [self.albert_changeset, self.jorge_changeset, self.david_changeset]
 
 
-    def test_filter_issue_by_type(self):
+    def test_filter_issues_by_type(self):
         """
-        Test to filter issue by type
+        Test to filter issues by type
         """
         expected_result_issue = [{'status': 'New', 'issues_url': '#', 'title': 'Parse changeset is weird', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'priority': 'Major', 'assignee': 'Jorge Yau', 'date': '11-29-2013', 'type': 'Bug'}]
         self.assertEqual(bitfilter.filter_issues({'type':'bug'},self.all_parsed_issues), expected_result_issue)
 
     
-    def test_filter_issue_by_priority(self):
+    def test_filter_issues_by_priority(self):
         """
-        Test to filter issue by priority
+        Test to filter issues by priority
+        """
+        expected_result_issue = [{'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Function for getting all issues in a repository', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-19-2013', 'priority': 'Blocker'}]
+        self.assertEqual(bitfilter.filter_issues({'priority':'blocker'},self.all_parsed_issues), expected_result_issue)
+
+
+    def test_filter_issues_by_status(self):
+        """
+        Test to filter issues by status
+        """
+        expected_result_issue = [{'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from a single repo', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from all repos', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}]
+        self.assertEqual(bitfilter.filter_issues({'status':'invalid'},self.all_parsed_issues), expected_result_issue)
+
+
+    def test_filter_issues_by_date_created(self):
+        """
+        Test to filter issues by date created
         """
         pass
 
 
-    def test_filter_issue_by_status(self):
+    def test_filter_issues_by_assignee(self):
         """
-        Test to filter issue by status
-        """
-        pass
-
-
-    def test_filter_issue_by_date_created(self):
-        """
-        Test to filter issue by date created
-        """
-        pass
-
-
-    def test_filter_issue_by_assignee(self):
-        """
-        Test to filter issue by assignee
+        Test to filter issues by assignee
         """
         pass
 
@@ -248,7 +250,7 @@ class BitfilterTest(unittest.TestCase):
     
     def test_filter_issue_by_today(self):
         """
-        Test to filter issues by today
+        Test to filter issue date by today
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_0, 'today'), expected_result_issue)        
@@ -256,7 +258,7 @@ class BitfilterTest(unittest.TestCase):
     
     def test_filter_issue_by_this_week(self):
         """
-        Test to filter issues by this week
+        Test to filter issue date by this week
         """
         expected_result_issue = [self.today_issue, self.current_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'this_week'), expected_result_issue)        
@@ -264,7 +266,7 @@ class BitfilterTest(unittest.TestCase):
     
     def test_filter_issue_by_last_week(self):
         """
-        Test to filter issues by last week
+        Test to filter issue date by last week
         """
         expected_result_issue = [self.last_monday_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'last_week'), expected_result_issue)        
@@ -272,7 +274,7 @@ class BitfilterTest(unittest.TestCase):
     
     def test_filter_issue_by_this_month(self):
         """
-        Test to filter issues by this month
+        Test to filter issue date by this month
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'this_month'), expected_result_issue)        
@@ -280,7 +282,7 @@ class BitfilterTest(unittest.TestCase):
     
     def test_filter_issue_by_last_month(self):
         """
-        Test to filter issues by last month
+        Test to filter issue date by last month
         """
         expected_result_issue = [self.last_day_prev_month_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'last_month'), expected_result_issue)        
@@ -288,7 +290,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issue_by_this_year(self):
         """
-        Test to filter issues by this year
+        Test to filter issue date by this year
         """
         expected_result_issue = [self.today_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'this_year'), expected_result_issue)        
@@ -296,7 +298,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issue_by_last_year(self):
         """
-        Test to filter issues by last year
+        Test to filter issue date by last year
         """
         expected_result_issue = [self.last_year_issue]
         self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'last_year'), expected_result_issue)        
@@ -304,7 +306,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issues_by_user_albert(self):
         """
-        Test to filter issues by user 'Albert Chieu'
+        Test to filter issue assignee by user 'Albert Chieu'
         """
         expected_result_issue = [self.albert_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues,'Albert Chieu'), expected_result_issue)
@@ -312,7 +314,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issues_by_user_jorge(self):
         """
-        Test to filter issues by user 'Jorge Yau'
+        Test to filter issue assignee by user 'Jorge Yau'
         """
         expected_result_issue = [self.jorge_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'Jorge Yau'), expected_result_issue)        
@@ -320,7 +322,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issues_by_user_david(self):
         """
-        Test to filter issues by user 'David Leonard'
+        Test to filter issue assignee by user 'David Leonard'
         """
         expected_result_issue = [self.david_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'David Leonard'), expected_result_issue)        
@@ -328,7 +330,7 @@ class BitfilterTest(unittest.TestCase):
 
     def test_filter_issues_by_user_unassigned(self):
         """
-        Test to filter issues by unassigned user
+        Test to filter issue assignee by unassigned user
         """
         expected_result_issue = [self.unassigned_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'unassigned'), expected_result_issue)        
