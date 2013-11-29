@@ -22,7 +22,8 @@ $(".btn-show-more").click(function() {
 
         success : function(data) {
             // Append rows of issues to table
-            tableBody.append(data);
+            var moreIssues = $(data).hide();
+            moreIssues.appendTo(tableBody).show(duration=800);
 
             // Increment repo count
             var newCount = parseInt(repoCount) + 15;

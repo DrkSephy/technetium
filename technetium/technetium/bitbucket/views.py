@@ -61,10 +61,10 @@ def reports(request, owner, repo_slug):
 
     # Tally all of the changesets for each user
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
-    Changeset_count = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
-    changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', Changeset_count)
-    changeset_parsed = bitchangesets.iterate_all_changesets(changeset_urls, auth_tokens)
-    changeset_tallied = bitstats.tally_changesets(changeset_parsed)
+    Changesets_count = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
+    changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', Changeset_count)
+    changesets_parsed = bitchangesets.iterate_all_changesets(changeset_urls, auth_tokens)
+    changesets_tallied = bitstats.tally_changesets(changeset_parsed)
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
@@ -130,8 +130,8 @@ def subscribe_repository(request):
     """
     # Success: subscribe to repository
     if bitmanager.subscribe_repository(request.user, request.POST):
-        return HttpResponse("{'status' : 'sucess'}")
-    return HttpResponse("{'status' : 'fail'}")
+        return HttpResponse(status=201)
+    return HttpResponse(status=500)
 
 
 @login_required
@@ -141,8 +141,8 @@ def unsubscribe_repository(request):
     """
     # Success: unsubscribe from repository
     if bitmanager.unsubscribe_repository(request.user, request.POST):
-        return HttpResponse("{'status' : 'sucess'}")
-    return HttpResponse("{'status' : 'fail'}")
+        return HttpResponse(status=201)
+    return HttpResponse(status=500)
 
 
 @login_required
