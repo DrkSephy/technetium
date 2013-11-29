@@ -1,0 +1,60 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+<div class="col-lg-12">
+  <h2><span class="glyphicon glyphicon-tasks space-right"></span>
+    Technetium Report: <em>{{ owner }}/{{ repo_slug }}</em>
+  </h2>
+</div>
+<hr>
+
+<div class="col-lg-12">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped tablesorter">
+            <thead>
+            <tr>
+            <th class="header"> Bitbucket User <i class="icon-sort"></i></th>
+            <th class="header"> Commits <i class="icon-sort"></i></th>
+            <th class="header"> Issues Opened <i class="icon-sort"></i></th>
+            <th class="header"> Issues Assigned <i class="icon-sort"></i></th>
+            <th class="header"> Issues Completed <i class="icon-sort"></i></th>
+            <th class="header"> Issue Comments <i class="icon-sort"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for key, value in tallies.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value.changesets }}</td>
+                <td>{{ value.issues_opened }}</td>
+                <td>{{ value.issues_assigned }}</td>
+                <td>{{ value.issues_completed }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<hr>
+
+
+<div class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Changesets Breakdown By Users</h3>
+  </div>
+  <div class="panel-body">
+
+    {% load nvd3_tags %}
+    {% include_chart_jscss %}
+    {% load_chart commits_piegraph.charttype commits_piegraph.chartdata commits_piegraph.chartcontainer commits_piegraph.extra %}
+    {% include_container commits_piegraph.chartcontainer 400 500 %}
+
+  </div>
+</div>
+
+{% endblock %}
