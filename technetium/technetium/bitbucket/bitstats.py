@@ -2,7 +2,6 @@
 Module to get statistics of repositories
 """
 import bitmethods
-import bitchangesets
 
 
 def tally_changesets(data):
