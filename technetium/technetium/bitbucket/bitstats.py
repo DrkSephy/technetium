@@ -30,9 +30,6 @@ def tally_changesets(data):
             tally[author]['changesets'] += 1
     return tally
 
-    tally = bitmethods.dictionary_sum(tally, tallies, 'changesets')
-    return tally
-
 
 def tally_assigned_issues(data):
     """
