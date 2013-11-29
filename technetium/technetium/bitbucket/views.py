@@ -57,8 +57,10 @@ def reports(request, owner, repo_slug):
     end_issues = bitissues.get_issues_count(owner, repo_slug, auth_tokens)
     issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', end_issues)
     parsed_issues = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
-    print parsed_issues
+    tallied_issues = bitstats.tally_issues(parsed_issues)
+    print tallied_issues
     return
+
     # Get the count of the commits in the repository
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
     start = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1

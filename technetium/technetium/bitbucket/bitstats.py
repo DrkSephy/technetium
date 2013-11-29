@@ -52,43 +52,39 @@ def parse_issues_for_tallying(req_urls, auth_tokens):
     return parsed_issues
 
 
-def tally_assigned_issues(data):
+def tally_issues(issues):
     """
     Gets the number of issues that each user has been assigned.
 
     Parameters:
-        data: Dictionary
-            - A dictionary containing all assigned issues to be tallied.
+        data: List
+            - A List containing all parsed issues to be tallied.
 
     Returns:
         tally: Dictionary
             - A dictionary containing the tally of all assigned issues for
               all users in a repository.
-
-    Example: Returns {accountname: 8, DrkSephy: 5}, which is a
-    dictionary of the number of issues the above user resolved.
     """
-    pass
+    tally = {}
+    for issue in issues:
+        # Tally up who opened the issue
+        reporter = issue['opened_by']
+        if reporter not in tally:
+            tally[reporter] = {'issues_opened' : 0, 'issues_assigned' : 0}
+        tally[reporter]['issues_opened'] += 1
+
+        # Tally up who was assigned the issue
+        assigned = issue['assigned']
+        if assigned:
+            if assigned not in tally:
+                tally[assigned] = {'issues_opened' : 0, 'issues_assigned' : 0}
+            tally[assigned]['issues_assigned'] += 1
+    return tally
 
 
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
-    """
-    pass
-
-
-def tally_opened_issues(data):
-    """
-    Gets the number of issues each user has opened.
-
-    Notes: Even though issues are usually opened by the scrum master,
-    we still need this to grade them.
-
-    Returns:
-        opened_issues: Dictionary
-            - A dictionary containing number of issues that each
-              user in a given repository has opened.
     """
     pass
 
