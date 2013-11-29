@@ -42,6 +42,7 @@ def parse_issues_for_tallying(req_urls, auth_tokens):
         for issues_list in raw_issues:
             for issue in issues_list['issues']:
                 data = {}
+                data['status']  = issue['status']
                 data['issue_id']  = issue['local_id']
                 data['opened_by'] = issue['reported_by']['display_name']
                 data['timestamp'] = issue['utc_last_updated']
@@ -66,20 +67,35 @@ def tally_issues(issues):
               all users in a repository.
     """
     tally = {}
+
     for issue in issues:
         # Tally up who opened the issue
         reporter = issue['opened_by']
         if reporter not in tally:
-            tally[reporter] = {'issues_opened' : 0, 'issues_assigned' : 0}
+            tally[reporter] = new_issues_tally()
         tally[reporter]['issues_opened'] += 1
 
         # Tally up who was assigned the issue
         assigned = issue['assigned']
         if assigned:
             if assigned not in tally:
-                tally[assigned] = {'issues_opened' : 0, 'issues_assigned' : 0}
+                tally[assigned] = new_issues_tally()
             tally[assigned]['issues_assigned'] += 1
+
+            # Tally up issues completed if issue was completed
+            print issue['status']
+            if issue['status'] == 'resolved':
+                tally[assigned]['issues_completed'] += 1
     return tally
+
+
+def new_issues_tally():
+    """
+    Helper function for tally issues
+    """
+    return {'issues_opened' : 0,
+            'issues_assigned' : 0,
+            'issues_completed' : 0 }
 
 
 def combine_tallies(changesets_tallied, issues_tallied):
@@ -103,12 +119,12 @@ def combine_tallies(changesets_tallied, issues_tallied):
         else:
             changesets_tallied[user]['issues_opened'] = 0
             changesets_tallied[user]['issues_assigned'] = 0
+            changesets_tallied[user]['issues_completed'] = 0
 
     # Handle case if user has issues but not commits
     for user in issues_tallied:
         changesets_tallied[user] = issues_tallied[user]
         changesets_tallied[user]['changesets'] = 0
-
     return changesets_tallied
 
 
