@@ -1,8 +1,9 @@
-import requests
+"""
+Module to get statistics of repositories
+"""
 import bitmethods
 import bitchangesets
-import bitstats
-import simplejson as json
+
 
 def tally_changesets(data):
     """
@@ -14,17 +15,15 @@ def tally_changesets(data):
 
     Returns:
         tally: Dictionary
-            - A dictionary containing the sums of all commits in the 
+            - A dictionary containing the sums of all commits in the
               repository.
     """
-
-    #data = [{'author': 'Kevin Chan'}, {'author': 'Kevin Chan'}]
-    # Dictionary to store commit counts
     tally = {}
+
     # Iterate over all dictionaries in our list
     if data != None:
         for i in data:
-            for k,v in i.iteritems():
+            for k, v in i.iteritems():
                 # If author is in dictionary, +=1.
                 # Otherwise, add the author to the dictionary
                 # and start his counter to be 1.
@@ -32,34 +31,29 @@ def tally_changesets(data):
                     tally[v] += 1
                 else:
                     tally[v] = 1
-
-        # Return a dictionary of the tally.
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
 
-def iterate_data(user, repo, auth_tokens, start, limit):
+
+def iterate_changesets(req_urls, auth_tokens):
     """
-    Gets all of the commit JSON from a repository, bundles it and tallies.
+    Sends async API requests to gets all of the commits
+    from a repository based on the req_urls. Parses the
+    json reponse and tallies commits for each user.
+
+    Parameters:
+        req_urls: List
+
+    Returns:
+        Dictionary
     """
-    data = {}
-    data['changesets_json'] = {}
-    num_requests = 0
-    iterations = start / limit
-    last_request = start % limit
-
-    while num_requests <= iterations:
-        if start < 50:
-            start = last_request
-            limit = last_request
-        x = bitstats.tally_changesets(bitchangesets.parse_changesets(
-            bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
-        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
-
-        start -= 50
-        num_requests += 1
-
-    return data
+    tally = {}
+    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+    # Tally up changesets from responses
+    for changesets in raw_changesets:
+        tallies = tally_changesets(bitchangesets.parse_changesets(changesets['changesets']))
+        tally = bitmethods.dictionary_sum(tally, tallies)
+    return tally
 
 
 def tally_assigned_issues(data):
@@ -68,11 +62,11 @@ def tally_assigned_issues(data):
 
     Parameters:
         data: Dictionary
-            - A dictionary containing all assigned issues to be tallied. 
+            - A dictionary containing all assigned issues to be tallied.
 
     Returns:
         tally: Dictionary
-            - A dictionary containing the tally of all assigned issues for 
+            - A dictionary containing the tally of all assigned issues for
               all users in a repository.
 
     Example: Returns {accountname: 8, DrkSephy: 5}, which is a
@@ -81,13 +75,12 @@ def tally_assigned_issues(data):
     pass
 
 
-
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
     """
-
     pass
+
 
 def tally_opened_issues(data):
     """
@@ -101,13 +94,12 @@ def tally_opened_issues(data):
             - A dictionary containing number of issues that each
               user in a given repository has opened.
     """
-
     pass
 
 
 def list_users(data):
     """
-    Returns a list of all developers in a repository. 
+    Returns a list of all developers in a repository.
     Useful for generating D3 graphs.
 
     Paramters:
@@ -118,11 +110,11 @@ def list_users(data):
         devs: List
             - A list containing the developers of a given repository.
     """
-
     devs = []
-    for k,v in data.iteritems():
+    for k, v in data.iteritems():
         devs.append(str(k))
     return devs
+
 
 def list_commits(data):
     """
@@ -135,11 +127,11 @@ def list_commits(data):
 
     Returns:
         commits: List
-            - A list containing the number of commits for each user  
+            - A list containing the number of commits for each user
               of a given repository.
     """
-
     commits = []
-    for k,v in data.iteritems():
+    for k, v in data.iteritems():
         commits.append(v)
     return commits
+

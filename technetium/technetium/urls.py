@@ -13,11 +13,13 @@ urlpatterns = patterns('',
     url(r'^$', views_bitbucket.home),
     url(r'^login/$', views_bitbucket.home, name='login'),
     url(r'^logout/$', views_bitbucket.logout, name='logout'),
+
+    # Technetium Sidebar
     url(r'^dashboard/$', views_bitbucket.dashboard, name='dashboard'),
     url(r'^issues/$', views_bitbucket.dashboard_issues, name='issues'),
-    url(r'^linechart/$', views_bitbucket.line_chart),
-    url(r'^statistics/$', views_bitbucket.statistics),
     url(r'^manage/$', views_bitbucket.manage_repositories, name='manage'),
+    url(r'^reports/(.+)/(.+)$', views_bitbucket.reports, name='manage'),
+    # url(r'^linechart/$', views_bitbucket.line_chart),
 
     # Ajax Request URLs
     url(r'^subscribe/$', views_bitbucket.subscribe_repository),

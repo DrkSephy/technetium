@@ -1,7 +1,9 @@
-import requests
-import simplejson as json
+"""
+Module for bitchangesets
+"""
 import bitmethods
 import re
+
 
 def get_changesets(user, repo, auth_tokens, limit, start):
     """
@@ -14,20 +16,15 @@ def get_changesets(user, repo, auth_tokens, limit, start):
 
     Returns:
         changesets: dictionary
-            - A dictionary containing [key][values] representing 
+            - A dictionary containing [key][values] representing
               all commits for the requested repositories.
     """
-
-    # Get the changesets.
-    # The URL for changesets is:
-    # 'https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?limit=2')
     req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
-    changesets = bitmethods.send_bitbucket_request(req_url, auth_tokens)
-    return changesets['changesets']
-   
-    # Return the JSON
+    res_json = bitmethods.send_bitbucket_request(req_url, auth_tokens)
+    if 'changesets'  in res_json:
+        return res_json['changesets']
+    return {}
 
-    
 
 def parse_changesets(repository):
     """
@@ -40,9 +37,7 @@ def parse_changesets(repository):
               which needs to be parsed for all useful
               information.
     """
-
     keys = ['raw_author']
-
     changeset = []
 
     for a in repository:

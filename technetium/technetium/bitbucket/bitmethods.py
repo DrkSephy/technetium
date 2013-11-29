@@ -12,7 +12,7 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, limit=None, start=None):
+def make_req_url(user, repo, endpoint, limit=50, start=0):
     """
     Constructs a URL for bitbucket API request.
 
@@ -28,11 +28,10 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         start: Integer
             - The starting node number for the resource.
 
-    Returns:   
+    Returns:
         url: String
             - The URL to send the request to.
     """
-
     url = "%s%s/%s/%s" % (API_BASE_URL, user, repo, endpoint)
 
     # Set limit is given and is above 50, set limit to 50
@@ -40,28 +39,27 @@ def make_req_url(user, repo, endpoint, limit=None, start=None):
         limit = 50
 
     # Handle extra queries
-    if limit and start:
-        url += "?limit=%d&start=%d" % (limit, start)
-    elif limit:
-        url += "?limit=%d" % limit
-    elif start:
-        url += "?start=%d" % start
+    url += "?limit=%d&start=%d" % (limit, start)
     return url
 
-def count(url, auth_tokens):
-    """
-    Returns the count of the repository.
 
-    Parameters:
-        url: String
-            - The URL to send the request to.
-    Returns:   
-        count: Integer
-            - The number of commits inside the repository.
+def get_api_urls(user, repo, endpoint, start, limit=50):
     """
-    req = requests.get(url, auth=auth_tokens)
-    changesets = json.loads(req.content)
-    return changesets['count']
+    Makes a list of api urls based on iterating through limit.
+    Uses make_req_url() as a helper function.
+
+    Returns:
+        content: List
+    """
+    req_urls = []
+    count = 0
+    stop = start/limit
+    while count <= stop:
+        new_url = make_req_url(user, repo, endpoint, limit, start)
+        req_urls.append(new_url)
+        start -= limit
+        count += 1
+    return req_urls
 
 
 def send_bitbucket_request(req_url, auth_tokens):

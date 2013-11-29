@@ -1,14 +1,11 @@
 """
-Views for bitbucket application
+Views for bitbucket web application
 """
 from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-import random
-import datetime
-import time
 
 # Project Modules
 import bitauth
@@ -17,6 +14,7 @@ import bitmanager
 import bitchangesets
 import bitmethods
 import bitstats
+import bitgraphs
 
 # Home page view
 def home(request):
@@ -30,56 +28,6 @@ def home(request):
       'key': getattr(settings, 'SOCIAL_AUTH_BITBUCKET_KEY', None)
     })
 
-
-@login_required
-def statistics(request):
-    """
-    Render the reports.
-    """
-    # Using smw-koopa-krisis as a test repository
-    user = 'DrkSephy'
-    repo = 'technetium-teamdev-david'
-
-    # Store the data
-    # OAuth tokens
-    auth_data = bitauth.get_social_auth_data(request.user)
-    auth_tokens = bitauth.get_auth_tokens(auth_data)
-
-    # Get the count of the commits in the repository
-    # The count is not zero based, have to subtract 1 or else
-    # a JSON decode error is thrown.
-    url = bitmethods.make_req_url(user, repo, 'changesets', 0, 0)
-    start = bitmethods.count(url, auth_tokens) - 1
-
-    # Number of iterations needed to get all of the data
-    data = bitstats.iterate_data(user, repo, auth_tokens, start, 50)
-
-    xdata =  bitstats.list_users(data['changesets_json'])
-    ydata =  bitstats.list_commits(data['changesets_json'])
-
-    ##########################
-    # Setup Graph Parameters #
-    ##########################
-    
-    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-    chartcontainer = 'piechart_container' # container name
-
-    graph = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': False,
-            'x_axis_format': '',
-            'tag_script_js': True,
-            'jquery_on_ready': False,
-        }
-    }
-
-    # Pass in multiple objects to be rendered through the template.
-    return render(request, 'statistics.html', {'graph': graph, 'changesets_json': data['changesets_json']})
 
 @login_required
 def dashboard(request):
@@ -97,6 +45,33 @@ def dashboard(request):
 
 
 @login_required
+def reports(request, owner, repo_slug):
+    """
+    Render the webpage to show reports and graphs
+    """
+    # Get OAuth tokens
+    auth_data = bitauth.get_social_auth_data(request.user)
+    auth_tokens = bitauth.get_auth_tokens(auth_data)
+
+    # Get the count of the commits in the repository
+    count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
+    start = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
+
+    # Call asynch iterations to get all of the data
+    changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
+    changesets_users = bitstats.iterate_changesets(changeset_urls, auth_tokens)
+
+    # Get retrieved context from subscribed repositories
+    subscribed = bitmanager.get_all_subscriptions(request.user)
+    context = bitmethods.package_context(subscribed)
+    context['owner'] = owner
+    context['repo_slug'] = repo_slug
+    context['changesets_users'] = changesets_users
+    context['graph'] = bitgraphs.commits_pie_graph(changesets_users)
+    return render(request, 'statistics.html', context)
+
+
+@login_required
 def dashboard_issues(request):
     """
     Render dashboard issue tracker overview.
@@ -106,9 +81,8 @@ def dashboard_issues(request):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get all subscribed repositories
-    limit = 10
     subscribed  = bitmanager.get_all_subscriptions(request.user)
-    repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', limit)
+    repo_urls   = bitmanager.get_subscribed_repo_urls(subscribed, 'issues', 10)
     repo_issues = bitissues.parse_all_issues(
                   bitmethods.send_async_bitbucket_requests(repo_urls, auth_tokens))
     issues_list = bitissues.attach_meta(subscribed, repo_issues)
@@ -117,50 +91,6 @@ def dashboard_issues(request):
     data = bitmethods.package_context(subscribed)
     data['issues_list'] = issues_list
     return render(request, 'dashboard_issues.html', data)
-
-
-@login_required
-def line_chart(request):
-    """
-    Render line chart on dashboard/graphs
-
-    David's notes
-    -------------
-    I'll need to figure out how to properly get the data from the JSON
-    returned from Bitbucket, and get it into the proper form. Will
-    probably need a few methods from bitstats to get the data in the
-    right form and pass it into the charting views.
-    """
-
-    # Get random data
-    start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
-    nb_element = 150
-    xdata = range(nb_element)
-    xdata = map(lambda x: start_time + x * 1000000000, xdata)
-    ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-    ydata2 = map(lambda x: x * 2, ydata)
-
-    tooltip_date = "%d %b %Y %H:%M:%S %p"
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"},
-                   "date_format": tooltip_date}
-    chartdata = {'x': xdata,
-                 'name1': 'series 1', 'y1': ydata, 'extra1': extra_serie,
-                 'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
-
-    charttype = "lineChart"
-    chartcontainer = 'linechart_container' # container name
-    data = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': True,
-            'x_axis_format': '%d %b %Y %H',
-            'tag_script_js': True,
-            'jquery_on_ready': False,
-        }
-    }
-    return render(request, 'line_chart.html', data)
 
 
 #######################
@@ -232,7 +162,7 @@ def fetch_more_issues(request):
     repo_count = int(request.GET['count'])
 
     # Filter out just one repo slug
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 15, repo_count)
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
     html_data = bitissues.add_html_issue_rows(parsed_data)
@@ -249,4 +179,3 @@ def logout(request):
     """
     auth.logout(request)
     return redirect('/')
-
