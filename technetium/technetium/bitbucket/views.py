@@ -59,15 +59,15 @@ def reports(request, owner, repo_slug):
 
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
-    changesets_users = bitstats.iterate_changesets(changeset_urls, auth_tokens)
+    tallies = bitstats.iterate_changesets(changeset_urls, auth_tokens)
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
     context = bitmethods.package_context(subscribed)
     context['owner'] = owner
     context['repo_slug'] = repo_slug
-    context['changesets_users'] = changesets_users
-    context['graph'] = bitgraphs.commits_pie_graph(changesets_users)
+    context['tallies'] = tallies
+    context['graph'] = bitgraphs.commits_pie_graph(tallies['changesets'])
     return render(request, 'statistics.html', context)
 
 

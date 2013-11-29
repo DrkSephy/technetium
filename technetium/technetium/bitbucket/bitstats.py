@@ -19,20 +19,19 @@ def tally_changesets(data):
               repository.
     """
     tally = {}
-
     # Iterate over all dictionaries in our list
-    if data != None:
+    if data:
         for i in data:
             for k, v in i.iteritems():
-                # If author is in dictionary, +=1.
-                # Otherwise, add the author to the dictionary
-                # and start his counter to be 1.
+                # If author is in dictionary
                 if v in tally:
                     tally[v] += 1
+                # Otherwise, add the author and start counter to 1
                 else:
                     tally[v] = 1
-        # Example: {DrkSephy: 9, Jorge Yau: 15}
-        return tally
+
+    # Example: {DrkSephy: 9, Jorge Yau: 15}
+    return tally
 
 
 def iterate_changesets(req_urls, auth_tokens):

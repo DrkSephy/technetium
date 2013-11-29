@@ -36,20 +36,16 @@ def parse_changesets(repository):
             - A dictionary containing JSON from a repository
               which needs to be parsed for all useful
               information.
+
+    Returns:
+        changesets: List
     """
-    keys = ['raw_author']
-    changeset = []
-
-    for a in repository:
-        new_list = {}
-        for k,v in a.iteritems():
-            if k in keys:
-                if re.match('(.*?)(?=\s<)', v) == None:
-                    new_list[k] = v
-                else:
-                    v2 = re.match('(.*?)(?=\s<)', v)
-                    new_list[k] = v2.group()
-        changeset.append(new_list)
-
-    return changeset
-
+    changesets = []
+    for changeset in repository:
+        data = {}
+        data['parsed_author'] = re.sub(r'\s+<.+>', '', changeset['raw_author'])
+        data['author'] = changeset['author']
+        data['timestamp'] = changeset['utctimestamp']
+        changesets.append(data)
+    print changesets
+    return changesets
