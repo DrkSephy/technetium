@@ -52,8 +52,8 @@ def commits_linegraph(changesets=None):
     right form and pass it into the charting views.
     """
     # Set start date to earliest commit
-    start_time = changesets[-1]['timestamp']
-    nb_element = 200
+    start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
+    nb_element = 10
     xdata = range(nb_element)
     xdata = map(lambda x: start_time + x * 1000000000, xdata)
     ydata = [i + random.randint(1, 10) for i in range(nb_element)]

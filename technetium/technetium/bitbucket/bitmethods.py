@@ -2,8 +2,9 @@
 This Module has terrible cohension, but it's okay.
 Module contains a trash bin for our common methods.
 """
-import simplejson as json
 from datetime import datetime
+import simplejson as json
+import time
 import requests
 import grequests
 
@@ -128,7 +129,8 @@ def get_count(owner, repo_slug, auth_tokens, endpoint):
 
 def to_unix_time(timestamp):
     """
-    Formats a string timestamp to unix seconds
+    Formats a string timestamp to unix seconds.
+    Multiplies by 1000 to use for d3.
 
     Parameters:
         timestamp: String
@@ -136,7 +138,9 @@ def to_unix_time(timestamp):
     Returns:
         Integer
     """
-    pass
+    date = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
+    return int(time.mktime(date.timetuple()))*1000
+
 
 
 def format_timestamp(timestamp):
