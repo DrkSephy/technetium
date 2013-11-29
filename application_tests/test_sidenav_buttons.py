@@ -10,18 +10,25 @@ class ButtonsTest(unittest.TestCase):
 	def setUp(self):
 		self.driver = webdriver.Firefox()
 		self.driver.implicitly_wait(3)
-		self.base_url = "http://technetium.herokuapp.com"
-		self.b_login = False
+
+		username = "technetiumtest"
+		password = "zaq1xsw2"
+
+		# set b_local true to test locally
+		b_local = False
+		if b_local:
+			base_url = "http://localhost:8000"
+		else:
+			base_url = "http://technetium.herokuapp.com"
 
 		driver = self.driver
-		driver.get(self.base_url + "/")
+		driver.get(base_url + "/")
 #		WebDriverWait(driver, 10).until(EC.title_contains("Technetium"))
 
 		link_element = driver.find_element_by_partial_link_text("Sign in with Bitbucket")
 		if link_element is not None:
 			link_element.click()
 
-			title = ""
 			try:
 				# wait for the page to refresh
 				WebDriverWait(driver, 10).until(lambda driver : driver.find_element_by_name("submit"))
@@ -30,23 +37,19 @@ class ButtonsTest(unittest.TestCase):
 				username_element = driver.find_element_by_name("username")
 				password_element = driver.find_element_by_name("password")
 
-				username = "technetiumtest"
-				password = "zaq1xsw2"
 				username_element.send_keys(username)
 				password_element.send_keys(password)
 
 				submit_element.click()
 				WebDriverWait(driver, 10).until(EC.title_contains("Technetium"))
-				self.b_login = True
 
-				print "Test login resulting in target page with title: ", driver.title
+#				print "Setup Login to: ", driver.title
 				# wait 3 seconds to show the correct page being loaded before quitting the browser
-				time.sleep(3)
+#				time.sleep(3)
 
 			except:
-				print "Exception: login failed"
+				print "Setup Login failed"
 	
-
 
 	def test_dashboard_button(self):
 		"""
@@ -74,7 +77,7 @@ class ButtonsTest(unittest.TestCase):
 
 	def test_issue_tracker_button(self):
 		"""
-		tests dashboard button after login
+		tests issue tracker button after login
 		"""
 
 		b = False
@@ -94,6 +97,13 @@ class ButtonsTest(unittest.TestCase):
 		time.sleep(3)
 
 		self.assertTrue(b)
+
+
+	def test_subscriptions_button(self):
+		"""
+		tests subscriptions button after login
+		"""
+		pass
 
 
 	def tearDown(self):

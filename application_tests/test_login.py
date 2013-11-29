@@ -8,7 +8,14 @@ class LoginTest(unittest.TestCase):
 	def setUp(self):
 		self.driver = webdriver.Firefox()
 		self.driver.implicitly_wait(3)
-		self.base_url = "http://technetium.herokuapp.com"
+		
+		# set b_local true to test locally
+		b_local = False
+		if b_local:
+			self.base_url = "http://localhost:8000"
+		else:
+			self.base_url = "http://technetium.herokuapp.com"
+
 
 	def test_login(self):
 		"""
