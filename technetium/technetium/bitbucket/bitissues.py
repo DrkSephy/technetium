@@ -2,6 +2,13 @@ from django.template.loader import render_to_string
 import bitmethods
 
 
+def iterate_all_issues(req_urls, auth_tokens):
+    """
+    Grabs all issues in a repository with async requests.
+    """
+    raw_issues = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+
+
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API
@@ -94,3 +101,14 @@ def add_html_issue_rows(parsed_data):
     """
     html = 'includes/issues/issues-list.html'
     return render_to_string(html, {'repo' : {'issues' : parsed_data}})
+
+
+def get_issues_count(owner, repo_slug):
+    """
+    Gets and returns issues count of repo
+    """
+    issue_url = bitmethods.make_req_url(owner, repo_slug, 'issues', 0)
+    response = bitmethods.send_bitbucket_request(issue_url, auth_tokens)
+    if response and 'count' in response:
+        return response['count'] - 1
+    return 0

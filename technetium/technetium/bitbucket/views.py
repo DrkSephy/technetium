@@ -53,13 +53,22 @@ def reports(request, owner, repo_slug):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
+    start_issues = bitissues.get_issues_count(owner, repo_slug)
+    print start_issues
+    issues_urls = bitmethods.get_api_urls(owner, repo_slug, 'issues', start_issues)
+    print issues_urls
+    # bitissues.iterate_all_issues
+    return
+
     # Get the count of the commits in the repository
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
     start = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
 
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
-    parsed_changesets = bitchangesets.parse_all_changesets(changeset_urls, auth_tokens)
+    parsed_changesets = bitchangesets.iterate_all_changesets(changeset_urls, auth_tokens)
+
+    # Tally up changesets, issues opened, assigned, resolved
     tallies = bitstats.tally_changesets(parsed_changesets)
 
     # Get retrieved context from subscribed repositories

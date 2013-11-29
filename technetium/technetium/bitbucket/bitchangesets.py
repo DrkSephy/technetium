@@ -5,7 +5,7 @@ import bitmethods
 import re
 
 
-def parse_all_changesets(req_urls, auth_tokens):
+def iterate_all_changesets(req_urls, auth_tokens):
     """
     Sends async API requests to gets all of the commits
     from a repository based on the req_urls. Parses the
