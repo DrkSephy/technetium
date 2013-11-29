@@ -17,7 +17,7 @@
             <th class="header"> User <i class="icon-sort"></i></th>
             <th class="header"> Commits <i class="icon-sort"></i></th>
             <th class="header"> Issues Opened <i class="icon-sort"></i></th>
-            <th class="header"> Issues Closed <i class="icon-sort"></i></th>
+            <th class="header"> Issues Assigned <i class="icon-sort"></i></th>
             <th class="header"> Issue Comments <i class="icon-sort"></i></th>
             </tr>
         </thead>
@@ -27,6 +27,8 @@
             <tr>
                 <td>{{ key }}</td>
                 <td>{{ value.changesets }}</td>
+                <td>{{ value.issues_opened }}</td>
+                <td>{{ value.issues_assigned }}</td>
             </tr>
         {% endfor %}
 

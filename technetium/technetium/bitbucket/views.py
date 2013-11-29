@@ -53,12 +53,6 @@ def reports(request, owner, repo_slug):
     auth_data = bitauth.get_social_auth_data(request.user)
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
-    # Tally the number of issues opened, assigned
-    issues_count = bitissues.get_issues_count(owner, repo_slug, auth_tokens)
-    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
-    issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
-    issues_tallied = bitstats.tally_issues(issues_parsed)
-
     # Tally all of the changesets for each user
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
     changesets_count = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
@@ -66,9 +60,14 @@ def reports(request, owner, repo_slug):
     changesets_parsed = bitchangesets.iterate_all_changesets(changesets_urls, auth_tokens)
     changesets_tallied = bitstats.tally_changesets(changesets_parsed)
 
+    # Tally the number of issues opened, assigned
+    issues_count = bitissues.get_issues_count(owner, repo_slug, auth_tokens)
+    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
+    issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
+    issues_tallied = bitstats.tally_issues(issues_parsed)
+
     # Combine tallies for issues and changesets for each user
-    tallies = bitstats.combine_tallies(issues_tallied, changesets_tallied)
-    print tallies
+    tallies = bitstats.combine_tallies(changesets_tallied, issues_tallied)
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)

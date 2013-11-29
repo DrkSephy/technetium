@@ -82,26 +82,33 @@ def tally_issues(issues):
     return tally
 
 
-def combine_tallies(issues_tallied, changesets_tallied):
+def combine_tallies(changesets_tallied, issues_tallied):
     """
     Returns a dictionary where tallies for issues and changesets
     are merged into a single dictionary.
 
     Parameters:
-        issues_tallied: Dictionary
         changesets_tallied: Dictionary
+        issues_tallied: Dictionary
 
     Returns:
         Dictionary
     """
+    # Check in changesets if they made an issue
     for user in changesets_tallied:
-        # User has made an issue
         if user in issues_tallied:
-            for key in issues_tallied:
-                changesets_tallied[user][key] = issues_tallied[user][key]
+            for tally in issues_tallied[user]:
+                changesets_tallied[user][tally] = issues_tallied[user][tally]
+            del issues_tallied[user]
         else:
             changesets_tallied[user]['issues_opened'] = 0
             changesets_tallied[user]['issues_assigned'] = 0
+
+    # Handle case if user has issues but not commits
+    for user in issues_tallied:
+        changesets_tallied[user] = issues_tallied[user]
+        changesets_tallied[user]['changesets'] = 0
+
     return changesets_tallied
 
 
