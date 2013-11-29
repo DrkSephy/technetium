@@ -30,27 +30,7 @@ def tally_changesets(data):
             tally[author]['changesets'] += 1
     return tally
 
-
-def iterate_changesets(req_urls, auth_tokens):
-    """
-    Sends async API requests to gets all of the commits
-    from a repository based on the req_urls. Parses the
-    json reponse and tallies commits for each user.
-
-    Parameters:
-        req_urls: List
-
-    Returns:
-        Dictionary
-    """
-    # Send async requests to get raw changesets
-    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
-
-    # Tally up changesets from responses
-    tally = {}
-    for changesets in raw_changesets:
-        tallies = tally_changesets(bitchangesets.parse_changesets(changesets['changesets']))
-        tally = bitmethods.dictionary_sum(tally, tallies, 'changesets')
+    tally = bitmethods.dictionary_sum(tally, tallies, 'changesets')
     return tally
 
 
@@ -114,10 +94,11 @@ def list_users(data):
     return devs
 
 
-def list_commits(data):
+def list_data(data, key_value='changesets'):
     """
-    Returns a list of commits in order of developers.
-    Useful for D3 graphs.
+    Returns a list of data in order of developers.
+    Useful for D3 graphs. You can use this to list
+    commit data as well as issues.
 
     Paramters:
         data: Dictionary
@@ -130,6 +111,6 @@ def list_commits(data):
     """
     commits = []
     for key, value in data.iteritems():
-        commits.append(value['changesets'])
+        commits.append(value[key_value])
     return commits
 

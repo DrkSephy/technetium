@@ -19,7 +19,7 @@ def commits_pie_graph(tallies):
     """
     # Get x and y list data
     xdata = bitstats.list_users(tallies)
-    ydata = bitstats.list_commits(tallies)
+    ydata = bitstats.list_data(tallies)
 
     # Setup Graph Parameters
     extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}

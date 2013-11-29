@@ -59,7 +59,10 @@ def reports(request, owner, repo_slug):
 
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
-    tallies = bitstats.iterate_changesets(changeset_urls, auth_tokens)
+    parsed_changesets = bitchangesets.parse_all_changesets(changeset_urls, auth_tokens)
+    print parsed_changesets
+    return
+    tallies = bitstats.tally_changesets(parsed_changesets)
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)

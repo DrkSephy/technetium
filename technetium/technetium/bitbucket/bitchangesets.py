@@ -26,7 +26,29 @@ def get_changesets(user, repo, auth_tokens, limit, start):
     return {}
 
 
-def parse_changesets(repository):
+def parse_all_changesets(req_urls, auth_tokens):
+    """
+    Sends async API requests to gets all of the commits
+    from a repository based on the req_urls. Parses the
+    json reponse and tallies commits for each user.
+    Uses parse_changesets as a helper function.
+
+    Parameters:
+        req_urls: List
+
+    Returns:
+        List
+    """
+    # Send async requests to get raw changesets
+    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+    parsed_changesets = []
+    for changesets in raw_changesets:
+        for changeset in changesets['changesets']:
+            parsed_changesets.append(parse_changeset(changeset))
+    return parsed_changesets
+
+
+def parse_changeset(changeset):
     """
     Parses returned JSON data for the API call to the
     `repositories` endpoint on Bitbucket.
@@ -40,11 +62,8 @@ def parse_changesets(repository):
     Returns:
         changesets: List
     """
-    changesets = []
-    for changeset in repository:
-        data = {}
-        data['parsed_author'] = re.sub(r'\s+<.+>', '', changeset['raw_author'])
-        data['author'] = changeset['author']
-        data['timestamp'] = changeset['utctimestamp']
-        changesets.append(data)
-    return changesets
+    data = {}
+    data['parsed_author'] = re.sub(r'\s+<.+>', '', changeset['raw_author'])
+    data['author'] = changeset['author']
+    data['timestamp'] = changeset['utctimestamp']
+    return data
