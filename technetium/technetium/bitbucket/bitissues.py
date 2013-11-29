@@ -22,17 +22,6 @@ def get_issues_urls(user, repo, endpoint, end, limit=50):
     return req_urls
 
 
-def iterate_all_issues(req_urls, auth_tokens):
-    """
-    Grabs all issues in a repository with async requests.
-    Purpose is to parse issues open, assigned, and resolved.
-    """
-    if req_urls:
-        raw_issues = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
-        parsed_issues = []
-        print raw_issues
-
-
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API

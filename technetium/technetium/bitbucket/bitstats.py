@@ -31,6 +31,23 @@ def tally_changesets(data):
     return tally
 
 
+def parse_issues_for_tallying(req_urls, auth_tokens):
+    """
+    Grabs all issues in a repository with async requests.
+    Purpose is to parse issues open, assigned, and resolved.
+    """
+    parsed_issues
+    if req_urls:
+        raw_issues = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+        for issues_list in raw_issues:
+            for issues in issues_list['issues']:
+                if
+                print issues
+                print
+
+    return parsed_issues
+
+
 def tally_assigned_issues(data):
     """
     Gets the number of issues that each user has been assigned.
