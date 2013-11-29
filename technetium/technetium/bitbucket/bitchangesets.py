@@ -46,3 +46,13 @@ def parse_changeset(changeset):
     data['author'] = changeset['author']
     data['timestamp'] = changeset['utctimestamp']
     return data
+
+
+def get_changesets_count(count_url, auth_tokens):
+    """
+    Returns the changeset counts from request to count_url
+    """
+    response = bitmethods.send_bitbucket_request(count_url, auth_tokens)
+    if response and 'count' in response:
+        return response['count']-1
+    return 0
