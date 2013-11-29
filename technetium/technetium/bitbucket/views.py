@@ -61,10 +61,13 @@ def reports(request, owner, repo_slug):
 
     # Tally all of the changesets for each user
     count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
-    Changesets_count = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
-    changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', Changeset_count)
-    changesets_parsed = bitchangesets.iterate_all_changesets(changeset_urls, auth_tokens)
-    changesets_tallied = bitstats.tally_changesets(changeset_parsed)
+    changesets_count = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
+    changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', changesets_count)
+    changesets_parsed = bitchangesets.iterate_all_changesets(changesets_urls, auth_tokens)
+    changesets_tallied = bitstats.tally_changesets(changesets_parsed)
+
+    # Combine tallies for issues and changesets for each user
+    tallies = bitstats.combine_tallies(issues_tallied, changesets_tallied)
 
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)

@@ -82,6 +82,22 @@ def tally_issues(issues):
     return tally
 
 
+def combine_tallies(issues_tallied, changesets_tallied):
+    """
+    Returns a dictionary where tallies for issues and changesets
+    are merged into a single dictionary.
+
+    Parameters:
+        issues_tallied: Dictionary
+        changesets_tallied: Dictionary
+
+    Returns:
+        Dictionary
+    """
+    return changesets_tallied
+    pass
+
+
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
