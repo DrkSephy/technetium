@@ -56,14 +56,13 @@ def reports(request, owner, repo_slug):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get the count of the commits in the repository
-    url = bitmethods.make_req_url(owner, repo_slug, 'changesets')
-    start = bitmethods.count(url, auth_tokens) - 1
+    changesets_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
+    start = bitmethods.send_bitbucket_request(changesets_url, auth_tokens)['count'] - 1
 
-    # Number of iterations needed to get all of the data
-    data = bitstats.iterate_data(owner, repo_slug, auth_tokens, start, 50)
-
-    xdata =  bitstats.list_users(data['changesets_json'])
-    ydata =  bitstats.list_commits(data['changesets_json'])
+    # Call iterations needed to get all of the data
+    changesets = bitstats.iterate_data(owner, repo_slug, auth_tokens, start, 50)
+    xdata = bitstats.list_users(changesets['changesets_json'])
+    ydata = bitstats.list_commits(changesets['changesets_json'])
 
     ##########################
     # Setup Graph Parameters #
@@ -91,7 +90,7 @@ def reports(request, owner, repo_slug):
     context['owner'] = owner
     context['repo_slug'] = repo_slug
     context['graph'] = graph
-    context['changesets_json'] = data['changesets_json']
+    context['changesets_json'] = changesets['changesets_json']
 
     # Pass in multiple objects to be rendered through the template.
     return render(request, 'statistics.html', context)

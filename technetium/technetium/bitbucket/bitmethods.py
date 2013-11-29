@@ -43,22 +43,6 @@ def make_req_url(user, repo, endpoint, limit=50, start=0):
     return url
 
 
-def count(url, auth_tokens):
-    """
-    Returns the count of the repository.
-
-    Parameters:
-        url: String
-            - The URL to send the request to.
-    Returns:
-        count: Integer
-            - The number of commits inside the repository.
-    """
-    req = requests.get(url, auth=auth_tokens)
-    changesets = json.loads(req.content)
-    return changesets['count']
-
-
 def send_bitbucket_request(req_url, auth_tokens):
     """
     Obtains a JSON dictionary from bitbucket API endpoint.
