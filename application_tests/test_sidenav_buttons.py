@@ -15,7 +15,7 @@ class ButtonsTest(unittest.TestCase):
 		password = "zaq1xsw2"
 
 		# set b_local true to test locally
-		b_local = True
+		b_local = False
 		if b_local:
 			base_url = "http://localhost:8000"
 		else:
