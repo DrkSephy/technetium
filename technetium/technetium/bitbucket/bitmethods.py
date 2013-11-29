@@ -1,3 +1,7 @@
+"""
+This Module has terrible cohension, but it's okay.
+Module contains a trash bin for our common methods.
+"""
 import simplejson as json
 from datetime import datetime
 import requests
@@ -106,6 +110,20 @@ def send_async_bitbucket_requests(req_urls, auth_tokens):
         except Exception:
             json_list.append({})
     return json_list
+
+
+def get_count(owner, repo_slug, auth_tokens, endpoint):
+    """
+    Gets count from endpoint of bitbucket API request
+
+    Returns:
+        Integer
+    """
+    count_url = make_req_url(owner, repo_slug, endpoint, 0)
+    response  = send_bitbucket_request(count_url, auth_tokens)
+    if response and 'count' in response:
+        return response['count']-1
+    return 0
 
 
 def format_timestamp(timestamp):

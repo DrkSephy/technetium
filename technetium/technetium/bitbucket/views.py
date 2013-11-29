@@ -54,8 +54,7 @@ def reports(request, owner, repo_slug):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Tally all of the changesets for each user
-    count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
-    changesets_count = bitchangesets.get_changesets_count(count_url, auth_tokens)
+    changesets_count = bitchangesets.get_changesets_count(owner, repo_slug, auth_tokens)
     changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', changesets_count)
     changesets_parsed = bitchangesets.iterate_all_changesets(changesets_urls, auth_tokens)
     changesets_tallied = bitstats.tally_changesets(changesets_parsed)
