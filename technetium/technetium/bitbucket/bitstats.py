@@ -83,7 +83,6 @@ def tally_issues(issues):
             tally[assigned]['issues_assigned'] += 1
 
             # Tally up issues completed if issue was completed
-            print issue['status']
             if issue['status'] == 'resolved':
                 tally[assigned]['issues_completed'] += 1
     return tally
