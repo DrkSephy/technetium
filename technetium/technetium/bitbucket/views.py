@@ -56,13 +56,16 @@ def reports(request, owner, repo_slug):
     auth_tokens = bitauth.get_auth_tokens(auth_data)
 
     # Get the count of the commits in the repository
-    changesets_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
-    start = bitmethods.send_bitbucket_request(changesets_url, auth_tokens)['count'] - 1
+    count_url = bitmethods.make_req_url(owner, repo_slug, 'changesets', 0)
+    start = bitmethods.send_bitbucket_request(count_url, auth_tokens)['count'] - 1
 
-    # Call iterations needed to get all of the data
+    # Call asynch iterations to get all of the data
+    changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
+    return
     changesets = bitstats.iterate_changesets(owner, repo_slug, auth_tokens, start)
     xdata = bitstats.list_users(changesets['changesets_json'])
     ydata = bitstats.list_commits(changesets['changesets_json'])
+
 
     ##########################
     # Setup Graph Parameters #

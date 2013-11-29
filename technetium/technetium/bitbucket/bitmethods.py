@@ -43,6 +43,26 @@ def make_req_url(user, repo, endpoint, limit=50, start=0):
     return url
 
 
+def get_api_urls(user, repo, endpoint, start, limit=50):
+    """
+    Makes a list of api urls based on iterating through limit.
+    Uses make_req_url() as a helper function.
+
+    Returns:
+        content: List
+    """
+    req_urls = []
+    count = 0
+    stop = start/limit
+    while count <= stop:
+        new_url = make_req_url(user, repo, endpoint, limit, start)
+        req_urls.append(new_url)
+        start -= limit
+        count += 1
+    print req_urls
+
+
+
 def send_bitbucket_request(req_url, auth_tokens):
     """
     Obtains a JSON dictionary from bitbucket API endpoint.

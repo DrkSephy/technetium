@@ -4,6 +4,7 @@ import bitchangesets
 import bitstats
 import simplejson as json
 
+
 def tally_changesets(data):
     """
     Counts the number of commits for each developer in a repository.
