@@ -1,6 +1,5 @@
 import simplejson as json
 from datetime import datetime
-from collections import defaultdict
 import requests
 import grequests
 

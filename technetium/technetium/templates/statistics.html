@@ -23,10 +23,10 @@
         </thead>
         <tbody>
 
-        {% for username in tallies.changesets %}
+        {% for key, value in tallies.items %}
             <tr>
                 <td>{{ key }}</td>
-                <td>{{ value }}</td>
+                <td>{{ value.changesets }}</td>
             </tr>
         {% endfor %}
 
@@ -52,8 +52,5 @@
 
   </div>
 </div>
-
-
-
 
 {% endblock %}
