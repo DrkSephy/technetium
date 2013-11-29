@@ -51,13 +51,14 @@ def get_api_urls(user, repo, endpoint, start, limit=50):
         content: List
     """
     req_urls = []
-    count = 0
-    stop = start/limit
-    while count <= stop:
-        new_url = make_req_url(user, repo, endpoint, limit, start)
-        req_urls.append(new_url)
-        start -= limit
-        count += 1
+    if start:
+        count = 0
+        stop = start/limit
+        while count <= stop:
+            new_url = make_req_url(user, repo, endpoint, limit, start)
+            req_urls.append(new_url)
+            start -= limit
+            count += 1
     return req_urls
 
 

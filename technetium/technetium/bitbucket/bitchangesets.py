@@ -18,12 +18,13 @@ def iterate_all_changesets(req_urls, auth_tokens):
     Returns:
         List
     """
-    # Send async requests to get raw changesets
-    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
     parsed_changesets = []
-    for changesets in raw_changesets:
-        for changeset in changesets['changesets']:
-            parsed_changesets.append(parse_changeset(changeset))
+    if req_urls:
+        # Send async requests to get raw changesets
+        raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+        for changesets in raw_changesets:
+            for changeset in changesets['changesets']:
+                parsed_changesets.append(parse_changeset(changeset))
     return parsed_changesets
 
 
