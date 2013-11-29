@@ -23,7 +23,7 @@ def tally_changesets(data):
     # Iterate over all dictionaries in our list
     if data != None:
         for i in data:
-            for k,v in i.iteritems():
+            for k, v in i.iteritems():
                 # If author is in dictionary, +=1.
                 # Otherwise, add the author to the dictionary
                 # and start his counter to be 1.

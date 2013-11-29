@@ -39,7 +39,7 @@ def commits_pie_graph(chart_data):
         }}
 
 
-def line_chart(request):
+def line_chart():
     """
     Temporary placeholder for line graph code.
 
@@ -66,8 +66,9 @@ def line_chart(request):
                  'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
 
     charttype = "lineChart"
-    chartcontainer = 'linechart_container' # container name
-    data = {
+    chartcontainer = 'linechart_container'
+
+    return {
         'charttype': charttype,
         'chartdata': chartdata,
         'chartcontainer': chartcontainer,
@@ -76,5 +77,4 @@ def line_chart(request):
             'x_axis_format': '%d %b %Y %H',
             'tag_script_js': True,
             'jquery_on_ready': False,
-        }
-    }
+            }}

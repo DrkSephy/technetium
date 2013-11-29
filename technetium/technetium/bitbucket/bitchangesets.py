@@ -1,5 +1,6 @@
-import requests
-import simplejson as json
+"""
+Module for bitchangesets
+"""
 import bitmethods
 import re
 
