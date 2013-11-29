@@ -34,7 +34,7 @@ def tally_changesets(data):
         return tally
 
 
-def iterate_data(user, repo, auth_tokens, start, limit=50):
+def iterate_changesets(user, repo, auth_tokens, start, limit=50):
     """
     Gets all of the commit JSON from a repository, bundles it and tallies.
     """

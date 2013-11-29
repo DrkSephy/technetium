@@ -60,7 +60,7 @@ def reports(request, owner, repo_slug):
     start = bitmethods.send_bitbucket_request(changesets_url, auth_tokens)['count'] - 1
 
     # Call iterations needed to get all of the data
-    changesets = bitstats.iterate_data(owner, repo_slug, auth_tokens, start)
+    changesets = bitstats.iterate_changesets(owner, repo_slug, auth_tokens, start)
     xdata = bitstats.list_users(changesets['changesets_json'])
     ydata = bitstats.list_commits(changesets['changesets_json'])
 
