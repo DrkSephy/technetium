@@ -17,10 +17,8 @@ def tally_changesets(data):
             - A dictionary containing the sums of all commits in the
               repository.
     """
-
-    #data = [{'author': 'Kevin Chan'}, {'author': 'Kevin Chan'}]
-    # Dictionary to store commit counts
     tally = {}
+
     # Iterate over all dictionaries in our list
     if data != None:
         for i in data:
@@ -32,33 +30,29 @@ def tally_changesets(data):
                     tally[v] += 1
                 else:
                     tally[v] = 1
-
-        # Return a dictionary of the tally.
         # Example: {DrkSephy: 9, Jorge Yau: 15}
         return tally
 
-def iterate_data(user, repo, auth_tokens, start, limit):
+
+def iterate_data(user, repo, auth_tokens, start, limit=50):
     """
     Gets all of the commit JSON from a repository, bundles it and tallies.
     """
-    data = {}
-    data['changesets_json'] = {}
+    data = {'changesets_json' : {}}
     num_requests = 0
     iterations = start / limit
     last_request = start % limit
 
     while num_requests <= iterations:
-        if start < 50:
+        if start < limit:
             start = last_request
             limit = last_request
         x = bitstats.tally_changesets(bitchangesets.parse_changesets(
             bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        #req_url = bitmethods.make_req_url(user, repo, 'changesets', limit, start)
         data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
 
-        start -= 50
+        start -= limit
         num_requests += 1
-
     return data
 
 
