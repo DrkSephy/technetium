@@ -126,6 +126,19 @@ def get_count(owner, repo_slug, auth_tokens, endpoint):
     return 0
 
 
+def to_unix_time(timestamp):
+    """
+    Formats a string timestamp to unix seconds
+
+    Parameters:
+        timestamp: String
+
+    Returns:
+        Integer
+    """
+    pass
+
+
 def format_timestamp(timestamp):
     """
     Formats string timestamp into readable timestamp.

@@ -1,6 +1,7 @@
 """
 Module for bitgraphs
 """
+import bitmethods
 import bitstats
 import random
 import datetime
@@ -50,17 +51,18 @@ def commits_linegraph(changesets=None):
     probably need a few methods from bitstats to get the data in the
     right form and pass it into the charting views.
     """
-    # Get random data
-    start_time = int(time.mktime(datetime.datetime(2012, 6, 1).timetuple()) * 1000)
-    nb_element = 150
+    # Set start date to earliest commit
+    start_time = changesets[-1]['timestamp']
+    nb_element = 200
     xdata = range(nb_element)
     xdata = map(lambda x: start_time + x * 1000000000, xdata)
     ydata = [i + random.randint(1, 10) for i in range(nb_element)]
     ydata2 = map(lambda x: x * 2, ydata)
 
-    tooltip_date = "%d %b %Y %H:%M:%S %p"
+    tooltip_date = "%b %d %Y %H:%M:%S %p"
     extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"},
                    "date_format": tooltip_date}
+
     chartdata = {'x': xdata,
                  'name1': 'series 1', 'y1': ydata, 'extra1': extra_serie,
                  'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
@@ -74,7 +76,7 @@ def commits_linegraph(changesets=None):
         'chartcontainer': chartcontainer,
         'extra': {
             'x_is_date': True,
-            'x_axis_format': '%d %b %Y %H',
+            'x_axis_format': '%b %d %Y',
             'tag_script_js': True,
             'jquery_on_ready': False,
             }}

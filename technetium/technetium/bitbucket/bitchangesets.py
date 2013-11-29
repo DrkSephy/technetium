@@ -42,6 +42,7 @@ def parse_changeset(changeset):
     Returns:
         changesets: List
     """
+    print changeset
     data = {}
     data['parsed_author'] = re.sub(r'\s*<.+>', '', changeset['raw_author'])
     data['author'] = changeset['author']
