@@ -61,10 +61,9 @@ def reports(request, owner, repo_slug):
 
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
-    changesets = bitstats.iterate_changesets(changeset_urls, auth_tokens)
-    return
-    xdata = bitstats.list_users(changesets['changesets_json'])
-    ydata = bitstats.list_commits(changesets['changesets_json'])
+    changesets_users = bitstats.iterate_changesets(changeset_urls, auth_tokens)
+    xdata = bitstats.list_users(changesets_users)
+    ydata = bitstats.list_commits(changesets_users)
 
 
     ##########################
@@ -93,7 +92,7 @@ def reports(request, owner, repo_slug):
     context['owner'] = owner
     context['repo_slug'] = repo_slug
     context['graph'] = graph
-    context['changesets_json'] = changesets['changesets_json']
+    context['changesets_json'] = changesets_users
 
     # Pass in multiple objects to be rendered through the template.
     return render(request, 'statistics.html', context)

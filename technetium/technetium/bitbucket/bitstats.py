@@ -37,8 +37,9 @@ def tally_changesets(data):
 
 def iterate_changesets(req_urls, auth_tokens):
     """
-    Gets all of the commit JSON from a repository based
-    on the req_urls, parses it and tallies.
+    Sends async API requests to gets all of the commits
+    from a repository based on the req_urls. Parses the
+    json reponse and tallies commits for each user.
 
     Parameters:
         req_urls: List
@@ -46,13 +47,12 @@ def iterate_changesets(req_urls, auth_tokens):
     Returns:
         Dictionary
     """
-    tally = {'changesets_json' : {}}
+    tally = {}
     raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
-
-    # x = bitstats.tally_changesets(bitchangesets.parse_changesets(
-    #     bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-    # tally['changesets_json'] = bitmethods.dictionary_sum(tally['changesets_json'], x)
-
+    # Tally up changesets from responses
+    for changesets in raw_changesets:
+        tallies = tally_changesets(bitchangesets.parse_changesets(changesets['changesets']))
+        tally = bitmethods.dictionary_sum(tally, tallies)
     return tally
 
 
@@ -75,13 +75,12 @@ def tally_assigned_issues(data):
     pass
 
 
-
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
     """
-
     pass
+
 
 def tally_opened_issues(data):
     """
@@ -95,7 +94,6 @@ def tally_opened_issues(data):
             - A dictionary containing number of issues that each
               user in a given repository has opened.
     """
-
     pass
 
 
