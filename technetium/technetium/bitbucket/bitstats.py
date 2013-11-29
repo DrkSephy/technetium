@@ -1,8 +1,8 @@
-import requests
+"""
+Module to get statistics of repositories
+"""
 import bitmethods
 import bitchangesets
-import bitstats
-import simplejson as json
 
 
 def tally_changesets(data):
@@ -35,26 +35,27 @@ def tally_changesets(data):
         return tally
 
 
-def iterate_changesets(user, repo, auth_tokens, start, limit=50):
+def iterate_changesets(req_urls, auth_tokens):
     """
-    Gets all of the commit JSON from a repository, bundles it and tallies.
-    """
-    data = {'changesets_json' : {}}
-    num_requests = 0
-    iterations = start / limit
-    last_request = start % limit
+    Gets all of the commit JSON from a repository based
+    on the req_urls, parses it and tallies.
 
-    while num_requests <= iterations:
+    Parameters:
+        req_urls: List
+
+    Returns:
+        Dictionary
+    """
+    tally = {'changesets_json' : {}}
+
         if start < limit:
             start = last_request
             limit = last_request
         x = bitstats.tally_changesets(bitchangesets.parse_changesets(
             bitchangesets.get_changesets(user, repo, auth_tokens, limit, start)))
-        data['changesets_json'] = bitmethods.dictionary_sum(data['changesets_json'], x)
+        tally['changesets_json'] = bitmethods.dictionary_sum(tally['changesets_json'], x)
 
-        start -= limit
-        num_requests += 1
-    return data
+    return tally
 
 
 def tally_assigned_issues(data):
