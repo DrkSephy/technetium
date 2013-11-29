@@ -134,3 +134,4 @@ def list_commits(data):
     for k, v in data.iteritems():
         commits.append(v)
     return commits
+

@@ -17,6 +17,7 @@ import bitmanager
 import bitchangesets
 import bitmethods
 import bitstats
+import bitgraphs
 
 # Home page view
 def home(request):
@@ -62,36 +63,13 @@ def reports(request, owner, repo_slug):
     # Call asynch iterations to get all of the data
     changeset_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', start)
     changesets_users = bitstats.iterate_changesets(changeset_urls, auth_tokens)
-    xdata = bitstats.list_users(changesets_users)
-    ydata = bitstats.list_commits(changesets_users)
-
-
-    ##########################
-    # Setup Graph Parameters #
-    ##########################
-    extra_serie = {"tooltip": {"y_start": "", "y_end": "commits"}}
-    chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-    chartcontainer = 'piechart_container' # container name
-
-    graph = {
-        'charttype': charttype,
-        'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
-        'extra': {
-            'x_is_date': False,
-            'x_axis_format': '',
-            'tag_script_js': True,
-            'jquery_on_ready': False,
-        }
-    }
 
     # Get retrieved issues from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
     context = bitmethods.package_context(subscribed)
     context['owner'] = owner
     context['repo_slug'] = repo_slug
-    context['graph'] = graph
+    context['graph'] = bitgraphs.commits_pie_graph(changesets_users)
     context['changesets_json'] = changesets_users
 
     # Pass in multiple objects to be rendered through the template.
