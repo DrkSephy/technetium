@@ -47,5 +47,4 @@ def parse_changesets(repository):
         data['author'] = changeset['author']
         data['timestamp'] = changeset['utctimestamp']
         changesets.append(data)
-    print changesets
     return changesets

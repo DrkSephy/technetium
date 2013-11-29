@@ -17,20 +17,19 @@ def tally_changesets(data):
         tally: Dictionary
             - A dictionary containing the sums of all commits in the
               repository.
+
+    Example:
+        { 'David Leonard' : {'changesets' : 9}, ...}
     """
     tally = {}
-    # Iterate over all dictionaries in our list
-    if data:
-        for i in data:
-            for k, v in i.iteritems():
-                # If author is in dictionary
-                if v in tally:
-                    tally[v] += 1
-                # Otherwise, add the author and start counter to 1
-                else:
-                    tally[v] = 1
-
-    # Example: {DrkSephy: 9, Jorge Yau: 15}
+    for changeset in data:
+        author = changeset['parsed_author']
+        if author not in tally:
+            tally[author] = {'changesets' : 1}
+        else:
+            tally[author]['changesets'] += 1
+    print tally
+    print
     return tally
 
 
