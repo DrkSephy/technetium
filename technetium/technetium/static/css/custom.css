@@ -18,6 +18,10 @@ h2 { font-size: 25px; }
     max-width: 540px;
 }
 
+.panel-max {
+    max-width: inherit;
+}
+
 .display-name {
     margin-left: 15px;
 }
