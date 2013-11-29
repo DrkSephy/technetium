@@ -4,7 +4,7 @@
 {% block content %}
 <div class="col-lg-12">
   <h2><span class="glyphicon glyphicon-tasks space-right"></span>
-    Repository Report: <strong><em>{{ owner }}/{{ repo_slug }}</em></strong>
+    Technetium Report: <em>{{ owner }}/{{ repo_slug }}</em>
   </h2>
 </div>
 <hr>
@@ -14,23 +14,25 @@
         <table class="table table-hover table-striped tablesorter">
             <thead>
             <tr>
-        <th class="header"> User <i class="icon-sort"></i></th>
-        <th class="header"> Commits <i class="icon-sort"></i></th>
-        <th class="header"> Issues Opened <i class="icon-sort"></i></th>
-        <th class="header"> Issues Closed <i class="icon-sort"></i></th>
-        <th class="header"> Issue Comments <i class="icon-sort"></i></th>
-
+            <th class="header"> User <i class="icon-sort"></i></th>
+            <th class="header"> Commits <i class="icon-sort"></i></th>
+            <th class="header"> Issues Opened <i class="icon-sort"></i></th>
+            <th class="header"> Issues Assigned <i class="icon-sort"></i></th>
+            <th class="header"> Issue Comments <i class="icon-sort"></i></th>
             </tr>
         </thead>
         <tbody>
-        {% for key, value in changesets_users.items %}
-        <tr>
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
 
-        </tr>
+        {% for key, value in tallies.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value.changesets }}</td>
+                <td>{{ value.issues_opened }}</td>
+                <td>{{ value.issues_assigned }}</td>
+            </tr>
         {% endfor %}
-    </tbody>
+
+        </tbody>
         </table>
     </div>
 </div>
@@ -38,16 +40,19 @@
 <br>
 <hr>
 
-{% load nvd3_tags %}
-<head>
+
+<div class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Changeset contribution by each user</h3>
+  </div>
+  <div class="panel-body">
+
+    {% load nvd3_tags %}
     {% include_chart_jscss %}
-    {% load_chart graph.charttype graph.chartdata graph.chartcontainer graph.extra %}
-</head>
-<body>
-    {% include_container graph.chartcontainer 400 500 %}
-</body>
+    {% load_chart commits_piegraph.charttype commits_piegraph.chartdata commits_piegraph.chartcontainer commits_piegraph.extra %}
+    {% include_container commits_piegraph.chartcontainer 400 500 %}
 
-
-
+  </div>
+</div>
 
 {% endblock %}

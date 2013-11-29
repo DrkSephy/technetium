@@ -17,82 +17,104 @@ def tally_changesets(data):
         tally: Dictionary
             - A dictionary containing the sums of all commits in the
               repository.
+
+    Example:
+        { 'David Leonard' : {'changesets' : 9}, ...}
     """
     tally = {}
-
-    # Iterate over all dictionaries in our list
-    if data != None:
-        for i in data:
-            for k, v in i.iteritems():
-                # If author is in dictionary, +=1.
-                # Otherwise, add the author to the dictionary
-                # and start his counter to be 1.
-                if v in tally:
-                    tally[v] += 1
-                else:
-                    tally[v] = 1
-        # Example: {DrkSephy: 9, Jorge Yau: 15}
-        return tally
-
-
-def iterate_changesets(req_urls, auth_tokens):
-    """
-    Sends async API requests to gets all of the commits
-    from a repository based on the req_urls. Parses the
-    json reponse and tallies commits for each user.
-
-    Parameters:
-        req_urls: List
-
-    Returns:
-        Dictionary
-    """
-    tally = {}
-    raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
-    # Tally up changesets from responses
-    for changesets in raw_changesets:
-        tallies = tally_changesets(bitchangesets.parse_changesets(changesets['changesets']))
-        tally = bitmethods.dictionary_sum(tally, tallies)
+    for changeset in data:
+        author = changeset['parsed_author']
+        if author not in tally:
+            tally[author] = {'changesets' : 1}
+        else:
+            tally[author]['changesets'] += 1
     return tally
 
 
-def tally_assigned_issues(data):
+def parse_issues_for_tallying(req_urls, auth_tokens):
+    """
+    Grabs all issues in a repository with async requests.
+    Purpose is to parse issues open, assigned, and resolved.
+    """
+    parsed_issues = []
+    if req_urls:
+        raw_issues = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
+        for issues_list in raw_issues:
+            for issue in issues_list['issues']:
+                data = {}
+                data['issue_id']  = issue['local_id']
+                data['opened_by'] = issue['reported_by']['display_name']
+                data['timestamp'] = issue['utc_last_updated']
+                data['assigned']  = None
+                if 'responsible' in issue:
+                    data['assigned'] = issue['responsible']['display_name']
+                parsed_issues.append(data)
+    return parsed_issues
+
+
+def tally_issues(issues):
     """
     Gets the number of issues that each user has been assigned.
 
     Parameters:
-        data: Dictionary
-            - A dictionary containing all assigned issues to be tallied.
+        data: List
+            - A List containing all parsed issues to be tallied.
 
     Returns:
         tally: Dictionary
             - A dictionary containing the tally of all assigned issues for
               all users in a repository.
-
-    Example: Returns {accountname: 8, DrkSephy: 5}, which is a
-    dictionary of the number of issues the above user resolved.
     """
-    pass
+    tally = {}
+    for issue in issues:
+        # Tally up who opened the issue
+        reporter = issue['opened_by']
+        if reporter not in tally:
+            tally[reporter] = {'issues_opened' : 0, 'issues_assigned' : 0}
+        tally[reporter]['issues_opened'] += 1
+
+        # Tally up who was assigned the issue
+        assigned = issue['assigned']
+        if assigned:
+            if assigned not in tally:
+                tally[assigned] = {'issues_opened' : 0, 'issues_assigned' : 0}
+            tally[assigned]['issues_assigned'] += 1
+    return tally
+
+
+def combine_tallies(changesets_tallied, issues_tallied):
+    """
+    Returns a dictionary where tallies for issues and changesets
+    are merged into a single dictionary.
+
+    Parameters:
+        changesets_tallied: Dictionary
+        issues_tallied: Dictionary
+
+    Returns:
+        Dictionary
+    """
+    # Check in changesets if they made an issue
+    for user in changesets_tallied:
+        if user in issues_tallied:
+            for tally in issues_tallied[user]:
+                changesets_tallied[user][tally] = issues_tallied[user][tally]
+            del issues_tallied[user]
+        else:
+            changesets_tallied[user]['issues_opened'] = 0
+            changesets_tallied[user]['issues_assigned'] = 0
+
+    # Handle case if user has issues but not commits
+    for user in issues_tallied:
+        changesets_tallied[user] = issues_tallied[user]
+        changesets_tallied[user]['changesets'] = 0
+
+    return changesets_tallied
 
 
 def tally_issue_comments(data):
     """
     Gets the number of comments that each user has made.
-    """
-    pass
-
-
-def tally_opened_issues(data):
-    """
-    Gets the number of issues each user has opened.
-
-    Notes: Even though issues are usually opened by the scrum master,
-    we still need this to grade them.
-
-    Returns:
-        opened_issues: Dictionary
-            - A dictionary containing number of issues that each
-              user in a given repository has opened.
     """
     pass
 
@@ -111,15 +133,16 @@ def list_users(data):
             - A list containing the developers of a given repository.
     """
     devs = []
-    for k, v in data.iteritems():
-        devs.append(str(k))
+    for key, value in data.iteritems():
+        devs.append(key)
     return devs
 
 
-def list_commits(data):
+def list_data(data, key_value='changesets'):
     """
-    Returns a list of commits in order of developers.
-    Useful for D3 graphs.
+    Returns a list of data in order of developers.
+    Useful for D3 graphs. You can use this to list
+    commit data as well as issues.
 
     Paramters:
         data: Dictionary
@@ -131,7 +154,22 @@ def list_commits(data):
               of a given repository.
     """
     commits = []
-    for k, v in data.iteritems():
-        commits.append(v)
+    for key, value in data.iteritems():
+        commits.append(value[key_value])
     return commits
 
+
+def list_timestamp_and_user(changesets):
+    """
+    Will be modified in the future for commits linegraph
+
+    Returns a tuple of list containing:
+    (1) timestamps
+    (2) usernames
+    """
+    timestamps = []
+    usernames  = []
+    for commit in changesets:
+        timestamps.append(commit['timestamp'])
+        usernames.append(commit['parsed_author'])
+    return (timestamps, usernames)

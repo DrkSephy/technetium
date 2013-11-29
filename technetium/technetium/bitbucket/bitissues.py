@@ -2,6 +2,26 @@ from django.template.loader import render_to_string
 import bitmethods
 
 
+###########
+# REPORTS #
+###########
+def get_issues_urls(user, repo, endpoint, end, limit=50):
+    """
+    Makes a list of api urls based on iterating through limit.
+    Uses make_req_url() as a helper function.
+
+    Returns:
+        content: List
+    """
+    req_urls = []
+    count = 0
+    while count < end:
+        new_url = bitmethods.make_req_url(user, repo, endpoint, limit, count)
+        req_urls.append(new_url)
+        count += limit
+    return req_urls
+
+
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API
@@ -94,3 +114,14 @@ def add_html_issue_rows(parsed_data):
     """
     html = 'includes/issues/issues-list.html'
     return render_to_string(html, {'repo' : {'issues' : parsed_data}})
+
+
+def get_issues_count(owner, repo_slug, auth_tokens):
+    """
+    Gets and returns issues count of repo
+    """
+    issue_url = bitmethods.make_req_url(owner, repo_slug, 'issues', 0)
+    response = bitmethods.send_bitbucket_request(issue_url, auth_tokens)
+    if response and 'count' in response:
+        return response['count'] - 1
+    return 0

@@ -14,9 +14,15 @@
   <b class="caret"></b></a>
   <ul class="dropdown-menu">
     {% if subscriptions %}
+
       {% for repo in subscriptions %}
-        <li><a href="#">{{ repo.owner }} / {{ repo.repository }}</a></li>
+        <li>
+          <a target="_blank" href="https://bitbucket.org/{{ repo.owner }}/{{ repo.slug_url }}">
+          {{ repo.owner }} / {{ repo.repository }}
+          </a>
+        </li>
       {% endfor %}
+
       <li class="divider"></li>
     {% endif %}
     <li><a href="{% url 'manage' %}">Manage Subscriptions</a></li>
