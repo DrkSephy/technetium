@@ -42,7 +42,23 @@
 <br>
 <hr>
 
+<!-- Changesets Linegraph -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Changesets Breakdown By Users</h3>
+  </div>
+  <div class="panel-body">
 
+    {% load nvd3_tags %}
+    {% include_chart_jscss %}
+    {% load_chart charttype chartdata chartcontainer extra %}
+    {% include_container commits_linegraph.chartcontainer %}
+
+  </div>
+</div>
+
+
+<!-- Changesets Piechart -->
 <div class="panel panel-default panel-small">
   <div class="panel-heading">
     <h3 class="panel-title">Changesets Breakdown By Users</h3>
