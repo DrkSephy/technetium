@@ -32,12 +32,12 @@ class BitchangesetsTests(unittest.TestCase):
     #################################################
     def test_iterate_all_changesets(self):
         self.auth_tokens = {}
-        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?start=1&limit=1']
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?start=2&limit=2']
         self.parsed_changesets= []
         self.raw_changesets = {
           "count": 569,
-          "start": "1",
-          "limit": 1,
+          "start": "2",
+          "limit": 2,
           "changesets": [
             {
               "node": "51dbaae3ff56",
@@ -55,13 +55,6 @@ class BitchangesetsTests(unittest.TestCase):
               "parents": [
                 "e551c1f26bca"
               ],
-              "branch": "default",
-              "message": "Created: README.md",
-              "revision": 1,
-              "size": -1
-            }
-          ]
-        }
 
         self.assertEqual(bitchangesets.iterate_all_changesets(self.req_urls, self.auth_tokens), 
             [{'timestamp': '2013-07-27 01:56:46', 'parsed_author': 'David Leonard'}])
