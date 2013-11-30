@@ -19,6 +19,7 @@ class BitmethodsTests(unittest.TestCase):
         self.data3 = {'a':1, 'b':2}
         self.data4 = {'c':2, 'b':3}
 
+
     # Tests For: make_req_url()
     def test_make_req_url(self):
         """
@@ -117,12 +118,12 @@ class BitmethodsTests(unittest.TestCase):
         Tests that summing two empty dictionaries returns an empty dictionary.
         """
 
-        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2), {})
+        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2, self.data2), {})
 
     def test_dictionary_sum(self):
         """
         Tests that summing two non-empty dictionaries returns the proper result.
         """
 
-        self.assertEqual(bitmethods.dictionary_sum(self.data3, self.data4), {'a': 1, 'c': 2, 'b': 5})
+        self.assertEqual(bitmethods.dictionary_sum(self.data3, self.data3), {'a': 1, 'c': 2, 'b': 5})
 
