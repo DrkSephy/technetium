@@ -26,8 +26,50 @@ class BitchangesetsTests(unittest.TestCase):
               "raw_author": "David Leonard",
               "timestamp": "2013-07-27 01:56:46",
         }
-        
 
+    #################################################
+    # iterate_all_changesets(req_urls, auth_tokens) #
+    #################################################
+    def test_iterate_all_changesets(self):
+        self.auth_tokens = {}
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?start=1&limit=1']
+        self.parsed_changesets= []
+        self.raw_changesets = {
+          "count": 569,
+          "start": "1",
+          "limit": 1,
+          "changesets": [
+            {
+              "node": "51dbaae3ff56",
+              "files": [
+                {
+                  "type": "added",
+                  "file": "README.md"
+                }
+              ],
+              "raw_author": "David Leonard <sephirothcloud1025@yahoo.com>",
+              "utctimestamp": "2013-07-26 23:56:46+00:00",
+              "author": "DrkSephy",
+              "timestamp": "2013-07-27 01:56:46",
+              "raw_node": "51dbaae3ff56392daab82e370b6a3fd5d089df59",
+              "parents": [
+                "e551c1f26bca"
+              ],
+              "branch": "default",
+              "message": "Created: README.md",
+              "revision": 1,
+              "size": -1
+            }
+          ]
+        }
+
+        self.assertEqual(bitchangesets.iterate_all_changesets(self.req_urls, self.auth_tokens), 
+            [{'timestamp': '2013-07-27 01:56:46', 'parsed_author': 'David Leonard'}])
+
+
+    ##############################
+    # parse_changeset(changeset) #
+    ##############################
     def test_get_parse_not_empty(self):
         """
         Tests that parsing changesets returns a non-empty list.

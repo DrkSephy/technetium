@@ -44,6 +44,7 @@ class BitissuesTests(unittest.TestCase):
         self.user = 'DrkSephy'
         self.repo = 'smw-koopa-krisis'
         self.endpoint = 'issues'
+
     ########################################################
     # get_issues_urls(user, repo, endpoint, end, limit=50) #
     ########################################################
@@ -59,9 +60,6 @@ class BitissuesTests(unittest.TestCase):
     def test_get_issues_urls_not_empty(self):
         self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues?limit=50&start=0']
         self.count = 0
-        self.user = 'DrkSephy'
-        self.repo = 'smw-koopa-krisis'
-        self.endpoint = 'issues'
         self.limit = 50
         self.end = 50
 
