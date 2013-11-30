@@ -64,8 +64,8 @@ def commits_linegraph(changesets=None):
     """
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
-    end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
-    nb_element = 30
+    end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])+(86400*2000)
+    nb_element = 40
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
@@ -126,13 +126,20 @@ def tally_data_series(xdata, user_timestamps, elements):
     """
     user_series = {}
     for user in user_timestamps:
+        # Initialize tallies of each range to 0
         user_series[user] = [0 for x in range(elements)]
+
         # Cycle through each user's commits
-        for timestamp in user_series[user]:
+        for timestamp in user_timestamps[user]:
+            current, next = 0, 0
             for i in xrange(elements):
                 current = xdata[i]
-                next = xdata[i+1]
-                if current <= timestamp < next:
-                    user_series[user][i] += 1
+                try:
+                    next = xdata[i+1]
+                    if current <= timestamp < next:
+                        user_series[user][i] += 1
+                        break
+                except IndexError:
+                    user_series[user][-1] += 1
+                    break
     return user_series
-
