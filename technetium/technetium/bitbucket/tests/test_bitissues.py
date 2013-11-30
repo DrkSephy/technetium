@@ -18,7 +18,7 @@ class BitissuesTests(unittest.TestCase):
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
-            'utc_created_on' : '2013-11-17 10:00:01-0400',
+            'utc_last_updated' : '2013-11-17 10:00:01-0400',
 
             'metadata' : {
                 'kind' : 'task',
@@ -30,7 +30,7 @@ class BitissuesTests(unittest.TestCase):
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
-            'utc_created_on' : '2013-11-17 10:00:01-0400',
+            'utc_last_updated' : '2013-11-17 10:00:01-0400',
 
             'metadata' : {
                 'kind' : 'task',
