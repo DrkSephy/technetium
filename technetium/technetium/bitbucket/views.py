@@ -107,9 +107,11 @@ def dashboard_issues(request):
     name_val_dict = {}
     repo_slug = ''
     for n, v in request.GET.iteritems():
+        n = n.strip().lower()
+        v = v.strip().lower()
         if n == 'repo_slug':
             repo_slug = v
-        else:
+        elif n == 'type' or n == 'status' or n == 'priority' or n == 'date' or n == 'assignee':
             name_val_dict[n] = v
 
     # filter only if repo_slug name value pair is given
