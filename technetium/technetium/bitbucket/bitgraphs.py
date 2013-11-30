@@ -42,19 +42,30 @@ def commits_pie_graph(tallies):
 
 def commits_linegraph(changesets=None):
     """
-    Temporary placeholder for line graph code.
+    Algorithm to parse commits linegraph
+    1. Get the timestamp of first and most recent commit
+    2. Split the x-axis regions into date ranges
+    3. For each commit, parse each user's timestamp to unix time
+    4. Create a data series for each user based on date ranges
 
-    David's notes
-    -------------
-    I'll need to figure out how to properly get the data from the JSON
-    returned from Bitbucket, and get it into the proper form. Will
-    probably need a few methods from bitstats to get the data in the
-    right form and pass it into the charting views.
+    Function will be refactored into sub functions.
+    Search can be improved with binary search
+
+    Improvements:
+    ** Fix nb_element issue
+    ** Fix cutoff date end
+    1. Refactoring into smaller functions
+    2. Optimize number of elements
+    3. Improve search algorithm
+    4. Synch colors of line and pie graphs
+
+    Returns:
+        Dictionary
     """
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
     end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
-    nb_element = 100
+    nb_element = 30
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
@@ -70,17 +81,31 @@ def commits_linegraph(changesets=None):
         user_commits[author].append(timestamp)
 
     # Create a data series tally for each user
+    user_series = {}
+    for user in user_commits:
+        user_series[user] = [0 for x in range(nb_element)]
+        # Cycle through each user's commits
+        for timestamp in user_commits[user]:
+            for i in xrange(nb_element):
+                current = xdata[i]
+                next = xdata[i+1]
+                if current <= timestamp < next:
+                    user_series[user][i] += 1
 
-    ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-    ydata2 = map(lambda x: x * 2, ydata)
+    tooltip_date = "%b %d %Y"
+    extra_serie = {"tooltip": {"y_start": "Pushed ", "y_end": " commits"},
+                    "date_format": tooltip_date}
 
-    tooltip_date = "%b %d %Y %H:%M:%S %p"
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"},
-                   "date_format": tooltip_date}
-
-    chartdata = {'x': xdata,
-                 'name1': 'series 1', 'y1': ydata, 'extra1': extra_serie,
-                 'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
+    # Add each user commit breakdown into chart data
+    chartdata = {'x': xdata, 'extra1': extra_serie }
+    user_count = 0
+    for user in user_series:
+        user_count += 1
+        ydata = user_series[user]
+        string_count = str(user_count)
+        chartdata['name'+string_count] = user
+        chartdata['y'+string_count] = ydata
+        chartdata['extra'+string_count] = extra_serie
 
     charttype = "lineChart"
     chartcontainer = 'linechart_container'
@@ -91,7 +116,7 @@ def commits_linegraph(changesets=None):
         'chartcontainer': chartcontainer,
         'extra': {
             'x_is_date': True,
-            'x_axis_format': '%b %d %Y',
+            'x_axis_format': '%b %d',
             'tag_script_js': True,
             'jquery_on_ready': False,
             }}
