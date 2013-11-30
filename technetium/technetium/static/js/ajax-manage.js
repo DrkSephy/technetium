@@ -10,6 +10,7 @@ $("button[name='subscribe']").click(function() {
     var repoOwner  = $("#owner-" + buttonId).val();
     var repoSlug   = $("#slug-" + buttonId).val();
     var repoId     = $("#id-" + buttonId).val();
+    var subCount   = $("#subscription-count");
     var sidebarSub = $("#sidebar-repos");
 
     // Send Ajax request to server
@@ -37,6 +38,10 @@ $("button[name='subscribe']").click(function() {
                 repoSlug + '"><a href="/reports/'+repoOwner+'/'+repoSlug+'">'+
                 repoName + '</a></li>';
                 sidebarSub.append(newSubscription);
+
+                // Add subscription to navbar
+                var newCount = parseInt(subCount.text())+1;
+                subCount.text(newCount);
             }
 
             else if (action == 'unsubscribe') {
@@ -48,6 +53,10 @@ $("button[name='subscribe']").click(function() {
                 var subscriptionID = '#sidebar-'+repoOwner+'-'+repoSlug;
                 var removeSubscription = $(subscriptionID);
                 removeSubscription.remove();
+
+                // Remove subscription from navbar
+                var newCount = parseInt(subCount.text())-1;
+                subCount.text(newCount);
             }
         },
 
