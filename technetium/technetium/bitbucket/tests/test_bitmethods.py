@@ -32,7 +32,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that URL has proper limit parameter
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=20'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=20&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=20), match)
 

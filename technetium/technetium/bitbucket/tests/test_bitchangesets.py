@@ -20,6 +20,7 @@ class BitchangesetsTests(unittest.TestCase):
         self.start = 0
         self.auth_tokens = {}
         self.data3 = { "count": 532, "start": "0", "limit": 0, "changesets": []}
+        self.data3['parsed_author'] = {'raw_author': 'David Leonard'}
 
 
         # Private user repository
@@ -35,7 +36,7 @@ class BitchangesetsTests(unittest.TestCase):
         """
         Tests that parsing changesets returns a non-empty list.
         """
-        self.assertEqual(bitchangesets.parse_changesets(self.data), [{'raw_author': 'David Leonard'}])
+        self.assertEqual(bitchangesets.parse_changesets(self.data), self.data['parsed_author'])
         pass
 
     def test_parse_changesets_empty(self):
