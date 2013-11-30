@@ -54,7 +54,8 @@ def commits_linegraph(changesets=None):
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
     end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
-    nb_element = 100
+    nb_element = (end_time-start_time) / (86400*1000)
+    print nb_element
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
@@ -71,16 +72,20 @@ def commits_linegraph(changesets=None):
 
     # Create a data series tally for each user
 
-    ydata = [i + random.randint(1, 10) for i in range(nb_element)]
-    ydata2 = map(lambda x: x * 2, ydata)
 
     tooltip_date = "%b %d %Y %H:%M:%S %p"
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"},
-                   "date_format": tooltip_date}
+    extra_serie = {"date_format": tooltip_date}
 
-    chartdata = {'x': xdata,
-                 'name1': 'series 1', 'y1': ydata, 'extra1': extra_serie,
-                 'name2': 'series 2', 'y2': ydata2, 'extra2': extra_serie}
+    # Add each user commit breakdown into chart data
+    chartdata = {'x': xdata, 'extra1': extra_serie }
+    user_count = 0
+    for user in user_commits:
+        ydata = [random.randint(0, 10) for i in range(nb_element)]
+        user_count += 1
+        string_count = str(user_count)
+        chartdata['name'+string_count] = user
+        chartdata['y'+string_count] = ydata
+        chartdata['extra'+string_count] = extra_serie
 
     charttype = "lineChart"
     chartcontainer = 'linechart_container'
@@ -91,7 +96,7 @@ def commits_linegraph(changesets=None):
         'chartcontainer': chartcontainer,
         'extra': {
             'x_is_date': True,
-            'x_axis_format': '%b %d %Y',
+            'x_axis_format': '%b %d',
             'tag_script_js': True,
             'jquery_on_ready': False,
             }}
