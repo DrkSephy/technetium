@@ -43,6 +43,11 @@ $("button[name='subscribe']").click(function() {
                 $('#subscribed-' + buttonId).html('No');
                 button.attr('value', 'subscribe');
                 button.html('Subscribe');
+
+                // Remove old subcription from sidebar
+                var subscriptionID = '#sidebar-'+repoOwner+'-'+repoSlug;
+                var removeSubscription = $(subscriptionID);
+                removeSubscription.remove();
             }
         },
 
