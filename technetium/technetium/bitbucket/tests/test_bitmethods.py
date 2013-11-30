@@ -24,7 +24,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that constructs URL returns correct API request url.
         """
-        match = self.url_issues
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt), match)
 
