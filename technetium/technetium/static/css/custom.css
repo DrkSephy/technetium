@@ -1,6 +1,9 @@
 /* Custom Stylesheet to override bootstrap */
 /* Keep things simple and remember to stay DRY */
 
+
+h2 { font-size: 25px; }
+
 .hero-unit {
     width: 450px;
     margin-left: auto;
