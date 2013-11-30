@@ -2,14 +2,15 @@
 
 // AJAX Request to subscribe to repository
 $("button[name='subscribe']").click(function() {
-    var button    = $(this);
-    var buttonId  = this.id;
-    var action    = this.value;
-    var csrftoken = $.cookie('csrftoken');
-    var repoName  = $("#name-" + buttonId).val();
-    var repoOwner = $("#owner-" + buttonId).val();
-    var repoSlug  = $("#slug-" + buttonId).val();
-    var repoId  = $("#id-" + buttonId).val();
+    var button     = $(this);
+    var buttonId   = this.id;
+    var action     = this.value;
+    var csrftoken  = $.cookie('csrftoken');
+    var repoName   = $("#name-" + buttonId).val();
+    var repoOwner  = $("#owner-" + buttonId).val();
+    var repoSlug   = $("#slug-" + buttonId).val();
+    var repoId     = $("#id-" + buttonId).val();
+    var sidebarSub = $("#sidebar-repos");
 
     // Send Ajax request to server
     $.ajax({
@@ -30,6 +31,12 @@ $("button[name='subscribe']").click(function() {
                 $('#subscribed-' + buttonId).html('Yes');
                 button.attr('value', 'unsubscribe');
                 button.html('Unsubscribe');
+
+                // Add new subscription to sidebar
+                var newSubscription = '<li id="sidebar-'+repoOwner+'-'+
+                repoSlug + '"><a href="/reports/'+repoOwner+'/'+repoSlug+'">'+
+                repoName + '</a></li>';
+                sidebarSub.append(newSubscription);
             }
 
             else if (action == 'unsubscribe') {
