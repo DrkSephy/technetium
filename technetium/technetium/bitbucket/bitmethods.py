@@ -142,7 +142,6 @@ def to_unix_time(timestamp):
     return int(time.mktime(date.timetuple()))*1000
 
 
-
 def format_timestamp(timestamp):
     """
     Formats string timestamp into readable timestamp.
