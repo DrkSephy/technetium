@@ -44,7 +44,6 @@ def parse_changeset(changeset):
     """
     data = {}
     data['parsed_author'] = re.sub(r'\s*<.+>', '', changeset['raw_author'])
-    data['author'] = changeset['author']
-    data['timestamp'] = changeset['utctimestamp']
+    data['timestamp'] = changeset['timestamp']
     return data
 
