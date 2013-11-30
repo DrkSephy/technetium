@@ -1,0 +1,59 @@
+/* Custom Stylesheet to override bootstrap */
+/* Keep things simple and remember to stay DRY */
+
+
+h2 { font-size: 25px; }
+
+.hero-unit {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.panel-title>a {
+    color: #428bca;
+}
+
+.panel-small {
+    max-width: 540px;
+}
+
+.display-name {
+    margin-left: 15px;
+}
+
+.expand {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.btn-link {
+    padding: 0px 0px 0px 0px;
+}
+
+.badge {
+    background-color: #8B2E2E;
+}
+
+.dropdown-menu {
+    min-width: 120px;
+}
+
+.space-left {
+    margin-left: 25px;
+}
+
+.space-right {
+    margin-right: 5px;
+}
+
+.assignee-avatar {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
+
+.inline {
+    display: inline-block;
+}
