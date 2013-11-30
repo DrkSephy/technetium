@@ -90,7 +90,7 @@ class BitfilterTest(unittest.TestCase):
         Test to filter issues by type
         """
         expected_result_issue = [{'status': 'New', 'issues_url': '#', 'title': 'Parse changeset is weird', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'priority': 'Major', 'assignee': 'Jorge Yau', 'date': '11-29-2013', 'type': 'Bug'}]
-        self.assertEqual(bitfilter.filter_issues({'type':'bug'},self.all_parsed_issues), expected_result_issue)
+        self.assertEqual(bitfilter.filter_issues({'type':'bug'}, self.all_parsed_issues), expected_result_issue)
 
     
     def test_filter_issues_by_priority(self):
@@ -98,7 +98,7 @@ class BitfilterTest(unittest.TestCase):
         Test to filter issues by priority
         """
         expected_result_issue = [{'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Function for getting all issues in a repository', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-19-2013', 'priority': 'Blocker'}]
-        self.assertEqual(bitfilter.filter_issues({'priority':'blocker'},self.all_parsed_issues), expected_result_issue)
+        self.assertEqual(bitfilter.filter_issues({'priority':'blocker'}, self.all_parsed_issues), expected_result_issue)
 
 
     def test_filter_issues_by_status(self):
@@ -106,7 +106,7 @@ class BitfilterTest(unittest.TestCase):
         Test to filter issues by status
         """
         expected_result_issue = [{'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from a single repo', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from all repos', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}]
-        self.assertEqual(bitfilter.filter_issues({'status':'invalid'},self.all_parsed_issues), expected_result_issue)
+        self.assertEqual(bitfilter.filter_issues({'status':'invalid'}, self.all_parsed_issues), expected_result_issue)
 
 
     def test_filter_issues_by_date_created(self):
@@ -120,7 +120,8 @@ class BitfilterTest(unittest.TestCase):
         """
         Test to filter issues by assignee
         """
-        pass
+        expected_result_issue = [{'status': 'New', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test for sidenav buttons', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from a single repo', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from all repos', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}]
+        self.assertEqual(bitfilter.filter_issues({'assignee':'Albert Chieu'}, self.all_parsed_issues), expected_result_issue)        
 
 
     def test_filter_issue_type_by_bug(self):

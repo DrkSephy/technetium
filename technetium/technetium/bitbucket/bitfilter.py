@@ -1,8 +1,7 @@
 import simplejson as json
 import datetime
 
-# coverage is 100% without this function
-# with this function is 95% as of now
+
 def filter_issues(name_val_dict, parsed_json):
     """
     Main filter dispatcher for issues.
