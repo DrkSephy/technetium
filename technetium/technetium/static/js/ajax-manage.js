@@ -57,11 +57,14 @@ $("button[name='subscribe']").click(function() {
                 button.html('Subscribe');
 
                 // Remove old subcription from sidebar
-                var subID = '#sidebar-'+repoOwner+'-'+repoSlug;
-                var removeSideSub = $(subID);
+                var sideSubID = '#sidebar-'+repoOwner+'-'+repoSlug;
+                var removeSideSub = $(sideSubID);
                 removeSideSub.remove();
 
                 // Remove subscription from navbar
+                var navSubID = '#navbar-'+repoOwner+'-'+repoSlug;
+                var removeSideSub = $(navSubID);
+                removeSideSub.remove();
 
                 // Update navbar subscriptions count
                 var newCount = parseInt(subCount.text())-1;
