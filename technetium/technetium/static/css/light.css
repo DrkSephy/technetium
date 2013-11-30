@@ -1,3 +1,5 @@
+/* Custom CSS for Technetium Home Page */
+
 body 
   {
     color:#657b83;
@@ -15,11 +17,13 @@ body
    {
     font-size: 17px;
    }
+
   h2{
     font-size: 25px;
     border-style:solid;
     text-align:center;
   }
+
   h3
   {
     margin-bottom:2pt;
@@ -27,43 +31,16 @@ body
     /*color:#268bd2;*/
     font-weight:bold;
   }
+
   strong
   {
     color:#d33682;
     font-weight:bolder;
   }
+
   em
   {
     color:#268bd2;
     font-style:italic;
-    font-weight:bolder;
-  }
-  .emph
-  {
-    color:#d33682;
-    font-weight:bolder;
-  }
-  .litem
-  {
-    color:#268bd2;
-    font-style:italic;
-    font-weight:bolder;
-  }
-  .hl
-  {
-    color:#268bd2;
-    font-style:italic;
-  }
-  .required
-  {
-    color:#268bd2;
-    font-style:italic;
-    font-weight:bold;
-  }
-  .inputbox
-  {
-    background-color:#eee8d5;
-    color:#586e75;
-    font-family:Gill Sans MT;
     font-weight:bolder;
   }
