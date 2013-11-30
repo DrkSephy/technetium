@@ -53,7 +53,7 @@ class BitstatsTests(unittest.TestCase):
         Tests that a non-empty dictionary returns a list of commits.
         """
 
-        self.assertEqual(bitstats.list_commits(self.data3), [29, 11])
+        self.assertEqual(bitstats.list_data(self.data3), [29, 11])
         
 
     def test_list_empty_commits(self):
