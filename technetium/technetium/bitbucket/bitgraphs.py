@@ -48,13 +48,10 @@ def commits_linegraph(changesets=None):
     3. For each commit, parse each user's timestamp to unix time
     4. Create a data series for each user based on date ranges
 
-    Function will be refactored into sub functions.
-    Search can be improved with binary search
-
     Improvements:
-    ** Fix nb_element issue
+    ** [done] Fix nb_element issue
     ** Fix cutoff date end
-    1. Refactoring into smaller functions
+    1. [done] Refactoring into smaller functions
     2. Optimize number of elements
     3. Improve search algorithm
     4. Synch colors of line and pie graphs
@@ -72,15 +69,7 @@ def commits_linegraph(changesets=None):
     xdata = [x for x in range(start_time, end_time, step)]
 
     # Get commit data with user as its own y data
-    user_commits = {}
-    for commit in changesets:
-        author = commit['parsed_author']
-        timestamp = bitmethods.to_unix_time(commit['timestamp'])
-        if author not in user_commits:
-            user_commits[author] = []
-        user_commits[author].append(timestamp)
-
-    # Create a data series tally for each user
+    user_commits = get_commit_data_of_user(changesets)
     user_series = tally_data_series(xdata, user_commits, nb_element)
 
     tooltip_date = "%b %d %Y"
@@ -111,6 +100,21 @@ def commits_linegraph(changesets=None):
             'tag_script_js': True,
             'jquery_on_ready': False,
             }}
+
+
+def get_commit_data_of_user(changesets):
+    """
+    Parses commits into individual user commits with
+    parsed timestamps. Helper function for commits_linegraph()
+    """
+    user_commits = {}
+    for commit in changesets:
+        author = commit['parsed_author']
+        timestamp = bitmethods.to_unix_time(commit['timestamp'])
+        if author not in user_commits:
+            user_commits[author] = []
+        user_commits[author].append(timestamp)
+    return user_commits
 
 
 def tally_data_series(xdata, user_timestamps, elements):
