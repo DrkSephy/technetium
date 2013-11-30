@@ -53,9 +53,24 @@ def commits_linegraph(changesets=None):
     """
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
-    nb_element = 10
-    xdata = range(nb_element)
-    xdata = map(lambda x: start_time + x * 1000000000, xdata)
+    end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
+    nb_element = 100
+
+    # Get xdata for time range of commits
+    step = (end_time - start_time) / nb_element
+    xdata = [x for x in range(start_time, end_time, step)]
+
+    # Get commit data with user as its own y data
+    user_commits = {}
+    for commit in changesets:
+        author = commit['parsed_author']
+        timestamp = bitmethods.to_unix_time(commit['timestamp'])
+        if author not in user_commits:
+            user_commits[author] = []
+        user_commits[author].append(timestamp)
+
+    # Create a data series tally for each user
+
     ydata = [i + random.randint(1, 10) for i in range(nb_element)]
     ydata2 = map(lambda x: x * 2, ydata)
 
