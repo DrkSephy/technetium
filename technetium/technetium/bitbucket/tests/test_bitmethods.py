@@ -56,7 +56,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that any generated URL has a max limit of 50
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
