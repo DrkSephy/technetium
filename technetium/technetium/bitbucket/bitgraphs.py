@@ -51,6 +51,14 @@ def commits_linegraph(changesets=None):
     Function will be refactored into sub functions.
     Search can be improved with binary search
 
+    Improvements:
+    ** Fix nb_element issue
+    ** Fix cutoff date end
+    1. Refactoring into smaller functions
+    2. Optimize number of elements
+    3. Improve search algorithm
+    4. Synch colors of line and pie graphs
+
     Returns:
         Dictionary
     """
