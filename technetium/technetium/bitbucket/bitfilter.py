@@ -17,7 +17,7 @@ def filter_issues(name_val_dict, parsed_json):
             filtered_json = filter_issues_by_priority(filtered_json, v_strip)
         if n_strip == 'status':
             filtered_json = filter_issues_by_status(filtered_json, v_strip)
-        if n_strip == 'created':
+        if n_strip == 'date':
             filtered_json = filter_issues_by_date(filtered_json, v_strip)
         if n_strip == 'assignee':
             filtered_json = filter_issues_by_user(filtered_json, v_strip)
@@ -123,9 +123,9 @@ def filter_issues_by_date(parsed_json, filtered_value):
 
     filtered_json = []
     for issue in parsed_json:
-        if 'created' in issue:
-            json_date = issue['created'].strip().lower()
-            b_ok = False
+        b_ok = False
+        if 'date' in issue:
+            json_date = issue['date'].strip().lower()
             if case_num == 1:
                 # for today, this week, and last week filtering
                 j_date_obj = datetime.datetime.strptime(json_date, '%m-%d-%Y')

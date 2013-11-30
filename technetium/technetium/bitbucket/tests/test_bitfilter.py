@@ -40,24 +40,24 @@ class BitfilterTest(unittest.TestCase):
         # global variables to filter issues by date created
         today = datetime.date.today()
         j_today = datetime.datetime.strftime(today,'%m-%d-%Y')
-        self.today_issue = {'created':j_today}
+        self.today_issue = {'date':j_today}
 
         current_monday = today - datetime.timedelta(today.weekday())
         j_current_monday = datetime.datetime.strftime(current_monday,'%m-%d-%Y')
-        self.current_monday_issue = {'created':j_current_monday}
+        self.current_monday_issue = {'date':j_current_monday}
 
         last_monday = current_monday - datetime.timedelta(7)
         j_last_monday = datetime.datetime.strftime(last_monday,'%m-%d-%Y')
-        self.last_monday_issue = {'created':j_last_monday}
+        self.last_monday_issue = {'date':j_last_monday}
 
         first_day_of_month = datetime.date(day=1, month=today.month, year=today.year)
         last_day_prev_month = first_day_of_month - datetime.timedelta(days=1)
         j_last_day_prev_month = datetime.datetime.strftime(last_day_prev_month,'%m-%d-%Y')
-        self.last_day_prev_month_issue = {'created':j_last_day_prev_month}
+        self.last_day_prev_month_issue = {'date':j_last_day_prev_month}
 
         last_year = today - datetime.timedelta(365)
         j_last_year = datetime.datetime.strftime(last_year,'%m-%d-%Y')
-        self.last_year_issue = {'created':j_last_year}
+        self.last_year_issue = {'date':j_last_year}
 
         # test input for today
         self.date_created_issues_0 = [self.today_issue, self.last_monday_issue]
@@ -113,7 +113,13 @@ class BitfilterTest(unittest.TestCase):
         """
         Test to filter issues by date created
         """
-        pass
+        expected_result_issue = [{'status': 'New', 'issues_url': '#', 'assignee': 'David Leonard', 'title': 'Create mock-ups for home page', 'assignee_avatar': 'https://secure.gravatar.com/avatar/1aee4f304d9836daa9a69b7e92cdd6ec?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-29-2013', 'priority': 'Minor'}, {'status': 'New', 'issues_url': '#', 'assignee': 'David Leonard', 'title': 'Homepage for technetium', 'assignee_avatar': 'https://secure.gravatar.com/avatar/1aee4f304d9836daa9a69b7e92cdd6ec?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-29-2013', 'priority': 'Major'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Method for selecting a repository for generating reports', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-29-2013', 'priority': 'Major'}, {'status': 'New', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Parse changeset is weird', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Bug', 'date': '11-29-2013', 'priority': 'Major'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Add repos to sidebar', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-29-2013', 'priority': 'Major'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Cleanup sidebar', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-29-2013', 'priority': 'Major'}, {'status': 'New', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test for sidenav buttons', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'New', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Method for getting opened/resolved issues', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-23-2013', 'priority': 'Major'}, {'status': 'New', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Method to get issue comments in a repository', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-23-2013', 'priority': 'Major'}, {'status': 'New', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Unit test for manager module', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-21-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from a single repo', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Invalid', 'issues_url': '#', 'assignee': 'Albert Chieu', 'title': 'Application test to unsubscribe from all repos', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b313cc54c8f455f358dc1dda9e302d95?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-26-2013', 'priority': 'Major'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'David Leonard', 'title': 'Setup python sphinx', 'assignee_avatar': 'https://secure.gravatar.com/avatar/1aee4f304d9836daa9a69b7e92cdd6ec?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-24-2013', 'priority': 'Minor'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'David Leonard', 'title': 'Create line graph with actual data', 'assignee_avatar': 'https://secure.gravatar.com/avatar/1aee4f304d9836daa9a69b7e92cdd6ec?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-20-2013', 'priority': 'Major'}, {'status': 'Resolved', 'issues_url': '#', 'assignee': 'Jorge Yau', 'title': 'Function for getting all issues in a repository', 'assignee_avatar': 'https://secure.gravatar.com/avatar/b0cff0fe6417101f526780df0af3a56d?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fb4673d467030%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32', 'type': 'Task', 'date': '11-19-2013', 'priority': 'Blocker'}]
+        # this_month = November 2013
+        filter_month_value = 'this_month'
+        # to cover when this_month becomes December
+        if datetime.datetime.strftime(datetime.date.today(),'%m') == '12':
+            filter_month_value = 'last_month'
+        self.assertEqual(bitfilter.filter_issues({'date':filter_month_value}, self.all_parsed_issues), expected_result_issue)
 
 
     def test_filter_issues_by_assignee(self):
