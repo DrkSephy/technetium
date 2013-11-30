@@ -55,7 +55,9 @@ def commits_linegraph(changesets=None):
 
     ** Fix cutoff date end
     3. Improve search algorithm
-    4. Synch colors of line and pie graphs
+    4. Synch colors of line and pie graphs <-- You don't have to do this, I don't believe
+                                               it affects the user's experience with 
+                                               reading different graphs. [David]
 
     Returns:
         Dictionary
