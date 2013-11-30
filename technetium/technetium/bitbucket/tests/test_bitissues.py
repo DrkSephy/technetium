@@ -41,6 +41,21 @@ class BitissuesTests(unittest.TestCase):
                 'avatar' : 'http://mygravatar.com',
             }}]
 
+        self.user = 'DrkSephy'
+        self.repo = 'smw-koopa-krisis'
+        self.endpoint = 'issues'
+    ########################################################
+    # get_issues_urls(user, repo, endpoint, end, limit=50) #
+    ########################################################
+    def test_get_issues_urls_empty(self):
+        """
+        Tests that we can get urls to send to the issue endpoint.
+        """
+        self.req_urls = []
+        self.end = 0
+        self.assertEqual(bitissues.get_issues_urls(self.user, self.repo, self.endpoint,
+            self.end, limit=50), self.req_urls )
+        
 
     #################################
     # parse_all_issues(repo_issues) #
