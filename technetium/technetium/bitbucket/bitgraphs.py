@@ -48,7 +48,8 @@ def commits_linegraph(changesets=None):
     3. For each commit, parse each user's timestamp to unix time
     4. Create a data series for each user based on date ranges
 
-    Function may be refactored into sub functions.
+    Function will be refactored into sub functions.
+    Search can be improved with binary search
 
     Returns:
         Dictionary
@@ -57,7 +58,6 @@ def commits_linegraph(changesets=None):
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
     end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
     nb_element = 30
-    print nb_element
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
@@ -76,7 +76,13 @@ def commits_linegraph(changesets=None):
     user_series = {}
     for user in user_commits:
         user_series[user] = [0 for x in range(nb_element)]
-    print user_series
+        # Cycle through each user's commits
+        for timestamp in user_commits[user]:
+            for i in xrange(nb_element):
+                current = xdata[i]
+                next = xdata[i+1]
+                if current <= timestamp < next:
+                    user_series[user][i] += 1
 
     tooltip_date = "%b %d %Y"
     extra_serie = {"tooltip": {"y_start": "Pushed ", "y_end": " commits"},
@@ -86,8 +92,8 @@ def commits_linegraph(changesets=None):
     chartdata = {'x': xdata, 'extra1': extra_serie }
     user_count = 0
     for user in user_series:
-        ydata = [random.randint(0, 10) for i in range(nb_element)]
         user_count += 1
+        ydata = user_series[user]
         string_count = str(user_count)
         chartdata['name'+string_count] = user
         chartdata['y'+string_count] = ydata
