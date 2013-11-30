@@ -12,19 +12,17 @@
 
   <!-- Pass the subscribed repo information into request object -->
   <b class="caret"></b></a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" id="navbar-repos">
     {% if subscriptions %}
 
       {% for repo in subscriptions %}
-        <li>
+        <li id="navbar-{{ repo.owner }}-{{ repo.slug_url }}">
           <a target="_blank" href="https://bitbucket.org/{{ repo.owner }}/{{ repo.slug_url }}">
           {{ repo.owner }} / {{ repo.repository }}
           </a>
         </li>
       {% endfor %}
 
-      <li class="divider"></li>
     {% endif %}
-    <li><a href="{% url 'manage' %}">Manage Subscriptions</a></li>
   </ul>
 </li>

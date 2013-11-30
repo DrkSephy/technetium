@@ -1,4 +1,4 @@
-// Put AJAX Requests for Manage in this File
+// Put AJAX for Manage in this File
 
 // AJAX Request to subscribe to repository
 $("button[name='subscribe']").click(function() {
@@ -12,6 +12,7 @@ $("button[name='subscribe']").click(function() {
     var repoId     = $("#id-" + buttonId).val();
     var subCount   = $("#subscription-count");
     var sidebarSub = $("#sidebar-repos");
+    var navbarSub  = $("#navbar-repos");
 
     // Send Ajax request to server
     $.ajax({
@@ -34,12 +35,18 @@ $("button[name='subscribe']").click(function() {
                 button.html('Unsubscribe');
 
                 // Add new subscription to sidebar
-                var newSubscription = '<li id="sidebar-'+repoOwner+'-'+
+                var newSideSub = '<li id="sidebar-'+repoOwner+'-'+
                 repoSlug + '"><a href="/reports/'+repoOwner+'/'+repoSlug+'">'+
                 repoName + '</a></li>';
-                sidebarSub.append(newSubscription);
+                sidebarSub.append(newSideSub);
 
                 // Add subscription to navbar
+                var newNavSub = '<li id="navbar-'+repoOwner+'-'+
+                repoSlug + '"><a target="_blank" href="https://bitbucket.org/'+
+                repoOwner + '/' + repoSlug +'">'+repoOwner+' / '+repoName+'</a>';
+                navbarSub.append(newNavSub);
+
+                // Update navbar subscriptions count
                 var newCount = parseInt(subCount.text())+1;
                 subCount.text(newCount);
             }
@@ -50,11 +57,13 @@ $("button[name='subscribe']").click(function() {
                 button.html('Subscribe');
 
                 // Remove old subcription from sidebar
-                var subscriptionID = '#sidebar-'+repoOwner+'-'+repoSlug;
-                var removeSubscription = $(subscriptionID);
-                removeSubscription.remove();
+                var subID = '#sidebar-'+repoOwner+'-'+repoSlug;
+                var removeSideSub = $(subID);
+                removeSideSub.remove();
 
                 // Remove subscription from navbar
+
+                // Update navbar subscriptions count
                 var newCount = parseInt(subCount.text())-1;
                 subCount.text(newCount);
             }
