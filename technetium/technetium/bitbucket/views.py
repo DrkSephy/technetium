@@ -62,11 +62,10 @@ def reports(request, owner, repo_slug):
     changesets_tallied = bitstats.tally_changesets(changesets_parsed)
 
     # Tally the number of issues opened, assigned
-    # issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
-    # issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
-    # issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
-    # issues_tallied = bitstats.tally_issues(issues_parsed)
-    issues_tallied = {}
+    issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
+    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
+    issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
+    issues_tallied = bitstats.tally_issues(issues_parsed)
 
     # Combine tallies for issues and changesets for each user
     tallies = bitstats.combine_tallies(changesets_tallied, issues_tallied)

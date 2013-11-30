@@ -50,9 +50,10 @@ def commits_linegraph(changesets=None):
 
     Improvements:
     ** [done] Fix nb_element issue
-    ** Fix cutoff date end
     1. [done] Refactoring into smaller functions
-    2. Optimize number of elements
+    2. [done] Optimize number of elements
+
+    ** Fix cutoff date end
     3. Improve search algorithm
     4. Synch colors of line and pie graphs
 
@@ -62,7 +63,7 @@ def commits_linegraph(changesets=None):
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
     end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])+(86400*2000)
-    nb_element = 40
+    nb_element = 50
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
@@ -137,9 +138,8 @@ def tally_data_series(xdata, user_timestamps, elements):
         for timestamp in user_timestamps[user]:
             current, next = 0, 0
             for i in xrange(elements):
-                current = xdata[i]
                 try:
-                    next = xdata[i+1]
+                    current, next = xdata[i], xdata[i+1]
                     if current <= timestamp < next:
                         user_series[user][i] += 1
                         break
