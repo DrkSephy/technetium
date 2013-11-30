@@ -81,16 +81,7 @@ def commits_linegraph(changesets=None):
         user_commits[author].append(timestamp)
 
     # Create a data series tally for each user
-    user_series = {}
-    for user in user_commits:
-        user_series[user] = [0 for x in range(nb_element)]
-        # Cycle through each user's commits
-        for timestamp in user_commits[user]:
-            for i in xrange(nb_element):
-                current = xdata[i]
-                next = xdata[i+1]
-                if current <= timestamp < next:
-                    user_series[user][i] += 1
+    user_series = tally_data_series(xdata, user_commits, nb_element)
 
     tooltip_date = "%b %d %Y"
     extra_serie = {"tooltip": {"y_start": "Pushed ", "y_end": " commits"},
@@ -120,3 +111,28 @@ def commits_linegraph(changesets=None):
             'tag_script_js': True,
             'jquery_on_ready': False,
             }}
+
+
+def tally_data_series(xdata, user_timestamps, elements):
+    """
+    Tallies data series against timestamps.
+    Helper function for commits_linegraph()
+
+    Parameters:
+        user_timestamps: Dictionary
+
+    Returns:
+        Dictionary
+    """
+    user_series = {}
+    for user in user_timestamps:
+        user_series[user] = [0 for x in range(elements)]
+        # Cycle through each user's commits
+        for timestamp in user_series[user]:
+            for i in xrange(elements):
+                current = xdata[i]
+                next = xdata[i+1]
+                if current <= timestamp < next:
+                    user_series[user][i] += 1
+    return user_series
+
