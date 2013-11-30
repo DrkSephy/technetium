@@ -61,6 +61,6 @@ class BitstatsTests(unittest.TestCase):
         Tests that an empty dictionary returns an empty list of commits.
         """
 
-        self.assertEqual(bitstats.list_commits({}), [])
+        self.assertEqual(bitstats.list_data({}), [])
 
         pass
