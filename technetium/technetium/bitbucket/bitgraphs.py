@@ -42,19 +42,21 @@ def commits_pie_graph(tallies):
 
 def commits_linegraph(changesets=None):
     """
-    Temporary placeholder for line graph code.
+    Algorithm to parse commits linegraph
+    1. Get the timestamp of first and most recent commit
+    2. Split the x-axis regions into date ranges
+    3. For each commit, parse each user's timestamp to unix time
+    4. Create a data series for each user based on date ranges
 
-    David's notes
-    -------------
-    I'll need to figure out how to properly get the data from the JSON
-    returned from Bitbucket, and get it into the proper form. Will
-    probably need a few methods from bitstats to get the data in the
-    right form and pass it into the charting views.
+    Function may be refactored into sub functions.
+
+    Returns:
+        Dictionary
     """
     # Set start date to earliest commit
     start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
     end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
-    nb_element = (end_time-start_time) / (86400*1000)
+    nb_element = 30
     print nb_element
 
     # Get xdata for time range of commits
@@ -71,15 +73,19 @@ def commits_linegraph(changesets=None):
         user_commits[author].append(timestamp)
 
     # Create a data series tally for each user
+    user_series = {}
+    for user in user_commits:
+        user_series[user] = [0 for x in range(nb_element)]
+    print user_series
 
-
-    tooltip_date = "%b %d %Y %H:%M:%S %p"
-    extra_serie = {"date_format": tooltip_date}
+    tooltip_date = "%b %d %Y"
+    extra_serie = {"tooltip": {"y_start": "Pushed ", "y_end": " commits"},
+                    "date_format": tooltip_date}
 
     # Add each user commit breakdown into chart data
     chartdata = {'x': xdata, 'extra1': extra_serie }
     user_count = 0
-    for user in user_commits:
+    for user in user_series:
         ydata = [random.randint(0, 10) for i in range(nb_element)]
         user_count += 1
         string_count = str(user_count)
