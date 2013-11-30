@@ -56,6 +56,17 @@ class BitissuesTests(unittest.TestCase):
         self.assertEqual(bitissues.get_issues_urls(self.user, self.repo, self.endpoint,
             self.end, limit=50), self.req_urls )
         
+    def test_get_issues_urls_not_empty(self):
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues?limit=50&start=0']
+        self.count = 0
+        self.user = 'DrkSephy'
+        self.repo = 'smw-koopa-krisis'
+        self.endpoint = 'issues'
+        self.limit = 50
+        self.end = 50
+
+        self.assertEqual(bitissues.get_issues_urls(self.user, self.repo, self.endpoint,
+            self.end, self.limit), self.req_urls)
 
     #################################
     # parse_all_issues(repo_issues) #
