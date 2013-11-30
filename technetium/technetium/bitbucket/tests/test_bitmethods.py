@@ -11,6 +11,7 @@ class BitmethodsTests(unittest.TestCase):
         self.user = 'technetiumccny'
         self.repo = 'technetium'
         self.issues_endpt = 'issues'
+        self.endpoint = 'changesets'
         self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
          # Set up for dictionary_sum()
@@ -20,7 +21,21 @@ class BitmethodsTests(unittest.TestCase):
         self.data4 = {'c':2, 'b':3}
 
 
-    # Tests For: make_req_url()
+    #######################################################
+    # get_api_urls(user, repo, endpoint, start, limit=50) #
+    #######################################################
+    def test_get_api_urls(self):
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
+        self.start = 51
+        self.limit = 50
+        self.new_url = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?start=1&limit=1'
+
+        self.assertEqual(bitmethods.get_api_urls(self.user, self.repo, self.endpoint, self.limit, self.start),
+            self.req_urls)
+
+    #########################################################   
+    # make_req_url(user, repo, endpoint, limit=50, start=0) #
+    #########################################################
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
@@ -62,7 +77,7 @@ class BitmethodsTests(unittest.TestCase):
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
 
-    #
+    
     # Tests For: send_bitbucket_request()
     def test_send_bitbucket_request_not_200(self):
         """
