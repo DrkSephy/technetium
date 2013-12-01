@@ -82,16 +82,13 @@ def commits_linegraph(changesets=None, count=50):
     nb_element = (end_time-start_time)/(86400*1000)
     if nb_element > 60:
         nb_element = 60
-    elif nb_element < 5:
-        nb_element = 5
+    elif nb_element < 10:
+        nb_element = 10
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
     xdata = [x for x in range(start_time, end_time, step)]
-    print start_time, changesets[-1]['timestamp']
-    print end_time, changesets[0]['timestamp']
-    print step
-    print
+
     # Get commit data with user as its own y data
     user_commits = get_commit_data_of_user(changesets)
     user_series = tally_data_series(xdata, user_commits, nb_element)
