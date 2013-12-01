@@ -11,24 +11,44 @@ Welcome to Technetium's documentation!
 
 
 
-
+Bitchangesets
+=============
 .. automodule:: bitchangesets
     :members:
+
+Bitmethods
+==========
 .. automodule:: bitmethods
     :members:
+
+Bitstats
+========
 .. automodule:: bitstats
     :members:
+
+Bitfilter
+=========
 .. automodule:: bitfilter
     :members:
+
+Bitissues
+=========
 .. automodule:: bitissues
     :members:
+
+Bitauth
+=======
 .. automodule:: bitauth
     :members:
-.. automodule:: decorators
-    :members:
+
+Bitmanager
+==========
 .. automodule:: bitmanager
     :members:
 
+Bitgraphs
+.. automodule:: bitgraphs
+    :members:
     
 
 
@@ -39,4 +59,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
 
