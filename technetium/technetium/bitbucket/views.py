@@ -110,8 +110,6 @@ def dashboard_issues(request):
     repo_slug = ''
 
     for n, v in request.GET.iteritems():
-        n = n.strip().lower()
-        v = v.strip().lower()
         if n == 'repo_slug':
             repo_slug = v
         elif n == 'type' or n == 'status' or n == 'priority' or n == 'date':
@@ -125,18 +123,13 @@ def dashboard_issues(request):
 
 
     # filter only if repo_slug name value pair is given
-    if repo_slug != '':
+    if repo_slug:
         query_str_dict = {}
         for repo in issues_list:
             slug = repo['repo_meta']['repo_slug']
             if slug == repo_slug:
                 parsed_issues = repo['issues']
                 repo['issues'] = bitfilter.filter_issues(name_val_dict, parsed_issues)
-                # append name_val_dict back to the html page
-                query_str_dict['type'] = query_str_type
-                query_str_dict['status'] = query_str_status
-                query_str_dict['date'] = query_str_date
-                repo['query_str_dict'] = query_str_dict
 
     return render(request, 'dashboard_issues.html', data)
 
