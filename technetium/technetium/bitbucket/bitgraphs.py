@@ -1,5 +1,7 @@
 """
-Module for bitgraphs
+Module containing methods for graph generation using Django D3. 
+This module contains methods for generating pie graphs and 
+line graphs, with bar charts to come in the near future.
 """
 import bitmethods
 import bitstats
