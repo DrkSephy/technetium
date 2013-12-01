@@ -3,28 +3,26 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
   <span class="glyphicon glyphicon-eye-open space-right"></span>
     Subscribed Repositories
-  <span class="badge">
+  <span class="badge" id="subscription-count">
     {% if subscription_count %}
       {{ subscription_count }}
     {% else %}0
     {% endif %}
   </span>
-  <!-- We might need a decorator for views -->
+
   <!-- Pass the subscribed repo information into request object -->
   <b class="caret"></b></a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" id="navbar-repos">
     {% if subscriptions %}
 
       {% for repo in subscriptions %}
-        <li>
+        <li id="navbar-{{ repo.owner }}-{{ repo.slug_url }}">
           <a target="_blank" href="https://bitbucket.org/{{ repo.owner }}/{{ repo.slug_url }}">
           {{ repo.owner }} / {{ repo.repository }}
           </a>
         </li>
       {% endfor %}
 
-      <li class="divider"></li>
     {% endif %}
-    <li><a href="{% url 'manage' %}">Manage Subscriptions</a></li>
   </ul>
 </li>

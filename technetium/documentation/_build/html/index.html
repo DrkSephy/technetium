@@ -57,37 +57,30 @@
 <ul class="simple">
 </ul>
 </div>
-<span class="target" id="module-bitchangesets"></span><dl class="function">
-<dt id="bitchangesets.get_changesets">
-<tt class="descclassname">bitchangesets.</tt><tt class="descname">get_changesets</tt><big>(</big><em>user</em>, <em>repo</em>, <em>auth_tokens</em>, <em>limit</em>, <em>start</em><big>)</big><a class="headerlink" href="#bitchangesets.get_changesets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtains a JSON dictionary of changesets across
-a repository/repositories.</p>
+</div>
+<div class="section" id="module-bitchangesets">
+<span id="bitchangesets"></span><h1>Bitchangesets<a class="headerlink" href="#module-bitchangesets" title="Permalink to this headline">¶</a></h1>
+<p>Module containing methods for interacting with changeset data from
+Bitbucket. These methods deal with retrieving JSON data and parsing
+it for use in Technetium&#8217;s reports.</p>
+<dl class="function">
+<dt id="bitchangesets.iterate_all_changesets">
+<tt class="descclassname">bitchangesets.</tt><tt class="descname">iterate_all_changesets</tt><big>(</big><em>req_urls</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitchangesets.iterate_all_changesets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends async API requests to gets all of the commits
+from a repository based on the req_urls. Parses the
+json reponse and tallies commits for each user.
+Uses parse_changesets as a helper function.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
-<dd><dl class="first last docutils">
-<dt>URL: string</dt>
-<dd><ul class="first last simple">
-<li>The url to GET the resource from bitbucket.</li>
-</ul>
-</dd>
-</dl>
-</dd>
+<dd>req_urls: List</dd>
 <dt>Returns:</dt>
-<dd><dl class="first last docutils">
-<dt>changesets: dictionary</dt>
-<dd><ul class="first last simple">
-<li>A dictionary containing [key][values] representing 
-all commits for the requested repositories.</li>
-</ul>
-</dd>
-</dl>
-</dd>
+<dd>List</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="bitchangesets.parse_changesets">
-<tt class="descclassname">bitchangesets.</tt><tt class="descname">parse_changesets</tt><big>(</big><em>repository</em><big>)</big><a class="headerlink" href="#bitchangesets.parse_changesets" title="Permalink to this definition">¶</a></dt>
+<dt id="bitchangesets.parse_changeset">
+<tt class="descclassname">bitchangesets.</tt><tt class="descname">parse_changeset</tt><big>(</big><em>changeset</em><big>)</big><a class="headerlink" href="#bitchangesets.parse_changeset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses returned JSON data for the API call to the
 <cite>repositories</cite> endpoint on Bitbucket.</p>
 <dl class="docutils">
@@ -102,38 +95,20 @@ information.</li>
 </dd>
 </dl>
 </dd>
+<dt>Returns:</dt>
+<dd>changesets: List</dd>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-bitmethods"></span><dl class="function">
-<dt id="bitmethods.count">
-<tt class="descclassname">bitmethods.</tt><tt class="descname">count</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#bitmethods.count" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the count of the repository.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><dl class="first last docutils">
-<dt>url: String</dt>
-<dd><ul class="first last simple">
-<li>The URL to send the request to.</li>
-</ul>
-</dd>
-</dl>
-</dd>
-<dt>Returns:   </dt>
-<dd><dl class="first last docutils">
-<dt>count: Integer</dt>
-<dd><ul class="first last simple">
-<li>The number of commits inside the repository.</li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
+</div>
+<div class="section" id="module-bitmethods">
+<span id="bitmethods"></span><h1>Bitmethods<a class="headerlink" href="#module-bitmethods" title="Permalink to this headline">¶</a></h1>
+<p>Module containing a handful of auxillary methods. These methods are meant
+to be used within all other modules, bitmethods is simply a collection of
+helper functions meant for de-coupling code.</p>
 <dl class="function">
 <dt id="bitmethods.dictionary_sum">
-<tt class="descclassname">bitmethods.</tt><tt class="descname">dictionary_sum</tt><big>(</big><em>dict_a</em>, <em>dict_b</em><big>)</big><a class="headerlink" href="#bitmethods.dictionary_sum" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">bitmethods.</tt><tt class="descname">dictionary_sum</tt><big>(</big><em>dict_a</em>, <em>dict_b</em>, <em>sum_key</em><big>)</big><a class="headerlink" href="#bitmethods.dictionary_sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sums the values of two dictionaries based on corresponding keys.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -190,8 +165,29 @@ added with the first dictionary.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="bitmethods.get_api_urls">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">get_api_urls</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>start</em>, <em>limit=50</em><big>)</big><a class="headerlink" href="#bitmethods.get_api_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a list of api urls based on iterating through limit.
+Uses make_req_url() as a helper function.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>content: List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitmethods.get_count">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">get_count</tt><big>(</big><em>owner</em>, <em>repo_slug</em>, <em>auth_tokens</em>, <em>endpoint</em><big>)</big><a class="headerlink" href="#bitmethods.get_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets count from endpoint of bitbucket API request</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>Integer</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="bitmethods.make_req_url">
-<tt class="descclassname">bitmethods.</tt><tt class="descname">make_req_url</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>limit=None</em>, <em>start=None</em><big>)</big><a class="headerlink" href="#bitmethods.make_req_url" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">bitmethods.</tt><tt class="descname">make_req_url</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>limit=50</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#bitmethods.make_req_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a URL for bitbucket API request.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -223,7 +219,7 @@ added with the first dictionary.</li>
 </dd>
 </dl>
 </dd>
-<dt>Returns:   </dt>
+<dt>Returns:</dt>
 <dd><dl class="first last docutils">
 <dt>url: String</dt>
 <dd><ul class="first last simple">
@@ -315,11 +311,45 @@ API when generating reports.</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-bitstats"></span><dl class="function">
-<dt id="bitstats.list_commits">
-<tt class="descclassname">bitstats.</tt><tt class="descname">list_commits</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_commits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of commits in order of developers.
-Useful for D3 graphs.</p>
+<dl class="function">
+<dt id="bitmethods.to_unix_time">
+<tt class="descclassname">bitmethods.</tt><tt class="descname">to_unix_time</tt><big>(</big><em>timestamp</em><big>)</big><a class="headerlink" href="#bitmethods.to_unix_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats a string timestamp to unix seconds.
+Multiplies by 1000 to use for d3.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>timestamp: String</dd>
+<dt>Returns:</dt>
+<dd>Integer</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bitstats">
+<span id="bitstats"></span><h1>Bitstats<a class="headerlink" href="#module-bitstats" title="Permalink to this headline">¶</a></h1>
+<p>Module containing methods for generating Technetium&#8217;s reports. These 
+methods include the ability to create tallies of both changeset and 
+issue data for each user in a given repository.</p>
+<dl class="function">
+<dt id="bitstats.combine_tallies">
+<tt class="descclassname">bitstats.</tt><tt class="descname">combine_tallies</tt><big>(</big><em>changesets_tallied</em>, <em>issues_tallied</em><big>)</big><a class="headerlink" href="#bitstats.combine_tallies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary where tallies for issues and changesets
+are merged into a single dictionary.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>changesets_tallied: Dictionary
+issues_tallied: Dictionary</dd>
+<dt>Returns:</dt>
+<dd>Dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.list_data">
+<tt class="descclassname">bitstats.</tt><tt class="descname">list_data</tt><big>(</big><em>data</em>, <em>key_value='changesets'</em><big>)</big><a class="headerlink" href="#bitstats.list_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of data in order of developers.
+Useful for D3 graphs. You can use this to list
+commit data as well as issues.</p>
 <dl class="docutils">
 <dt>Paramters:</dt>
 <dd><dl class="first last docutils">
@@ -334,7 +364,7 @@ Useful for D3 graphs.</p>
 <dd><dl class="first last docutils">
 <dt>commits: List</dt>
 <dd><ul class="first last simple">
-<li>A list containing the number of commits for each user  
+<li>A list containing the number of commits for each user
 of a given repository.</li>
 </ul>
 </dd>
@@ -344,9 +374,18 @@ of a given repository.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="bitstats.list_timestamp_and_user">
+<tt class="descclassname">bitstats.</tt><tt class="descname">list_timestamp_and_user</tt><big>(</big><em>changesets</em><big>)</big><a class="headerlink" href="#bitstats.list_timestamp_and_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be modified in the future for commits linegraph</p>
+<p>Returns a tuple of list containing:
+(1) timestamps
+(2) usernames</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="bitstats.list_users">
 <tt class="descclassname">bitstats.</tt><tt class="descname">list_users</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.list_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of all developers in a repository. 
+<dd><p>Returns a list of all developers in a repository.
 Useful for generating D3 graphs.</p>
 <dl class="docutils">
 <dt>Paramters:</dt>
@@ -371,32 +410,16 @@ Useful for generating D3 graphs.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bitstats.tally_assigned_issues">
-<tt class="descclassname">bitstats.</tt><tt class="descname">tally_assigned_issues</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_assigned_issues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the number of issues that each user has been assigned.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><dl class="first last docutils">
-<dt>data: Dictionary</dt>
-<dd><ul class="first last simple">
-<li>A dictionary containing all assigned issues to be tallied.</li>
-</ul>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt>
-<dd><dl class="first last docutils">
-<dt>tally: Dictionary</dt>
-<dd><ul class="first last simple">
-<li>A dictionary containing the tally of all assigned issues for 
-all users in a repository.</li>
-</ul>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>Example: Returns {accountname: 8, DrkSephy: 5}, which is a
-dictionary of the number of issues the above user resolved.</p>
+<dt id="bitstats.new_issues_tally">
+<tt class="descclassname">bitstats.</tt><tt class="descname">new_issues_tally</tt><big>(</big><big>)</big><a class="headerlink" href="#bitstats.new_issues_tally" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for tally issues</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bitstats.parse_issues_for_tallying">
+<tt class="descclassname">bitstats.</tt><tt class="descname">parse_issues_for_tallying</tt><big>(</big><em>req_urls</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitstats.parse_issues_for_tallying" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs all issues in a repository with async requests.
+Purpose is to parse issues open, assigned, and resolved.</p>
 </dd></dl>
 
 <dl class="function">
@@ -417,12 +440,14 @@ dictionary of the number of issues the above user resolved.</p>
 <dd><dl class="first last docutils">
 <dt>tally: Dictionary</dt>
 <dd><ul class="first last simple">
-<li>A dictionary containing the sums of all commits in the 
+<li>A dictionary containing the sums of all commits in the
 repository.</li>
 </ul>
 </dd>
 </dl>
 </dd>
+<dt>Example:</dt>
+<dd>{ &#8216;David Leonard&#8217; : {&#8216;changesets&#8217; : 9}, ...}</dd>
 </dl>
 </dd></dl>
 
@@ -433,18 +458,25 @@ repository.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="bitstats.tally_opened_issues">
-<tt class="descclassname">bitstats.</tt><tt class="descname">tally_opened_issues</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#bitstats.tally_opened_issues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the number of issues each user has opened.</p>
-<p>Notes: Even though issues are usually opened by the scrum master,
-we still need this to grade them.</p>
+<dt id="bitstats.tally_issues">
+<tt class="descclassname">bitstats.</tt><tt class="descname">tally_issues</tt><big>(</big><em>issues</em><big>)</big><a class="headerlink" href="#bitstats.tally_issues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the number of issues that each user has been assigned.</p>
 <dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>data: List</dt>
+<dd><ul class="first last simple">
+<li>A List containing all parsed issues to be tallied.</li>
+</ul>
+</dd>
+</dl>
+</dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>opened_issues: Dictionary</dt>
+<dt>tally: Dictionary</dt>
 <dd><ul class="first last simple">
-<li>A dictionary containing number of issues that each
-user in a given repository has opened.</li>
+<li>A dictionary containing the tally of all assigned issues for
+all users in a repository.</li>
 </ul>
 </dd>
 </dl>
@@ -452,7 +484,10 @@ user in a given repository has opened.</li>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-bitfilter"></span><dl class="function">
+</div>
+<div class="section" id="module-bitfilter">
+<span id="bitfilter"></span><h1>Bitfilter<a class="headerlink" href="#module-bitfilter" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
 <dt id="bitfilter.filter_changesets_by_user">
 <tt class="descclassname">bitfilter.</tt><tt class="descname">filter_changesets_by_user</tt><big>(</big><em>parsed_json</em>, <em>filtered_value</em><big>)</big><a class="headerlink" href="#bitfilter.filter_changesets_by_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filters changesets based on user.</p>
@@ -494,7 +529,14 @@ user in a given repository has opened.</li>
 <dd><p>Filters issues based on users.</p>
 </dd></dl>
 
-<span class="target" id="module-bitissues"></span><dl class="function">
+</div>
+<div class="section" id="module-bitissues">
+<span id="bitissues"></span><h1>Bitissues<a class="headerlink" href="#module-bitissues" title="Permalink to this headline">¶</a></h1>
+<p>Module for interacting with Bitbucket Issue data. This module contains
+methods for bundling request URLs to Bitbucket, for parsing JSON data
+relating to Issues, and auxillary methods for preparing the data for use
+inside of Technetium&#8217;s Subscription Manager.</p>
+<dl class="function">
 <dt id="bitissues.add_html_issue_rows">
 <tt class="descclassname">bitissues.</tt><tt class="descname">add_html_issue_rows</tt><big>(</big><em>parsed_data</em><big>)</big><a class="headerlink" href="#bitissues.add_html_issue_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes parsed issues and returns HTML to attach to rows.
@@ -502,7 +544,7 @@ There has to be a better way of doing this.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>parsed_data: Dictionary</dd>
-<dt>Returns: </dt>
+<dt>Returns:</dt>
 <dd>String</dd>
 </dl>
 </dd></dl>
@@ -519,6 +561,17 @@ infomation to each list of issues.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="bitissues.get_issues_urls">
+<tt class="descclassname">bitissues.</tt><tt class="descname">get_issues_urls</tt><big>(</big><em>user</em>, <em>repo</em>, <em>endpoint</em>, <em>end</em>, <em>limit=50</em><big>)</big><a class="headerlink" href="#bitissues.get_issues_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a list of api urls based on iterating through limit.
+Uses make_req_url() as a helper function.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>content: List</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="bitissues.parse_all_issues">
 <tt class="descclassname">bitissues.</tt><tt class="descname">parse_all_issues</tt><big>(</big><em>repo_issues</em><big>)</big><a class="headerlink" href="#bitissues.parse_all_issues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses returned JSON data from the bitbucket API
@@ -526,7 +579,7 @@ response for the technetium issues dashboard.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>repo_issues: List (Dictionaries of JSON issues)</dd>
-<dt>Returns: </dt>
+<dt>Returns:</dt>
 <dd>List</dd>
 </dl>
 </dd></dl>
@@ -538,12 +591,18 @@ response for the technetium issues dashboard.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>issues: List</dd>
-<dt>Returns: </dt>
+<dt>Returns:</dt>
 <dd>List</dd>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-bitauth"></span><dl class="function">
+</div>
+<div class="section" id="module-bitauth">
+<span id="bitauth"></span><h1>Bitauth<a class="headerlink" href="#module-bitauth" title="Permalink to this headline">¶</a></h1>
+<p>This module contains methods responsible for handling OAuth tokens needed for 
+interacting with the Bitbucket API. As required by Bitbucket, OAuth1 is required 
+to make API calls to any private repository.</p>
+<dl class="function">
 <dt id="bitauth.get_auth_tokens">
 <tt class="descclassname">bitauth.</tt><tt class="descname">get_auth_tokens</tt><big>(</big><em>extra_data</em><big>)</big><a class="headerlink" href="#bitauth.get_auth_tokens" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the authorization tokens required to access
@@ -578,7 +637,14 @@ function as the &#8216;auth&#8217; parameter for requests.</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-decorators"></span><span class="target" id="module-bitmanager"></span><dl class="function">
+</div>
+<div class="section" id="module-bitmanager">
+<span id="bitmanager"></span><h1>Bitmanager<a class="headerlink" href="#module-bitmanager" title="Permalink to this headline">¶</a></h1>
+<p>Module containing methods for handling repository subscriptions. These
+methods include retrieving subscription data from the database, as well
+as supplying functionality for subscribe/unsubscribe to any read-access
+enabled repository.</p>
+<dl class="function">
 <dt id="bitmanager.get_all_subscriptions">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_all_subscriptions</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.get_all_subscriptions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all Subscription objects that
@@ -705,6 +771,18 @@ data: request.POST (Django Query dict)</dd>
 </dl>
 </dd></dl>
 
+<p>Bitgraphs
+.. automodule:: bitgraphs</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">members:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -726,6 +804,13 @@ data: request.POST (Django Query dict)</dd>
 <li><a class="reference internal" href="#">Welcome to Technetium&#8217;s documentation!</a><ul>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-bitchangesets">Bitchangesets</a></li>
+<li><a class="reference internal" href="#module-bitmethods">Bitmethods</a></li>
+<li><a class="reference internal" href="#module-bitstats">Bitstats</a></li>
+<li><a class="reference internal" href="#module-bitfilter">Bitfilter</a></li>
+<li><a class="reference internal" href="#module-bitissues">Bitissues</a></li>
+<li><a class="reference internal" href="#module-bitauth">Bitauth</a></li>
+<li><a class="reference internal" href="#module-bitmanager">Bitmanager</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

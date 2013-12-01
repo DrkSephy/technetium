@@ -1,5 +1,7 @@
 """
-Module for bitchangesets
+Module containing methods for interacting with changeset data from
+Bitbucket. These methods deal with retrieving JSON data and parsing
+it for use in Technetium's reports.
 """
 import bitmethods
 import re

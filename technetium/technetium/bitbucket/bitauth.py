@@ -1,3 +1,9 @@
+"""
+This module contains methods responsible for handling OAuth tokens needed for 
+interacting with the Bitbucket API. As required by Bitbucket, OAuth1 is required 
+to make API calls to any private repository.
+"""
+
 from django.conf import settings
 from social_auth.models import UserSocialAuth
 from requests_oauthlib import OAuth1

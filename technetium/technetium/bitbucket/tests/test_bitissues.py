@@ -18,7 +18,7 @@ class BitissuesTests(unittest.TestCase):
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
-            'utc_created_on' : '2013-11-17 10:00:01-0400',
+            'utc_last_updated' : '2013-11-17 10:00:01-0400',
 
             'metadata' : {
                 'kind' : 'task',
@@ -30,7 +30,7 @@ class BitissuesTests(unittest.TestCase):
             'title' : 'issue title',
             'status' : 'new',
             'priority' : 'major',
-            'utc_created_on' : '2013-11-17 10:00:01-0400',
+            'utc_last_updated' : '2013-11-17 10:00:01-0400',
 
             'metadata' : {
                 'kind' : 'task',
@@ -41,6 +41,30 @@ class BitissuesTests(unittest.TestCase):
                 'avatar' : 'http://mygravatar.com',
             }}]
 
+        self.user = 'DrkSephy'
+        self.repo = 'smw-koopa-krisis'
+        self.endpoint = 'issues'
+
+    ########################################################
+    # get_issues_urls(user, repo, endpoint, end, limit=50) #
+    ########################################################
+    def test_get_issues_urls_empty(self):
+        """
+        Tests that we can get urls to send to the issue endpoint.
+        """
+        self.req_urls = []
+        self.end = 0
+        self.assertEqual(bitissues.get_issues_urls(self.user, self.repo, self.endpoint,
+            self.end, limit=50), self.req_urls )
+        
+    def test_get_issues_urls_not_empty(self):
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/issues?limit=50&start=0']
+        self.count = 0
+        self.limit = 50
+        self.end = 50
+
+        self.assertEqual(bitissues.get_issues_urls(self.user, self.repo, self.endpoint,
+            self.end, self.limit), self.req_urls)
 
     #################################
     # parse_all_issues(repo_issues) #

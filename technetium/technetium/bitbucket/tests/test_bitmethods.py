@@ -11,6 +11,7 @@ class BitmethodsTests(unittest.TestCase):
         self.user = 'technetiumccny'
         self.repo = 'technetium'
         self.issues_endpt = 'issues'
+        self.endpoint = 'changesets'
         self.url_issues = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues'
 
          # Set up for dictionary_sum()
@@ -19,12 +20,27 @@ class BitmethodsTests(unittest.TestCase):
         self.data3 = {'a':1, 'b':2}
         self.data4 = {'c':2, 'b':3}
 
-    # Tests For: make_req_url()
+
+    #######################################################
+    # get_api_urls(user, repo, endpoint, start, limit=50) #
+    #######################################################
+    def test_get_api_urls(self):
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
+        self.start = 51
+        self.limit = 50
+        self.new_url = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?start=1&limit=1'
+
+        self.assertEqual(bitmethods.get_api_urls(self.user, self.repo, self.endpoint, self.limit, self.start),
+            self.req_urls)
+
+    #########################################################   
+    # make_req_url(user, repo, endpoint, limit=50, start=0) #
+    #########################################################
     def test_make_req_url(self):
         """
         Tests that constructs URL returns correct API request url.
         """
-        match = self.url_issues
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt), match)
 
@@ -32,7 +48,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that URL has proper limit parameter
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=20'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=20&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=20), match)
 
@@ -40,7 +56,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that URL has proper start parameter
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?start=20'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=20'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, start=20), match)
 
@@ -48,20 +64,20 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that URL is created with limit and start parameters
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=20&start=5'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=20'
         self.assertEqual(bitmethods.make_req_url
-            (self.user, self.repo, self.issues_endpt, limit=20, start=5), match)
+            (self.user, self.repo, self.issues_endpt, limit=50, start=20), match)
 
     def test_make_req_url_max_limit_50(self):
         """
         Tests that any generated URL has a max limit of 50
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
 
-    #
+    
     # Tests For: send_bitbucket_request()
     def test_send_bitbucket_request_not_200(self):
         """
@@ -117,12 +133,11 @@ class BitmethodsTests(unittest.TestCase):
         Tests that summing two empty dictionaries returns an empty dictionary.
         """
 
-        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2), {})
+        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2, self.data2), {})
 
     def test_dictionary_sum(self):
         """
         Tests that summing two non-empty dictionaries returns the proper result.
         """
 
-        self.assertEqual(bitmethods.dictionary_sum(self.data3, self.data4), {'a': 1, 'c': 2, 'b': 5})
-
+        pass

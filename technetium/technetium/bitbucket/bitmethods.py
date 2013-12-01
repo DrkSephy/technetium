@@ -1,6 +1,7 @@
 """
-This Module has terrible cohension, but it's okay.
-Module contains a trash bin for our common methods.
+Module containing a handful of auxillary methods. These methods are meant
+to be used within all other modules, bitmethods is simply a collection of
+helper functions meant for de-coupling code.
 """
 from datetime import datetime
 import simplejson as json
@@ -140,7 +141,6 @@ def to_unix_time(timestamp):
     """
     date = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
     return int(time.mktime(date.timetuple()))*1000
-
 
 
 def format_timestamp(timestamp):

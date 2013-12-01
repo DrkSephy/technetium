@@ -1,3 +1,9 @@
+"""
+Module for interacting with Bitbucket Issue data. This module contains
+methods for bundling request URLs to Bitbucket, for parsing JSON data
+relating to Issues, and auxillary methods for preparing the data for use
+inside of Technetium's Subscription Manager.
+"""
 from django.template.loader import render_to_string
 import bitmethods
 
