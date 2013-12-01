@@ -7,8 +7,19 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 
 
-class BitauthTest(TestCase):
-    pass
+class SimpleTest(TestCase):
+
+    def test_basic_operations(self):
+        """
+        Tests that 1 + 1 always equals 2.
+        """
+        self.assertEqual(1 + 1, 2)
+        self.assertNotEqual(1, 2)
+        self.assertTrue(1 == 1)
+        self.assertFalse(1 == 2)
+        self.assertIsNone(None)
+        self.assertIn(1, [1, 2, 3])
+
 
 
 class BitissuesTest(TestCase):
