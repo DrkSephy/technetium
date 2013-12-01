@@ -107,16 +107,15 @@ def dashboard_issues(request):
     query_str_type = ''
     query_str_status = ''
     query_str_date = ''
-    query_str_assignee = ''
-
     repo_slug = ''
+
     print request.GET
     for n, v in request.GET.iteritems():
         n = n.strip().lower()
         v = v.strip().lower()
         if n == 'repo_slug':
             repo_slug = v
-        elif n == 'type' or n == 'status' or n == 'priority' or n == 'date' or n == 'assignee':
+        elif n == 'type' or n == 'status' or n == 'priority' or n == 'date':
             name_val_dict[n] = v
             if n != 'type':
                 query_str_type = query_str_type + '&' + n + '=' + v
@@ -124,9 +123,6 @@ def dashboard_issues(request):
                 query_str_status = query_str_status + '&' + n + '=' + v
             if n != 'date':
                 query_str_date = query_str_date + '&' + n + '=' + v
-            if n != 'assignee':
-                query_str_assignee = query_str_assignee + '&' + n + '=' + v
-
 
 
     # filter only if repo_slug name value pair is given
@@ -141,7 +137,6 @@ def dashboard_issues(request):
                 query_str_dict['type'] = query_str_type
                 query_str_dict['status'] = query_str_status
                 query_str_dict['date'] = query_str_date
-                query_str_dict['assignee'] = query_str_assignee
                 repo['query_str_dict'] = query_str_dict
 
     return render(request, 'dashboard_issues.html', data)
