@@ -77,7 +77,7 @@ def reports(request, owner, repo_slug):
     context['repo_slug'] = repo_slug
     context['tallies'] = tallies
     context['commits_piegraph'] = bitgraphs.commits_pie_graph(tallies)
-    context['commits_linegraph'] = bitgraphs.commits_linegraph(changesets_parsed)
+    context['commits_linegraph'] = bitgraphs.commits_linegraph(changesets_parsed, changesets_count)
     return render(request, 'statistics.html', context)
 
 
