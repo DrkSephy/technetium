@@ -1,6 +1,6 @@
 """
-Module containing methods for graph generation using Django D3. 
-This module contains methods for generating pie graphs and 
+Module containing methods for graph generation using Django D3.
+This module contains methods for generating pie graphs and
 line graphs, with bar charts to come in the near future.
 """
 import bitmethods
@@ -42,8 +42,13 @@ def commits_pie_graph(tallies):
         }}
 
 
-def commits_linegraph(changesets=None):
+def commits_linegraph(changesets=None, count=50):
     """
+    Bitbucket has a inconsistent design where if your repo has
+    less than 50 commits, they are returned in oldest commits first.
+    If your repo has more than 50 commits, the commits are returned
+    in most recent commits first.
+
     Algorithm to parse commits linegraph
     1. Get the timestamp of first and most recent commit
     2. Split the x-axis regions into date ranges
@@ -55,19 +60,30 @@ def commits_linegraph(changesets=None):
     1. [done] Refactoring into smaller functions
     2. [done] Optimize number of elements
 
+    ** Fix backwards order of linegraph for < 50 commits
     ** Fix cutoff date end
     3. Improve search algorithm
-    4. Synch colors of line and pie graphs <-- You don't have to do this, I don't believe
-                                               it affects the user's experience with 
-                                               reading different graphs. [David]
 
     Returns:
         Dictionary
     """
-    # Set start date to earliest commit
-    start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
-    end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])+(86400*2000)
-    nb_element = 50
+    # Initialize start and end timestamp
+    start_time, end_time = 0, 0
+
+    # Handle bitbucket's inconsistent commits ordering
+    if count <= 50:
+        start_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
+        end_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
+    else:
+        start_time = bitmethods.to_unix_time(changesets[-1]['timestamp'])
+        end_time = bitmethods.to_unix_time(changesets[0]['timestamp'])
+
+    # Set limit on amount of time regions
+    nb_element = (end_time-start_time)/(86400*1000)
+    if nb_element > 60:
+        nb_element = 60
+    elif nb_element < 10:
+        nb_element = 10
 
     # Get xdata for time range of commits
     step = (end_time - start_time) / nb_element
