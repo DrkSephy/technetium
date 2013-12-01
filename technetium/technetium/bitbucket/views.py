@@ -110,6 +110,7 @@ def dashboard_issues(request):
     query_str_assignee = ''
 
     repo_slug = ''
+    print request.GET
     for n, v in request.GET.iteritems():
         n = n.strip().lower()
         v = v.strip().lower()
