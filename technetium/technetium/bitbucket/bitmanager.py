@@ -1,3 +1,10 @@
+"""
+Module containing methods for handling repository subscriptions. These
+methods include retrieving subscription data from the database, as well
+as supplying functionality for subscribe/unsubscribe to any read-access
+enabled repository.
+"""
+
 from django.db import IntegrityError, DatabaseError
 from technetium.bitbucket.models import Subscription
 import technetium.bitbucket.bitmethods as bitmethods

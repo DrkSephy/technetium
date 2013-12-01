@@ -1,5 +1,7 @@
 """
-Module to get statistics of repositories
+Module containing methods for generating Technetium's reports. These 
+methods include the ability to create tallies of both changeset and 
+issue data for each user in a given repository. 
 """
 import bitmethods
 

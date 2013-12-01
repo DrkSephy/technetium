@@ -103,8 +103,9 @@ information.</li>
 </div>
 <div class="section" id="module-bitmethods">
 <span id="bitmethods"></span><h1>Bitmethods<a class="headerlink" href="#module-bitmethods" title="Permalink to this headline">¶</a></h1>
-<p>This Module has terrible cohension, but it&#8217;s okay.
-Module contains a trash bin for our common methods.</p>
+<p>Module containing a handful of auxillary methods. These methods are meant
+to be used within all other modules, bitmethods is simply a collection of
+helper functions meant for de-coupling code.</p>
 <dl class="function">
 <dt id="bitmethods.dictionary_sum">
 <tt class="descclassname">bitmethods.</tt><tt class="descname">dictionary_sum</tt><big>(</big><em>dict_a</em>, <em>dict_b</em>, <em>sum_key</em><big>)</big><a class="headerlink" href="#bitmethods.dictionary_sum" title="Permalink to this definition">¶</a></dt>
@@ -326,7 +327,9 @@ Multiplies by 1000 to use for d3.</p>
 </div>
 <div class="section" id="module-bitstats">
 <span id="bitstats"></span><h1>Bitstats<a class="headerlink" href="#module-bitstats" title="Permalink to this headline">¶</a></h1>
-<p>Module to get statistics of repositories</p>
+<p>Module containing methods for generating Technetium&#8217;s reports. These 
+methods include the ability to create tallies of both changeset and 
+issue data for each user in a given repository.</p>
 <dl class="function">
 <dt id="bitstats.combine_tallies">
 <tt class="descclassname">bitstats.</tt><tt class="descname">combine_tallies</tt><big>(</big><em>changesets_tallied</em>, <em>issues_tallied</em><big>)</big><a class="headerlink" href="#bitstats.combine_tallies" title="Permalink to this definition">¶</a></dt>
@@ -529,6 +532,10 @@ all users in a repository.</li>
 </div>
 <div class="section" id="module-bitissues">
 <span id="bitissues"></span><h1>Bitissues<a class="headerlink" href="#module-bitissues" title="Permalink to this headline">¶</a></h1>
+<p>Module for interacting with Bitbucket Issue data. This module contains
+methods for bundling request URLs to Bitbucket, for parsing JSON data
+relating to Issues, and auxillary methods for preparing the data for use
+inside of Technetium&#8217;s Subscription Manager.</p>
 <dl class="function">
 <dt id="bitissues.add_html_issue_rows">
 <tt class="descclassname">bitissues.</tt><tt class="descname">add_html_issue_rows</tt><big>(</big><em>parsed_data</em><big>)</big><a class="headerlink" href="#bitissues.add_html_issue_rows" title="Permalink to this definition">¶</a></dt>
@@ -633,6 +640,10 @@ function as the &#8216;auth&#8217; parameter for requests.</p>
 </div>
 <div class="section" id="module-bitmanager">
 <span id="bitmanager"></span><h1>Bitmanager<a class="headerlink" href="#module-bitmanager" title="Permalink to this headline">¶</a></h1>
+<p>Module containing methods for handling repository subscriptions. These
+methods include retrieving subscription data from the database, as well
+as supplying functionality for subscribe/unsubscribe to any read-access
+enabled repository.</p>
 <dl class="function">
 <dt id="bitmanager.get_all_subscriptions">
 <tt class="descclassname">bitmanager.</tt><tt class="descname">get_all_subscriptions</tt><big>(</big><em>user</em><big>)</big><a class="headerlink" href="#bitmanager.get_all_subscriptions" title="Permalink to this definition">¶</a></dt>
