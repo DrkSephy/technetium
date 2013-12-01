@@ -60,7 +60,9 @@
 </div>
 <div class="section" id="module-bitchangesets">
 <span id="bitchangesets"></span><h1>Bitchangesets<a class="headerlink" href="#module-bitchangesets" title="Permalink to this headline">¶</a></h1>
-<p>Module for bitchangesets</p>
+<p>Module containing methods for interacting with changeset data from
+Bitbucket. These methods deal with retrieving JSON data and parsing
+it for use in Technetium&#8217;s reports.</p>
 <dl class="function">
 <dt id="bitchangesets.iterate_all_changesets">
 <tt class="descclassname">bitchangesets.</tt><tt class="descname">iterate_all_changesets</tt><big>(</big><em>req_urls</em>, <em>auth_tokens</em><big>)</big><a class="headerlink" href="#bitchangesets.iterate_all_changesets" title="Permalink to this definition">¶</a></dt>
@@ -590,6 +592,9 @@ response for the technetium issues dashboard.</p>
 </div>
 <div class="section" id="module-bitauth">
 <span id="bitauth"></span><h1>Bitauth<a class="headerlink" href="#module-bitauth" title="Permalink to this headline">¶</a></h1>
+<p>This module contains methods responsible for handling OAuth tokens needed for 
+interacting with the Bitbucket API. As required by Bitbucket, OAuth1 is required 
+to make API calls to any private repository.</p>
 <dl class="function">
 <dt id="bitauth.get_auth_tokens">
 <tt class="descclassname">bitauth.</tt><tt class="descname">get_auth_tokens</tt><big>(</big><em>extra_data</em><big>)</big><a class="headerlink" href="#bitauth.get_auth_tokens" title="Permalink to this definition">¶</a></dt>
