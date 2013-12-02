@@ -43,8 +43,6 @@ class LogoutTest(unittest.TestCase):
 				WebDriverWait(driver, 10).until(EC.title_contains("Technetium"))
 
 #				print "Setup Login to: ", driver.title
-				# wait 3 seconds to show the correct page being loaded before quitting the browser
-#				time.sleep(3)
 
 			except:
 				print "Setup Login failed"
