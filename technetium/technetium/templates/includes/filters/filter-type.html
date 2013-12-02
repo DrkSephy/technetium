@@ -1,0 +1,24 @@
+<!-- Issue Tracker: Filter Type -->
+<div class="btn-group">
+
+  <button type="button" class="btn btn-default btn-xs">Issue Type</button>
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=bug{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
+      >Bug</a></li>
+    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=enhancement{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
+      >Enhancement</a></li>
+    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=proposal{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
+      >Proposal</a></li>
+    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=task{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
+      >Task</a></li>
+    <li class="divider"></li>
+    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}">All</a></li>
+  </ul>
+
+</div>
+
