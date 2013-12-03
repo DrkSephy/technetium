@@ -8,17 +8,30 @@ $(".btn-show-more").click(function() {
     var repoSlug  = button.attr("data-slug");
     var repoCount = button.attr("data-count");
     var tableBody = $('#issues-' + repoOwner + '-' + repoSlug);
+    var filterQueryStr = button.attr("data-filter");
     button.attr("disabled", "disabled");
+
+    var getData = {
+            'repo-owner' : repoOwner,
+            'repo-slug'  : repoSlug,
+            'count' : repoCount
+        };
+
+    if (filterQueryStr != '') {
+        var nvPairs = filterQueryStr.split('&');
+        for (var i=0; i < nvPairs.length; i++) {
+            var nameVal = nvPairs[i].split('=');
+            if (nameVal.length == 2) {
+                getData[nameVal[0]] = nameVal[1];
+            }
+        }
+    } 
 
     // Ajax request to get next set of issues
     $.ajax({
         type : 'GET',
         url  : '/fetch-more-issues',
-        data : {
-            'repo-owner' : repoOwner,
-            'repo-slug'  : repoSlug,
-            'count' : repoCount
-        },
+        data : getData,
 
         success : function(data) {
             // Append rows of issues to table
