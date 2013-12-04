@@ -125,7 +125,7 @@ def make_html_issue_rows(parsed_data):
 ###################
 # AJAX PROCESSORS #
 ###################
-def ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries):
+def ajax_process_issues(auth_tokens, repo_owner, repo_slug, count, queries):
     """
     Common function to process Ajax request for issues.
     1. Creates the request url for bitbucket API
@@ -141,7 +141,7 @@ def ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries):
     Returns:
         String
     """
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, queries)
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', count, queries)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = parse_issues(raw_data[0]['issues'])
     return make_html_issue_rows(parsed_data)
