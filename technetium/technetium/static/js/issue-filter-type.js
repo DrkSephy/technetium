@@ -9,15 +9,20 @@ $(".filter-type").click(function() {
     var repoOwner  = parentName.attr("data-filter-owner");
     var tableBody  = $("#issues-"+repoOwner+"-"+repoSlug);
 
+    var getData = {
+            'repo-owner'  : repoOwner,
+            'repo-slug'   : repoSlug
+        };
+        
+    if (filterType != '' && filterType != 'all'){
+        getData['filter-type'] = filterType;
+    }
+
    // Ajax request to grab filtered issues
     $.ajax({
         type : 'GET',
         url  : '/filter-issues-type',
-        data : {
-            'repo-owner'  : repoOwner,
-            'repo-slug'   : repoSlug,
-            'filter-type' : filterType
-        },
+        data : getData,
 
         success : function(data) {
             // Empty old issues and show new filter issues

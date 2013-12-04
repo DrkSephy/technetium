@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     # Ajax Issues
     url(r'^fetch-more-issues/$', views_bitbucket.fetch_more_issues),
     url(r'^filter-issues-type/$', views_bitbucket.filter_issues_type),
-
+    url(r'^filter-issues-status/$', views_bitbucket.filter_issues_status),
 
     # Social Auth URLs
     url(r'', include('social.apps.django_app.urls', namespace='social'))

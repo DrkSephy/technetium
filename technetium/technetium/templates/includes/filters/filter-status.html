@@ -7,24 +7,42 @@
     <span class="sr-only">Toggle Dropdown</span>
   </button>
 
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=new{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >New</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=open{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >Open</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=resolved{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >Resolved</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=duplicate{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >Duplicate</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=on_hold{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >On Hold</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=invalid{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >Invalid</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&status=wontfix{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >Won't Fix</a></li>
+  <ul class="dropdown-menu" data-filter-repo="{{ repo.repo_meta.repo_slug }}" data-filter-owner="{{ repo.repo_meta.repo_owner }}" data-count="10" role="menu">
+
+    <li data-filter-status="new" id="filter-status-new" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">New</a>
+    </li>
+
+    <li data-filter-status="open" id="filter-status-open" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Open</a>
+    </li>
+
+    <li data-filter-status="resolved" id="filter-status-resolved" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Resolved</a>
+    </li>
+
+    <li data-filter-status="duplicate" id="filter-status-duplicate" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Duplicate</a>
+    </li>
+
+    <li data-filter-status="on_hold" id="filter-status-on-hold" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">On Hold</a>
+    </li>
+
+    <li data-filter-status="invalid" id="filter-status-invalid" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Invalid</a>
+    </li>
+
+    <li data-filter-status="wontfix" id="filter-status-wontfix" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Won't Fix</a>
+    </li>
+
     <li class="divider"></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}{% if repo.query_str_dict  %}{{ repo.query_str_dict.status }}{% endif %}"
-      >All Issues</a></li>
+
+    <li data-filter-status="all" id="filter-status-all" class="filter-status">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">All</a>
+    </li>
+
   </ul>
 
 </div>
