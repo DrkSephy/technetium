@@ -19,13 +19,16 @@ urlpatterns = patterns('',
     url(r'^issues/$', views_bitbucket.dashboard_issues, name='issues'),
     url(r'^manage/$', views_bitbucket.manage_repositories, name='manage'),
     url(r'^reports/(.+)/(.+)$', views_bitbucket.reports, name='manage'),
-    # url(r'^linechart/$', views_bitbucket.line_chart),
 
-    # Ajax Request URLs
+    # Ajax Manager
     url(r'^subscribe/$', views_bitbucket.subscribe_repository),
     url(r'^unsubscribe/$', views_bitbucket.unsubscribe_repository),
     url(r'^unsubscribe-all/$', views_bitbucket.unsubscribe_all, name='unsubscribe-all'),
+
+    # Ajax Issues
     url(r'^fetch-more-issues/$', views_bitbucket.fetch_more_issues),
+    url(r'^filter-issues-type/$', views_bitbucket.filter_issues_type),
+
 
     # Social Auth URLs
     url(r'', include('social.apps.django_app.urls', namespace='social'))

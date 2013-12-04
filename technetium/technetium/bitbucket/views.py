@@ -203,6 +203,9 @@ def unsubscribe_all(request):
     return redirect('/manage')
 
 
+#################
+# ISSUE TRACKER #
+#################
 @login_required
 def fetch_more_issues(request):
     """
@@ -235,6 +238,21 @@ def fetch_more_issues(request):
 
     html_data = bitissues.add_html_issue_rows(parsed_data)
     return HttpResponse(html_data)
+
+
+@login_required
+def filter_issues_type(request):
+    """
+    [AJAX] Grab issues that are filtered by type
+    """
+    data = request.GET
+    repo = data['repo-slug']
+    owner = data['repo-owner']
+    parameters = {'kind' : data['filter-type']}
+    req_url = bitmethods.make_req_url_with_parameters(owner, repo, 'issues', 10, 10, parameters)
+    print req_url
+
+    return HttpResponse(status=200)
 
 
 ##################

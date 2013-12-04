@@ -48,6 +48,24 @@ def make_req_url(user, repo, endpoint, limit=50, start=0):
     return url
 
 
+def make_req_url_with_parameters(user, repo, endpoint, limit, start, data):
+    """
+    Constructs a request url with extra parameters
+
+    Parameters:
+        data: Dictionary
+
+    Returns:
+        String
+    """
+    # Construct basic url
+    req_url = make_req_url(user, repo, endpoint, limit, start)
+    # Construct url with extra parameters
+    for key, value in data:
+        req_url += "&%s=%s" % (key, value)
+    return req_url
+
+
 def get_api_urls(user, repo, endpoint, start, limit=50):
     """
     Makes a list of api urls based on iterating through limit.

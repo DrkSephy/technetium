@@ -7,17 +7,30 @@
     <span class="sr-only">Toggle Dropdown</span>
   </button>
 
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=bug{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
-      >Bug</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=enhancement{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
-      >Enhancement</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=proposal{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
-      >Proposal</a></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}&type=task{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}"
-      >Task</a></li>
+  <ul class="dropdown-menu" data-filter-repo="{{ repo.repo_meta.repo_slug }}" data-filter-owner="{{ repo.repo_meta.repo_owner }}" role="menu">
+
+    <li data-filter-type="bug" id="filter-type-bug" class="filter-type">
+        <a href="#">Bug</a>
+    </li>
+
+    <li data-filter-type="enhancement" id="filter-type-enhancement" class="filter-type">
+        <a href="#">Enhancement</a>
+    </li>
+
+    <li data-filter-type="proposal" id="filter-type-proposal" class="filter-type">
+        <a href="#">Proposal</a>
+    </li>
+
+    <li data-filter-type="task" id="filter-type-task" class="filter-type">
+        <a href="#">Task</a>
+    </li>
+
     <li class="divider"></li>
-    <li><a href="/issues?repo_slug={{ repo.repo_meta.repo_slug }}{% if repo.query_str_dict  %}{{ repo.query_str_dict.type }}{% endif %}">All</a></li>
+
+    <li data-filter-type="all" id="filter-type-all" class="filter-type">
+        <a href="#">All</a>
+    </li>
+
   </ul>
 
 </div>
