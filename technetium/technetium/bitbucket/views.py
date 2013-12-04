@@ -218,7 +218,14 @@ def filter_issues_type(request):
     """
     [AJAX] Grab issues that are filtered by type
     """
-    pass
+    data = request.GET
+    repo = data['repo-slug']
+    owner = data['repo-owner']
+    parameters = {'kind' : data['filter-type']}
+    req_url = bitmethods.make_req_url_with_parameters(owner, repo, 'issues', 10, 10, parameters)
+    print req_url
+
+    return HttpResponse(status=200)
 
 
 ##################
