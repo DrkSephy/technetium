@@ -7,6 +7,7 @@ $(".filter-type").click(function() {
     var filterType = $(this).attr("data-filter-type");
     var repoSlug   = parentName.attr("data-filter-repo");
     var repoOwner  = parentName.attr("data-filter-owner");
+    var tableBody  = $("#issues-"+repoOwner+"-"+repoSlug);
 
    // Ajax request to grab filtered issues
     $.ajax({
@@ -19,9 +20,10 @@ $(".filter-type").click(function() {
         },
 
         success : function(data) {
-            // Append rows of issues to table
-            alert('Successfully filtered issues');
-            console.log(data);
+            // Empty old issues and show new filter issues
+            tableBody.empty();
+            tableBody.html(data).hide();
+            tableBody.show(800);
         },
 
         error : function() {
