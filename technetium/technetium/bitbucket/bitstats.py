@@ -154,7 +154,7 @@ def list_users(data):
     return devs
 
 
-def list_data(data, key_value='changesets'):
+def list_data(data, key_value):
     """
     Returns a list of data in order of developers.
     Useful for D3 graphs. You can use this to list
@@ -165,34 +165,14 @@ def list_data(data, key_value='changesets'):
             - A dictionary containing commits [keys] to be turned into a list.
 
     Returns:
-        commits: List
-            - A list containing the number of commits for each user
+        Information: List
+            - A list containing the number of commits or issues for each user
               of a given repository.
     """
-    commits = []
+    information = []
     for key, value in data.iteritems():
-        commits.append(value[key_value])
-    return commits
-
-def list_data_issues(data, key_value='issues_completed'):
-    """
-    Returns a list of data in order of developers.
-    Useful for D3 graphs. You can use this to list
-    commit data as well as issues.
-
-    Paramters:
-        data: Dictionary
-            - A dictionary containing commits [keys] to be turned into a list.
-
-    Returns:
-        commits: List
-            - A list containing the number of commits for each user
-              of a given repository.
-    """
-    issues_completed = []
-    for key, value in data.iteritems():
-        issues_completed.append(value[key_value])
-    return issues_completed
+        information.append(value[key_value])
+    return information
 
 
 def list_timestamp_and_user(changesets):
