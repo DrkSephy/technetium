@@ -42,6 +42,36 @@ def commits_pie_graph(tallies):
         }}
 
 
+def issues_bargraph(tallies):
+    """
+    Sets up bar graph from given chart data.
+
+    Parameters:
+        issues: Dictionary
+
+    Returns:
+        content: Dictionary
+    """
+
+    xdata = bitstats.list_users(tallies)
+    ydata = bitstats.list_data_issues(tallies)
+
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie}
+    charttype = "discreteBarChart"
+    chartcontainer = 'discretebarchart_container' # container name
+
+    return {
+        'charttype': charttype,
+        'chartdata': chartdata,
+        'chartcontainer': chartcontainer,
+        'extra': {
+            'x_is_date': False,
+            'x_axis_format': '',
+            'tag_script_js': True,
+            'jquery_on_ready': False,
+        }}
+
 def commits_linegraph(changesets=None, count=50):
     """
     Bitbucket has a inconsistent design where if your repo has

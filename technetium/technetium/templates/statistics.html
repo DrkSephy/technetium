@@ -12,6 +12,10 @@
     <!-- Load commits piegraph -->
     {% load_chart commits_piegraph.charttype commits_piegraph.chartdata commits_piegraph.chartcontainer commits_piegraph.extra %}
 
+    <!-- Load issues bargraph -->
+    {% load_chart issues_bargraph.charttype issues_bargraph.chartdata issues_bargraph.chartcontainer issues_bargraph.extra %}
+
+
 {% endblock %}
 
 {% block content %}
@@ -74,5 +78,16 @@
     {% include_container commits_piegraph.chartcontainer 400 500 %}
   </div>
 </div>
+
+<!-- Issues Bar Graph -->
+<div class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Issue Breakdown By Users</h3>
+  </div>
+  <div class="panel-body">
+    {% include_container issues_bargraph.chartcontainer 400 500 %}
+  </div>
+</div>
+
 
 {% endblock %}
