@@ -1,0 +1,83 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block content %}
+<div class="col-lg-12">
+  <h2><span class="glyphicon glyphicon-saved space-right"></span>Issue Tracker</h2>
+
+  {% if not issues_list %}
+    {% include 'includes/tutorials/issues-tutorial.html' %}
+
+  {% else %}
+  {% for repo in issues_list %}
+
+  <hr>
+  <h3 id="view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+    {{ repo.repo_meta.repo_name }}
+    <span class="pull-right">
+
+      <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-new-issue">
+      <span class="glyphicon glyphicon-check space-right"></span>New Issue</button>
+
+    </span>
+  </h3>
+
+    {% if repo.issues %}
+    <hr>
+    <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th class="header">Assignee</th>
+          <th class="header">Issue Title <i class="icon-sort"></i></th>
+
+          <th class="header">
+            {% include "includes/filters/filter-type.html" %}
+          </th>
+
+          <th class="header">
+            {% include "includes/filters/filter-created.html" %}
+          </th>
+
+          <th class="header">
+            {% include "includes/filters/filter-status.html" %}
+          </th>
+
+        </tr>
+      </thead>
+      <tbody id="issues-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+
+      {% include "includes/issues/issues-list.html" %}
+
+      {% else %}
+        <hr>
+        <h4>No issues reported yet.</h4>
+      {% endif %}
+      </tbody>
+  </table>
+
+  {% if repo.issues %}
+  <div>
+  <span class="pull-right">
+      <button class="btn btn-default btn-sm btn-show-more" data-owner="{{ repo.repo_meta.repo_owner }}" data-slug="{{ repo.repo_meta.repo_slug }}" data-count="10" data-filter="{{ repo.filter_name_val_str }}">
+      <span class="glyphicon glyphicon-refresh space-right"></span>Show More</button>
+  </span>
+  </div>
+  <br>
+  {% endif %}
+
+  <hr>
+  {% endfor %}
+
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/issue-tracker.js"></script>
+    <script src="/static/js/issue-filter-type.js"></script>
+    <script src="/static/js/issue-filter-date.js"></script>
+    <script src="/static/js/issue-filter-status.js"></script>
+{% endblock %}

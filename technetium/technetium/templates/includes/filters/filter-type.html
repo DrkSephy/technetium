@@ -1,0 +1,37 @@
+<!-- Issue Tracker: Filter Type -->
+<div class="btn-group">
+
+  <button type="button" class="btn btn-default btn-xs">Issue Type</button>
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+
+  <ul class="dropdown-menu" data-filter-repo="{{ repo.repo_meta.repo_slug }}" data-filter-owner="{{ repo.repo_meta.repo_owner }}" data-count="10" role="menu">
+
+    <li data-filter-type="bug" id="filter-type-bug" class="filter-type">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Bug</a>
+    </li>
+
+    <li data-filter-type="enhancement" id="filter-type-enhancement" class="filter-type">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Enhancement</a>
+    </li>
+
+    <li data-filter-type="proposal" id="filter-type-proposal" class="filter-type">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Proposal</a>
+    </li>
+
+    <li data-filter-type="task" id="filter-type-task" class="filter-type">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">Task</a>
+    </li>
+
+    <li class="divider"></li>
+
+    <li data-filter-type="all" id="filter-type-all" class="filter-type">
+        <a href="#view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">All</a>
+    </li>
+
+  </ul>
+
+</div>
+
