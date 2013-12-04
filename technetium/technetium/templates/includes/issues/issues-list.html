@@ -10,8 +10,8 @@
           {% endif %}
 
           <td><a href="{{ issue.issues_url }}">{{ issue.title }}</a></td>
-          <td>{{ issue.type }}</td>
           <td>{{ issue.date }}</td>
+          <td>{{ issue.type }}</td>
           <td>
             {% if issue.status == "Resolved" %}
               <span class="text-success">{{ issue.status }}</span>

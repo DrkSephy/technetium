@@ -21,6 +21,7 @@ $(".filter-type").click(function() {
         success : function(data) {
             // Append rows of issues to table
             alert('Successfully filtered issues');
+            console.log(data);
         },
 
         error : function() {

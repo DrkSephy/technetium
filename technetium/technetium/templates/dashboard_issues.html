@@ -30,13 +30,10 @@
         <tr>
           <th class="header">Assignee</th>
           <th class="header">Issue Title <i class="icon-sort"></i></th>
+          <th class="header">Last Updated</th>
 
           <th class="header">
             {% include "includes/filters/filter-type.html" %}
-          </th>
-
-          <th class="header">
-            {% include "includes/filters/filter-created.html" %}
           </th>
 
           <th class="header">
@@ -79,6 +76,5 @@
 {% block scripts %}
     <script src="/static/js/issue-tracker.js"></script>
     <script src="/static/js/issue-filter-type.js"></script>
-    <script src="/static/js/issue-filter-date.js"></script>
     <script src="/static/js/issue-filter-status.js"></script>
 {% endblock %}
