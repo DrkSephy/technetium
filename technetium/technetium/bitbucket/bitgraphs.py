@@ -56,7 +56,7 @@ def issues_bargraph(tallies):
     xdata = bitstats.list_users(tallies)
     ydata = bitstats.list_data_issues(tallies)
 
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+    extra_serie = {"tooltip": {"y_start": "", "y_end": " Issues completed"}}
     chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie}
     charttype = "discreteBarChart"
     chartcontainer = 'discretebarchart_container' # container name
