@@ -1,0 +1,35 @@
+
+<ul class="nav navbar-nav side-nav">
+
+  <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+    <a href="{% url 'dashboard' %}">
+    <span class="glyphicon glyphicon-list-alt space-right"></span> Home </a>
+  </li>
+
+  <li class="{% if request.path == '/manage/' %}active{% endif %}">
+    <a href="{% url 'manage' %}">
+    <span class="glyphicon glyphicon-briefcase space-right"></span> Subscriptions</a>
+  </li>
+
+  <li class="{% if request.path == '/issues/' %}active{% endif %}">
+    <a href="{% url 'issues' %}">
+    <span class="glyphicon glyphicon-saved space-right"></span> Issue Tracker </a>
+  </li>
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-tasks space-right"></span> Reports<b class="caret"></b></a>
+    <ul class="dropdown-menu" id="sidebar-repos">
+      {% if subscriptions %}
+        {% for repo in subscriptions %}
+          <li id="sidebar-{{ repo.owner }}-{{ repo.slug_url }}" title="{{ repo.owner }} : {{ repo.repository }}">
+          <a href="/reports/{{ repo.owner }}/{{ repo.slug_url }}">
+            {{ repo.repository }}
+          </a>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </li>
+
+</ul>
