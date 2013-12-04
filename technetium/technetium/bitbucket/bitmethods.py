@@ -17,21 +17,21 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, limit=50, start=0):
+def make_req_url(user, repo, endpoint, query, limit=50):
     """
     Constructs a URL for bitbucket API request.
 
     Parameters:
         user: String
-            - The Bitbucket username.
+            - The Bitbucket username
         repo: String
-            - The Bitbucket repository name.
+            - The Bitbucket repository name
         endpoint: String
-            - The Bitbucket API endpoint.
+            - The Bitbucket API endpoint
+        query: Dictionary
+            - Additional query set parameters
         limit: Integer (Max 50)
-            - The number of data entries to return.
-        start: Integer
-            - The starting node number for the resource.
+            - The number of data entries to return
 
     Returns:
         url: String
@@ -42,28 +42,13 @@ def make_req_url(user, repo, endpoint, limit=50, start=0):
     # Set limit is given and is above 50, set limit to 50
     if limit and limit > 50:
         limit = 50
+    url += "?limit=%d" % limit
 
-    # Handle extra queries
-    url += "?limit=%d&start=%d" % (limit, start)
+    # Add additional query parameters
+    for key, value in query:
+        url += "&%s=%s" % (key, value)
     return url
 
-
-def make_req_url_with_parameters(user, repo, endpoint, limit, start, data):
-    """
-    Constructs a request url with extra parameters
-
-    Parameters:
-        data: Dictionary
-
-    Returns:
-        String
-    """
-    # Construct basic url
-    req_url = make_req_url(user, repo, endpoint, limit, start)
-    # Construct url with extra parameters
-    for key, value in data:
-        req_url += "&%s=%s" % (key, value)
-    return req_url
 
 
 def get_api_urls(user, repo, endpoint, start, limit=50):
