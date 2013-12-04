@@ -1,7 +1,6 @@
 """
-Module containing a handful of auxillary methods. These methods are meant
-to be used within all other modules, bitmethods is simply a collection of
-helper functions meant for de-coupling code.
+Module containing a handful of auxillary methods.
+These methods are meant to be used within all other modules.
 """
 from datetime import datetime
 import simplejson as json
@@ -17,21 +16,21 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, limit=50, start=0):
+def make_req_url(user, repo, endpoint, limit=50, queries=None):
     """
     Constructs a URL for bitbucket API request.
 
     Parameters:
         user: String
-            - The Bitbucket username.
+            - The Bitbucket username
         repo: String
-            - The Bitbucket repository name.
+            - The Bitbucket repository name
         endpoint: String
-            - The Bitbucket API endpoint.
+            - The Bitbucket API endpoint
+        queries: Dictionary
+            - Additional query set parameters
         limit: Integer (Max 50)
-            - The number of data entries to return.
-        start: Integer
-            - The starting node number for the resource.
+            - The number of data entries to return
 
     Returns:
         url: String
@@ -42,28 +41,32 @@ def make_req_url(user, repo, endpoint, limit=50, start=0):
     # Set limit is given and is above 50, set limit to 50
     if limit and limit > 50:
         limit = 50
+    url += "?limit=%d" % limit
 
-    # Handle extra queries
-    url += "?limit=%d&start=%d" % (limit, start)
+    # Add additional query parameters
+    if queries:
+        for key in queries:
+            url += "&%s=%s" % (key, queries[key])
     return url
 
 
 def get_api_urls(user, repo, endpoint, start, limit=50):
     """
     Makes a list of api urls based on iterating through limit.
-    Uses make_req_url() as a helper function.
 
     Returns:
         content: List
     """
     req_urls = []
+    queries = {}
+    queries['start'] = start
     if start:
         count = 0
         stop = start/limit
         while count <= stop:
-            new_url = make_req_url(user, repo, endpoint, limit, start)
+            new_url = make_req_url(user, repo, endpoint, limit, queries)
             req_urls.append(new_url)
-            start -= limit
+            queries['start'] -= limit
             count += 1
     return req_urls
 

@@ -104,6 +104,7 @@ def dashboard_issues(request):
     # Filter issues in each subscribed repo with query string inputs
     # get filtering name value pairs from request query string
     name_val_dict = {}
+    name_val_str = ''
     query_str_type = ''
     query_str_status = ''
     query_str_date = ''
@@ -112,8 +113,10 @@ def dashboard_issues(request):
     for n, v in request.GET.iteritems():
         if n == 'repo_slug':
             repo_slug = v
-        elif n == 'type' or n == 'status' or n == 'priority' or n == 'date':
+        elif n == 'type' or n == 'status' or n == 'date':
             name_val_dict[n] = v
+            name_val_str = name_val_str + '&' + n + '=' + v
+
             if n != 'type':
                 query_str_type = query_str_type + '&' + n + '=' + v
             if n != 'status':
@@ -121,15 +124,25 @@ def dashboard_issues(request):
             if n != 'date':
                 query_str_date = query_str_date + '&' + n + '=' + v
 
+    if name_val_str.startswith('&'):
+        name_val_str = name_val_str[1:]
 
     # filter only if repo_slug name value pair is given
-    if repo_slug:
-        query_str_dict = {}
-        for repo in issues_list:
+    for repo in issues_list:
+        repo['filter_name_val_str'] = ''
+        if repo_slug:
             slug = repo['repo_meta']['repo_slug']
             if slug == repo_slug:
                 parsed_issues = repo['issues']
                 repo['issues'] = bitfilter.filter_issues(name_val_dict, parsed_issues)
+                # append name val pair back to html page
+                query_str_dict = {}
+                query_str_dict['type'] = query_str_type
+                query_str_dict['status'] = query_str_status
+                query_str_dict['date'] = query_str_date
+                repo['query_str_dict'] = query_str_dict
+                # used for show more button
+                repo['filter_name_val_str'] = name_val_str
 
     return render(request, 'dashboard_issues.html', data)
 
@@ -190,6 +203,9 @@ def unsubscribe_all(request):
     return redirect('/manage')
 
 
+#################
+# ISSUE TRACKER #
+#################
 @login_required
 def fetch_more_issues(request):
     """
@@ -201,13 +217,44 @@ def fetch_more_issues(request):
     repo_owner = request.GET['repo-owner']
     repo_slug  = request.GET['repo-slug']
     repo_count = int(request.GET['count'])
+    queries = {}
+    queries['start'] = repo_count
 
     # Filter out just one repo slug
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, queries)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
+
+    # Filter issues in each subscribed repo with query string inputs
+    name_val_dict = {}
+    if 'type' in request.GET:
+        name_val_dict['type'] = request.GET['type'].strip()
+    if 'status' in request.GET:
+        name_val_dict['status'] = request.GET['status'].strip()
+    if 'date' in request.GET:
+        name_val_dict['date'] = request.GET['date'].strip()
+    # filter only if any name value pair is given
+    if len(name_val_dict.keys()) > 0:
+        parsed_data = bitfilter.filter_issues(name_val_dict, parsed_data)
+
     html_data = bitissues.add_html_issue_rows(parsed_data)
     return HttpResponse(html_data)
+
+
+@login_required
+def filter_issues_type(request):
+    """
+    [AJAX] Grab issues that are filtered by type
+    """
+    data = request.GET
+    repo = data['repo-slug']
+    owner = data['repo-owner']
+    queries = {}
+    queries['kind'] = data['filter-type']
+    req_url = bitmethods.make_req_url(owner, repo, 'issues', 10, queries)
+    print req_url
+
+    return HttpResponse(status=200)
 
 
 ##################
