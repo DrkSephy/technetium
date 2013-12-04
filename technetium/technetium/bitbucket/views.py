@@ -217,23 +217,7 @@ def fetch_more_issues(request):
     queries['start'] = repo_count
 
     # Filter out just one repo slug
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, queries)
-    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
-    parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
-
-    # Filter issues in each subscribed repo with query string inputs
-    name_val_dict = {}
-    if 'type' in request.GET:
-        name_val_dict['type'] = request.GET['type'].strip()
-    if 'status' in request.GET:
-        name_val_dict['status'] = request.GET['status'].strip()
-    if 'date' in request.GET:
-        name_val_dict['date'] = request.GET['date'].strip()
-    # filter only if any name value pair is given
-    if len(name_val_dict.keys()) > 0:
-        parsed_data = bitfilter.filter_issues(name_val_dict, parsed_data)
-
-    html_data = bitissues.make_html_issue_rows(parsed_data)
+    html_data = bitissues.ajax_process_issues(repo_owner, repo_slug, queries)
     return HttpResponse(html_data)
 
 
@@ -244,16 +228,13 @@ def filter_issues_type(request):
     """
     # Get query data from Ajax request
     auth_tokens = bitauth.get_auth_tokens(request.user)
-    repo = request.GET['repo-slug']
-    owner = request.GET['repo-owner']
+    repo_owner = request.GET['repo-owner']
+    repo_slug = request.GET['repo-slug']
     queries = {}
     queries['kind'] = request.GET['filter-type']
 
     # Create request URL and get filtered issues by kind
-    req_url = bitmethods.make_req_url(owner, repo, 'issues', 10, queries)
-    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
-    parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
-    html_data = bitissues.make_html_issue_rows(parsed_data)
+    html_data = bitissues.ajax_process_issues(repo_owner, repo_slug, queries)
     return HttpResponse(html_data)
 
 
