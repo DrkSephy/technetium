@@ -216,8 +216,8 @@ def fetch_more_issues(request):
     queries = {}
     queries['start'] = repo_count
 
-    # Filter out just one repo slug
-    html_data = bitissues.ajax_process_issues(repo_owner, repo_slug, queries)
+    # Grabs more deal, parses them, and renders template context
+    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries)
     return HttpResponse(html_data)
 
 
@@ -234,7 +234,7 @@ def filter_issues_type(request):
     queries['kind'] = request.GET['filter-type']
 
     # Create request URL and get filtered issues by kind
-    html_data = bitissues.ajax_process_issues(repo_owner, repo_slug, queries)
+    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries)
     return HttpResponse(html_data)
 
 

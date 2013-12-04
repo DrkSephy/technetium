@@ -120,3 +120,28 @@ def make_html_issue_rows(parsed_data):
     """
     html = 'includes/issues/issues-list.html'
     return render_to_string(html, {'repo' : {'issues' : parsed_data}})
+
+
+###################
+# AJAX PROCESSORS #
+###################
+def ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries):
+    """
+    Common function to process Ajax request for issues.
+    1. Creates the request url for bitbucket API
+    2. Sends the request and loads raw JSON
+    3. Parses the raw JSON into usable dictionary
+    4. Creates the html data from the parsed data
+
+    Parameters:
+        repo_owner: String
+        repo_slug: String
+        queries: Dictionary
+
+    Returns:
+        String
+    """
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, queries)
+    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
+    parsed_data = parse_issues(raw_data[0]['issues'])
+    return make_html_issue_rows(parsed_data)
