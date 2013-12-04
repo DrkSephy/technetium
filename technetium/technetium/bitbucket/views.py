@@ -115,7 +115,7 @@ def dashboard_issues(request):
             repo_slug = v
         elif n == 'type' or n == 'status' or n == 'date':
             name_val_dict[n] = v
-            name_val_str = name_val_str + '&' + n + '=' + v 
+            name_val_str = name_val_str + '&' + n + '=' + v
 
             if n != 'type':
                 query_str_type = query_str_type + '&' + n + '=' + v
@@ -143,7 +143,7 @@ def dashboard_issues(request):
                 repo['query_str_dict'] = query_str_dict
                 # used for show more button
                 repo['filter_name_val_str'] = name_val_str
-               
+
     return render(request, 'dashboard_issues.html', data)
 
 
@@ -224,7 +224,6 @@ def fetch_more_issues(request):
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
 
     # Filter issues in each subscribed repo with query string inputs
-    # get filtering name value pairs from request query string
     name_val_dict = {}
     if 'type' in request.GET:
         name_val_dict['type'] = request.GET['type'].strip()
@@ -248,8 +247,9 @@ def filter_issues_type(request):
     data = request.GET
     repo = data['repo-slug']
     owner = data['repo-owner']
-    parameters = {'kind' : data['filter-type']}
-    req_url = bitmethods.make_req_url_with_parameters(owner, repo, 'issues', 10, 10, parameters)
+    queries = {}
+    queries['kind'] = data['filter-type']
+    req_url = bitmethods.make_req_url(owner, repo, 'issues', queries, 10)
     print req_url
 
     return HttpResponse(status=200)

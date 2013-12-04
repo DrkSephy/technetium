@@ -1,7 +1,6 @@
 """
-Module containing a handful of auxillary methods. These methods are meant
-to be used within all other modules, bitmethods is simply a collection of
-helper functions meant for de-coupling code.
+Module containing a handful of auxillary methods.
+These methods are meant to be used within all other modules.
 """
 from datetime import datetime
 import simplejson as json
@@ -17,7 +16,7 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, query, limit=50):
+def make_req_url(user, repo, endpoint, queries, limit=50):
     """
     Constructs a URL for bitbucket API request.
 
@@ -28,7 +27,7 @@ def make_req_url(user, repo, endpoint, query, limit=50):
             - The Bitbucket repository name
         endpoint: String
             - The Bitbucket API endpoint
-        query: Dictionary
+        queries: Dictionary
             - Additional query set parameters
         limit: Integer (Max 50)
             - The number of data entries to return
@@ -45,10 +44,9 @@ def make_req_url(user, repo, endpoint, query, limit=50):
     url += "?limit=%d" % limit
 
     # Add additional query parameters
-    for key, value in query:
+    for key, value in queries:
         url += "&%s=%s" % (key, value)
     return url
-
 
 
 def get_api_urls(user, repo, endpoint, start, limit=50):
@@ -60,13 +58,15 @@ def get_api_urls(user, repo, endpoint, start, limit=50):
         content: List
     """
     req_urls = []
+    queries = {}
+    queries['start'] = start
     if start:
         count = 0
         stop = start/limit
         while count <= stop:
-            new_url = make_req_url(user, repo, endpoint, limit, start)
+            new_url = make_req_url(user, repo, endpoint, queries, limit)
             req_urls.append(new_url)
-            start -= limit
+            queries['start'] -= limit
             count += 1
     return req_urls
 
