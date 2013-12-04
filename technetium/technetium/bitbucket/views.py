@@ -233,7 +233,7 @@ def fetch_more_issues(request):
     if len(name_val_dict.keys()) > 0:
         parsed_data = bitfilter.filter_issues(name_val_dict, parsed_data)
 
-    html_data = bitissues.add_html_issue_rows(parsed_data)
+    html_data = bitissues.make_html_issue_rows(parsed_data)
     return HttpResponse(html_data)
 
 
@@ -251,8 +251,10 @@ def filter_issues_type(request):
 
     # Create request URL and get filtered issues by kind
     req_url = bitmethods.make_req_url(owner, repo, 'issues', 10, queries)
-    response = bitmethods.send_bitbucket_request(req_url, auth_tokens)
-    return HttpResponse(status=200)
+    raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
+    parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
+    html_data = bitissues.make_html_issue_rows(parsed_data)
+    return HttpResponse(html_data)
 
 
 ##################

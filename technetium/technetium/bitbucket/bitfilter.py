@@ -1,3 +1,6 @@
+"""
+Module containing functions for filtering issues
+"""
 import simplejson as json
 import datetime
 

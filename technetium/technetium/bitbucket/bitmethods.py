@@ -1,5 +1,5 @@
 """
-Module containing a handful of auxillary methods.
+Module bitmethods contains a handful of auxillary methods.
 These methods are meant to be used within all other modules.
 """
 from datetime import datetime

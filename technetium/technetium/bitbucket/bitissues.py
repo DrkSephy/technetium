@@ -107,7 +107,7 @@ def attach_meta(subscription, repo_issues):
     return repo_list
 
 
-def add_html_issue_rows(parsed_data):
+def make_html_issue_rows(parsed_data):
     """
     Takes parsed issues and returns HTML to attach to rows.
     There has to be a better way of doing this.
