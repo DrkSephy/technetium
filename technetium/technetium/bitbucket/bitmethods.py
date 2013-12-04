@@ -16,7 +16,7 @@ API_BASE_URL = "https://bitbucket.org/api/1.0/repositories/"
 BITBUCKET_BASE_URL = "https://bitbucket.org/"
 
 
-def make_req_url(user, repo, endpoint, queries, limit=50):
+def make_req_url(user, repo, endpoint, limit=50, queries=None):
     """
     Constructs a URL for bitbucket API request.
 
@@ -44,8 +44,9 @@ def make_req_url(user, repo, endpoint, queries, limit=50):
     url += "?limit=%d" % limit
 
     # Add additional query parameters
-    for key, value in queries:
-        url += "&%s=%s" % (key, value)
+    if queries:
+        for key in queries:
+            url += "&%s=%s" % (key, queries[key])
     return url
 
 
@@ -64,7 +65,7 @@ def get_api_urls(user, repo, endpoint, start, limit=50):
         count = 0
         stop = start/limit
         while count <= stop:
-            new_url = make_req_url(user, repo, endpoint, queries, limit)
+            new_url = make_req_url(user, repo, endpoint, limit, queries)
             req_urls.append(new_url)
             queries['start'] -= limit
             count += 1

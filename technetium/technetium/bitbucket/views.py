@@ -217,9 +217,11 @@ def fetch_more_issues(request):
     repo_owner = request.GET['repo-owner']
     repo_slug  = request.GET['repo-slug']
     repo_count = int(request.GET['count'])
+    queries = {}
+    queries['start'] = repo_count
 
     # Filter out just one repo slug
-    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, repo_count)
+    req_url = bitmethods.make_req_url(repo_owner, repo_slug, 'issues', 10, queries)
     raw_data = [bitmethods.send_bitbucket_request(req_url, auth_tokens)]
     parsed_data = bitissues.parse_issues(raw_data[0]['issues'])
 
@@ -249,7 +251,7 @@ def filter_issues_type(request):
     owner = data['repo-owner']
     queries = {}
     queries['kind'] = data['filter-type']
-    req_url = bitmethods.make_req_url(owner, repo, 'issues', queries, 10)
+    req_url = bitmethods.make_req_url(owner, repo, 'issues', 10, queries)
     print req_url
 
     return HttpResponse(status=200)

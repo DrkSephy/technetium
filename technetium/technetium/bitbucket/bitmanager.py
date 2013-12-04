@@ -18,7 +18,7 @@ def get_list_of_repositories(auth_tokens):
     Parameters:
         auth_tokens: OAuth1
 
-    Returns: 
+    Returns:
         List
     """
     req_url = "https://bitbucket.org/api/1.0/user/repositories/dashboard/"
@@ -33,7 +33,7 @@ def get_all_subscriptions(user):
     Parameters:
         user: User (Django Request)
 
-    Returns: 
+    Returns:
         List
     """
     return Subscription.objects.filter(user=user).filter(subscribed=True)
@@ -47,7 +47,7 @@ def get_repo_id_from_subscriptions(subscriptions):
     Parameters:
         subscriptions: Subscription (Object)
 
-    Returns: 
+    Returns:
         List (of Integers)
     """
     repo_ids = []
@@ -66,7 +66,7 @@ def get_subscribed_repo_urls(subs, endpoint, limit):
         endpoint: String (API request endpoint: 'issues')
         limit: Integer (20)
 
-    Returns: 
+    Returns:
         List (String URLs)
     """
     repo_urls = []
@@ -84,7 +84,7 @@ def parse_repositories(repositories, repo_ids):
         repositories: List
         repo_ids: List (repo ids that uer is subscribed to)
 
-    Returns: 
+    Returns:
         List
     """
     parsed_repositories = []
@@ -123,7 +123,7 @@ def subscribe_repository(user, data):
         user: User (Django Model)
         data: request.POST (Django Query dict)
 
-    Returns: 
+    Returns:
         Boolean
             - True/False based on if operation was successful.
     """
@@ -159,7 +159,7 @@ def unsubscribe_repository(user, data):
         user: User (Django Model)
         data: request.POST (Django Query dict)
 
-    Returns: 
+    Returns:
         Boolean
             - True/False based on if operation was successful.
     """
