@@ -174,8 +174,14 @@ def fetch_more_issues(request):
     queries = {}
     queries['start'] = repo_count
 
+    if 'filter-type' in request.GET:
+        queries['kind'] = request.GET['filter-type']
+
+    if 'filter-status' in request.GET:
+        queries['status'] = request.GET['filter-status']
+
     # Grabs more deal, parses them, and renders template context
-    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries)
+    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, 10, queries)
     return HttpResponse(html_data)
 
 
@@ -192,8 +198,15 @@ def filter_issues_type(request):
     if 'filter-type' in request.GET:
         queries['kind'] = request.GET['filter-type']
 
+    if 'filter-status' in request.GET:
+        queries['status'] = request.GET['filter-status']
+
+    count = 10
+    if 'count' in request.GET:
+        count = int(request.GET['count'])
+
     # Create request URL and get filtered issues by kind
-    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries)
+    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, count, queries)
     return HttpResponse(html_data)
 
 
@@ -210,8 +223,15 @@ def filter_issues_status(request):
     if 'filter-status' in request.GET:
         queries['status'] = request.GET['filter-status']
 
+    if 'filter-type' in request.GET:
+        queries['kind'] = request.GET['filter-type']
+
+    count = 10
+    if 'count' in request.GET:
+        count = int(request.GET['count'])
+
     # Create request URL and get filtered issues by kind
-    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, queries)
+    html_data = bitissues.ajax_process_issues(auth_tokens, repo_owner, repo_slug, count, queries)
     return HttpResponse(html_data)
 
 
