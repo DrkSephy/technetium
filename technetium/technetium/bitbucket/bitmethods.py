@@ -53,7 +53,6 @@ def make_req_url(user, repo, endpoint, limit=50, queries=None):
 def get_api_urls(user, repo, endpoint, start, limit=50):
     """
     Makes a list of api urls based on iterating through limit.
-    Uses make_req_url() as a helper function.
 
     Returns:
         content: List

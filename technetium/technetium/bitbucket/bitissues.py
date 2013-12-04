@@ -20,11 +20,11 @@ def get_issues_urls(user, repo, endpoint, end, limit=50):
         content: List
     """
     req_urls = []
-    count = 0
-    while count < end:
-        new_url = bitmethods.make_req_url(user, repo, endpoint, limit, count)
+    queries = {'start' : 0}
+    while queries['start'] < end:
+        new_url = bitmethods.make_req_url(user, repo, endpoint, limit, queries)
         req_urls.append(new_url)
-        count += limit
+        queries['start'] += limit
     return req_urls
 
 
