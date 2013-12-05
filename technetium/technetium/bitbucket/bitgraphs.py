@@ -72,6 +72,7 @@ def issues_bargraph(tallies):
             'jquery_on_ready': False,
         }}
 
+
 def commits_linegraph(changesets=None, count=50):
     """
     Bitbucket has a inconsistent design where if your repo has
