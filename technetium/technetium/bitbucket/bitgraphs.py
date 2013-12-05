@@ -98,6 +98,10 @@ def commits_linegraph(changesets=None, count=50):
     Returns:
         Dictionary
     """
+    # Fixed issues with count of 1 or less
+    if not count:
+        return {}
+
     # Initialize start and end timestamp
     start_time, end_time = 0, 0
 
