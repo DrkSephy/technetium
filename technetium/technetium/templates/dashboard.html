@@ -3,42 +3,59 @@
 
 {% block content %}
 
-    <div>
-        <h1 class="title">Welcome to Technetium!</h1>
+    <h2>
+        <span class="glyphicon glyphicon-list-alt space-right"></span>
+        Technetium Home
+    </h2>
+    <hr>
+
+    <!-- What is Technetium -->
+    <div class="panel panel-default panel-medium">
+      <div class="panel-heading">
+        <h3 class="panel-title">What is Technetium?</h3>
+      </div>
+      <div class="panel-body">
+        <blockquote>Technetium is a data aggregation web application built using Django on top of the Bitbucket API. Through this scalable API, Technetium is able to deliver simplistic yet highly useable tools perfect for use in any development environment.
+        </blockquote>
+      </div>
     </div>
 
-    <h2>What is Technetium?</h2>
-    <p>
-        Technetium is a data aggregation web application built using Django on top of the Bitbucket API. Through this scalable API, Technetium is able to deliver simplistic yet highly useable tools perfect for use in any development environment.
-    </p>
+    <!-- Why Technetium -->
+    <div class="panel panel-default panel-medium">
+      <div class="panel-heading">
+        <h3 class="panel-title">Why Technetium?</h3>
+      </div>
+      <div class="panel-body">
+        <blockquote>Are you a product owner or scrum master finding it difficult to keep track of the multitude of projects under your belt? Look no further than Technetium for all of your issue and developmental tracking needs. Through our single-page application, you can easily configure repositories to stay up to date with through its repository manager, while having the ability able to read a report regarding the developmental progress of your project through Technetium's reports module.
+        </blockquote>
+      </div>
+    </div>
 
+    <!-- Repository Manager -->
+    <div class="panel panel-default panel-medium">
+      <div class="panel-heading">
+        <h3 class="panel-title">Repository Manager</h3>
+      </div>
+      <div class="panel-body">
+        <blockquote>View all read-access enabled repositories on your account through Technetium's repository manager. Using its simplistic yet powerful accordion-style drop down lists, subscribe to repositories that you'd like to keep up with.
+        </blockquote>
+      </div>
+    </div>
 
-    <h2 id="Why Technetium?"> Why Technetium?</h2>
-    <p>
-        Are you a product owner or scrum master finding it difficult to keep track of the multitude of projects under your belt? Look no further than Technetium for all of your issue and developmental tracking needs. Through our single-page application, you can easily configure repositories to stay up to date with through its repository manager, while having the ability able to read a report regarding the developmental progress of your project through Technetium's reports module.
-    </p>
+    <!-- Reports and Graphs -->
+    <div class="panel panel-default panel-medium">
+      <div class="panel-heading">
+        <h3 class="panel-title">Reports and Graphs</h3>
+      </div>
+      <div class="panel-body">
+        <blockquote>View commit/issue activity in both tabular and graphical views using Technetium's report module. <em>Perfect for product owners and scrum masters to track the progress of any project.</em>
+        </blockquote>
+      </div>
+    </div>
 
-    <h2>Repository Manager</h2>
     <center><img src="/static/img/subscribe.png" width="700" height="400"></center>
-    <br></br>
-    <p>
-         View all read-access enabled repositories on your account through Technetium's repository manager. Using its simplistic yet powerful accordion-style drop down lists, subscribe to repositories that you'd like to keep up with.
-    </p>
-
-
-    <h2>Centralized Issue Tracker</h2>
     <center><img src="/static/img/issue_tracker.png" width="700" height="400"></center>
-    <br></br>
-    <p>
-        View issues across a multitude of repositories using Technetium's central issue tracker. From bug tracking to resolved issues, our centalized issue tracker is perfect for all members of the development team to keep up with the project.
-    </p>
-
-    <h2>Reports and Graphs</h2>
     <center><img src="/static/img/reports.png" width="700" height="400"></center>
-    <br></br>
-    <p>
-        View commit/issue activity in both tabular and graphical views using Technetium's report module.<em>Perfect for product owners and scrum masters to track the progress of any project.</em>
-    </p>
 
 
 {% endblock %}
