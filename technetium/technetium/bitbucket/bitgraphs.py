@@ -22,7 +22,7 @@ def commits_pie_graph(tallies):
     """
     # Get x and y list data
     xdata = bitstats.list_users(tallies)
-    ydata = bitstats.list_data(tallies)
+    ydata = bitstats.list_data(tallies, 'changesets')
 
     # Setup Graph Parameters
     extra_serie = {"tooltip": {"y_start": "", "y_end": " commits"}}
@@ -54,7 +54,7 @@ def issues_bargraph(tallies):
     """
 
     xdata = bitstats.list_users(tallies)
-    ydata = bitstats.list_data_issues(tallies)
+    ydata = bitstats.list_data(tallies, 'issues_completed')
 
     extra_serie = {"tooltip": {"y_start": "", "y_end": " Issues completed"}}
     chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie}
@@ -71,6 +71,7 @@ def issues_bargraph(tallies):
             'tag_script_js': True,
             'jquery_on_ready': False,
         }}
+
 
 def commits_linegraph(changesets=None, count=50):
     """
