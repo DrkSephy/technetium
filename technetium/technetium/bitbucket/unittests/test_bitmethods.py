@@ -1,7 +1,7 @@
 """
 Test Technetium Bitbucket: bitmethods
 """
-from mock import Mock, patch
+from mock import Mock, patch, MagicMock
 import technetium.bitbucket.bitmethods as bitmethods
 import unittest
 
@@ -40,7 +40,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that constructs URL returns correct API request url.
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt), match)
 
@@ -72,7 +72,7 @@ class BitmethodsTests(unittest.TestCase):
         """
         Tests that any generated URL has a max limit of 50
         """
-        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50&start=0'
+        match = 'https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/issues?limit=50'
         self.assertEqual(bitmethods.make_req_url
             (self.user, self.repo, self.issues_endpt, limit=9001), match)
 
@@ -109,6 +109,26 @@ class BitmethodsTests(unittest.TestCase):
             mock_response.content = '{"count" : 49, "issues" : [{"status": "new"}]}'
             results = bitmethods.send_bitbucket_request(req_url, auth_tokens)
             self.assertEqual(results, match)
+
+
+    @patch.object(bitmethods, 'make_req_url')
+    @patch.object(bitmethods, 'send_bitbucket_request')
+    def test_count(self, mock_send_bitbucket_request, mock_make_req_url):
+        self.owner = 'DrkSephy'
+        self.repo_slug = 'smw-koopa-krisis'
+        self.auth_tokens = {}
+        self.endpoint = 'changesets'
+
+        # Mock count_url = make_req_url(owner, repo_slug, endpoint, 0)
+        mock_make_req_url.return_value = MagicMock()
+        # Mock auth tokens in response
+        mock_auth_tokens = MagicMock(name='auth_tokens')
+        # Mock entire response object (send_bitbucket_request)
+        mock_send_bitbucket_request.return_value = {'count': 4}
+        self.assertEqual(bitmethods.get_count(self.owner, self.repo_slug, self.auth_tokens, self.endpoint), 3)
+        mock_send_bitbucket_request.return_value = False
+        self.assertEqual(bitmethods.get_count(self.owner, self.repo_slug, self.auth_tokens, self.endpoint), 0)
+
 
 
     # Tests For: format_timestamp()

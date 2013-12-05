@@ -1,8 +1,9 @@
 """
 Test Technetium Bitbucket: bitissues
 """
-from mock import Mock, patch
+from mock import Mock, patch, MagicMock
 import technetium.bitbucket.bitissues as bitissues
+import technetium.bitbucket.bitmethods as bitmethods
 import unittest
 
 
@@ -140,3 +141,26 @@ class BitissuesTests(unittest.TestCase):
         Tests that bitissues add html returns proper html
         """
         pass
+
+    @patch.object(bitmethods, 'make_req_url')
+    @patch.object(bitmethods, 'send_bitbucket_request')
+    @patch.object(bitissues,  'parse_issues')
+    @patch.object(bitissues,  'make_html_issue_rows')
+    def test_ajax_process_issues(self, mock_send_bitbucket_request, mock_make_req_url,
+        mock_parse_issues, mock_make_html_issue_rows):
+        """
+        Tests that ajax works on issues.
+        """
+        self.repo_owner = 'DrkSephy'
+        self.repo_slug = 'smw-koopa-krisis'
+        self.count = 1
+        self.queries = {}
+        self.auth_tokens = {}
+
+        mock_make_req_url.return_value = MagicMock()
+        mock_auth_tokens = MagicMock(name='auth_tokens')
+        mock_send_bitbucket_request.return_value = [{}]
+        mock_parse_issues.return_value = MagicMock()
+        mock_make_html_issue_rows.return_value = ''
+        self.assertEqual(bitissues.ajax_process_issues(self.auth_tokens, 
+            self.repo_owner, self.repo_slug, self.count, self.queries), [{}])
