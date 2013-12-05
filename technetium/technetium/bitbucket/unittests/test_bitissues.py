@@ -136,11 +136,16 @@ class BitissuesTests(unittest.TestCase):
     ####################################
     # add_html_issue_rows(parsed_data) #
     ####################################
-    def test_add_html_issue_rows(self):
+    @patch.object(bitissues, 'render_to_string')
+    def test_add_html_issue_rows(self, mock_render_to_string):
         """
         Tests that bitissues add html returns proper html
         """
-        pass
+        self.html = 'includes/issues/issues-list.html'
+        self.data = {}
+        mock_render_to_string.return_value = {}
+        self.assertEqual(bitissues.make_html_issue_rows(self.data), {})
+        
 
     @patch.object(bitmethods, 'make_req_url')
     @patch.object(bitmethods, 'send_bitbucket_request')
@@ -158,9 +163,9 @@ class BitissuesTests(unittest.TestCase):
         self.auth_tokens = {}
 
         mock_make_req_url.return_value = MagicMock()
-        mock_auth_tokens = MagicMock(name='auth_tokens')
         mock_send_bitbucket_request.return_value = [{}]
-        mock_parse_issues.return_value = MagicMock()
+        mock_parse_issues.return_value = MagicMock() 
         mock_make_html_issue_rows.return_value = ''
+
         self.assertEqual(bitissues.ajax_process_issues(self.auth_tokens, 
             self.repo_owner, self.repo_slug, self.count, self.queries), [{}])
