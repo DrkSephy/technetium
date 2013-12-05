@@ -60,14 +60,13 @@ def get_api_urls(user, repo, endpoint, start, limit=50):
     req_urls = []
     queries = {}
     queries['start'] = start
-    if start:
-        count = 0
-        stop = start/limit
-        while count <= stop:
-            new_url = make_req_url(user, repo, endpoint, limit, queries)
-            req_urls.append(new_url)
-            queries['start'] -= limit
-            count += 1
+    count = 0
+    stop = start/limit
+    while count <= stop:
+        new_url = make_req_url(user, repo, endpoint, limit, queries)
+        req_urls.append(new_url)
+        queries['start'] -= limit
+        count += 1
     return req_urls
 
 
