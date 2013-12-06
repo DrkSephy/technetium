@@ -22,6 +22,8 @@ def filter_issues(name_val_dict, parsed_json):
             filtered_json = filter_issues_by_status(filtered_json, v_strip)
         if n_strip == 'date':
             filtered_json = filter_issues_by_date(filtered_json, v_strip)
+        if n_strip == 'assignee':
+            filtered_json = filter_issues_by_user(filtered_json, v_strip)
 
     return filtered_json
 
@@ -60,7 +62,18 @@ def filter_issues_by_user(parsed_json, filtered_value):
     """
     Filters issues based on users.
     """
-    pass
+
+    filtered_value = filtered_value.lower()
+    filtered_json = []
+    for issue in parsed_json:
+        if 'assignee' in issue:
+            j_assignee = issue['assignee']
+            if issue['assignee'].strip().lower()==filtered_value:
+                filtered_json.append(issue)
+            elif filtered_value == 'unassigned' and j_assignee == '':
+                filtered_json.append(issue)
+
+    return filtered_json
 
 
 def filter_issues_by_date(parsed_json, filtered_value):
