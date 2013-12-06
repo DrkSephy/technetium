@@ -178,19 +178,3 @@ def filter_issues_by_status(parsed_json, filtered_value):
 
     return filtered_json
 
-
-def filter_changesets_by_user(parsed_json, filtered_value):
-    """
-    Filters changesets based on user.
-    """
-
-    filtered_value = filtered_value.lower()
-    filtered_json = []
-    for changeset in parsed_json:
-        if 'author' in changeset:
-            j_author = changeset['author']
-            if j_author.strip().lower()==filtered_value:
-                filtered_json.append(changeset)
-
-    return filtered_json
-
