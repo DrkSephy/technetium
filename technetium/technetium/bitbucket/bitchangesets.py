@@ -25,8 +25,9 @@ def iterate_all_changesets(req_urls, auth_tokens):
         # Send async requests to get raw changesets
         raw_changesets = bitmethods.send_async_bitbucket_requests(req_urls, auth_tokens)
         for changesets in raw_changesets:
-            for changeset in changesets['changesets']:
-                parsed_changesets.append(parse_changeset(changeset))
+            if 'changesets' in changesets:
+                for changeset in changesets['changesets']:
+                    parsed_changesets.append(parse_changeset(changeset))
     return parsed_changesets
 
 

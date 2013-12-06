@@ -68,7 +68,7 @@ def reports(request, owner, repo_slug):
 
     # Combine tallies for issues and changesets for each user
     tallies = bitstats.combine_tallies(changesets_tallied, issues_tallied)
-    
+
     # Get retrieved context from subscribed repositories
     subscribed = bitmanager.get_all_subscriptions(request.user)
     context = bitmethods.package_context(subscribed)
