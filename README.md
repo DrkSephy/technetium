@@ -10,24 +10,19 @@ See: [Technetium](http://technetium.herokuapp.com/)
 It features an all-in-one issue tracker across multiple repositories, along with
 both visualization and statistical reports of data pertaining to a repository.
 
-Goals/Tasks [ 11/21/13 --> 11/14/13 ]
+Goals/Tasks [ 12/05/13 --> 12/12/13 ]
 -------------------------------------
-1. Continue working on Reports module. [ Jorge ]
-    - [A] Write methods for handling all issues. With these issues, we need to:
-        - Get all the issues that were opened by a user.
-        - Get all the issues that were completed by a user.
-        - Get the number of comments that users have made in a repository.
+1. Render Issue Comments on Reports page. [ Jorge ]
+    - Create the method needed for getting the comment data.
+    - Write a parser method and tally method for this data.
+    - Lastly, render the comments on the reports. 
+        - Possibly put a spinning progress bar in that spot to denote loading time.
 
-2. Finish the graphs for Technetium. [ David ]
-    - [A] Write the last methods for getting more data for graphs.
-    - [B] Update existing graphs with real data using existing methods.
+2. Update our PyLint scores to be as high as possible. [ Albert ]
 
-3. Start the Sphinx Documentation. [ David ]
 
-4. Write Application Tests. [ Albert ]
+3. Finish up unit testing. [ David ]
 
-5. Write unit test code. [ Albert, David, Jorge ]
-    - [A] Everyone can pitch in and contribute to test code.
 
 ###Installation and Running Django
 1. Setup and workon your python virtualenv
