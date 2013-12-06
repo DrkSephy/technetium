@@ -14,12 +14,15 @@
   <hr>
   <h3 id="view-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
     {{ repo.repo_meta.repo_name }}
-    <span class="pull-right">
 
+    <!-- Show More Issues -->
+    <!--
+    <span class="pull-right">
       <button name="{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" class="btn btn-default btn-sm btn-new-issue">
       <span class="glyphicon glyphicon-check space-right"></span>New Issue</button>
-
     </span>
+    -->
+
   </h3>
 
     {% if repo.issues %}
