@@ -5,7 +5,7 @@ Test Technetium Bitbucket: bitchangesets
 from mock import Mock, patch
 import unittest
 import technetium.bitbucket.bitchangesets as bitchangesets
-import technetium.bitbucket.bitchangesets as bitmethods
+import technetium.bitbucket.bitmethods as bitmethods
 
 
 class BitchangesetsTests(unittest.TestCase):
@@ -30,11 +30,12 @@ class BitchangesetsTests(unittest.TestCase):
     #################################################
     # iterate_all_changesets(req_urls, auth_tokens) #
     #################################################
-    def test_iterate_all_changesets(self):
+    @patch.object(bitmethods,'send_async_bitbucket_requests')
+    def test_iterate_all_changesets(self, mock_async):
         self.auth_tokens = {}
         self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?start=1&limit=1']
         self.parsed_changesets= []
-        self.raw_changesets = {
+        self.raw_changesets = [{
           "count": 569,
           "start": "1",
           "limit": 1,
@@ -61,9 +62,10 @@ class BitchangesetsTests(unittest.TestCase):
               "size": -1
             }
           ]
-        }
-
-        self.assertEqual(bitchangesets.iterate_all_changesets(self.req_urls, self.auth_tokens), [{'timestamp': '2013-07-27 01:56:46', 'parsed_author': 'David Leonard'}])
+        }]
+        mock_async.return_value = self.raw_changesets
+        self.assertEqual(bitchangesets.iterate_all_changesets(self.req_urls, self.auth_tokens), 
+          [{'timestamp': '2013-07-27 01:56:46', 'parsed_author': 'David Leonard'}])
 
 
     ##############################
