@@ -62,9 +62,9 @@ class SidenavButtonsTest(unittest.TestCase):
 		if link_element is not None:
 			link_element.click()
 			WebDriverWait(driver, 10).until(EC.title_contains("Technetium"))			
-			h1_elements = driver.find_elements_by_tag_name("h1")
-			for element in h1_elements:
-				if "Welcome to Technetium!" in element.text:
+			h2_elements = driver.find_elements_by_tag_name("h2")
+			for element in h2_elements:
+				if "Technetium Home" in element.text:
 					b = True
 					break
 
