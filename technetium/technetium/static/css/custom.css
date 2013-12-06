@@ -15,9 +15,18 @@ h2 { font-size: 25px; }
     color: #428bca;
 }
 
+.panel-thin {
+    max-width: 30%;
+}
+
 .panel-small {
     max-width: 540px;
 }
+
+.panel-medium {
+    max-width: 68%;
+}
+
 
 .display-name {
     margin-left: 15px;
@@ -56,4 +65,9 @@ h2 { font-size: 25px; }
 
 .inline {
     display: inline-block;
+}
+
+.img-thumbnail {
+    width: 280px;
+    height: 170px;
 }
