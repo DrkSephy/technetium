@@ -16,7 +16,7 @@ h2 { font-size: 25px; }
 }
 
 .panel-thin {
-    max-width: 300px;
+    max-width: 30%;
 }
 
 .panel-small {
@@ -24,7 +24,7 @@ h2 { font-size: 25px; }
 }
 
 .panel-medium {
-    max-width: 740px;
+    max-width: 68%;
 }
 
 
@@ -69,5 +69,5 @@ h2 { font-size: 25px; }
 
 .img-thumbnail {
     width: 280px;
-    height: 180px;
+    height: 170px;
 }
