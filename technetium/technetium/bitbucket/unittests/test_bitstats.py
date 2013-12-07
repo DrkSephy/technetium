@@ -68,6 +68,12 @@ class BitstatsTests(unittest.TestCase):
 
         pass
 
+    def test_tally_changesets(self):
+
+        self.tally = {}
+        self.changesets = [{'timestamp': '2013-12-01 06:51:30', 'parsed_author': 'Jorge Yau'}, {'timestamp': '2013-12-01 06:53:34', 'parsed_author': 'Jorge Yau'}, {'timestamp': '2013-12-01 16:50:13', 'parsed_author': 'Jorge Yau'}, {'timestamp': '2013-12-01 17:01:51', 'parsed_author': 'Jorge Yau'}, {'timestamp': '2013-12-01 17:10:55', 'parsed_author': 'Jorge Yau'}]
+        self.assertEqual(bitstats.tally_changesets(self.changesets), {'Jorge Yau': {'changesets': 5}})
+
     def test_tally_issues(self):
 
         self.tally = {}
