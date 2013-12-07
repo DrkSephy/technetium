@@ -130,6 +130,7 @@ class BitmethodsTests(unittest.TestCase):
         self.assertEqual(bitmethods.get_count(self.owner, self.repo_slug, self.auth_tokens, self.endpoint), 0)
 
 
+    
 
     # Tests For: format_timestamp()
     def test_format_timestamp_empty(self):
