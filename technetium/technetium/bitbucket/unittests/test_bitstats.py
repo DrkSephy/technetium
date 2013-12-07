@@ -68,6 +68,11 @@ class BitstatsTests(unittest.TestCase):
 
         pass
 
+    def test_list_data(self):
+        self.information = []
+        self.endpoint = 'changesets'
+        self.data = {'Jorge Yau': {'issues_assigned': 41, 'changesets': 292, 'issues_opened': 8, 'issues_completed': 32}}
+        self.assertEqual(bitstats.list_data(self.data, self.endpoint), [292])
 
     def test_combine_tallies_empty(self):
         self.issues_tallied =  {'Albert Chieu': {'issues_assigned': 22, 'issues_opened': 79, 'issues_completed': 13}}
