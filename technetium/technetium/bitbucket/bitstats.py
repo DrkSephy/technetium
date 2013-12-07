@@ -174,26 +174,6 @@ def list_data(data, key_value):
         information.append(value[key_value])
     return information
 
-def list_data_issues(data, key_value='issues_completed'):
-    """
-    Returns a list of data in order of developers.
-    Useful for D3 graphs. You can use this to list
-    commit data as well as issues.
-
-    Paramters:
-        data: Dictionary
-            - A dictionary containing commits [keys] to be turned into a list.
-
-    Returns:
-        commits: List
-            - A list containing the number of commits for each user
-              of a given repository.
-    """
-    issues_completed = []
-    for key, value in data.iteritems():
-        issues_completed.append(value[key_value])
-    return issues_completed
-
 
 def list_timestamp_and_user(changesets):
     """
