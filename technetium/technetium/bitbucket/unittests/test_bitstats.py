@@ -67,3 +67,13 @@ class BitstatsTests(unittest.TestCase):
         self.assertEqual(bitstats.list_data({}), [])
 
         pass
+
+    def test_tally_issues(self):
+
+        self.tally = {}
+        self.issues = [{'status': 'new', 'opened_by': 'Albert Chieu', 'issue_id': 102, 'assigned': 'Jorge Yau', 
+            'timestamp': '2013-12-06 05:07:11+00:00'}]
+        self.assertEqual(bitstats.tally_issues(self.issues), {'Albert Chieu': {'issues_assigned': 0, 'issues_opened': 1, 'issues_completed': 0}, 'Jorge Yau': 
+            {'issues_assigned': 1, 'issues_opened': 0, 'issues_completed': 0}})
+
+
