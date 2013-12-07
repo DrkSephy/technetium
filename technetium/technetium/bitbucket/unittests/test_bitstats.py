@@ -68,6 +68,16 @@ class BitstatsTests(unittest.TestCase):
 
         pass
 
+
+    def test_combine_tallies(self):
+        self.changesets_tallied = {'Albert Chieu': {'changesets': 85}}
+        self.issues_tallied =  {'Albert Chieu': {'issues_assigned': 22, 'issues_opened': 79, 'issues_completed': 13}}
+        self.assertEqual(bitstats.combine_tallies(self.changesets_tallied, 
+            self.issues_tallied), {'Albert Chieu': {'issues_assigned': 22, 'changesets': 85, 'issues_opened': 79, 'issues_completed': 13}})
+        self.changesets_tallied2 = {}
+        self.assertEqual(bitstats.combine_tallies(self.changesets_tallied2, self.issues_tallied), 
+            {'Albert Chieu': {'issues_assigned': 22, 'changesets': 0, 'issues_opened': 79, 'issues_completed': 13}})
+
     def test_tally_changesets(self):
 
         self.tally = {}
