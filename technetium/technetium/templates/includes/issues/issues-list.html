@@ -1,0 +1,29 @@
+{% for issue in repo.issues %}
+
+        <tr>
+          {% if issue.assignee %}
+            <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
+              {{ issue.assignee }}
+            </td>
+          {% else %}
+            <td><span class="text-muted space-left">Unassigned</span></td>
+          {% endif %}
+
+          <!-- Clickable issue title -->
+          <td>
+          <a class="cursor-hand grab-issue" data-toggle="modal" data-target="#show-issue" data-issue-id="{{ issue.issue_id}}" data-issue-uri="{{ issue.issue_url }}" data-issue-content="{{ issue.content }}" data-issue-title="{{ issue.title }}" data-issue-assignee="{{ issue.assignee }}" data-issue-reporter="{{ issue.reporter }}" data-issue-type="{{ issue.type }}">
+          {{ issue.title }}</a>
+          </td>
+
+          <td>{{ issue.date }}</td>
+          <td>{{ issue.type }}</td>
+          <td>
+            {% if issue.status == "Resolved" %}
+              <span class="text-success">{{ issue.status }}</span>
+            {% else %}
+              <span>{{ issue.status }}</span>
+            {% endif %}
+          </td>
+        </tr>
+
+{% endfor %}

@@ -1,0 +1,24 @@
+<!-- Screenshots -->
+{% for image in screenshots %}
+
+<span class="cursor-hand" data-toggle="modal" data-target="#screenshot-{{ image.id }}">
+<img class="img-thumbnail" src="{{ image.filename }}">
+</span>
+<br><br>
+
+<!-- Screenshot Modal -->
+<div class="modal fade" id="screenshot-{{ image.id }}" role="dialog" aria-labelledby="label-{{ image.id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="label-{{ image.id }}">{{ image.description }}</h4>
+      </div>
+      <div class="modal-body">
+          <img class="img-screenshot" src="{{ image.filename }}">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endfor %}
