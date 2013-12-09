@@ -8,7 +8,7 @@ $(".btn-show-more").click(function() {
     var repoSlug  = button.attr("data-slug");
     var repoCount = button.attr("data-count");
     var tableBody = $('#issues-' + repoOwner + '-' + repoSlug);
-    var filterQueryStr = button.attr("data-filter");
+    var filterQueryStr = button.attr("dissue_urlissue_urlata-filter");
     button.attr("disabled", "disabled");
 
     var getData = {
@@ -48,4 +48,15 @@ $(".btn-show-more").click(function() {
             alert('Cannot fetch any more issues');
         }
     });
+});
+
+
+// Grab issue detail
+$(".grab-issue").click(function() {
+    // Grab the variables
+    var get_link  = $(this);
+    var issue_id  = get_link.attr("data-issue-id");
+    var issue_uri = get_link.attr("data-issue-uri");
+    alert(issue_id + '\n' + issue_uri);
+
 });

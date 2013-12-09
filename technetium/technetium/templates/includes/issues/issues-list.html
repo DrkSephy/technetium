@@ -1,6 +1,6 @@
 {% for issue in repo.issues %}
-        <tr>
 
+        <tr>
           {% if issue.assignee %}
             <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
               {{ issue.assignee }}
@@ -11,7 +11,8 @@
 
           <!-- Clickable issue title -->
           <td>
-          <span>{{ issue.title }}</span>
+          <a class="cursor-hand grab-issue" data-issue-id="{{ issue.issue_id}}" data-issue-uri="{{ issue.issue_url }}">
+          {{ issue.title }}</a>
           </td>
 
           <td>{{ issue.date }}</td>
@@ -24,4 +25,5 @@
             {% endif %}
           </td>
         </tr>
+
 {% endfor %}
