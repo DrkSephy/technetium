@@ -92,29 +92,13 @@
       <div class="panel-body">
 
         <!-- Screenshots -->
-        <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-1">
-        <img class="img-thumbnail" src="/static/img/screenshots/manager.jpg">
-        </span>
+        {% for image in screenshots %}
+            <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-{{ image.id }}">
+            <img class="img-thumbnail" src="{{ image.filename }}">
+            </span>
+            <br><br>
+        {% endfor %}
 
-        <hr>
-        <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-1">
-        <img class="img-thumbnail" src="/static/img/screenshots/issue_tracker.jpg">
-        </span>
-
-        <hr>
-        <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-1">
-        <img class="img-thumbnail" src="/static/img/screenshots/report.jpg">
-        </span>
-
-        <hr>
-        <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-1">
-        <img class="img-thumbnail" src="/static/img/screenshots/linegraph.jpg">
-        </span>
-
-        <hr>
-        <span class="cursor-hand" data-toggle="modal" data-target="#screenshot-1">
-        <img class="img-thumbnail" src="/static/img/screenshots/piegraph.jpg">
-        </span>
       </div>
     </div>
 
