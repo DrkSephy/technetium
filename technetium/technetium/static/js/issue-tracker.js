@@ -62,11 +62,13 @@ $(".grab-issue").click(function() {
     var issueReporter  = getLink.attr("data-issue-reporter");
     var issueAssignee  = getLink.attr("data-issue-assignee");
     var modalHead      = $("#issues-modal-head");
-    var modalBody      = $("#issues-modal-body");
+    var modalReporter  = $("#issues-modal-reporter");
+    var modalAssignee  = $("#issues-modal-assignee");
+    var modalContent   = $("#issues-modal-content");
 
-    // Update body text
-
-    // Update modal information
+    // Update modal information by pieces
     modalHead.text(issueTitle);
-    modalBody.text(issueContent);
+    modalReporter.text(issueReporter);
+    modalAssignee.text(issueAssignee);
+    modalContent.text(issueContent);
 });
