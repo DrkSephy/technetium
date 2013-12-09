@@ -91,3 +91,7 @@ h2 { font-size: 25px; }
 .modal-small-dialog {
     width: 650px;
 }
+
+.dark-text { color: #333333; }
+
+.dark-text:hover { color: #428bca; }

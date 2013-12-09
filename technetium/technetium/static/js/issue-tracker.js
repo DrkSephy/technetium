@@ -55,15 +55,18 @@ $(".btn-show-more").click(function() {
 $(".grab-issue").click(function() {
     // Grab the variables
     var getLink        = $(this);
+    var repoOwner      = $(this).parents("tbody").attr("data-repo-owner");
+    var repoSlug       = $(this).parents("tbody").attr("data-repo-slug");
     var issueId        = getLink.attr("data-issue-id");
-    var issueUri       = getLink.attr("data-issue-uri");
     var issueType      = getLink.attr("data-issue-type");
     var issueTitle     = getLink.attr("data-issue-title");
     var issueContent   = getLink.attr("data-issue-content");
     var issueReporter  = getLink.attr("data-issue-reporter");
     var issueAssignee  = getLink.attr("data-issue-assignee");
+    var bitbucketLink  = "https://bitbucket.org/"+repoOwner+"/"+repoSlug+"/issue/"+issueId;
 
     // Update modal information by pieces
+    $("#issues-bitbucket-url").attr("href", bitbucketLink);
     $("#issues-modal-type").text(issueType);
     $("#issues-modal-title").text(issueTitle);
     $("#issues-modal-reporter").text(issueReporter);
@@ -71,3 +74,4 @@ $(".grab-issue").click(function() {
     $("#issues-modal-content").text(issueContent);
 
 });
+

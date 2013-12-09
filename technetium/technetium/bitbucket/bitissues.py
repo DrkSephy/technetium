@@ -74,7 +74,6 @@ def parse_issues(issues):
         data['priority'] = issue['priority'].capitalize()
         data['date'] = bitmethods.format_timestamp(issue['utc_last_updated'])
         data['issue_id'] = issue['local_id']
-        data['issue_url'] = "%s%s" % ('https://bitbucket.org/api', issue['resource_uri'])
         data['reporter'] = issue['reported_by']['display_name']
 
         # Parse assignee

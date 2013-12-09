@@ -45,7 +45,7 @@
 
         </tr>
       </thead>
-      <tbody id="issues-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}">
+      <tbody id="issues-{{ repo.repo_meta.repo_owner }}-{{ repo.repo_meta.repo_slug }}" data-repo-owner="{{ repo.repo_meta.repo_owner }}" data-repo-slug="{{ repo.repo_meta.repo_slug }}">
 
       {% include "includes/issues/issues-list.html" %}
 
