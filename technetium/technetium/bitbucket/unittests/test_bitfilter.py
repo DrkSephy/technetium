@@ -2,7 +2,6 @@
 Test Technetium Bitbucket: bitfilter
 """
 import unittest
-import datetime
 import technetium.bitbucket.bitfilter as bitfilter
  
 
@@ -36,40 +35,6 @@ class BitfilterTest(unittest.TestCase):
         self.critical_issue = {'priority':'critical'}
         self.blocker_issue = {'priority':'blocker'}
         self.priority_issues = [self.major_issue, self.trivial_issue, self.minor_issue, self.critical_issue, self.blocker_issue]
-
-        # global variables to filter issues by date created
-        today = datetime.date.today()
-        j_today = datetime.datetime.strftime(today,'%m-%d-%Y')
-        self.today_issue = {'date':j_today}
-
-        current_monday = today - datetime.timedelta(today.weekday())
-        j_current_monday = datetime.datetime.strftime(current_monday,'%m-%d-%Y')
-        self.current_monday_issue = {'date':j_current_monday}
-
-        last_monday = current_monday - datetime.timedelta(7)
-        j_last_monday = datetime.datetime.strftime(last_monday,'%m-%d-%Y')
-        self.last_monday_issue = {'date':j_last_monday}
-
-        first_day_of_month = datetime.date(day=1, month=today.month, year=today.year)
-        last_day_prev_month = first_day_of_month - datetime.timedelta(days=1)
-        j_last_day_prev_month = datetime.datetime.strftime(last_day_prev_month,'%m-%d-%Y')
-        self.last_day_prev_month_issue = {'date':j_last_day_prev_month}
-
-        last_year = today - datetime.timedelta(365)
-        j_last_year = datetime.datetime.strftime(last_year,'%m-%d-%Y')
-        self.last_year_issue = {'date':j_last_year}
-
-        # test input for today
-        self.date_created_issues_0 = [self.today_issue, self.last_monday_issue]
-
-        # test input for today, this week, last week
-        self.date_created_issues_1 = [self.today_issue, self.current_monday_issue, self.last_monday_issue]
-
-        # test input for this month, last month
-        self.date_created_issues_2 = [self.today_issue, self.last_day_prev_month_issue]
-
-        # test input for this year, last year
-        self.date_created_issues_3 = [self.today_issue, self.last_year_issue]
 
         # global variables to filter issues by user
         self.albert_issue = {'assignee':'Albert Chieu'}
@@ -244,62 +209,6 @@ class BitfilterTest(unittest.TestCase):
         self.assertEqual(bitfilter.filter_issues_by_priority(self.priority_issues, 'blocker'), expected_result_issue)
 
     
-    def test_filter_issue_by_today(self):
-        """
-        Test to filter issue date by today
-        """
-        expected_result_issue = [self.today_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_0, 'today'), expected_result_issue)        
-
-    
-    def test_filter_issue_by_this_week(self):
-        """
-        Test to filter issue date by this week
-        """
-        expected_result_issue = [self.today_issue, self.current_monday_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'this_week'), expected_result_issue)        
-
-    
-    def test_filter_issue_by_last_week(self):
-        """
-        Test to filter issue date by last week
-        """
-        expected_result_issue = [self.last_monday_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_1, 'last_week'), expected_result_issue)        
-
-    
-    def test_filter_issue_by_this_month(self):
-        """
-        Test to filter issue date by this month
-        """
-        expected_result_issue = [self.today_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'this_month'), expected_result_issue)        
-
-    
-    def test_filter_issue_by_last_month(self):
-        """
-        Test to filter issue date by last month
-        """
-        expected_result_issue = [self.last_day_prev_month_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_2, 'last_month'), expected_result_issue)        
-
-
-    def test_filter_issue_by_this_year(self):
-        """
-        Test to filter issue date by this year
-        """
-        expected_result_issue = [self.today_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'this_year'), expected_result_issue)        
-
-
-    def test_filter_issue_by_last_year(self):
-        """
-        Test to filter issue date by last year
-        """
-        expected_result_issue = [self.last_year_issue]
-        self.assertEqual(bitfilter.filter_issues_by_date(self.date_created_issues_3, 'last_year'), expected_result_issue)        
-
-
     def test_filter_issues_by_user_albert(self):
         """
         Test to filter issue assignee by user 'Albert Chieu'
