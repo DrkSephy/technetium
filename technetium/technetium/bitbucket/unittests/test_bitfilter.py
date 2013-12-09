@@ -354,27 +354,3 @@ class BitfilterTest(unittest.TestCase):
         expected_result_issue = [self.unassigned_issue]
         self.assertEqual(bitfilter.filter_issues_by_user(self.assignee_issues, 'unassigned'), expected_result_issue)        
 
-
-    def test_filter_changesets_by_user_albert(self):
-        """
-        Test to filter changesets by user 'Albert Chieu'
-        """
-        expected_result_changeset = [self.albert_changeset]
-        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'Albert Chieu'), expected_result_changeset)                
-
-
-    def test_filter_changesets_by_user_jorge(self):
-        """
-        Test to filter changesets by user 'Jorge Yau'
-        """
-        expected_result_changeset = [self.jorge_changeset]
-        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'Jorge Yau'), expected_result_changeset)                
-
-
-    def test_filter_changesets_by_user_david(self):
-        """
-        Test to filter changesets by user 'David Leonard'
-        """
-        expected_result_changeset = [self.david_changeset]
-        self.assertEqual(bitfilter.filter_changesets_by_user(self.author_changesets, 'David Leonard'), expected_result_changeset)                
-
