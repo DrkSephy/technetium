@@ -3,8 +3,8 @@ Module containing methods for graph generation using Django D3.
 This module contains methods for generating pie graphs and
 line graphs, with bar charts to come in the near future.
 """
-import bitmethods
-import bitstats
+import technetium.bitbucket.bitmethods as bitmethods
+import technetium.bitbucket.bitstats as bitstats
 import random
 import datetime
 import time
@@ -202,3 +202,4 @@ def tally_data_series(xdata, user_timestamps, elements):
                     user_series[user][-1] += 1
                     break
     return user_series
+    
