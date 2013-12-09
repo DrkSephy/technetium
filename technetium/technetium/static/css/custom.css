@@ -87,3 +87,7 @@ h2 { font-size: 25px; }
     max-width: 960px;
     width: 960px;
 }
+
+.modal-small-dialog {
+    width: 600px;
+}

@@ -1,17 +1,18 @@
 
-<div class="modal fade" id="#show-issue" role="dialog" aria-labelledby="label-issue-modal" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- Issue detail modal -->
+<div class="modal fade" id="show-issue" role="dialog" aria-labelledby="issues-modal-head" aria-hidden="true">
+  <div class="modal-dialog modal-small-dialog">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="label-issue-modal">{{ image.description }}</h4>
+        <h4 class="modal-title" id="issues-modal-head">
+        </h4>
       </div>
 
       <!-- Modal Body -->
-      <div class="modal-body">
-          <img class="img-screenshot" src="{{ image.filename }}">
+      <div class="modal-body" id="issues-modal-body">
       </div>
 
     </div>

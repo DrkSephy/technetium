@@ -54,9 +54,19 @@ $(".btn-show-more").click(function() {
 // Grab issue detail
 $(".grab-issue").click(function() {
     // Grab the variables
-    var get_link  = $(this);
-    var issue_id  = get_link.attr("data-issue-id");
-    var issue_uri = get_link.attr("data-issue-uri");
-    // alert(issue_id + '\n' + issue_uri);
+    var getLink        = $(this);
+    var issueId        = getLink.attr("data-issue-id");
+    var issueUri       = getLink.attr("data-issue-uri");
+    var issueTitle     = getLink.attr("data-issue-title");
+    var issueContent   = getLink.attr("data-issue-content");
+    var issueReporter  = getLink.attr("data-issue-reporter");
+    var issueAssignee  = getLink.attr("data-issue-assignee");
+    var modalHead      = $("#issues-modal-head");
+    var modalBody      = $("#issues-modal-body");
 
+    // Update body text
+
+    // Update modal information
+    modalHead.text(issueTitle);
+    modalBody.text(issueContent);
 });
