@@ -28,3 +28,4 @@ def get_screenshots(num_screenshots=5):
         data['description'] = descriptions[i]
         screenshots.append(data)
     return screenshots
+

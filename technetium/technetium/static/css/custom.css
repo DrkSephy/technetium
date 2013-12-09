@@ -72,10 +72,18 @@ h2 { font-size: 25px; }
     height: 170px;
 }
 
+.img-screenshot {
+    max-width: 900px;
+    max-height: 750px;
+}
+
 .cursor-hand {
     cursor: pointer;
 }
 
 .modal-dialog {
-    padding-top: 80px;
+    padding-top: 50px;
+    max-height: 750px;
+    max-width: 960px;
+    width: 960px;
 }
