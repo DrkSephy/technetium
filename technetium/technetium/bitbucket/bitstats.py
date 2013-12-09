@@ -1,9 +1,9 @@
 """
-Module containing methods for generating Technetium's reports. These 
-methods include the ability to create tallies of both changeset and 
-issue data for each user in a given repository. 
+Module containing methods for generating Technetium's reports. These
+methods include the ability to create tallies of both changeset and
+issue data for each user in a given repository.
 """
-import bitmethods
+import technetium.bitbucket.bitmethods as bitmethods
 
 
 def tally_changesets(data):

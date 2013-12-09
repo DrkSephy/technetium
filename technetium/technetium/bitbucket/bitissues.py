@@ -5,7 +5,7 @@ relating to Issues, and auxillary methods for preparing the data for use
 inside of Technetium's Subscription Manager.
 """
 from django.template.loader import render_to_string
-import bitmethods
+import technetium.bitbucket.bitmethods as bitmethods
 
 
 ###########
