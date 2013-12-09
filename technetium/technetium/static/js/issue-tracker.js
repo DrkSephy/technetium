@@ -57,6 +57,6 @@ $(".grab-issue").click(function() {
     var get_link  = $(this);
     var issue_id  = get_link.attr("data-issue-id");
     var issue_uri = get_link.attr("data-issue-uri");
-    alert(issue_id + '\n' + issue_uri);
+    // alert(issue_id + '\n' + issue_uri);
 
 });
