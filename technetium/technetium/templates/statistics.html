@@ -1,0 +1,93 @@
+{% extends "includes/base.html" %}
+{% load url from future %}
+
+{% block extra_head %}
+
+    {% load nvd3_tags %}
+    {% include_chart_jscss %}
+
+    <!--  Load commits linegraph -->
+    {% load_chart commits_linegraph.charttype commits_linegraph.chartdata commits_linegraph.chartcontainer commits_linegraph.extra %}
+
+    <!-- Load commits piegraph -->
+    {% load_chart commits_piegraph.charttype commits_piegraph.chartdata commits_piegraph.chartcontainer commits_piegraph.extra %}
+
+    <!-- Load issues bargraph -->
+    {% load_chart issues_bargraph.charttype issues_bargraph.chartdata issues_bargraph.chartcontainer issues_bargraph.extra %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-12">
+  <h2><span class="glyphicon glyphicon-stats space-right"></span>
+    Technetium Report: <em>{{ owner }}/{{ repo_slug }}</em>
+  </h2>
+</div>
+<hr>
+
+<div class="col-lg-12">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped tablesorter">
+            <thead>
+            <tr>
+            <th class="header"> Bitbucket User <i class="icon-sort"></i></th>
+            <th class="header"> Commits <i class="icon-sort"></i></th>
+            <th class="header"> Issues Opened <i class="icon-sort"></i></th>
+            <th class="header"> Issues Assigned <i class="icon-sort"></i></th>
+            <th class="header"> Issues Completed <i class="icon-sort"></i></th>
+            <th class="header"> Issue Comments <i class="icon-sort"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for key, value in tallies.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value.changesets }}</td>
+                <td>{{ value.issues_opened }}</td>
+                <td>{{ value.issues_assigned }}</td>
+                <td>{{ value.issues_completed }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+<br>
+
+<!-- Commits Linegraph -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Commit Activity By Users</h3>
+  </div>
+  <div class="panel-body">
+    {% include_container commits_linegraph.chartcontainer 350 1050 %}
+  </div>
+</div>
+<br>
+
+<!-- Commits Piechart -->
+<div style="float:left;"class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Commit Breakdown By Users</h3>
+  </div>
+  <div class="panel-body">
+    {% include_container commits_piegraph.chartcontainer 400 500 %}
+  </div>
+</div>
+
+<!-- Issues Bar Graph -->
+<div style="float:right;"class="panel panel-default panel-small">
+  <div class="panel-heading">
+    <h3 class="panel-title">Issue Breakdown By Users</h3>
+  </div>
+  <div class="panel-body">
+    {% include_container issues_bargraph.chartcontainer 400 500 %}
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,89 @@
+/* Custom Stylesheet to override bootstrap */
+/* Keep things simple and remember to stay DRY */
+
+
+h2 { font-size: 25px; }
+
+.hero-unit {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.panel-title>a {
+    color: #428bca;
+}
+
+.panel-thin {
+    max-width: 30%;
+}
+
+.panel-small {
+    max-width: 540px;
+}
+
+.panel-medium {
+    max-width: 68%;
+}
+
+
+.display-name {
+    margin-left: 15px;
+}
+
+.expand {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.btn-link {
+    padding: 0px 0px 0px 0px;
+}
+
+.badge {
+    background-color: #48915F;
+}
+
+.dropdown-menu {
+    min-width: 120px;
+}
+
+.space-left {
+    margin-left: 25px;
+}
+
+.space-right {
+    margin-right: 5px;
+}
+
+.assignee-avatar {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.img-thumbnail {
+    width: 280px;
+    height: 170px;
+}
+
+.img-screenshot {
+    max-width: 900px;
+    max-height: 750px;
+}
+
+.cursor-hand {
+    cursor: pointer;
+}
+
+.modal-dialog {
+    padding-top: 50px;
+    max-height: 750px;
+    max-width: 960px;
+    width: 960px;
+}
