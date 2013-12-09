@@ -71,3 +71,11 @@ h2 { font-size: 25px; }
     width: 280px;
     height: 170px;
 }
+
+.cursor-hand {
+    cursor: pointer;
+}
+
+.modal-dialog {
+    padding-top: 80px;
+}

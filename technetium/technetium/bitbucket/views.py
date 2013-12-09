@@ -16,6 +16,7 @@ import bitmethods
 import bitstats
 import bitgraphs
 import bitfilter
+import bitdashboard
 
 
 # Home page view
@@ -43,6 +44,7 @@ def dashboard(request):
     # Get retrieved issues from subscribed repositories
     subscribed  = bitmanager.get_all_subscriptions(request.user)
     data = bitmethods.package_context(subscribed)
+    data['screenshots'] = bitdashboard.get_screenshots()
     return render(request, 'dashboard.html', data)
 
 
