@@ -56,17 +56,20 @@ def reports(request, owner, repo_slug):
     # Get OAuth tokens
     auth_tokens = bitauth.get_auth_tokens(request.user)
 
+    # Tally the number of issues opened, assigned
+    issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
+    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
+    issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
+    issues_comment_urls = bitissues.get_issue_comments_urls(issues_parsed, owner, repo_slug)
+    print issues_comment_urls
+    return
+    issues_tallied = bitstats.tally_issues(issues_parsed, owner, repo_slug)
+
     # Tally all of the changesets for each user
     changesets_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'changesets')
     changesets_urls = bitmethods.get_api_urls(owner, repo_slug, 'changesets', changesets_count)
     changesets_parsed = bitchangesets.iterate_all_changesets(changesets_urls, auth_tokens)
     changesets_tallied = bitstats.tally_changesets(changesets_parsed)
-
-    # Tally the number of issues opened, assigned
-    issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
-    issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
-    issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
-    issues_tallied = bitstats.tally_issues(issues_parsed)
 
     # Combine tallies for issues and changesets for each user
     tallies = bitstats.combine_tallies(changesets_tallied, issues_tallied)

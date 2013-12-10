@@ -176,13 +176,13 @@ def list_data(data, key_value):
 
 """
 def list_timestamp_and_user(changesets):
-    
+
     Will be modified in the future for commits linegraph
 
     Returns a tuple of list containing:
     (1) timestamps
     (2) usernames
-    
+
     timestamps = []
     usernames  = []
     for commit in changesets:

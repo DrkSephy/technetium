@@ -28,6 +28,21 @@ def get_issues_urls(user, repo, endpoint, end, limit=50):
     return req_urls
 
 
+def get_issue_comments_urls(issues, repo_owner, repo_slug):
+    """
+    Gets the issue comments URLs
+
+    Returns:
+        List
+    """
+    issues_urls = []
+    for issue in issues:
+        url = "%s%s/%s/%s/issues/%d/comments/" %\
+            (bitmethods.API_BASE_URL, repo_owner, repo_slug, issue['issue_id'])
+        issues_urls.append[url]
+    return issues_urls
+
+
 def parse_all_issues(repo_issues):
     """
     Parses returned JSON data from the bitbucket API
