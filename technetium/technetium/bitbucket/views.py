@@ -60,10 +60,14 @@ def reports(request, owner, repo_slug):
     issues_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'issues')
     issues_urls = bitissues.get_issues_urls(owner, repo_slug, 'issues', issues_count)
     issues_parsed = bitstats.parse_issues_for_tallying(issues_urls, auth_tokens)
-    issues_comment_urls = bitissues.get_issue_comments_urls(issues_parsed, owner, repo_slug)
-    print issues_comment_urls
+    issues_tallied = bitstats.tally_issues(issues_parsed)
+
+    # Tally issue comments
+    issues_comments_urls = bitissues.get_issue_comments_urls(issues_parsed, owner, repo_slug)
+    issues_comments = bitmethods.send_async_bitbucket_requests(issues_comments_urls, auth_tokens)
+    issues_tallied = bitstats.tally_issue_comments(issues_tallied, issues_comments)
+    print issues_tallied
     return
-    issues_tallied = bitstats.tally_issues(issues_parsed, owner, repo_slug)
 
     # Tally all of the changesets for each user
     changesets_count = bitmethods.get_count(owner, repo_slug, auth_tokens, 'changesets')

@@ -37,9 +37,9 @@ def get_issue_comments_urls(issues, repo_owner, repo_slug):
     """
     issues_urls = []
     for issue in issues:
-        url = "%s%s/%s/%s/issues/%d/comments/" %\
+        url = "%s%s/%s/issues/%d/comments/" %\
             (bitmethods.API_BASE_URL, repo_owner, repo_slug, issue['issue_id'])
-        issues_urls.append[url]
+        issues_urls.append(url)
     return issues_urls
 
 

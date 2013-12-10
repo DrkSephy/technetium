@@ -128,11 +128,17 @@ def combine_tallies(changesets_tallied, issues_tallied):
     return changesets_tallied
 
 
-def tally_issue_comments(data):
+def tally_issue_comments(tallied, all_issues):
     """
     Gets the number of comments that each user has made.
     """
-    pass
+    for issue in all_issues:
+        for comment in issue:
+            commenter = comment['author_info']['display_name']
+            if 'issue_comments' not in tallied[commenter]:
+                tallied[commenter]['issue_comments'] = 0
+            tallied[commenter]['issue_comments'] += 1
+    return tallied
 
 
 def list_users(data):
