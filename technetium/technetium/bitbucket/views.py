@@ -82,9 +82,9 @@ def reports(request, owner, repo_slug):
     context['owner'] = owner
     context['repo_slug'] = repo_slug
     context['tallies'] = tallies
-    context['commits_piegraph'] = bitgraphs.commits_pie_graph(tallies)
     context['commits_linegraph'] = bitgraphs.commits_linegraph(changesets_parsed, changesets_count)
-    context['issues_bargraph'] = bitgraphs.issues_bargraph(tallies)
+    context['commits_piegraph']  = bitgraphs.commits_pie_graph(tallies, 'changesets', 'pieChart', 'piechart_container')
+    context['issues_bargraph']   = bitgraphs.issues_bargraph(tallies)
     return render(request, 'statistics.html', context)
 
 

@@ -10,30 +10,31 @@ import datetime
 import time
 
 
-def commits_pie_graph(tallies):
+def set_up_graph(tallies, datatype, chart_type, container):
     """
-    Sets up pie chart from given chart data
+    Sets up simple d3 graph from given chart data
 
     Parameters:
         tallies: Dictionary
+        datatype: String ('changesets')
+        chart_type: String ('pie')
+        container: String
 
     Returns:
         content: Dictionary
     """
     # Get x and y list data
     xdata = bitstats.list_users(tallies)
-    ydata = bitstats.list_data(tallies, 'changesets')
+    ydata = bitstats.list_data(tallies, datatype)
 
     # Setup Graph Parameters
     extra_serie = {"tooltip": {"y_start": "", "y_end": " commits"}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-    charttype = "pieChart"
-    chartcontainer = 'piechart_container'
 
     return {
-        'charttype': charttype,
+        'charttype': chart_type,
         'chartdata': chartdata,
-        'chartcontainer': chartcontainer,
+        'chartcontainer': container,
         'extra': {
             'x_is_date': False,
             'x_axis_format': '',
@@ -52,14 +53,13 @@ def issues_bargraph(tallies):
     Returns:
         content: Dictionary
     """
-
     xdata = bitstats.list_users(tallies)
     ydata = bitstats.list_data(tallies, 'issues_completed')
 
     extra_serie = {"tooltip": {"y_start": "", "y_end": " Issues completed"}}
     chartdata = {'x': xdata, 'name1': '', 'y1': ydata, 'extra1': extra_serie}
     charttype = "discreteBarChart"
-    chartcontainer = 'discretebarchart_container' # container name
+    chartcontainer = 'discretebarchart_container'
 
     return {
         'charttype': charttype,
@@ -202,4 +202,3 @@ def tally_data_series(xdata, user_timestamps, elements):
                     user_series[user][-1] += 1
                     break
     return user_series
-    

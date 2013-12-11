@@ -93,10 +93,10 @@ def new_issues_tally():
     """
     Helper function for tally issues
     """
-    return {'issues_opened' : 0,
-            'issues_assigned' : 0,
+    return {'issues_opened'    : 0,
+            'issues_assigned'  : 0,
             'issues_completed' : 0,
-            'issues_comments' : 0 }
+            'issues_comments'  : 0 }
 
 
 def combine_tallies(changesets_tallied, issues_tallied):
