@@ -5,12 +5,9 @@ line graphs, with bar charts to come in the near future.
 """
 import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitstats as bitstats
-import random
-import datetime
-import time
 
 
-def set_up_graph(tallies, datatype, chart_type, container):
+def set_up_graph(tallies, datatype):
     """
     Sets up simple d3 graph from given chart data
 
@@ -23,6 +20,13 @@ def set_up_graph(tallies, datatype, chart_type, container):
     Returns:
         content: Dictionary
     """
+    # Determine container type
+    chart_type = 'pieChart'
+    container  = 'piechart_container'
+    if datatype == 'issues_completed':
+        chart_type = 'discreteBarChart'
+        container = 'discretebarchart_container'
+
     # Get x and y list data
     xdata = bitstats.list_users(tallies)
     ydata = bitstats.list_data(tallies, datatype)

@@ -85,11 +85,8 @@ def reports(request, owner, repo_slug):
 
     # Set up graphs for nvd3
     context['commits_linegraph'] = bitgraphs.commits_linegraph(changesets_parsed, changesets_count)
-    context['commits_piegraph']  = bitgraphs.set_up_graph(
-        tallies, 'changesets', 'pieChart', 'piechart_container')
-    context['issues_bargraph']   = bitgraphs.set_up_graph(
-        tallies, 'issues_completed', 'discreteBarChart', 'discretebarchart_container')
-
+    context['commits_piegraph'] = bitgraphs.set_up_graph(tallies, 'changesets')
+    context['issues_bargraph'] = bitgraphs.set_up_graph(tallies, 'issues_completed')
     return render(request, 'statistics.html', context)
 
 
