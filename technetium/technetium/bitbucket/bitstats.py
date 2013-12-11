@@ -189,20 +189,3 @@ def list_data(data, key_value):
     for key, value in data.iteritems():
         information.append(value[key_value])
     return information
-
-"""
-def list_timestamp_and_user(changesets):
-
-    Will be modified in the future for commits linegraph
-
-    Returns a tuple of list containing:
-    (1) timestamps
-    (2) usernames
-
-    timestamps = []
-    usernames  = []
-    for commit in changesets:
-        timestamps.append(commit['timestamp'])
-        usernames.append(commit['parsed_author'])
-    return (timestamps, usernames)
-"""
