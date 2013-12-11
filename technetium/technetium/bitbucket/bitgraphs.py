@@ -41,18 +41,18 @@ def set_up_graph(tallies, datatype):
     Returns:
         content: Dictionary
     """
-    # Determine container type
+    # Determine container type, leave spaces
     chart_type = 'pieChart'
     container  = 'piechart_container'
+    activity   = ' commits'
     if datatype == 'issues_completed':
         chart_type = 'discreteBarChart'
         container = 'discretebarchart_container'
+        activity = ' issues completed'
 
-    # Get x and y list data
+    # Get x and y list data, and set up graphs
     xdata, ydata = list_xy_data(tallies, datatype)
-
-    # Setup Graph Parameters
-    extra_serie = {"tooltip": {"y_start": "", "y_end": " commits"}}
+    extra_serie = {"tooltip": {"y_start": "", "y_end": activity}}
     chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
 
     return {
