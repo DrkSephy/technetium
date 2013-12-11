@@ -95,7 +95,8 @@ def new_issues_tally():
     """
     return {'issues_opened' : 0,
             'issues_assigned' : 0,
-            'issues_completed' : 0 }
+            'issues_completed' : 0,
+            'issues_comments' : 0 }
 
 
 def combine_tallies(changesets_tallied, issues_tallied):
@@ -120,6 +121,7 @@ def combine_tallies(changesets_tallied, issues_tallied):
             changesets_tallied[user]['issues_opened'] = 0
             changesets_tallied[user]['issues_assigned'] = 0
             changesets_tallied[user]['issues_completed'] = 0
+            changesets_tallied[user]['issues_comments'] = 0
 
     # Handle case if user has issues but not commits
     for user in issues_tallied:
@@ -131,13 +133,21 @@ def combine_tallies(changesets_tallied, issues_tallied):
 def tally_issue_comments(tallied, all_issues):
     """
     Gets the number of comments that each user has made.
+
+    Suggestion: Don't count issue if content is not None
     """
+    # Initialize each user's issue comments to 0
+    for user in tallied:
+        tallied[user]['issues_comments'] = 0
+
+    # Tally each issue comments
     for issue in all_issues:
         for comment in issue:
             commenter = comment['author_info']['display_name']
-            if 'issue_comments' not in tallied[commenter]:
-                tallied[commenter]['issue_comments'] = 0
-            tallied[commenter]['issue_comments'] += 1
+            # If commenter has not been tallied in past
+            if commenter not in tallied:
+                tallied[commenter] = new_issues_tally()
+            tallied[commenter]['issues_comments'] += 1
     return tallied
 
 
