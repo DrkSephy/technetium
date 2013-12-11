@@ -7,15 +7,33 @@ import technetium.bitbucket.bitmethods as bitmethods
 import technetium.bitbucket.bitstats as bitstats
 
 
+def list_xy_data(tallies, datatype):
+    """
+    Returns a list of data in order of developers.
+    Strips out empty set elements.
+    x-axis is list of users
+    y-axis is list of numeric values
+
+    Parameters:
+        tallies: Dictionary
+        datatype: String
+
+    Returns:
+        Tuple (of Lists)
+    """
+    devs = []
+    for key, value in data.iteritems():
+        devs.append(key)
+    return devs
+
+
 def set_up_graph(tallies, datatype):
     """
     Sets up simple d3 graph from given chart data
 
     Parameters:
         tallies: Dictionary
-        datatype: String ('changesets')
-        chart_type: String ('pie')
-        container: String
+        datatype: String ('changesets', 'issues_completed')
 
     Returns:
         content: Dictionary
@@ -28,8 +46,7 @@ def set_up_graph(tallies, datatype):
         container = 'discretebarchart_container'
 
     # Get x and y list data
-    xdata = bitstats.list_users(tallies)
-    ydata = bitstats.list_data(tallies, datatype)
+    xdata, ydata = list_xy_data(tallies, datatype)
 
     # Setup Graph Parameters
     extra_serie = {"tooltip": {"y_start": "", "y_end": " commits"}}
