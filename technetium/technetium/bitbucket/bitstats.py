@@ -153,39 +153,13 @@ def tally_issue_comments(tallied, all_issues):
 
 def list_users(data):
     """
-    Returns a list of all developers in a repository.
-    Useful for generating D3 graphs.
-
-    Paramters:
-        data: Dictionary
-            - A dictionary containing users [keys] to be turned into a list.
-
-    Returns:
-        devs: List
-            - A list containing the developers of a given repository.
+    Deprecated function. Move tests.
     """
-    devs = []
-    for key, value in data.iteritems():
-        devs.append(key)
-    return devs
+    pass
 
 
 def list_data(data, key_value):
     """
-    Returns a list of data in order of developers.
-    Useful for D3 graphs. You can use this to list
-    commit data as well as issues.
-
-    Paramters:
-        data: Dictionary
-            - A dictionary containing commits [keys] to be turned into a list.
-
-    Returns:
-        Information: List
-            - A list containing the number of commits or issues for each user
-              of a given repository.
+    Deprecated function. Moves tests.
     """
-    information = []
-    for key, value in data.iteritems():
-        information.append(value[key_value])
-    return information
+    pass
