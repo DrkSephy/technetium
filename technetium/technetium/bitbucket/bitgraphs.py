@@ -21,10 +21,13 @@ def list_xy_data(tallies, datatype):
     Returns:
         Tuple (of Lists)
     """
-    devs = []
-    for key, value in data.iteritems():
-        devs.append(key)
-    return devs
+    xdata, ydata  = [], []
+    for key, value in tallies.iteritems():
+        series = value[datatype]
+        if series:
+            xdata.append(key)
+            ydata.append(series)
+    return xdata, ydata
 
 
 def set_up_graph(tallies, datatype):
