@@ -131,6 +131,10 @@ class BitmethodsTests(unittest.TestCase):
 
 
     
+    def test_package_context(self):
+        self.subscriptions = {}
+        self.assertEqual(bitmethods.package_context(self.subscriptions), 
+            {'subscription_count': 0, 'subscriptions': {}})
 
     # Tests For: format_timestamp()
     def test_format_timestamp_empty(self):
@@ -148,17 +152,3 @@ class BitmethodsTests(unittest.TestCase):
         match = '10-29-2013'
         self.assertEqual(bitmethods.format_timestamp(timestamp), match)
 
-    # Tests for: dictionary_sum()
-    def test_dictionary_sum_empty(self):
-        """
-        Tests that summing two empty dictionaries returns an empty dictionary.
-        """
-
-        self.assertEqual(bitmethods.dictionary_sum(self.data, self.data2, self.data2), {})
-
-    def test_dictionary_sum(self):
-        """
-        Tests that summing two non-empty dictionaries returns the proper result.
-        """
-
-        pass

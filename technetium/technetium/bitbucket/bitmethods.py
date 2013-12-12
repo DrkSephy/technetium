@@ -177,26 +177,4 @@ def package_context(subscriptions):
     return data
 
 
-def dictionary_sum(dict_a, dict_b, sum_key):
-    """
-    Sums the values of two dictionaries based on corresponding keys.
-
-    Parameters:
-        dict_a: Dictionary
-            - The dictionary to add values to.
-
-        dict_b: Dictionary
-            - The second dictionary whose values are iterated through and
-              added with the first dictionary.
-
-    Returns:
-        dictionary: Dictionary
-            - The new dictionary containing the sum of its inputs.
-    """
-    for key, value in dict_b.items():
-        if key not in dict_a:
-            dict_a[key] = value
-        else:
-            dict_a[key][sum_key] += value[sum_key]
-    return dict_a
 
