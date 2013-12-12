@@ -129,12 +129,30 @@ class BitmethodsTests(unittest.TestCase):
         mock_send_bitbucket_request.return_value = False
         self.assertEqual(bitmethods.get_count(self.owner, self.repo_slug, self.auth_tokens, self.endpoint), 0)
 
+    @patch.object(bitmethods, 'grequests')
+    @patch.object(bitmethods, 'json')
+    def test_send_async_bitbucket_requests(self, mock_grequests, mock_json):
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
+        self.auth_tokens = {}
+        mock_grequests.map.return_value = self.req_urls
+        mock_grequests.response.content.return_value = [{}]
+        mock_grequests.get.return_value = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
+        self.urls = mock_grequests.get.return_value
+        self.assertEqual(bitmethods.send_async_bitbucket_requests(self.req_urls, self.auth_tokens), [])
 
-    
     def test_package_context(self):
         self.subscriptions = {}
         self.assertEqual(bitmethods.package_context(self.subscriptions), 
             {'subscription_count': 0, 'subscriptions': {}})
+
+    @patch.object(bitmethods, 'datetime')
+    @patch.object(bitmethods, 'time')
+    def test_to_unix_time(self, mock_datetime, mock_time):
+        mock_datetime.return_value = ''
+        mock_time.return_value = ''
+        self.timestamp = ''
+        self.assertEqual(bitmethods.to_unix_time(self.timestamp), 1000)
+
 
     # Tests For: format_timestamp()
     def test_format_timestamp_empty(self):
