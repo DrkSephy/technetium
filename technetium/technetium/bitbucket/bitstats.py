@@ -150,16 +150,3 @@ def tally_issue_comments(tallied, all_issues):
             tallied[commenter]['issues_comments'] += 1
     return tallied
 
-
-def list_users(data):
-    """
-    Deprecated function. Move tests.
-    """
-    pass
-
-
-def list_data(data, key_value):
-    """
-    Deprecated function. Moves tests.
-    """
-    pass
