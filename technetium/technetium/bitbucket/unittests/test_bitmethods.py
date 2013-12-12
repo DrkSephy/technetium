@@ -132,12 +132,47 @@ class BitmethodsTests(unittest.TestCase):
     @patch.object(bitmethods, 'grequests')
     @patch.object(bitmethods, 'json')
     def test_send_async_bitbucket_requests(self, mock_grequests, mock_json):
-        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
+        self.req_urls = ['https://bitbucket.org/api/1.0/repositories/DrkSephy/smw-koopa-krisis/changesets/?start=5&limit=2']
         self.auth_tokens = {}
-        mock_grequests.map.return_value = self.req_urls
-        mock_grequests.response.content.return_value = [{}]
-        mock_grequests.get.return_value = ['https://bitbucket.org/api/1.0/repositories/technetiumccny/technetium/changesets?limit=50&start=50']
-        self.urls = mock_grequests.get.return_value
+        self.json_list = [{
+          "count": 693,
+          "start": "5",
+          "limit": 2,
+          "changesets": [
+            {
+              "node": "982bb31ef6ea",
+              "files": [
+                {
+                  "type": "modified",
+                  "file": "lib/game/entities/player.js"
+                },
+                {
+                  "type": "modified",
+                  "file": "lib/game/levels/test.js"
+                },
+                {
+                  "type": "modified",
+                  "file": "lib/game/main.js"
+                }
+              ],
+              "raw_author": "David Leonard <sephirothcloud1025@yahoo.com>",
+              "utctimestamp": "2013-07-27 01:10:46+00:00",
+              "author": "DrkSephy",
+              "timestamp": "2013-07-27 03:10:46",
+              "raw_node": "982bb31ef6ea9e0a071a59c6c38c900e2b9e78a6",
+              "parents": [
+                "db8e184555a2"
+              ],
+              "branch": "default",
+              "message": "Player entity added",
+              "revision": 5,
+              "size": -1
+            }
+          ]
+        }]
+        mock_grequests.map.return_value = MagicMock()
+        mock_grequests.response.content.return_value = MagicMock()
+        mock_grequests.get.return_value = self.json_list
         self.assertEqual(bitmethods.send_async_bitbucket_requests(self.req_urls, self.auth_tokens), [])
 
     def test_package_context(self):
