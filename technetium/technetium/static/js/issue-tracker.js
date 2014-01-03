@@ -52,7 +52,7 @@ $(".btn-show-more").click(function() {
 
 
 // Grab issue detail
-$(".grab-issue").on('click', function() {
+$(document.body).on('click', '.grab-issue',function() {
     // Grab the variables
     var getLink        = $(this);
     var repoOwner      = $(this).parents("tbody").attr("data-repo-owner");
