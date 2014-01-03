@@ -1,6 +1,6 @@
 {% for issue in repo.issues %}
 
-        <tr {% if issue.status == "Resolved" %}class="success"{% endif %}>
+        <tr>
           {% if issue.assignee %}
             <td><img class="assignee-avatar" src="{{ issue.assignee_avatar }}">
               {{ issue.assignee }}
@@ -16,8 +16,13 @@
           </td>
 
           <td>{{ issue.date }}</td>
-          <td>{{ issue.type }}</td>
-          <td>{{ issue.status }}</td>
+          <td {% if issue.type == "Bug" %}class="danger"
+              {% else %}{% if issue.type == "Task" %}class="warning"
+              {% endif %}
+              {% endif %}>{{ issue.type }}</td>
+
+          <td {% if issue.status == "Resolved" %}class="success"
+              {% endif %}>{{ issue.status }}</td>
           </td>
         </tr>
 
