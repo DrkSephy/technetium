@@ -19,7 +19,7 @@ $(".filter-status").click(function() {
             'count' : count
         };
 
-	// add any existing filtering options        
+	// add any existing filtering options
     if (filterQueryStr != '') {
         var nvPairs = filterQueryStr.split('&');
         for (var i=0; i < nvPairs.length; i++) {

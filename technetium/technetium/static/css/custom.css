@@ -45,6 +45,8 @@ h2 { font-size: 25px; }
     background-color: #48915F;
 }
 
+.avatar-size {width:32px; height: 32px;}
+
 .dropdown-menu {
     min-width: 120px;
 }
