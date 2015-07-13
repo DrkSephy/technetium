@@ -20,7 +20,7 @@ DATABASES = {
         # Ignore below with sqlite3
         "USER": "technetium",
         # Not used with sqlite3.
-        "PASSWORD": "ae2cce3603f1913efb36bf39cb20250c",
+        "PASSWORD": "",
         # Set to empty string for localhost.
         "HOST": "localhost",
         # Set to empty string for default. Default PostgreSQL port
@@ -35,11 +35,11 @@ DATABASES = {
 ##################
 
 # Python-social-auth. We'll use both for now.
-SOCIAL_AUTH_BITBUCKET_KEY = 'dQMksmtLyJnCkh8JP6'
-SOCIAL_AUTH_BITBUCKET_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
+SOCIAL_AUTH_BITBUCKET_KEY = ''
+SOCIAL_AUTH_BITBUCKET_SECRET = ''
 
-BITBUCKET_CONSUMER_KEY = 'dQMksmtLyJnCkh8JP6'
-BITBUCKET_CONSUMER_SECRET = '4LT45DYUajuHZC3Xb95Lxx7mXquUWCta'
+BITBUCKET_CONSUMER_KEY = ''
+BITBUCKET_CONSUMER_SECRET = ''
 
 
 ##################
