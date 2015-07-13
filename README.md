@@ -1,7 +1,7 @@
 Technetium
 ----------
 
-> [Technetium](http://technetium.herokuapp.com/) is a data aggregation web application built using the Bitbucket API.
+> [Technetium](http://drksephy.github.io/2014/04/01/technetium/) is a data aggregation web application built using the Bitbucket API.
 It features an all-in-one issue tracker across multiple repositories, along with
 both visualization and statistical reports of data pertaining to a repository.
 
